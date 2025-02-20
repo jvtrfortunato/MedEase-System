@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jaldi&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+.conteudo {
+    height: 100vh;
+    width: 100%;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.conteudo__geral {
+    width: 1152px;
+    height: 819px;
+    display: flex;
+}
+
+.conteudo__geral__esquerda {
+    background-color: #4A90E2;
+    width: 648px;
+    height: 100%;
+    border: 1px solid #4A90E2;
+    border-radius: 10px 0 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.conteudo__geral__direita {
+    background-color: #F5F5F5;
+    border: 1px, solid rgba(136, 136, 136, 0.4);;
+    border-left: none;
+    border-radius: 0 10px 10px 0;
+    width: 504px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.conteudo__geral__esquerda__logo {
+    width: 449px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.conteudo__geral__esquerda__logo h1 {
+    font-size: 54.4px;
+    color: #FFFFFF;
+    font-family: "Inter", serif;
+}
+
+.conteudo__geral__esquerda__logo p {
+    font-size: 32px;
+    color: #FFFFFF;
+    font-family: "Jaldi", serif;
+    line-height: 1;
+    margin-top: 10px;
+}
+
+.conteudo__geral__direita__formulario {
+    width: 337px;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+}
+
+.conteudo__geral__direita__formulario h1 {
+    font-size: 46.4px;
+    color: #6C6767;
+    margin-bottom: 20px;
+    font-family: "Inter", serif;
+}
+
+.conteudo__geral__direita__formulario__login-esqueciSenha {
+    margin-bottom: 32px;
+    display: flex;
+    flex-direction: column;
+}
+
+.conteudo__geral__direita__formulario__login-esqueciSenha__login-senha {
+    width: 337px;
+    height: 65.6px;
+    border-radius: 35px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    margin-bottom: 11.2px;
+    display: flex;
+    align-items: center;
+}
+
+.conteudo__geral__direita__formulario__login-esqueciSenha__login-senha__icone {
+    width: 24px;
+    height: 24px;
+    margin-left: 22.4px;
+}
+
+.conteudo__geral__direita__formulario__login-esqueciSenha__login-senha__campo {
+    margin-left: 19.2px;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 0 35px 35px 0;
+    background-color: #F5F5F5;
+}
+
+.conteudo__geral__direita__formulario__login-esqueciSenha__login-senha__campo::placeholder {
+    text-align: left;
+    font-size: 28px;
+    color: rgba(136, 136, 136, 0.4);
+    font-weight: 400;
+    font-family: "Jaldi", serif;
+}
+
+.conteudo__geral__direita__formulario__login-esqueciSenha__checkbox-esqueciSenha {
+    display: flex;
+    justify-content: space-between;
+
+    border: 2px solid red;
+}
+
+.conteudo__geral__direita__formulario__login-esqueciSenha__checkbox-esqueciSenha a {
+    font-family: "Jaldi", serif;
+    color: rgba(136, 136, 136, 0.8);
+    text-decoration: none;
+    
+    border: 2px solid black;
+}
+
+.conteudo__geral__direita__formulario__login-esqueciSenha__checkbox-esqueciSenha__lembrar {
+    display: flex;
+    flex-direction: row;
+    
+    border: 2px solid black;
+}
+
+.conteudo__geral__direita__formulario__login-esqueciSenha__checkbox-esqueciSenha__lembrar p {
+    font-family: "Inter", serif;
+    font-weight: 400;
+    color: rgba(136, 136, 136, 0.8);
+}
+
+.conteudo__geral__direita__formulario__botao {
+    width: 337px;
+    height: 65.6px;
+    border: none;
+    border-radius: 35px;
+    background-color: #4A90E2;
+    color: #FFFFFF;
+    font-size: 22.4px;
+    font-weight: 600;
+    font-family: "Inter", serif;
+}

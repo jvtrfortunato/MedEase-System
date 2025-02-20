@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedEase Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <header></header>
+    <main>
+        <section class="conteudo">
+            <section class="conteudo__geral">
+                <section class="conteudo__geral__esquerda">
+                    <section class="conteudo__geral__esquerda__logo">
+                        <h1>MedEase</h1>
+                        <p>Você pode fazer login para acessar sua conta existente.</p>
+                    </section>
+                </section>
+                <section class="conteudo__geral__direita">
+                    <section class="conteudo__geral__direita__formulario">
+                        <h1>Entrar</h1>
+                        <form action="/login" method="POST">
+                            <div class="conteudo__geral__direita__formulario__login-esqueciSenha">
+                                <div class="conteudo__geral__direita__formulario__login-esqueciSenha__login-senha">
+                                    <img class="conteudo__geral__direita__formulario__login-esqueciSenha__login-senha__icone" src="icone_perfil.png" alt="Ícone de perfil">
+                                    <label for="login"></label>
+                                    <input class="conteudo__geral__direita__formulario__login-esqueciSenha__login-senha__campo" type="text" id="login" name="login" placeholder="cpf ou email" required><br><br>
+                                </div>
+                                
+                                <div class="conteudo__geral__direita__formulario__login-esqueciSenha__login-senha">   
+                                    <img class="conteudo__geral__direita__formulario__login-esqueciSenha__login-senha__icone" src="icone_cadeado.png" alt="Ícone de cadeado">
+                                    <label for="senha"></label>
+                                    <input class="conteudo__geral__direita__formulario__login-esqueciSenha__login-senha__campo" type="password" id="senha" name="senha" placeholder="senha" required><br><br>
+                                </div> 
+                                <div class="conteudo__geral__direita__formulario__login-esqueciSenha__checkbox-esqueciSenha">
+                                    <div class="conteudo__geral__direita__formulario__login-esqueciSenha__checkbox-esqueciSenha__lembrar">
+                                        <label for="lembrar">
+                                        <input type="checkbox" id="lembrar" name="lembrar">
+                                        <p>Lembre de mim</p>
+                                        </label><br><br>
+                                    </div>
+                                    
+                                    <a href="/esqueci-senha">Esqueceu sua senha?</a><br><br>
+                                </div>
+                            </div>
+                            
+                            <button class="conteudo__geral__direita__formulario__botao" type="submit">Entrar</button>
+                          </form>
+                    </section>
+                </section>
+            </section>
+        </section>
+    </main>
+    <footer></footer>
+</body>
+</html>
