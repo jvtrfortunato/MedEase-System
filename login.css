@@ -10,7 +10,7 @@ body {
     box-sizing: border-box;
 }
 
-.conteudo {
+.div_pai {
     height: 100vh;
     width: 100%;
     background-color: #FFFFFF;
@@ -19,13 +19,13 @@ body {
     justify-content: center;
 }
 
-.conteudo__geral {
+.conteudo_geral {
     width: 1152px;
     height: 819px;
     display: flex;
 }
 
-.conteudo__geral__esquerda {
+.geral_esquerda {
     background-color: #4A90E2;
     width: 648px;
     height: 100%;
@@ -36,7 +36,28 @@ body {
     align-items: center;
 }
 
-.conteudo__geral__direita {
+.logo {
+    width: 449px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.logo h1 {
+    font-size: 54.4px;
+    color: #FFFFFF;
+    font-family: "Inter", serif;
+}
+
+.logo p {
+    font-size: 32px;
+    color: #FFFFFF;
+    font-family: "Jaldi", serif;
+    line-height: 1;
+    margin-top: 10px;
+}
+
+.geral_direita {
     background-color: #F5F5F5;
     border: 1px, solid rgba(136, 136, 136, 0.4);;
     border-left: none;
@@ -48,48 +69,25 @@ body {
     align-items: center;
 }
 
-.conteudo__geral__esquerda__logo {
-    width: 449px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.conteudo__geral__esquerda__logo h1 {
-    font-size: 54.4px;
-    color: #FFFFFF;
-    font-family: "Inter", serif;
-}
-
-.conteudo__geral__esquerda__logo p {
-    font-size: 32px;
-    color: #FFFFFF;
-    font-family: "Jaldi", serif;
-    line-height: 1;
-    margin-top: 10px;
-}
-
-.conteudo__geral__direita__formulario {
-    width: 337px;
-    height: 320px;
+.formulario {
     display: flex;
     flex-direction: column;
 }
 
-.conteudo__geral__direita__formulario h1 {
+.formulario h1 {
     font-size: 46.4px;
     color: #6C6767;
     margin-bottom: 20px;
     font-family: "Inter", serif;
 }
 
-.conteudo__geral__direita__formulario__login-esqueciSenha {
+.login_ate_esqueciSenha {
     margin-bottom: 32px;
     display: flex;
     flex-direction: column;
 }
 
-.conteudo__geral__direita__formulario__login-esqueciSenha__login-senha {
+.input {
     width: 337px;
     height: 65.6px;
     border-radius: 35px;
@@ -99,22 +97,25 @@ body {
     align-items: center;
 }
 
-.conteudo__geral__direita__formulario__login-esqueciSenha__login-senha__icone {
+.icone_input {
     width: 24px;
     height: 24px;
     margin-left: 22.4px;
 }
 
-.conteudo__geral__direita__formulario__login-esqueciSenha__login-senha__campo {
+.input input {
     margin-left: 19.2px;
     width: 100%;
     height: 100%;
     border: none;
     border-radius: 0 35px 35px 0;
     background-color: #F5F5F5;
+    outline: none;
+    font-size: 28px;
+    color: #6C6767;
 }
 
-.conteudo__geral__direita__formulario__login-esqueciSenha__login-senha__campo::placeholder {
+.input input::placeholder {
     text-align: left;
     font-size: 28px;
     color: rgba(136, 136, 136, 0.4);
@@ -122,35 +123,48 @@ body {
     font-family: "Jaldi", serif;
 }
 
-.conteudo__geral__direita__formulario__login-esqueciSenha__checkbox-esqueciSenha {
+.input input:focus::placeholder {
+    color: transparent;
+}
+
+.checkbox_ate_esqueciSenha {
     display: flex;
     justify-content: space-between;
-
-    border: 2px solid red;
 }
 
-.conteudo__geral__direita__formulario__login-esqueciSenha__checkbox-esqueciSenha a {
-    font-family: "Jaldi", serif;
-    color: rgba(136, 136, 136, 0.8);
-    text-decoration: none;
-    
-    border: 2px solid black;
-}
-
-.conteudo__geral__direita__formulario__login-esqueciSenha__checkbox-esqueciSenha__lembrar {
+.checkbox_ate_lembreDeMim {
     display: flex;
-    flex-direction: row;
+    justify-content: space-between;
+    gap: 1.8px;
     
-    border: 2px solid black;
+
 }
 
-.conteudo__geral__direita__formulario__login-esqueciSenha__checkbox-esqueciSenha__lembrar p {
+.checkbox {
+    width: 20px;
+    height: 20px;
+}
+
+.checkbox_ate_lembreDeMim p {
     font-family: "Inter", serif;
     font-weight: 400;
     color: rgba(136, 136, 136, 0.8);
+    font-size: 14,2px;
 }
 
-.conteudo__geral__direita__formulario__botao {
+.esqueceu_senha a {
+    font-family: "Inter", serif;
+    font-weight: 400;
+    color: rgba(136, 136, 136, 0.8);
+    text-decoration: none;
+    font-size: 14,2px;
+}
+
+.esqueceu_senha a:hover {
+    text-decoration: underline;
+}
+
+.botao_entrar {
     width: 337px;
     height: 65.6px;
     border: none;
@@ -160,4 +174,5 @@ body {
     font-size: 22.4px;
     font-weight: 600;
     font-family: "Inter", serif;
+    cursor: pointer;
 }
