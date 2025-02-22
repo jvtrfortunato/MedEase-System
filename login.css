@@ -127,6 +127,13 @@ body {
     color: transparent;
 }
 
+input[type="password"]::-ms-reveal, 
+input[type="password"]::-ms-clear, 
+input[type="password"]::-webkit-clear-button, 
+input[type="password"]::-webkit-credentials-auto-fill-button {
+    display: none;
+}
+
 .checkbox_ate_esqueciSenha {
     display: flex;
     justify-content: space-between;
@@ -175,4 +182,8 @@ body {
     font-weight: 600;
     font-family: "Inter", serif;
     cursor: pointer;
+}
+
+.botao_entrar:hover {
+    background-color: #5AA9F4;
 }
