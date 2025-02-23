@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitar Exames</title>
+    <link rel="stylesheet" href="solicitarExames.css">
+</head>
+<body>
+    <header>
+        <a class="logo" href="">MedEase</a>
+        <div class="conteudo_header_direita">
+            <a href="">Consultas</a>
+            <a href="">Pacientes</a>
+            <div class="perfil_menu_usuario">
+                <img class="icone-perfil" src="../assets/img/perfilBranco.png" alt="Ícone de perfil do usuário">    
+                <button>
+                    <p>NomeUsuario</p>
+                    <img class="seta_menu" src="../assets/img/setaBranca.png" alt="Seta de ativação do menu do usuário">
+                </button>
+            </div>
+        </div>
+    </header>
+    <main>
+        <h1 class="titulo_secao">Solicitação de Exame</h1>
+        <section class="descricao_exame">
+            <section class="nome_exame">
+                <form action="">
+                    <label for="">Exame</label>
+                    <div class="nome_exame_input_button">
+                        <input type="text" placeholder="Buscar exame">
+                        <button>
+                            <img src="../assets/img/setaPreta.png" alt="">
+                        </button>
+                    </div>
+                </form>
+            </section>
+            <section class="nome_medico">
+                <div>
+                    <!--Descobrir como e de onde recuperar os dados do médico-->
+                    <p class="solicitado_por">Solicitado por</p>
+                    <p>DRA MARIANA OLÍVIA</p>
+                    <p>MÉDICA NEUROLOGISTA</p>
+                    <p>CRM: 99999999</p>
+                    <p>NOME DA CLÍNICA</p>
+                </div>
+                <div>
+                    <button>Confirmar</button>
+                </div>
+            </section>
+        </section>
+        <h1 class="titulo_secao">Exames solicitados</h1>
+        <section class="todos_exames_solicitados">
+            <div class="conteudo_exames_solicitados">
+                <div class="data_solicitacao">
+                    <p class="titulo">Solicitado</p>
+                    <div class="barra_separacao"></div>
+                    <!--Descobrir como e de onde recuperar os dados-->
+                    <p>99/99/9999</p>
+                </div>
+                <div class="nome_exames_solicitados">
+                    <p class="titulo">Nome do exame</p>
+                    <div class="barra_separacao"></div>
+                    <!--Descobrir como e de onde recuperar os dados-->
+                    <p>Nome do exame</p>
+                </div>
+                <div class="barra_rolagem">
+
+                </div>
+            </div>
+        </section>
+        <div class="botao">
+            <button>Finalizar</button>
+        </div>
+    </main>
+    <footer></footer>
+</body>
+</html>
