@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admitir Paciente</title>
-    <link rel="stylesheet" href="../assets/css/admitirPaciente.css">
+    <title>Iniciar Consulta</title>
+    <link rel="stylesheet" href="../assets/css/iniciar-consulta.css">
 </head>
 <body>
     <header>
@@ -22,19 +22,24 @@
         </div>
     </header>
     <main>
+        <h1 class="titulo_principal">Lista de Atendimentos - <!--Coletar a data atual-->99/99/9999</h1>
         <section class="busca">
             <img src="../assets/img/lupa.png" alt="Ícone de lupa">
             <label for="buscar_consulta"></label>
-            <input type="text" name="buscar_consulta" id="buscar_consulta" placeholder="Buscar consulta (nome do paciente)">
+            <input type="text" name="buscar_consulta" id="buscar_consulta" placeholder="Buscar atendimento (nome do paciente)">
         </section>
-        <h1 class="titulo_consultas">Descrição da Consulta</h1>
-        <section class="detalhes_consulta">
-
+        <div class="titulo_pacientes">
+            <p class="paciente">Paciente</p>
+            <p class="horario_status">Horário de chegada</p>
+            <p class="horario_status">Status</p>
+        </div>
+        <section class="lista_pacientes">
+            <!--Descobrir como coletar os dados e inseri-los aqui-->
         </section>
-        <section class="botoes_voltar_admitir">
+        <div class="botoes">
             <button class="voltar">Voltar</button>
-            <button class="admitir">Admitir Paciente</button>
-        </section>
+            <button class="iniciar">Iniciar Consulta</button>
+        </div>
     </main>
     <footer></footer>
 </body>
