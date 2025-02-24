@@ -133,17 +133,23 @@ header .logo{
     margin-left: 6.74vw;
     width: 52.57vw;
     display: flex;
-
-    
 }
+
 
 .titulo_pacientes p {
     font-family: "Inter", serif;
     font-weight: 500;
     opacity: 0.75;
     padding-left: 0.8vw;
+    font-size: 1vw;
+}
 
-    border: 1px solid red;
+.paciente {
+    width: 26.57vw;
+}
+
+.horario_status {
+    width: 13vw;
 }
 
 .lista_pacientes {
@@ -152,4 +158,41 @@ header .logo{
     border: 1px, solid rgba(136, 136, 136, 0.4);
     border-radius: 5px;
     padding: 1.1vh 0.8vw;
+    margin-bottom: 0.9vh;
+}
+
+.botoes {
+    margin-left: 6.74vw;
+    width: 54.2vw;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5vw;
+}
+
+.botoes button {
+    text-align: center;
+    padding: 0.3vw 0.8vw;
+    border: 1px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    font-size: 1vw;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-family: "Inter", serif;
+    cursor: pointer;
+}
+
+.botoes .voltar {
+    background-color: #FF6F61;
+}
+
+.botoes .voltar:hover {
+    background-color: #E65A50;
+}
+
+.botoes .iniciar {
+    background-color: #50E3C2;
+}
+
+.botoes .iniciar:hover {
+    background-color: #3AC3A5;
 }
