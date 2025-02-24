@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    background-color: #4A90E2;
+    height: 13.77vh;
+    padding-bottom: 0.4vh;
+    margin-bottom: 3vh;
+}
+
+header .logo{
+    margin-left: 6.74vw;
+    margin-bottom: 1.95vh;
+    font-size: 3vw;
+    font-family: "Inter", serif;
+    font-weight: 900;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.conteudo_header_direita {
+    margin-right: 6.74vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 5.07vw;
+    margin-bottom: 2.95vh;
+}
+
+.conteudo_header_direita a {
+    font-size: 1.4vw;
+    font-family: "Inter", serif;
+    font-weight: 900;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.perfil_menu_usuario {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1vw;
+}
+
+.icone-perfil {
+    width: 1.5vw;
+    height: auto;
+    padding-bottom: 0.6vh;
+}
+
+.perfil_menu_usuario button {
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+}
+
+.conteudo_header_direita p {
+    font-size: 1.4vw;
+    font-family: "Inter", serif;
+    font-weight: 900;
+    color: #FFFFFF;
+}
+
+.seta_menu {
+    margin-bottom: 0.4vh;
+    width: 1.1vw;
+    height: auto;
+}
+
+.titulo_principal {
+    margin-left: 6.74vw;
+    font-weight: 500;
+    font-family:"Inter", serif;
+    opacity: 0.75;
+    font-size: 1.5vw;
+    margin-bottom: 0.5vh;
+}
+
+.busca {
+    margin-left: 6.74vw;
+    height: 4.01vh;
+    width: 35.83vw;
+    border: 1px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 4vh;
+}
+
+.busca img {
+    width: 1vw;
+    height: auto;
+    margin-left: 1.11vw;
+    margin-top: 0.4vh;
+}
+
+.busca input {
+    margin-left: 1.11vw;
+    width: 35.83vw;
+    height: 4.01vh;
+    border: none;
+    outline: none;
+    font-size: 1vw;
+    font-family:"Inter", serif;
+    font-weight: 500;
+    border-radius: 0 5px 5px 0;
+    opacity: 0.5;
+}
+
+.busca input::placeholder {
+    font-family:"Inter", serif;
+    font-weight: 500;
+    font-size: 1vw;
+}
+
+.busca input:focus::placeholder {
+    color: transparent;
+}
+
+.titulo_pacientes {
+    margin-left: 6.74vw;
+    width: 52.57vw;
+    display: flex;
+}
+
+
+.titulo_pacientes p {
+    font-family: "Inter", serif;
+    font-weight: 500;
+    opacity: 0.75;
+    padding-left: 0.8vw;
+    font-size: 1vw;
+}
+
+.paciente {
+    width: 26.57vw;
+}
+
+.horario_status {
+    width: 13vw;
+}
+
+.lista_pacientes {
+    margin-left: 6.74vw;
+    width: 52.57vw;
+    border: 1px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    padding: 1.1vh 0.8vw;
+    margin-bottom: 0.9vh;
+}
+
+.botoes {
+    margin-left: 6.74vw;
+    width: 54.2vw;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5vw;
+}
+
+.botoes button {
+    text-align: center;
+    padding: 0.3vw 0.8vw;
+    border: 1px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    font-size: 1vw;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-family: "Inter", serif;
+    cursor: pointer;
+}
+
+.botoes .voltar {
+    background-color: #FF6F61;
+}
+
+.botoes .voltar:hover {
+    background-color: #E65A50;
+}
+
+.botoes .iniciar {
+    background-color: #50E3C2;
+}
+
+.botoes .iniciar:hover {
+    background-color: #3AC3A5;
+}
