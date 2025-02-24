@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    background-color: #4A90E2;
+    height: 13.77vh;
+    padding-bottom: 0.4vh;
+    margin-bottom: 3vh;
+}
+
+header .logo{
+    margin-left: 6.74vw;
+    margin-bottom: 1.95vh;
+    font-size: 3vw;
+    font-family: "Inter", serif;
+    font-weight: 900;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.conteudo_header_direita {
+    margin-right: 6.74vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 5.07vw;
+    margin-bottom: 2.95vh;
+}
+
+.conteudo_header_direita a {
+    font-size: 1.4vw;
+    font-family: "Inter", serif;
+    font-weight: 900;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.perfil_menu_usuario {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1vw;
+}
+
+.icone-perfil {
+    width: 1.5vw;
+    height: auto;
+    padding-bottom: 0.6vh;
+}
+
+.perfil_menu_usuario button {
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+}
+
+.conteudo_header_direita p {
+    font-size: 1.4vw;
+    font-family: "Inter", serif;
+    font-weight: 900;
+    color: #FFFFFF;
+}
+
+.seta_menu {
+    margin-bottom: 0.4vh;
+    width: 1.1vw;
+    height: auto;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.paciente {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 40px;
+
+}
+
+.paciente img {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    border: 1px solid black;
+}
+
+.paciente .informacao-perfil {
+    margin-left: 12px;
+    font-family:"Inter", serif;
+}
+
+.paciente .informacao-perfil .info {
+    font: 1em sans-serif;
+    color: ;
+}
+
+.container {
+    border: 1px solid black;
+    margin: 40px;
+    padding: 20px;
+
+}
+
+img {
+    width: 30px;
+    height: 30px;
+}
