@@ -127,6 +127,7 @@ main {
     max-height: 50.78vh;
     overflow-y: auto;
     padding-top: 1.85vh;
+    border-radius: 10px;
 }
 
 .container .campo-consulta {
@@ -137,6 +138,7 @@ main {
     width: 70%;
     font-size: 0.73vw;
     text-align: justify;
+    border-radius: 10px;
 }
 
 
