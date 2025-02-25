@@ -5,17 +5,24 @@
     padding: 0;
 }
 
+html, body {
+    font-family: "Inter", serif;
+    overflow: hidden;
+}
+
 header {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     background-color: #4A90E2;
+    /* Já estava em vh */
     height: 13.77vh;
     padding-bottom: 0.4vh;
     margin-bottom: 3vh;
 }
 
 header .logo{
+    /* Já em vw e vh */
     margin-left: 6.74vw;
     margin-bottom: 1.95vh;
     font-size: 3vw;
@@ -68,7 +75,6 @@ header .logo{
 
 .conteudo_header_direita p {
     font-size: 1.4vw;
-    font-family: "Inter", serif;
     font-weight: 900;
     color: #FFFFFF;
 }
@@ -83,42 +89,86 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .paciente {
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin-left: 40px;
-
+    align-self: flex-start;
+    margin-left: 9.77vw;
+    margin-bottom: 1.85vh;
 }
 
 .paciente img {
-    width: 50px;
-    height: 50px;
+    width: 3.65vw;
+    height: 3.65vw;
     border-radius: 100%;
-    border: 1px solid black;
+    border: 0.05vw solid rgba(136, 136, 136, 0.4);
 }
 
 .paciente .informacao-perfil {
-    margin-left: 12px;
+    margin-left: 0.63vw;
     font-family:"Inter", serif;
 }
 
 .paciente .informacao-perfil .info {
-    font: 1em sans-serif;
-    color: ;
+    font-size: 1vw;
+    color: grey;
 }
 
 .container {
-    border: 1px solid black;
-    margin: 40px;
-    padding: 20px;
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    border: 2px solid rgba(136, 136, 136, 0.4);
+    width: 80%;
+    max-height: 50.78vh;
+    overflow-y: auto;
+    padding-top: 1.85vh;
 }
 
-img {
-    width: 30px;
-    height: 30px;
+.container .campo-consulta {
+    box-sizing: border-box;
+    border: 2px solid rgba(136, 136, 136, 0.4);
+    padding: 1.04vw;
+    margin: 1.85vh 0;
+    width: 70%;
+    font-size: 0.73vw;
+    text-align: justify;
+}
+
+
+.container .campo-consulta h2 {
+    margin-bottom: 1.11vh;
+ }
+ 
+ .container .campo-consulta h4 {
+     margin-bottom: 1.11vh;
+ }
+ 
+ .container .campo-consulta {
+     font-size: 0.98vw;
+     text-align: justify;
+ }
+ 
+
+.btn {
+    text-align: center;
+    padding: 0.3vw 0.8vw;
+    border: 1px solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    font-size: 1vw;
+    color: #FFFFFF;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: #50E3C2;
+    align-self: flex-end;
+    margin-right: 135px;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background-color: #3AC3A5;
 }
