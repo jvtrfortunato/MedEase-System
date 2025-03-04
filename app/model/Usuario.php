@@ -3,22 +3,16 @@
 namespace App\Models;
 
 Class Usuario {
-    private int $id;
-    private string $nome;
-    private string $cpf;
-    private string $telefone;
-    private string $email;
-    private string $senha;
-    private string $tipo;
-
-    public function __construct($nome, $cpf, $telefone, $email, $senha, $tipo) {
-        $this->nome = $nome;
-        $this->cpf = $cpf;
-        $this->telefone = $telefone;
-        $this->email = $email;
-        $this->senha = password_hash($senha, PASSWORD_DEFAULT);
-        $this->tipo =  $tipo;
-    }
+    public function __construct(
+        private int $id,
+        private string $nome,
+        private string $cpf,
+        private string $telefone,
+        private string $email,
+        private string $senha,
+        private string $tipo,
+        ) {
+        }
 
     public function getId(): int {
         return $this->id;
@@ -68,3 +62,6 @@ Class Usuario {
         return password_verify($senha, $this->senha);
     }
 }
+
+//$usuario = new Usuario(1,'a','1','1','1','1','1');
+//var_dump($usuario);

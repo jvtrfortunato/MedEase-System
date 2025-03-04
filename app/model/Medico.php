@@ -6,6 +6,7 @@ require_once 'Usuario.php';
 
 class Medico extends Usuario {
     public function __construct(
+        int $id,
         string $nome, 
         string $cpf,
         string $telefone, 
@@ -17,7 +18,7 @@ class Medico extends Usuario {
         protected int $salaAtendimento,
         protected array $historicoConsultas = []
     ) {
-        parent::__construct($nome, $cpf, $telefone, $email, $senha, $tipo);
+        parent::__construct($id, $nome, $cpf, $telefone, $email, $senha, $tipo);
     }
 
     public function listarConsultasAgendadasDia() {
@@ -43,10 +44,16 @@ class Medico extends Usuario {
 
 }
 
-$medico = new Medico('Medico Teste', '999.999.999-99', '(99)99999-9999', 'MedTeste@.com', '123', 'Médico', 'CRM/SP-123456', 'Neurologista', 1);
-var_dump($medico);
-echo $medico->listarConsultasAgendadasDia() . "\n";
-echo $medico->selecionarConsulta() . "\n";
-echo $medico->atualizarProntuarioEletronico() . "\n";
-echo $medico->selecionarPaciente() . "\n";
-echo $medico->ConfirmarAtualizacaoProntuario();
+/*$medico = new Medico(
+    1, 
+    'Medico Teste', 
+    '999.999.999-99', 
+    '(99)99999-9999', 
+    'MedTeste@.com', 
+    '123', 
+    'Médico', 
+    'CRM/SP-123456', 
+    'Neurologista', 
+    1);
+
+var_dump($medico);*/

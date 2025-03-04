@@ -2,27 +2,19 @@
 
 namespace App\Models;
 
-require 'Endereco.php';
+require_once 'Endereco.php';
 
 class Paciente {
-    private int $id;
-    private string $nome;
-    private string $cpf;
-    private string $dataNascimento;
-    private Endereco $endereco;
-    private array $telefone = [];
-    private string $email;
-    private string $planoSaude;
-
-    public function __construct($nome, $cpf, $dataNascimento, $endereco, $telefone, $email, $planoSaude) {
-        $this->nome = $nome;
-        $this->cpf = $cpf;
-        $this->dataNascimento = $dataNascimento;
-        $this->endereco = $endereco;
-        $this->telefone = $telefone;
-        $this->email = $email;
-        $this->planoSaude = $planoSaude;
-    }
+    public function __construct(
+        private int $id,
+        private string $nome,
+        private string $cpf,
+        private string $dataNascimento,
+        private Endereco $endereco,
+        private array $telefone = [],
+        private string $email,
+        private string $planoSaude
+    ) {}    
     
     public function getId(): int {
         return $this->id;
@@ -86,6 +78,22 @@ class Paciente {
     }
 }
 
-$endereco = new Endereco("Rua das Flores", 123, "Centro", "São Paulo", "SP", "01010-000");
-$paciente = new Paciente('Paciente Teste', '999.999.999-99', '99/99/9999', $endereco, ['(99)99999-9999'], 'Paciente@.com', 'UniMed');
-var_dump($paciente);
+/*$endereco = new Endereco(
+    "Rua das Flores", 
+    123, 
+    "Centro", 
+    "São Paulo", 
+    "SP", 
+    "01010-000");
+
+$paciente = new Paciente(
+    1,
+    'Paciente Teste', 
+    '999.999.999-99', 
+    '99/99/9999', 
+    $endereco, 
+    ['(99)99999-9999'], 
+    'Paciente@.com', 
+    'UniMed');
+
+var_dump($paciente);*/
