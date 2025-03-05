@@ -19,6 +19,66 @@ class Consulta {
         private string $idMedico,
     ) {}
 
+    public function getId(): int {
+        return $this->id;
+    }
+
+    public function getData(): string {
+        return $this->data;
+    }
+    
+    public function setData($data): void {
+        $this->data = $data;
+    }
+
+    public function getHora(): string {
+        return $this->hora;
+    }
+    
+    public function setHora($hora): void {
+        $this->hora = $hora;
+    }
+
+    public function getStatus(): StatusConsulta { talvez esse get e set deve estar na classe StatusConsulta
+        return $this->status;
+    }
+    
+    public function setStatus($status): void {
+        $this->status = $status;
+    }
+
+    public function getSalaAtendimento(): int {
+        return $this->salaAtendimeto;
+    }
+    
+    public function setSalaAtendimento($salaAtendimento): void {
+        $this->salaAtendimento = $salaAtendimento;
+    }
+
+    public function getMotivo(): string {
+        return $this->motivo;
+    }
+    
+    public function setMotivo($motivo): void {
+        $this->motivo = $motivo;
+    }
+
+    public function getIdPaciente(): int {
+        return $this->idPaciente;
+    }
+    
+    public function setIdPaciente($idPaciente): void {
+        $this->idPaciente = $idPaciente;
+    }
+
+    public function getIdMedico(): int {
+        return $this->idMedico;
+    }
+    
+    public function setIdMedico($idMedico): void {
+        $this->idMedico = $idMedico;
+    }
+
     public function confirmarConsulta() {
         return "Consulta criada.";
     }
@@ -63,3 +123,4 @@ $consulta = new Consulta(
 );
     
 var_dump($consulta);
+echo $consulta->getStatus();

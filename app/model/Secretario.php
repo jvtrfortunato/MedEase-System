@@ -15,9 +15,25 @@ class Secretario extends Usuario {
         string $senha, 
         string $tipo, 
         protected string $horarioTrabalho,
-        protected array $historicoAtividades = []
+        protected array $historicoAtividades = [] //Talvez uma classe compositória
     ) {
         parent::__construct($id, $nome, $cpf, $telefone, $email, $senha, $tipo);
+    }
+
+    public function gethorarioTrabalho(): string {
+        return $this->horarioTrabalho;
+    }
+    
+    public function setHorarioTrabalho($horarioTrabalho): void {
+        $this->horarioTrabalho = $horarioTrabalho;
+    }
+
+    public function getHistoricoAtividades(): array {
+        return $this->historicoAtividades;
+    }
+    
+    public function setHistoricoAtividades($historicoAtividades): void {
+        $this->historicoAtividades = $historicoAtividades;
     }
 
     public function agendarConsulta() {

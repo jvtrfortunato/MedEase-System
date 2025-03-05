@@ -44,12 +44,11 @@ class Paciente {
         $this->dataNascimento = $dataNascimento;
     }
     
-    //Implementar endereço corretamente
-    public function getEndereco(): Endereco {
+    public function getEndereco(): Endereco { Talvez esse get e set tem que estar na classe Endereco
         return $this->endereco;
     }
     
-    public function setEndereco(Endereco $endereco): void {
+    public function setEndereco($endereco): void {
         $this->endereco = $endereco;
     }
     

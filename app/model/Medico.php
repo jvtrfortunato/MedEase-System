@@ -16,9 +16,41 @@ class Medico extends Usuario {
         protected string $crm,
         protected string $especialidade,
         protected int $salaAtendimento,
-        protected array $historicoConsultas = []
+        protected array $historicoConsultas = [] //Talvez uma classe compositória
     ) {
         parent::__construct($id, $nome, $cpf, $telefone, $email, $senha, $tipo);
+    }
+
+    public function getCrm(): string {
+        return $this->crm;
+    }
+    
+    public function setCrm($crm): void {
+        $this->crm = $crm;
+    }
+
+    public function getEspecialidade(): string {
+        return $this->especialidade;
+    }
+    
+    public function setEspecialidade($especialidade): void {
+        $this->especialidade = $especialidade;
+    }
+
+    public function getSalaAtendimento(): int {
+        return $this->salaAtendimento;
+    }
+    
+    public function setSalaAtendimento($salaAtendimento): void {
+        $this->salaAtendimento = $salaAtendimento;
+    }
+
+    public function getHistoricoConsultas(): array {
+        return $this->historicoConsultas;
+    }
+    
+    public function setHistoricoConsultas($historicoConsultas): void {
+        $this->historicoConsultas = $historicoConsultas;
     }
 
     public function listarConsultasAgendadasDia() {
