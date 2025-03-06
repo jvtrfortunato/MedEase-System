@@ -4,7 +4,8 @@ namespace App\Models;
 
 enum StatusConsulta {
     case Pendente;
-    case Aberta;
+    case PacienteAguardando;
+    case EmAndamento;
     case Concluida;
     case Cancelada;
 }

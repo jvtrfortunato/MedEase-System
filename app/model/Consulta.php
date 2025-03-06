@@ -9,14 +9,14 @@ require_once 'Medico.php';
 
 class Consulta {
     public function __construct(
-        private int $id,
+        private int $id, //o valor desse atributo será atribuido automaticamente no banco de dados
         private string $data,
         private string $hora,
         private StatusConsulta $status,
         private int $salaAtendimento,
         private string $motivo,
         private int $idPaciente,
-        private string $idMedico,
+        private int $idMedico,
     ) {}
 
     public function getId(): int {
@@ -39,7 +39,7 @@ class Consulta {
         $this->hora = $hora;
     }
 
-    public function getStatus(): StatusConsulta { talvez esse get e set deve estar na classe StatusConsulta
+    public function getStatus(): StatusConsulta { 
         return $this->status;
     }
     
@@ -79,37 +79,41 @@ class Consulta {
         $this->idMedico = $idMedico;
     }
 
-    public function confirmarConsulta() {
-        return "Consulta criada.";
+    //Métodos
+    //Secretario
+    public function agendarConsulta() {
+        return "Calendário com horários disponíveis.";
+    }
+
+    public function selecionarHorario() {
+        return "Formulário para a inserção dos dados da consulta.";
+    }
+
+    public function confirmarAgendamento() {
+        return "Objeto Consulta criado.";
+    }
+
+    public function selecionarConsultaPaciente() {
+        return "Lista de consultas do paciente.";
+    }
+
+    public function admitirPaciente() {
+        return "Atualiza o status da consulta para PacienteAguardando.";
+    }
+
+    //Médico
+    public function listarConsultasAgendadasDia() {
+        return "Lista de consultas agendadas do dia.";
+    }
+
+    public function abrirConsulta() {
+        return "Atualia o status da consulta para EmAndamento e o prontuário do paciente é aberto.";
+    }
+
+    public function finalizarConsulta() {
+        return "Atualiza o status da consulta para Concluida e salva os dados no prontuário.";
     }
 }
-
-$endereco = new Endereco("Rua das Flores", 123, "Centro", "São Paulo", "SP", "01010-000");
-
-$paciente = new Paciente(
-    1,
-    'Paciente Teste', 
-    '999.999.999-99', 
-    '99/99/9999', 
-    $endereco, 
-    ['(99)99999-9999'], 
-    'Paciente@.com', 
-    'UniMed'
-);
-
-$medico = new Medico(
-    1, 
-    'Medico Teste', 
-    '999.999.999-99', 
-    '(99)99999-9999', 
-    'MedTeste@.com', 
-    '123', 
-    'Médico', 
-    'CRM/SP-123456', 
-    'Neurologista', 
-    1
-);
-
 
 $consulta = new Consulta(
     1,
@@ -123,4 +127,3 @@ $consulta = new Consulta(
 );
     
 var_dump($consulta);
-echo $consulta->getStatus();

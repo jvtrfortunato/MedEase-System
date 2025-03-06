@@ -53,9 +53,7 @@ class Medico extends Usuario {
         $this->historicoConsultas = $historicoConsultas;
     }
 
-    public function listarConsultasAgendadasDia() {
-        return "Lista de consultas agendadas do dia.";
-    }
+    
 
     public function selecionarConsulta() {
         return "Dados da consulta específica.";
@@ -76,8 +74,8 @@ class Medico extends Usuario {
 
 }
 
-/*$medico = new Medico(
-    1, 
+$medico = new Medico(
+    3, 
     'Medico Teste', 
     '999.999.999-99', 
     '(99)99999-9999', 
@@ -88,4 +86,4 @@ class Medico extends Usuario {
     'Neurologista', 
     1);
 
-var_dump($medico);*/
+var_dump($medico);

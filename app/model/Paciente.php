@@ -44,7 +44,7 @@ class Paciente {
         $this->dataNascimento = $dataNascimento;
     }
     
-    public function getEndereco(): Endereco { Talvez esse get e set tem que estar na classe Endereco
+    public function getEndereco(): Endereco { //Talvez esse get e set tem que estar na classe Endereco
         return $this->endereco;
     }
     
@@ -75,9 +75,21 @@ class Paciente {
     public function setPlanoSaude($planoSaude): void {
         $this->planoSaude = $planoSaude;
     }
+
+    //Métodos
+    //Secretário
+    public function selecionarPaciente() {
+        return "Histórico de consultas do paciente (finalizadas, em andamento e agendadas).";
+    }
+
+    public function atualizarProntuarioEletronico() {
+        return "Lista de todos os pacientes.";
+    }
+
+    
 }
 
-/*$endereco = new Endereco(
+$endereco = new Endereco(
     "Rua das Flores", 
     123, 
     "Centro", 
@@ -86,7 +98,7 @@ class Paciente {
     "01010-000");
 
 $paciente = new Paciente(
-    1,
+    2,
     'Paciente Teste', 
     '999.999.999-99', 
     '99/99/9999', 
@@ -95,4 +107,4 @@ $paciente = new Paciente(
     'Paciente@.com', 
     'UniMed');
 
-var_dump($paciente);*/
+var_dump($paciente);
