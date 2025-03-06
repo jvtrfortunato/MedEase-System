@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+require_once 'Paciente.php';
+require_once 'Medico.php';
+
 class Prontuario {
     public function __construct(
         //Identificação
         private int $id,
         private int $idPaciente,
-        private int $idMedicoResponsavel, //talvez colocar Ids de todos medicos responsaveis em um array
+        private int $idMedicoResponsavel, //id do ultimo medico que atualizou o prontuario
         private string $dataUltimaAtualizacao,
 
         //Informações Clínicas
@@ -247,4 +250,44 @@ class Prontuario {
     public function setAntecedentesHospitalares($antecedentesHospitalares): void {
         $this->antecedentesHospitalares = $antecedentesHospitalares;
     }
+
+    //Métodos
+    public function solicitarExame() {
+        return "Formulário com um campo de texto para selecionar o exame específico";
+    }
+
+    public function salvarExame() {
+        return "Armazena o exame em uma lista.";
+    }
+
+    public function finalizarSolicitacaoExame() {
+        return "Registra os exames solicitados no prontuário do paciente e disponibiliza para impressão.";
+    }
+
+    //Médico
+    public function selecionarProntuario() {
+        return "Prontuário eletrônico do paciente aberto.";
+    }
+
+    public function confirmarAlteracoesProntuario() {
+        return "Modificações salvas e registros atualizados.";
+    }
+
+    public function inserirResultadoExame() {
+        return "Tela que possibilita a inserção dos dados do exame.";
+    }
+
+    public function salvarResultadoExame() {
+        return "Associa o resultado ao exame solicitado e o salva no prontuário.";
+    }
 }
+
+$prontuario = new Prontuario(
+    //Identificação
+    1,
+    $paciente->getId(),
+    $medico->getId(),
+    '05/03/2025',
+
+    //Informações Clínicas
+);
