@@ -107,4 +107,4 @@ $paciente = new Paciente(
     'Paciente@.com', 
     'UniMed');
 
-var_dump($paciente);
+//var_dump($paciente);

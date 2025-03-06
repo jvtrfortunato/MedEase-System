@@ -86,4 +86,4 @@ $medico = new Medico(
     'Neurologista', 
     1);
 
-var_dump($medico);
+//var_dump($medico);

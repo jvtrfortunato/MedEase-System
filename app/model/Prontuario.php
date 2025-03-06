@@ -4,6 +4,9 @@ namespace App\Models;
 
 require_once 'Paciente.php';
 require_once 'Medico.php';
+require_once 'Anamnese.php';
+require_once 'ExameFisico.php';
+require_once 'Prescricao.php';
 
 class Prontuario {
     public function __construct(
@@ -14,19 +17,18 @@ class Prontuario {
         private string $dataUltimaAtualizacao,
 
         //Informações Clínicas
-        private string $historicoMedico,
         private string $sintomas,
-        private string $diagnostico,
         private Anamnese $anamnese,
         private ExameFisico $exameFisico,
+        private string $diagnostico,
+        private array $historicoDiagnosticos = [], //$diagnostico será adicionado aqui / Talvez somente esse array seja necessário no lugar de $diagnostico
         private Prescricao $prescricao, 
-        private array $historicoDiagnosticos = [], 
 
         //Dados vitais e Exames
         private string $peso,
         private string $altura,
         private string $exameSolicitado, //Talvez implementar uma classe Exame
-        private array $examesSolicitados = [], 
+        private array $examesSolicitados = [], //$exameSolicitado será adicionado aqui / Talvez somente esse array seja necessário no lugar de $exameSolicitado
         private array $resultadosExames = [],
         private array $laudoExames = [],
 
@@ -290,4 +292,32 @@ $prontuario = new Prontuario(
     '05/03/2025',
 
     //Informações Clínicas
+    'Dor de cabeça',
+    $anamnese,
+    $exameFisico,
+    'Enxaqueca',
+    ['Enxaqueca'],
+    $prescricao,
+
+    //Dados Vitais e Exames
+    '90,2 Kg',
+    '1,85 m',
+    'Hemograma completo',
+    ['Hemograma completo'],
+    ['Resultado teste'],
+    ['Laudo teste'],
+
+    //Outros
+    'Masculino',
+    'Paulo',
+    'Maria',
+    'Mariana',
+    'Presidente Prudente - SP',
+    'Desenvolvedor',
+    'Pirapozinho - SP',
+    'Nenhum encaminhamento',
+    ['Histórico encaminhamento teste'],
+    ['Antecedentes hospitalares teste']
 );
+
+var_dump($prontuario);

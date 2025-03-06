@@ -35,3 +35,25 @@ class Prescricao {
         return "Une os medicamentos em uma prescricao e a armazena no prontuário do paciente";
     }
 }
+
+$prescricao = new Prescricao(
+    //Medicamento
+    'Medicamento teste',
+    'Concentração teste',
+    'Forma farmaceutica teste',
+    'Via administração teste',
+    'Tipo receita teste',
+
+    //Posologia
+    'Dose teste',
+    'Frequência dose teste',
+
+    //Período de tratamento
+    'Início teste',
+    'Dias teste',
+    
+    //Outros
+    'Recomendações teste'
+);
+
+//var_dump($prescricao);
