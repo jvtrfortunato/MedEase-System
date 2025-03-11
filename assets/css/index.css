@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jaldi&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+body {
+    background-color: #F4F6F8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    width: 100%;
+}
+
+.section-principal {
+    display: flex;
+    height: 100vh;
+    width: 85%;
+    border: 0.1vw solid rgba(136, 136, 136, 0.4);
+    margin: auto;
+}
+
+
+.lado-esquerdo {
+    background-color: #F5F5F5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+.lado-esquerdo .conteudos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 3vh;
+    margin-left: 5vw;
+}
+
+.lado-esquerdo h1 {
+    font-size: 4.9vw;
+    font-weight: 900;
+    color: #444;
+    line-height: 1.2;
+}
+
+.lado-esquerdo p {
+    font-size: 2.3vw;
+    font-weight: 600;
+    color: #666;
+    margin: 5vh 0;
+}
+
+h1 span, p span {
+    display: block;
+}
+
+
+.btn {
+    background-color: #4A90E2;
+    width: 14vw;
+    height: 9vh;
+    border: none;
+    border-radius: 5vw;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.5vw;
+}
+
+.btn:hover {
+    background-color: #5AA9F4;
+}
+
+.lado-direito {
+    width: 50%;
+    background-color: #4A90E2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lado-direito img {
+    width: 100%;
+    object-fit: contain;
+}
