@@ -3,96 +3,94 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: "Inter", sans-serif;
 }
 
 body {
-    background-color: #F4F6F8;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 100vh;
+    box-sizing: border-box;
 }
 
 main {
-    width: 100%;
-}
-
-.section-principal {
-    display: flex;
     height: 100vh;
-    width: 85%;
-    border: 0.1vw solid rgba(136, 136, 136, 0.4);
-    margin: auto;
-}
-
-
-.lado-esquerdo {
-    background-color: #F5F5F5;
+    width: 100%;
+    background-color: #FFFFFF;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    width: 50%;
+    justify-content: center;
 }
 
-.lado-esquerdo .conteudos {
+.conteudo_geral {
+    width: 1152px;
+    height: 819px;
+    display: flex;
+}
+
+.geral_esquerda {
+    height: 100%;
+    width: 55%;
+    background-color: #F5F5F5;
+    border: 1px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 10px 0 0 10px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
+}
+
+.conteudo_esquerda {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.texto {
+    display: flex;
+    flex-direction: column;
     align-items: flex-start;
-    padding: 3vh;
-    margin-left: 5vw;
 }
 
-.lado-esquerdo h1 {
-    font-size: 4.9vw;
+.texto h1 {
+    color: #6C6767;
+    font-size: 70px;
+    font-family: "Inter", serif;
     font-weight: 900;
-    color: #444;
-    line-height: 1.2;
 }
 
-.lado-esquerdo p {
-    font-size: 2.3vw;
-    font-weight: 600;
-    color: #666;
-    margin: 5vh 0;
+.conteudo_esquerda p {
+    color: #6C6767;
+    font-size: 30px;
+    font-family: "Inter", serif;
+    font-weight: 900;
 }
 
-h1 span, p span {
-    display: block;
+.botao_entrar {
+
 }
 
-
-.btn {
-    background-color: #4A90E2;
-    width: 14vw;
-    height: 9vh;
+.botao_entrar button {
+    width: 337px;
+    height: 65.6px;
     border: none;
-    border-radius: 5vw;
+    border-radius: 35px;
+    background-color: #4A90E2;
+    color: #FFFFFF;
+    font-size: 22.4px;
+    font-weight: 600;
+    font-family: "Inter", serif;
     cursor: pointer;
-    transition: 0.3s;
 }
 
-.btn a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 1.5vw;
-}
-
-.btn:hover {
+.botao_entrar button:hover {
     background-color: #5AA9F4;
 }
 
-.lado-direito {
-    width: 50%;
+.geral_direita {
+    height: 100%;
+    width: 45%;
     background-color: #4A90E2;
+    border: 1px solid #4A90E2;
+    border-radius: 0 10px 10px 0;
     display: flex;
-    justify-content: center;
     align-items: center;
-}
-
-.lado-direito img {
-    width: 100%;
-    object-fit: contain;
+    justify-content: center;
 }
