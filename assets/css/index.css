@@ -12,19 +12,8 @@ body {
 
 main {
     height: 100vh;
-<<<<<<< HEAD
     width: 100%;
     background-color: #FFFFFF;
-=======
-    width: 85%;
-    border: 0.1vw solid rgba(136, 136, 136, 0.4);
-    margin: auto;
-}
-
-/* Lado esquerdo */
-.lado-esquerdo {
-    background-color: #F5F5F5;
->>>>>>> 959f25bdfa30c29208fe6d2fccaf1dc594e4d9e4
     display: flex;
     align-items: center;
     justify-content: center;
@@ -95,15 +84,9 @@ main {
     background-color: #5AA9F4;
 }
 
-<<<<<<< HEAD
 .geral_direita {
     height: 100%;
     width: 45%;
-=======
-
-.lado-direito {
-    width: 50%;
->>>>>>> 959f25bdfa30c29208fe6d2fccaf1dc594e4d9e4
     background-color: #4A90E2;
     border: 1px solid #4A90E2;
     border-radius: 0 10px 10px 0;

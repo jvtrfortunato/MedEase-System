@@ -36,19 +36,6 @@ header .logo{
     margin-bottom: 2.95vh;
 }
 
-.perfil_menu_usuario {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1vw;
-}
-
-.icone-perfil {
-    width: 1.5vw;
-    height: auto;
-    padding-bottom: 0.6vh;
-}
-
 .perfil_menu_usuario button {
     background: none;
     border: none;
@@ -63,14 +50,9 @@ header .logo{
 .conteudo_header_direita p {
     font-size: 1.4vw;
     font-family: "Inter", serif;
-    font-weight: 900;
+    font-weight: 300;
     color: #FFFFFF;
-}
-
-.seta_menu {
-    margin-bottom: 0.4vh;
-    width: 1.1vw;
-    height: auto;
+    text-decoration: underline;
 }
 
 main {
@@ -79,17 +61,11 @@ main {
     margin: auto;
 }
 
-/* .section-principal {
-    border: 0.2vh solid rgba(136, 136, 136, 0.4);
-    padding: 3vh 4vw 10vh 4vw;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-} */
-
-h2 {
+h1 {
     font-size: 3vh;
     margin-bottom: 3vh;
+    font-weight: 500;
+    opacity: 75%;
 }
 
 .grid-container {
@@ -103,6 +79,7 @@ h2 {
     padding: 6vh;
     border: 0.2vh solid rgba(136, 136, 136, 0.4);
     cursor: pointer;
+    border-radius: 5px;
 }
 
 .card a {
@@ -124,7 +101,8 @@ h2 {
 
 .card p {
     font-size: 3vh;
-    font-weight: bold;
+    font-weight: 500;
+    opacity: 75%;
 }
 
 .card:hover {
