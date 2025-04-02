@@ -65,6 +65,7 @@ main {
 h1 {
     opacity: 75%;
     font-weight: 500;
+    font-size: 2em;
 }
 
 .conteudo-principal {
@@ -223,6 +224,7 @@ h1 {
 label {
     opacity: 75%;
     font-weight: 500;
+    font-size: 1.4em;
 }
 
 span {
@@ -233,6 +235,7 @@ input {
     border: 2px, solid rgba(136, 136, 136, 0.4);
     border-radius: 5px;
     padding: 5px;
+    padding: 10px 15px 10px 15px;
 }
 
 select {
