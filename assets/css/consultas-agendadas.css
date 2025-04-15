@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    background-color: #4A90E2;
+    height: 13.77vh;
+    padding-bottom: 0.4vh;
+    margin-bottom: 3vh;
+}
+
+header .logo{
+    margin-left: 6.74vw;
+    margin-bottom: 1.95vh;
+    font-size: 3vw;
+    font-family: "Inter", serif;
+    font-weight: 900;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.conteudo_header_direita {
+    margin-right: 6.74vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 5.07vw;
+    margin-bottom: 2.95vh;
+}
+
+.perfil_menu_usuario button {
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+}
+
+.conteudo_header_direita p {
+    font-size: 1.4vw;
+    font-family: "Inter", serif;
+    font-weight: 300;
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.conteudo-geral {
+    width: 80%;
+}
+
+.conteudo-geral h1 {
+    opacity: 75%;
+    margin-left: 2%;
+    margin-bottom: 1%;
+}
+
+.horarios {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 2% 2% 0 2%;
+    border: 2px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    margin-bottom: 1%;
+}
+
+.periodo {
+    display: flex;
+    flex-direction: column;
+    width: 49%;
+}
+
+.periodo h2 {
+    opacity: 75%;
+    font-weight: 500;
+}
+
+.horario {
+    display: flex;
+    gap: 4%;
+    width: 100%;
+    border: 2px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    margin-bottom: 3%;
+    padding: 1% 1% 1% 1%;
+    cursor: pointer;
+}
+
+.horario:hover {
+    background-color: #d8d2d2;
+}
+
+.horario p {
+    opacity: 50%;
+    font-size: 1.3em;
+}
+
+.hora {
+    font-weight: 500;
+}
+
+.italico {
+    font-style: italic;
+    font-weight: 400;
+}
+
+button {
+    text-align: center;
+    padding: 0.3vw 0.8vw;
+    border: 1px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    font-size: 1vw;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-family: "Inter", serif;
+    cursor: pointer;
+    background-color: #FF6F61;
+}
+
+button:hover {
+    background-color: #E65A50;
+}
