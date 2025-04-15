@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Profissionais</title>
+    <link rel="stylesheet" href="/assets/css/gerenciar-profissionais.css">
+</head>
+<body>
+    <header>
+        <a class="logo" href="">MedEase</a>
+        <div class="conteudo_header_direita">
+            <div class="perfil_menu_usuario">    
+                <button>
+                    <p>sair</p>
+                </button>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="conteudo-principal">
+
+            <div class="busca-opcoes">
+                
+                <div class="busca">
+                    <img src="/assets/img/lupa.png" alt="Lupa de pesquisa">
+                    <input type="text" placeholder="Buscar Profissional (nome do profissional)">
+                </div>
+
+                <div class="opcoes">
+                    <button id="opcao-medico" onclick="mostrar('medicos')" class="opcao ativo">Médicos</button>
+                    <button id="opcao-secretario" onclick="mostrar('secretarios')" class="opcao">Secretários</button>
+                </div>
+
+            </div>
+
+            <section class="profissionais">
+                
+                <div class="legenda">
+                    <p class="nome-legenda">Nome Completo</p>
+                    <p>CPF</p>
+                </div>
+                
+                <!--Lista Médicos-->
+                <div id="lista-medicos" class="lista">
+                    <div class="dados">
+                        <div class="nome">
+                            <p>Receber o nome do médico aqui</p>
+                        </div>
+                        <div class="cpf">
+                            <p>Receber o CPF aqui</p>
+                        </div>
+                        <button class="detalhes">
+                            Ver detalhes
+                        </button>
+                    </div>
+
+                    <div class="dados">
+                        <div class="nome">
+                            <p>Receber o nome do médico aqui</p>
+                        </div>
+                        <div class="cpf">
+                            <p>Receber o CPF aqui</p>
+                        </div>
+                        <button class="detalhes">
+                            Ver detalhes
+                        </button>
+                    </div>
+
+                    <div class="dados">
+                        <div class="nome">
+                            <p>Receber o nome do médico aqui</p>
+                        </div>
+                        <div class="cpf">
+                            <p>Receber o CPF aqui</p>
+                        </div>
+                        <button class="detalhes">
+                            Ver detalhes
+                        </button>
+                    </div>
+                </div>
+
+                <!--Lista Secretários-->
+                <div id="lista-secretarios" class="lista oculto">
+                        <div class="dados">
+                            <div class="nome">
+                                <p>Receber o nome do secretário aqui</p>
+                            </div>
+                            <div class="cpf">
+                                <p>Receber o CPF aqui</p>
+                            </div>
+                            <button class="detalhes">
+                                Ver detalhes
+                            </button>
+                        </div>
+    
+                        <div class="dados">
+                            <div class="nome">
+                                <p>Receber o nome do secretário aqui</p>
+                            </div>
+                            <div class="cpf">
+                                <p>Receber o CPF aqui</p>
+                            </div>
+                            <button class="detalhes">
+                                Ver detalhes
+                            </button>
+                        </div>
+    
+                        <div class="dados">
+                            <div class="nome">
+                                <p>Receber o nome do secretário aqui</p>
+                            </div>
+                            <div class="cpf">
+                                <p>Receber o CPF aqui</p>
+                            </div>
+                            <button class="detalhes">
+                                Ver detalhes
+                            </button>
+                        </div>
+                    </div>
+
+            </section>
+
+        </section>
+        <section class="botao">
+            <button class="voltar">Voltar</button>
+            <button class="adicionar" type="submit">Adicionar Profissional</button>
+        </section>
+    </main>
+    <footer></footer>
+
+    <script>
+        let tipoAtual = 'medicos'; 
+
+        function mostrar(tipo){
+            tipoAtual = tipo;
+            //Esconde ambas as listas
+            document.getElementById('lista-medicos').classList.add('oculto');
+            document.getElementById('lista-secretarios').classList.add('oculto');
+
+            //Remove o destaque dos botões
+            document.getElementById('opcao-medico').classList.remove('ativo');
+            document.getElementById('opcao-secretario').classList.remove('ativo');
+
+            if (tipo === 'medicos') {
+                document.getElementById('lista-medicos').classList.remove('oculto');
+                document.getElementById('opcao-medico').classList.add('ativo')
+            } else {
+                document.getElementById('lista-secretarios').classList.remove('oculto');
+                document.getElementById('opcao-secretario').classList.add('ativo')
+            }            
+        }
+
+        function adicionarNovo() {
+            if (tipoAtual === 'medicos') {
+                window.location.href = 'cadastrar-medico.html'; // caminho para a tela de cadastro de médico
+            } else {
+                window.location.href = 'cadastrar-secretario.html'; // caminho para a tela de cadastro de secretário
+            }
+        }
+    </script>
+</body>
+</html>

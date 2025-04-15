@@ -1,0 +1,310 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    background-color: #4A90E2;
+    height: 13.77vh;
+    padding-bottom: 0.4vh;
+    margin-bottom: 3vh;
+}
+
+header .logo{
+    margin-left: 6.74vw;
+    margin-bottom: 1.95vh;
+    font-size: 3vw;
+    font-family: "Inter", serif;
+    font-weight: 900;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.conteudo_header_direita {
+    margin-right: 6.74vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 5.07vw;
+    margin-bottom: 2.95vh;
+}
+
+.perfil_menu_usuario button {
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+}
+
+.conteudo_header_direita p {
+    font-size: 1.4vw;
+    font-family: "Inter", serif;
+    font-weight: 300;
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    opacity: 75%;
+    font-weight: 500;
+    font-size: 2em;
+}
+
+.conteudo-principal {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.endereco {
+    margin-top: 10px;
+}
+
+.dados-gerais-endereco {
+    width: 100%;
+    padding: 20px 20px 15px 20px;
+    border: 2px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+}
+
+/* ESTILIZAÇÃO FORMULÁRIO DOS DADOS GERAIS */
+.cpf-especialidade {
+    display: flex;
+    gap: 5%;
+    border: 1px solid red;
+}
+
+.cpf {
+    width: 49%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.crm {
+    width: 49%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.especialidade {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.nome-completo-email {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cpf-sexo {
+    width: 49%;
+}
+
+.cpf-crm {
+    display: flex;
+    justify-content: space-between;
+}
+
+.data-nascimento-sexo {
+    display: flex;
+    justify-content: space-between;
+}
+
+.especialidade-residencial {
+    width: 49%;
+    display: flex;
+    flex-direction: column;
+}
+
+.nome-completo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.data-nascimento {
+    width: 49%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.sexo {
+    width: 49%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.nome-mae {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.celular {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.tel-residencial {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.email {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+/* ESTILIZAÇÃO FORMULÁRIO ENDEREÇO */
+.logradouro-cep {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logradouro-bairro {
+    width: 49%;
+}
+
+.numero-cep {
+    width: 49%;
+}
+
+.estado-cep {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logradouro {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.complemento {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.bairro {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.numero {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.cidade {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.estado {
+    width: 49.5%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.cep {
+    width: 49.5%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+label {
+    opacity: 75%;
+    font-weight: 500;
+    font-size: 1.4em;
+}
+
+span {
+    color: #4A90E2;
+}
+
+input {
+    border: 2px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    padding: 5px;
+    padding: 10px 15px 10px 15px;
+}
+
+select {
+    border: 2px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    padding: 5px;
+    padding: 10px 15px 10px 15px
+}
+
+.medio {
+    width: 49%;
+}
+
+.botoes {
+    width: 75%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.botoes button {
+    text-align: center;
+    padding: 0.3vw 0.8vw;
+    border: 1px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    font-size: 1vw;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-family: "Inter", serif;
+    cursor: pointer;
+}
+
+.botoes .voltar {
+    background-color: #FF6F61;
+}
+
+.botoes .voltar:hover {
+    background-color: #E65A50;
+}
+
+.botoes .salvar {
+    background-color: #50E3C2;
+}
+
+.botoes .salvar:hover {
+    background-color: #3AC3A5;
+}

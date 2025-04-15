@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    background-color: #4A90E2;
+    height: 13.77vh;
+    padding-bottom: 0.4vh;
+    margin-bottom: 3vh;
+}
+
+header .logo{
+    margin-left: 6.74vw;
+    margin-bottom: 1.95vh;
+    font-size: 3vw;
+    font-family: "Inter", serif;
+    font-weight: 900;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.conteudo_header_direita {
+    margin-right: 6.74vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 5.07vw;
+    margin-bottom: 2.95vh;
+}
+
+.perfil_menu_usuario button {
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+}
+
+.conteudo_header_direita p {
+    font-size: 1.4vw;
+    font-family: "Inter", serif;
+    font-weight: 300;
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.conteudo-principal {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.busca-opcoes {
+    display: flex;
+    justify-content: space-between;
+}
+
+.busca {
+    width: 25%;
+    border: 2px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    padding: 10px 17px 10px 17px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.busca input {
+    border: transparent;
+    width: 100%;
+}
+
+.opcoes {
+
+}
+
+.opcoes button {
+    border: 2px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    padding: 10px 17px 10px 17px;
+    background-color: transparent;
+    font-weight: 700;
+    opacity: 50%;
+}
+
+.opcao {
+    border: 2px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    padding: 10px 17px 10px 17px;
+    background-color: #FFFFFF;
+    font-weight: 700;
+    opacity: 50%;
+    cursor: pointer;
+}
+
+.opcao.ativo {
+    color: #FFFFFF;
+    background-color: #6C6767;
+}
+
+.profissionais {
+    border: 2px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    padding: 10px 17px 10px 17px;
+}
+
+.legenda {
+    display: flex;
+    gap: 1%;
+    margin-bottom: 5px;
+}
+
+.legenda p {
+    font-size: 1.4em;
+    font-weight: 500;
+    opacity: 75%;
+}
+
+.lista {
+
+}
+
+.oculto {
+    display: none;
+}
+
+.dados p {
+    opacity: 50%;
+    font-size: 1.4em;
+    font-weight: 500;
+}
+
+.nome-legenda {
+    width: 64%;
+}
+
+.dados {
+    display: flex;
+    gap: 1%;
+    margin-bottom: 5px;
+}
+
+.nome {
+    width: 64%;
+    border: 2px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+}
+
+.cpf {
+    width: 19%;
+    border: 2px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+}
+
+.detalhes {
+    width: 15%;
+    text-align: center;
+    padding: 0.3vw 0.8vw;
+    border: 1px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    font-size: 1vw;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-family: "Inter", serif;
+    cursor: pointer;
+    background-color: #50E3C2;
+}
+
+.detalhes:hover {
+    background-color: #3AC3A5;
+}
+
+.botao {
+    display: flex;
+    justify-content: space-between;
+    width: 75%;
+    margin-top: 5px;
+}
+
+.botao button {
+    text-align: center;
+    padding: 0.3vw 0.8vw;
+    border: 1px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    font-size: 1vw;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-family: "Inter", serif;
+    cursor: pointer;
+}
+
+.botao .voltar {
+    background-color: #FF6F61;
+}
+
+.botao .voltar:hover {
+    background-color: #E65A50;
+}
+
+.botao .adicionar {
+    background-color: #50E3C2;
+}
+
+.botao .adicionar:hover {
+    background-color: #3AC3A5;
+}
