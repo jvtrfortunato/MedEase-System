@@ -7,54 +7,6 @@
     font-family: "Inter", sans-serif;
 }
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    background-color: #4A90E2;
-    height: 13.77vh;
-    padding-bottom: 0.4vh;
-    margin-bottom: 3vh;
-}
-
-header .logo{
-    margin-left: 6.74vw;
-    margin-bottom: 1.95vh;
-    font-size: 3vw;
-    font-family: "Inter", serif;
-    font-weight: 900;
-    color: #FFFFFF;
-    text-decoration: none;
-}
-
-.conteudo_header_direita {
-    margin-right: 6.74vw;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 5.07vw;
-    margin-bottom: 2.95vh;
-}
-
-.perfil_menu_usuario button {
-    background: none;
-    border: none;
-    outline: none;
-    padding: 0;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5vw;
-}
-
-.conteudo_header_direita p {
-    font-size: 1.4vw;
-    font-family: "Inter", serif;
-    font-weight: 300;
-    color: #FFFFFF;
-    text-decoration: underline;
-}
-
 main {
     padding: 3vh;
     max-width: 70vw;

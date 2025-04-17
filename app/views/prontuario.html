@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prontuário do Paciente</title>
+    <link rel="stylesheet" href="/assets/css/header.css">
+    <link rel="stylesheet" href="/assets/css/prontuario.css">
+</head>
+<body>
+    <header>
+        <a class="logo" href="">MedEase</a>    
+        <a href="">sair</a>
+    </header>
+
+    <main>
+        <section class="conteudo-principal">
+            <h1>Prontuário Eletrônico do Paciente</h1>
+            <section class="dados-prontuario">
+                
+                <!--Identificação do Paciente-->
+                <div class="menu-seta">
+                    <h2>Identificação do Paciente</h2>
+                    <img id="seta" onclick="expandir('formulario1', this)" src="/assets/img/seta-direita.png" alt="seta">
+                </div>
+                <div class="barra"></div>                
+                <section id="formulario1" class="formulario-oculto">
+                    <form action="">
+                        
+                        <!--Primeira linha-->
+                        <div class="linha-dados">
+                            <div class="input-grande">
+                                <label for="">Nome completo</label>
+                                <input class="input-estilizacao-padrao" type="text">
+                            </div>
+                            <div class="div-medios">
+                                <div class="input-medio">
+                                    <label for="">Data de Nascimento</label>
+                                    <input class="input-estilizacao-padrao" type="date">
+                                </div>
+                                <div class="input-medio">
+                                    <label for="">Sexo</label>
+                                    <input class="input-estilizacao-padrao" type="text">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Segunda linha-->
+                        <div class="linha-dados">
+                            <div class="input-grande">
+                                <label for="">Estado Civil</label>
+                                <input class="input-estilizacao-padrao" type="text">
+                            </div>
+                            <div class="div-medios">
+                                <div class="input-medio">
+                                    <label for="">CPF</label>
+                                    <input class="input-estilizacao-padrao" type="text">
+                                </div>
+                                <div class="input-medio">
+                                    <label for="">RG</label>
+                                    <input class="input-estilizacao-padrao" type="text">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Terceira linha-->
+                        <div class="linha-dados">
+                            <div class="input-grande">
+                                <label for="">Rua</label>
+                                <input class="input-estilizacao-padrao" type="text">
+                            </div>
+                            <div class="div-medios">
+                                <div class="input-medio">
+                                    <label for="">Número</label>
+                                    <input class="input-estilizacao-padrao" type="number">
+                                </div>
+                                <div class="input-medio">
+                                    <label for="">Bairro</label>
+                                    <input class="input-estilizacao-padrao" type="text">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Quarta linha-->
+                        <div class="linha-dados">
+                            <div class="input-grande">
+                                <label for="">Cidade</label>
+                                <input class="input-estilizacao-padrao" type="text">
+                            </div>
+                            <div class="div-medios">
+                                <div class="input-medio">
+                                    <label for="">Estado</label>
+                                    <input class="input-estilizacao-padrao" type="text">
+                                </div>
+                                <div class="input-medio">
+                                    <label for="">CEP</label>
+                                    <input class="input-estilizacao-padrao" type="text">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Quinta linha-->
+                        <div class="linha-dados">
+                            <div class="input-grande">
+                                <label for="">Telefone</label>
+                                <input class="input-estilizacao-padrao" type="text">
+                            </div>
+                            <div class="input-grande">
+                                <label for="">Email</label>
+                                <input class="input-estilizacao-padrao" type="text">
+                            </div>
+                        </div>
+
+                        <!--Sexta linha-->
+                        <div class="linha-dados">
+                            <div class="input-grande">
+                                <label for="">Nome do responsável</label>
+                                <input class="input-estilizacao-padrao" type="text">
+                            </div>
+                            <div class="input-grande">
+                                <label for="">Cartão Nacional de Saúde (CNS)</label>
+                                <input class="input-estilizacao-padrao" type="text">
+                            </div>
+                        </div>
+
+                        <!--Sétima linha-->
+                        <div class="linha-dados">
+                            <div class="input-grande">
+                                <label for="">Convênio</label>
+                                <input class="input-estilizacao-padrao" type="text">
+                            </div>
+                            <div class="input-grande">
+                                <label for="">Número do Plano de Saúde</label>
+                                <input class="input-estilizacao-padrao" type="text">
+                            </div>
+                        </div>
+
+                    </form>
+                </section>
+
+                <!--Histórico Médico e Familiar-->
+                <div class="menu-seta">
+                    <h2>Histórico Médico e Familiar</h2>
+                    <img id="seta" onclick="expandir('formulario2', this)" src="/assets/img/seta-direita.png" alt="seta">
+                </div>
+                <div class="barra"></div>
+                <section id="formulario2" class="formulario-oculto">
+                    <form action="">
+
+                        <div class="nome-campo">
+                            <label for="">Doenças pré-existentes</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        </div>
+
+                        <div class="nome-campo">
+                            <label for="">Medicaçõs de uso contínuo</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        </div>
+
+                        <div class="nome-campo">
+                            <label for="">Cirurgias anteriores</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        </div>
+
+                        <div class="nome-campo">
+                            <label for="">Alergias e reações adversas a medicamentos</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        </div>
+
+                        <div class="nome-campo">
+                            <label for="">Histórico de doenças na família</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        </div>   
+
+                    </form>
+                </section>
+
+                <!--Anamnese-->
+                <div class="menu-seta">
+                    <h2>Anamnese</h2>
+                    <img id="seta" onclick="expandir('formulario3', this)" src="/assets/img/seta-direita.png" alt="seta">
+                </div>
+                <div class="barra"></div>
+                <section id="formulario3" class="formulario-oculto">
+                    <form action="">
+
+                        <h3>Motivo da consulta</h3>
+                        <div class="motivo-consulta">
+                            <p>Receber aqui o motivo da consulta coletada no agendamento</p> <!--Receber aqui o motivo da consulta coletada no agendamento-->
+                        </div>
+
+                        <div class="nome-campo">
+                            <label for="">Queixa e duração</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        </div>
+
+                        <div class="nome-campo">
+                            <label for="">História da doença atual</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        </div>
+
+                        <div class="nome-campo">
+                            <label for="">História social</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        </div>
+
+                        <div class="nome-campo">
+                            <label for="">História gineco-obstétrica (para mulheres)</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        </div>
+
+                        <div class="nome-campo">
+                            <label for="">Revisão de sistemas (sintomas em difentes sistemas do organismo) </label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        </div>
+
+                    </form>
+                </section>
+
+                <!--Exame Físico-->
+                <div class="menu-seta">
+                    <h2>Exame Físico</h2>
+                    <img id="seta" onclick="expandir('formulario4', this)" src="/assets/img/seta-direita.png" alt="seta">
+                </div>
+                <div class="barra"></div>
+                <section id="formulario4" class="formulario-oculto">
+                    <form action="">
+
+                        <div class="nome-campo">
+                            <label for="">Avaliação geral</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        </div>
+
+                        <div class="nome-campo">
+                            <label for="">Sinais vitais</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        </div>
+
+                        <div class="nome-campo">
+                            <label for="">Exame da pele e anexos (cabelos, unhas, mucosas)</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        </div>
+
+                        <div class="nome-campo">
+                            <label for="">Exame da cabeça e pescoço</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        </div>
+
+                        <div class="nome-campo">
+                            <label for="">Exame cardiovascular</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        </div>
+
+                        <div class="nome-campo">
+                            <label for="">Exame respiratório</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        </div>
+
+                        <div class="nome-campo">
+                            <label for="">Exame abdominal</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        </div>
+
+                        <div class="nome-campo">
+                            <label for="">Exame neurológico</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        </div>
+
+                        <div class="nome-campo">
+                            <label for="">Exame do aparelho locomotor</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        </div>
+
+                    </form>
+                </section>
+
+                <!--Diagnóstico-->
+                <div class="menu-seta">
+                    <h2>Diagnóstico</h2>
+                    <img id="seta" onclick="expandir('formulario5', this)" src="/assets/img/seta-direita.png" alt="seta">
+                </div>
+                <div class="barra"></div>
+                <section id="formulario5" class="formulario-oculto">
+                    <form action="">
+
+                        <div class="nome-campo">
+                            <label for="">Diagnóstico presuntivo</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        </div>
+
+                        <div class="nome-campo">
+                            <label for="">Diagnóstico diferencial</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        </div>
+
+                        <div class="nome-campo">
+                            <label for="">Diagnóstico definitivo</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        </div>
+
+                        <div class="nome-campo">
+                            <label for="">CID-10 (classificação internacional de doenças)</label>
+                            <select name="" id="">
+                                <option value="">Selecione</option>
+                                <option value="">A00 - Cólera</option>
+                                <option value="">J45 - Asma</option>
+                                <option value="">F32.1 - Episódio depressivo moderado</option>
+                            </select>
+                        </div>
+
+                    </form>
+                </section>
+
+                <!--Exames Solicitados-->
+                <div class="menu-seta">
+                    <h2>Exames Solicitados</h2>
+                    <img id="seta" onclick="expandir('formulario6', this)" src="/assets/img/seta-direita.png" alt="seta">
+                </div>
+                <div class="barra"></div>
+                <section id="formulario6" class="formulario-oculto">
+                    <form action="">
+
+                        <div class="nome-campo">
+                            <label for="">Diagnóstico presuntivo</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        </div>
+                        <!--ESTOU IMPLEMENTANDO OS EXAMES SOLICITADOS AQUI-->
+
+                    </form>
+                </section>
+
+            </section>
+        </section>
+    </main>
+
+    <footer></footer>
+    <script>
+        function expandir(idFormulario, setaImg) {
+            const formulario = document.getElementById(idFormulario);
+            const visivel = formulario.classList.contains('formulario-visivel');
+
+            if (visivel) {
+                formulario.classList.remove('formulario-visivel');
+                formulario.classList.add('formulario-oculto');
+                setaImg.src = '/assets/img/seta-direita.png';
+            }   else {
+                formulario.classList.remove('formulario-oculto');
+                formulario.classList.add('formulario-visivel');
+                setaImg.src = '/assets/img/seta-baixo.png';
+            }
+        }
+    </script>
+</body>
+</html>
