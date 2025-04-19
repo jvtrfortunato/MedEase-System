@@ -33,47 +33,15 @@
     padding-left: 0.2vw;
 }
 
-.nome_exame_input_button {
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+select {
     border: 1px, solid rgba(136, 136, 136, 0.4);
     border-radius: 5px;
     height: 4vh;
-    display: flex;
-}
-
-.nome_exame_input_button input {
-    width: 100%;
-    border: none;
-    border-radius: 5px;
-    margin-left: 0.5vw;
-    outline: none;
-    font-family: "Inter", serif;
-    font-weight: 500;
-    opacity: 0.5;
-}
-
-.nome_exame_input_button input::placeholder {
-    font-family: "Inter", serif;
-    font-weight: 500;
-    color: #000000;
-    opacity: 0.5;
-}
-
-.nome_exame_input_button input:focus::placeholder {
-    color: transparent;
-}
-
-.nome_exame_input_button button {
-    background-color: #D3D3D3;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.nome_exame_input_button button img {
-    padding: 0 0.5vw;
-    width: 0.8vw;
-    height: auto;
-    opacity: 0.75;
 }
 
 .nome_medico {
@@ -119,16 +87,16 @@
 }
 
 .conteudo_exames_solicitados {
-    margin: 1.5vw 1vw;
+    padding: 1.5%;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 3.5%;
 }
 
 .conteudo_exames_solicitados .titulo {
     font-family: "Inter", serif;
     font-weight: 500;
     opacity: 0.75;
-    padding-left: 0.5vw;
 }
 
 .barra_separacao {
@@ -145,10 +113,11 @@
     font-weight: 500;
     opacity: 0.5;
     font-size: 1.1vw;
+    padding-left: 0.5vw;
 }
 
 .nome_exames_solicitados {
-    width: 58vw;    
+    width: 100%;    
 }
 
 .barra_rolagem {
@@ -181,4 +150,28 @@
 
 .botao button:hover {
     background-color: #3AC3A5;
+}
+
+.exame-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+ul {
+   display: flex;
+   flex-direction: column;
+   gap: 0.8em;
+   margin-top: 1%;
+}
+
+.lixeira {
+    width: 1.5%;
+    height: auto;
+    cursor: pointer;
+}
+
+li {
+    font-family: "Inter", serif;
+    opacity: 50%;
+    list-style: none;
 }

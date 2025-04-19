@@ -21,7 +21,7 @@
                 <!--Identificação do Paciente-->
                 <div class="menu-seta">
                     <h2>Identificação do Paciente</h2>
-                    <img id="seta" onclick="expandir('formulario1', this)" src="/assets/img/seta-direita.png" alt="seta">
+                    <img id="seta" onclick="expandirRetrair('formulario1', this)" src="/assets/img/seta-direita.png" alt="seta">
                 </div>
                 <div class="barra"></div>                
                 <section id="formulario1" class="formulario-oculto">
@@ -141,7 +141,7 @@
                 <!--Histórico Médico e Familiar-->
                 <div class="menu-seta">
                     <h2>Histórico Médico e Familiar</h2>
-                    <img id="seta" onclick="expandir('formulario2', this)" src="/assets/img/seta-direita.png" alt="seta">
+                    <img id="seta" onclick="expandirRetrair('formulario2', this)" src="/assets/img/seta-direita.png" alt="seta">
                 </div>
                 <div class="barra"></div>
                 <section id="formulario2" class="formulario-oculto">
@@ -178,7 +178,7 @@
                 <!--Anamnese-->
                 <div class="menu-seta">
                     <h2>Anamnese</h2>
-                    <img id="seta" onclick="expandir('formulario3', this)" src="/assets/img/seta-direita.png" alt="seta">
+                    <img id="seta" onclick="expandirRetrair('formulario3', this)" src="/assets/img/seta-direita.png" alt="seta">
                 </div>
                 <div class="barra"></div>
                 <section id="formulario3" class="formulario-oculto">
@@ -220,7 +220,7 @@
                 <!--Exame Físico-->
                 <div class="menu-seta">
                     <h2>Exame Físico</h2>
-                    <img id="seta" onclick="expandir('formulario4', this)" src="/assets/img/seta-direita.png" alt="seta">
+                    <img id="seta" onclick="expandirRetrair('formulario4', this)" src="/assets/img/seta-direita.png" alt="seta">
                 </div>
                 <div class="barra"></div>
                 <section id="formulario4" class="formulario-oculto">
@@ -277,7 +277,7 @@
                 <!--Diagnóstico-->
                 <div class="menu-seta">
                     <h2>Diagnóstico</h2>
-                    <img id="seta" onclick="expandir('formulario5', this)" src="/assets/img/seta-direita.png" alt="seta">
+                    <img id="seta" onclick="expandirRetrair('formulario5', this)" src="/assets/img/seta-direita.png" alt="seta">
                 </div>
                 <div class="barra"></div>
                 <section id="formulario5" class="formulario-oculto">
@@ -314,19 +314,27 @@
                 <!--Exames Solicitados-->
                 <div class="menu-seta">
                     <h2>Exames Solicitados</h2>
-                    <img id="seta" onclick="expandir('formulario6', this)" src="/assets/img/seta-direita.png" alt="seta">
+                    <img id="seta" onclick="expandirRetrair('formulario6', this)" src="/assets/img/seta-direita.png" alt="seta">
                 </div>
                 <div class="barra"></div>
                 <section id="formulario6" class="formulario-oculto">
-                    <form action="">
+                    <ul id="lista-exames"></ul>
+                    <div class="botao-solicitar-exame">
+                        <button id="botao-exame" onclick="window.location.href='solicitar-exames.html'">Solicitar exame</button>
+                    </div>                   
+                </section>
 
-                        <div class="nome-campo">
-                            <label for="">Diagnóstico presuntivo</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
-                        </div>
-                        <!--ESTOU IMPLEMENTANDO OS EXAMES SOLICITADOS AQUI-->
-
-                    </form>
+                <!--Prescrições Médicas-->
+                <div class="menu-seta">
+                    <h2>Prescrição Médica</h2>
+                    <img id="seta" onclick="expandirRetrair('formulario7', this)" src="/assets/img/seta-direita.png" alt="seta">
+                </div>
+                <div class="barra"></div>
+                <section id="formulario7" class="formulario-oculto">
+                    <ul id="lista-prescricoes"></ul>
+                    <div class="botao-solicitar-exame">
+                        <button id="botao-exame" onclick="window.location.href='prescricao'">Criar prescrição</button>
+                    </div>                   
                 </section>
 
             </section>
@@ -334,8 +342,11 @@
     </main>
 
     <footer></footer>
+    
     <script>
-        function expandir(idFormulario, setaImg) {
+
+        //Função para expandir ou retrair os campos do prontuário
+        function expandirRetrair(idFormulario, setaImg) {
             const formulario = document.getElementById(idFormulario);
             const visivel = formulario.classList.contains('formulario-visivel');
 
@@ -349,6 +360,33 @@
                 setaImg.src = '/assets/img/seta-baixo.png';
             }
         }
+
+        //Função que exibe os exames solicitados ao voltar para o prontuário
+        window.onload = function() {
+            const exames = JSON.parse(localStorage.getItem('examesSolicitados')) || [];
+            const lista = document.getElementById('lista-exames');
+            const botao = document.getElementById('botao-exame');
+            
+            lista.innerHTML = '';
+            exames.forEach(exame => {
+                const container = document.createElement('div');
+                container.classList.add('lista-exames');
+
+                const li = document.createElement('li');
+                li.textContent = exame;
+
+                container.appendChild(li);
+                lista.appendChild(container);
+            });
+
+            // Altera o botão se houver exames
+            if (exames.length > 0) {
+                botao.textContent = 'Editar exames';
+            } else {
+                botao.textContent = 'Solicitar exame';
+            }
+        }
+
     </script>
 </body>
 </html>

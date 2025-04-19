@@ -18,12 +18,12 @@
             <section class="nome_exame">
                 <form action="">
                     <label for="">Exame</label>
-                    <div class="nome_exame_input_button">
-                        <input type="text" placeholder="Buscar exame">
-                        <button>
-                            <img src="../../assets/img/setaPreta.png" alt="">
-                        </button>
-                    </div>
+                    <select name="" id="exame">
+                        <option value="">Selecione um exame</option>
+                        <option value="RAIO-X">RAIO-X</option>
+                        <option value="HEMOGRAMA">HEMOGRAMA</option>
+                        <option value="RESSONÂNCIA">RESSONÂNCIA</option>
+                    </select>
                 </form>
             </section>
             <section class="nome_medico">
@@ -36,34 +36,73 @@
                     <p>NOME DA CLÍNICA</p>
                 </div>
                 <div>
-                    <button>Confirmar</button>
+                    <button onclick="adicionarExame()">Confirmar</button>
                 </div>
             </section>
         </section>
         <h1 class="titulo_secao">Exames solicitados</h1>
         <section class="todos_exames_solicitados">
             <div class="conteudo_exames_solicitados">
-                <div class="data_solicitacao">
-                    <p class="titulo">Solicitado</p>
-                    <div class="barra_separacao"></div>
-                    <!--Descobrir como e de onde recuperar os dados-->
-                    <p>99/99/9999</p>
-                </div>
-                <div class="nome_exames_solicitados">
-                    <p class="titulo">Nome do exame</p>
-                    <div class="barra_separacao"></div>
-                    <!--Descobrir como e de onde recuperar os dados-->
-                    <p>Nome do exame</p>
-                </div>
-                <div class="barra_rolagem">
-
-                </div>
+                <p class="titulo">Nome do exame</p>
+                <div class="barra_separacao"></div>
+                <!--Descobrir como e de onde recuperar os dados-->
+                <ul id="lista-exames"></ul>
             </div>
         </section>
         <div class="botao">
-            <button>Finalizar</button>
+            <button onclick="finalizar()">Finalizar</button>
         </div>
     </main>
+    
     <footer></footer>
+    
+    <script>
+        let exames = JSON.parse(localStorage.getItem('examesSolicitados')) || [];
+
+        function adicionarExame() {
+            const select = document.getElementById('exame');
+            const valor = select.value;
+            if (valor && !exames.includes(valor)) {
+                exames.push(valor);
+                localStorage.setItem('examesSolicitados', JSON.stringify(exames));
+                atualizarLista();
+            }
+        }
+
+        function atualizarLista() {
+            const lista = document.getElementById('lista-exames');
+            lista.innerHTML = '';
+
+            exames.forEach((exame, index) => {
+                const container = document.createElement('div');
+                container.classList.add('exame-container');
+
+                const li = document.createElement('li');
+                li.classList.add('exame-item');
+                li.textContent = exame;
+
+                const imgRemover = document.createElement('img');
+                imgRemover.src = '/assets/img/lixeira.png';
+                imgRemover.alt = 'Lixeira';
+                imgRemover.classList.add('lixeira');
+                imgRemover.onclick = () => {
+                exames.splice(index, 1);
+                localStorage.setItem('examesSolicitados', JSON.stringify(exames));
+                atualizarLista();
+                };
+
+                container.appendChild(li);
+                container.appendChild(imgRemover);
+                lista.appendChild(container);
+            });
+        }
+
+        function finalizar() {
+            window.location.href = 'prontuario.html';
+        }
+
+        // Atualiza a lista ao carregar a página
+        window.onload = atualizarLista;
+    </script>
 </body>
 </html>
