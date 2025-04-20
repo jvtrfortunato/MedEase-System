@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes Consulta</title>
+    <link rel="stylesheet" href="/assets/css/header.css">
+    <link rel="stylesheet" href="../../assets/css/detalhes-consulta.css">
+    <script src="../../assets/script/detalhes-consulta.js" defer></script>
+</head>
+<body>
+    <header>
+        <a class="logo" href="">MedEase</a>    
+        <a href="">sair</a>
+    </header>
+    <h1>Descrição da Consulta</h1>
+    <section class="detalhes_consulta">
+        <form>
+            <div class="linha">
+                <div class="campo">
+                    <label for="motivo">Motivo</label>
+                    <input type="text" id="motivo" name="motivo">
+                </div>
+                <div class="campo">
+                    <label for="data">Data</label>
+                    <input type="text" id="data" name="data">
+                </div>
+                <div class="campo">
+                    <label for="hora">Hora</label>
+                    <input type="text" id="hora" name="hora" >
+                </div>
+            </div>
+    
+            <div class="linha">
+                <div class="campo">
+                    <label for="cpf">CPF</label>
+                    <input type="text" id="cpf" name="cpf">
+                </div>
+                <div class="campo">
+                    <label for="medico">Médico</label>
+                    <select id="medico" name="medico">
+                        <option selected>Dra Mariana Olívia do Amaral</option>
+                    </select>
+                </div>
+            </div>
+    
+            <div class="linha">
+                <div class="campo">
+                    <label for="paciente">Paciente</label>
+                    <input type="text" id="paciente" name="paciente" >
+                </div>
+                <div class="campo">
+                    <label for="especialidade">Especialidade</label>
+                    <input type="text" id="especialidade" name="especialidade">
+                </div>
+            </div>
+    
+            <div class="linha">
+                <div class="campo" style="flex: 1;">
+                    <label for="endereco">Endereço</label>
+                    <input type="text" id="endereco" name="endereco" >
+                </div>
+            </div>
+    
+            <div class="linha">
+                <div class="campo">
+                    <label for="telefone">Tel. celular</label>
+                    <input type="text" id="telefone" name="telefone" >
+                </div>
+            </div>
+        </form>
+    </section>
+    
+    <section class="botoes_voltar_admitir">
+        <div>
+            <button class="voltar"><a href="consultas-agendadas.html">Voltar</a></button>
+        </div>
+        <div>   
+            <button id="cancelarConsulta" class="cancelar">Cancelar Consulta</button>
+            <button class="nao_compareceu">Paciente não compareceu</button>
+            <button id="confirmar-consulta" class="admitir">Confirmar Consulta</button>
+        </div>
+    </section>
+    
+    <footer></footer>
+
+
+    
+</body>
+</html>

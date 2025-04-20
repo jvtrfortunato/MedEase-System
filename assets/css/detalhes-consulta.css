@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
+
+main {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    margin-left: 40px;
+}
+
+.titulo_consultas {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.detalhes_consulta {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 20px;
+    margin: 40px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.linha {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 200px;
+}
+
+.campo label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.campo input,
+.campo select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.botoes_voltar_admitir {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 40px;
+}
+button {
+    padding: 10px 16px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.voltar {
+    background-color: #d9534f;
+    color: #fff;
+}
+
+.voltar:hover {
+    background-color: #c9302c;
+}
+
+.cancelar {
+    background-color: #f0ad4e;
+    color: #fff;
+}
+
+.cancelar:hover {
+    background-color: #ec971f;
+}
+
+.nao_compareceu {
+    background-color: #d9534f;
+    color: #fff;
+}
+
+.nao_compareceu:hover {
+    background-color: #c9302c;
+}
+
+.admitir {
+    background-color: #5cb85c;
+    color: white;
+}
+
+.admitir:hover {
+    background-color: #449d44;
+}

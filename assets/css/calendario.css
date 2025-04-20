@@ -13,7 +13,7 @@
 /* O FullCalendar adiciona a classe .fc-day-today à célula da data atual. */
 
 .fc-day-today {
-    background: linear-gradient(135deg, #007bff, #00c6ff);
+    background: linear-gradient(135deg, #394551, #f0f0d2);
     color: white !important;
     font-weight: bold;
     box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);

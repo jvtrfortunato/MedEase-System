@@ -74,19 +74,29 @@ main {
     font-weight: 400;
 }
 
-button {
-    text-align: center;
-    padding: 0.3vw 0.8vw;
-    border: 1px, solid rgba(136, 136, 136, 0.4);
-    border-radius: 5px;
-    font-size: 1vw;
-    color: #FFFFFF;
-    font-weight: 600;
-    font-family: "Inter", serif;
-    cursor: pointer;
-    background-color: #FF6F61;
+.caixa-botao-voltar {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
 }
 
-button:hover {
-    background-color: #E65A50;
+.botao-voltar {
+    background-color: #f42d00;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
+
+
+.horario.agendado {
+    background-color: #ff4d4d;
+    color: white;
+    pointer-events: none; /* Impede que o usuário clique de novo */
+}
+
