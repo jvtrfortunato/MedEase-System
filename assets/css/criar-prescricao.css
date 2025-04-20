@@ -1,0 +1,336 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", serif;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.conteudo-principal {
+    width: 75%;
+    margin-bottom: 1.5%;
+}
+
+.adicionar-medicamentos {
+    border: 1px solid rgba(136, 136, 136, 0.4);
+    border-bottom: none;
+    border-radius: 5px 5px 0 0;
+    padding: 1.5%;
+    background-color: #f1efef;
+}
+
+.adicionar-medicamentos h1 {
+    font-weight: 400;
+    color: #4A90E2;
+}
+
+.dados-lista {
+    display: flex;
+}
+
+.dados-medicamento {
+    border: 1px solid rgba(136, 136, 136, 0.4);
+    border-radius: 0 0 0 5px;
+    padding: 1.5% 1.5% 0 1.5%;
+    width: 70%;
+}
+
+.lista-medicamentos {
+    border: 1px solid rgba(136, 136, 136, 0.4);
+    border-left: none;
+    width: 30%;
+    border-radius: 0 0 5px 0;
+    background-color: #f1efef;
+}
+
+.label-input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5%;
+}
+
+.label-input-media {
+    display: flex;
+    flex-direction: column;
+    width: 49%;
+    margin-bottom: 1.5%;
+}
+
+label {
+    opacity: 75%;
+    font-weight: 500;
+    font-size: 1.1em;
+}
+
+select {
+    border: 1px solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    padding: 5px;
+    padding: 10px 15px 10px 15px;
+}
+
+input {
+    border: 1px solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    padding: 5px;
+    padding: 10px 15px 10px 15px;
+}
+
+.concentracao-forma {
+    display: flex;
+    gap: 2%;
+}
+
+.via-tipo {
+    display: flex;
+    gap: 2%;
+}
+
+.azul {
+    color: #4A90E2;
+}
+
+.posologia {
+    border: 1px solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    padding: 1.5%;
+    margin-bottom: 1.5%;
+}
+
+h2 {
+    opacity: 75%;
+    font-weight: 500;
+    font-size: 1.2em;
+}
+
+.dose-uso {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5%;
+}
+
+.dose-esquerda {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 49%;
+}
+
+.dose-direita {
+    width: 49%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+p {
+    opacity: 75%;
+    font-weight: 500;
+    font-size: 1.2em;
+}
+
+.toggle-div {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 3%;
+}
+
+.toggle-opcao {
+    display: flex;
+    align-items: center;
+    width: 20%;
+    height: 2em;
+    border-radius: 50px;
+    background-color: #f1efef;
+    border: 1px solid rgba(136, 136, 136, 0.4);
+    padding: 1% 1.5%;
+    cursor: pointer;
+    position: relative;
+}
+
+.toggle-circle {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    width: 45%;
+    height: 90%;
+    transition: all 0.3s ease;
+    position: absolute;
+    left: 5px;
+}
+
+.toggle-opcao.ativo .toggle-circle {
+    background-color: #4A90E2;
+    left: calc(100% - 5px - 45%); /* onde 5px é o left inicial, 45% é a largura do círculo */
+  }
+
+h3 {
+    opacity: 75%;
+    font-weight: 500;
+    font-size: 1.2em;
+}
+
+.labels {
+    display: flex;
+    gap: 3%;
+    padding-left: 3%;
+    margin-top: 1.5%;
+    margin-bottom: 0.5%;;
+}
+
+.labels label {
+    opacity: 50%;
+    cursor: pointer;
+}
+
+.labels label.ativo {
+    color: #4A90E2;
+    opacity: 100%;
+}
+
+.frequencia-detalhe {
+    display: none;
+}
+
+.frequencia-detalhe.visivel {
+    border: 1px solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    padding: 1.5%;
+    margin-bottom: 1.5%;
+    display: flex;
+    gap: 3%;
+}
+
+.insercao-manual {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.2em;
+}
+
+.insercao-manual input {
+    width: 30%;
+}
+
+.frequencia-detalhe button {
+    padding: 1.5%;
+    background-color: #FFFFFF;
+    border: 1px solid rgba(136, 136, 136, 0.4);
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.frequencia-detalhe button.selecionado {
+    color: #4A90E2;
+    border: 1px solid rgba(74, 144, 226, 1);
+    
+}
+
+.inicio-duracao {
+    border: 1px solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    padding: 1.5%;
+    margin-bottom: 1.5%;
+    display: flex;
+    gap: 5%;
+    margin-bottom: 1.5%;
+}
+
+.inicio {
+    display: flex;
+    flex-direction: column;
+}
+
+.duracao {
+    display: flex;
+    flex-direction: column;
+}
+
+.duracao input {
+    width: 20%;
+}
+
+textarea {
+    border: 1px solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    padding: 5px;
+    padding: 10px 15px 10px 15px;
+    margin-bottom: 1.5%;
+}
+
+.botoes {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5%;
+}
+
+.botoes button {
+    text-align: center;
+    padding: 0.3vw 0.8vw;
+    border: 1px solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    font-size: 1vw;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-family: "Inter", serif;
+    cursor: pointer;
+}
+
+.vermelho {
+    background-color: #FF6F61;
+}
+
+.vermelho:hover {
+    background-color: #E65A50;
+}
+
+.verde {
+    background-color: #50E3C2;
+}
+
+.verde:hover {
+    background-color: #3AC3A5;
+}
+
+
+
+.adicionar-medicamento {
+    border-bottom: 1px solid rgba(136, 136, 136, 0.4);
+    padding: 8% 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: #FFFFFF;
+}
+
+.adicionar-medicamento h2 {
+    color: #4A90E2;
+    font-size: 0.9em;
+    opacity: 100%;
+}
+
+.item-lista {
+    padding: 8% 3%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 1px solid rgba(136, 136, 136, 0.4);
+    background-color: #FFFFFF;
+}
+
+.item-lista li {
+    list-style: none;
+}
+
+.item-lista img {
+    width: 5%;
+    height: auto;
+    cursor: pointer;
+}
