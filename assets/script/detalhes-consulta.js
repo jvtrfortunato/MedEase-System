@@ -27,45 +27,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    const btnCancelar = document.getElementById("cancelarConsulta");
+    let voltarPagina = document.getElementById("voltarPagina");
 
-    btnCancelar.addEventListener("click", () => {
-        const data = localStorage.getItem("dataSelecionada");
-        const hora = localStorage.getItem("horaSelecionada");
-
-        if (data && hora) {
-            // Pega a lista de horários agendados para a data
-            let horariosAgendados = JSON.parse(localStorage.getItem(data)) || [];
-
-            // Remove a hora atual da lista (desocupa)
-            const index = horariosAgendados.indexOf(hora);
-            if (index > -1) {
-                horariosAgendados.splice(index, 1); // remove a hora
-                localStorage.setItem(data, JSON.stringify(horariosAgendados)); // atualiza o localStorage
-            }
-
-            // Remove hora e data selecionadas (opcional)
-            localStorage.removeItem("horaSelecionada");
-            localStorage.removeItem("dataSelecionada");
-        }
-
-        // Redireciona de volta para a tela de agendamento
-        window.location.href = "consultas-agendadas.html?data=" + data;
+    voltarPagina.addEventListener("click", () => {
+            window.history.back();
     });
 
-    // Recupera do localStorage a data e a hora que o usuário selecionou na tela anterior
-    const data = localStorage.getItem("dataSelecionada");
-    const hora = localStorage.getItem("horaSelecionada");
-
-    // Verifica se os valores foram encontrados (ou seja, se o usuário veio da página anterior)
-    if (data && hora) {
-        // Converte a data do formato "aaaa-mm-dd" para "dd/mm/aaaa" para exibir corretamente no campo
-        const dataFormatada = data.split("-").reverse().join("/");
-
-        // Define os valores dos campos de entrada no formulário com os dados recuperados
-        document.getElementById("data").value = dataFormatada;
-        document.getElementById("hora").value = hora;
-    }
-  
+ 
+    
 });
 

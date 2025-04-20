@@ -38,24 +38,18 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    const cancelar = document.getElementById("cancelarConsulta");
+    cancelar.onclick(() => {
+        localStorage.removeItem("dataSelecionada");
+        localStorage.removeItem("horaSelecionada");
+    })
+
     // Função para marcar visualmente como agendado
     function marcarHorarioAgendado(horarioEl) {
         horarioEl.classList.add("agendado");
         horarioEl.querySelector(".italico").textContent = "Agendado";
     }
 
-    // Função para cancelar um agendamento
-    function cancelarHorario(horarioEl, horaTexto) {
-        const index = horariosAgendados.indexOf(horaTexto);
-        if (index > -1) {
-            horariosAgendados.splice(index, 1); // Remove da lista
-            localStorage.setItem(dataSelecionada, JSON.stringify(horariosAgendados)); // Atualiza localStorage
-
-            // Atualiza visualmente
-            horarioEl.classList.remove("agendado");
-            horarioEl.querySelector(".italico").textContent = "Horário Livre";
-        }
-    }
 });
 
 
