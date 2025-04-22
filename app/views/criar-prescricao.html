@@ -146,10 +146,10 @@
                         <!--IMPLEMENTAR OS BOTÕES AGORA-->
                     </form>
                     <div class="botoes">
-                        <button class="vermelho">Voltar</button>
+                        <button class="vermelho" type="button" onclick="window.location.href='prontuario.html'">Voltar</button>
                         <div class="botoes-direita">
                             <button type="button" class="vermelho" onclick="limparCampos()">Limpar campos</button>
-                            <button class="verde">Salvar</button>
+                            <button class="verde" type="button" onclick="salvarMedicamentos()">Salvar</button>
                         </div>
                     </div>
                 </section>
@@ -317,6 +317,68 @@
             document.querySelectorAll('.opcao-selecionavel.selecionado').forEach(el => el.classList.remove('selecionado'));
         }
 
+        function salvarMedicamentos() {
+            const lista = document.querySelectorAll('#listaMedicamentos .item-lista li');
+            const medicamentos = [];
+
+            lista.forEach(item => {
+                medicamentos.push(item.textContent.trim());
+            });
+
+            if (medicamentos.length === 0) {
+                alert('Nenhum medicamento foi adicionado!');
+                return;
+            }
+
+            localStorage.setItem('medicamentos', JSON.stringify(medicamentos));
+            window.location.href = 'prontuario.html';
+        }
+
+        function carregarMedicamentosSalvos() {
+            const medicamentosSalvos = JSON.parse(localStorage.getItem('medicamentos'));
+
+            if (medicamentosSalvos && Array.isArray(medicamentosSalvos)) {
+                const lista = document.getElementById('listaMedicamentos');
+                lista.innerHTML = '';
+
+                medicamentosSalvos.forEach(nome => {
+                    const container = document.createElement('div');
+                    container.classList.add('item-lista');
+
+                    const li = document.createElement('li');
+                    li.textContent = nome;
+
+                    const imgRemover = document.createElement('img');
+                    imgRemover.src = '/assets/img/lixeira.png';
+                    imgRemover.alt = 'Remover';
+                    imgRemover.classList.add('icone-remover');
+                    imgRemover.onclick = () => {
+                        container.remove();
+                        atualizarLocalStorage();
+                    };
+
+                    container.appendChild(li);
+                    container.appendChild(imgRemover);
+                    lista.appendChild(container);
+                });
+            }
+        }
+
+        function atualizarLocalStorage() {
+            const lista = document.querySelectorAll('#listaMedicamentos .item-lista li');
+            const medicamentosAtualizados = [];
+
+            lista.forEach(item => {
+                medicamentosAtualizados.push(item.textContent.trim());
+            });
+
+            localStorage.setItem('medicamentos', JSON.stringify(medicamentosAtualizados));
+        }
+
+        // Carrega medicamentos salvos ao abrir a página
+        window.addEventListener('DOMContentLoaded', () => {
+            carregarMedicamentosSalvos();
+        });
     </script>
 </body>
 </html>

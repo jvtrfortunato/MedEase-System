@@ -19,6 +19,7 @@ main {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    margin-bottom: 1.5%;
 }
 
 .conteudo-principal h1 {
@@ -30,6 +31,7 @@ main {
     padding: 20px 20px 0 20px;
     border: 2px, solid rgba(136, 136, 136, 0.4);
     border-radius: 5px; 
+    margin-bottom: 0.5%;
 }
 
 .menu-seta {
@@ -142,13 +144,13 @@ select {
     margin-bottom: 1%;
 }
 
-.botao-solicitar-exame {
+.botao-solicitar-criar {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 1%
 }
 
-.botao-solicitar-exame button {
+.botao-solicitar-criar button {
     text-align: center;
     padding: 0.3vw 0.8vw;
     border: 1px, solid rgba(136, 136, 136, 0.4);
@@ -161,7 +163,7 @@ select {
     background-color: #50E3C2;
 }
 
-.botao-solicitar-exame button:hover {
+.botao-solicitar-criar button:hover {
     background-color: #3AC3A5;
 }
 
@@ -169,4 +171,34 @@ li {
     font-family: "Inter", serif;
     opacity: 75%;
     list-style: none;
+}
+
+.lista-medicamentos {
+    border: 2px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    padding: 5px;
+    padding: 10px 15px 10px 15px;
+    margin-bottom: 1%;
+}
+
+.finalizar-consulta {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.finalizar-consulta button {
+    text-align: center;
+    padding: 0.3vw 0.8vw;
+    border: 1px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    font-size: 1vw;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-family: "Inter", serif;
+    cursor: pointer;
+    background-color: #50E3C2;
+}
+
+.finalizar-consulta button:hover {
+    background-color: #3AC3A5;
 }

@@ -319,7 +319,7 @@
                 <div class="barra"></div>
                 <section id="formulario6" class="formulario-oculto">
                     <ul id="lista-exames"></ul>
-                    <div class="botao-solicitar-exame">
+                    <div class="botao-solicitar-criar">
                         <button id="botao-exame" onclick="window.location.href='solicitar-exames.html'">Solicitar exame</button>
                     </div>                   
                 </section>
@@ -331,13 +331,139 @@
                 </div>
                 <div class="barra"></div>
                 <section id="formulario7" class="formulario-oculto">
-                    <ul id="lista-prescricoes"></ul>
-                    <div class="botao-solicitar-exame">
-                        <button id="botao-exame" onclick="window.location.href='prescricao'">Criar prescrição</button>
+                    <ul id="medicamentosPrescricao"></ul>
+                    <div class="botao-solicitar-criar">
+                        <button id="botaoPrescricao" type="button" onclick="window.location.href='criar-prescricao.html'">Criar prescrição</button>
                     </div>                   
                 </section>
 
+                <!--Evolução do Quadro Clínico-->
+                <div class="menu-seta">
+                    <h2>Evolução do Quadro Clínico (observações de consultas sucessivas)</h2>
+                    <img id="seta" onclick="expandirRetrair('formulario8', this)" src="/assets/img/seta-direita.png" alt="seta">
+                </div>
+                <div class="barra"></div>
+                <section id="formulario8" class="formulario-oculto">
+                    <div class="nome-campo">
+                        <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                    </div>                   
+                </section>
+
+                <!--Exames de Imagem e Procedimentos-->
+                <div class="menu-seta">
+                    <h2>Exames de Imagem e Procedimentos</h2>
+                    <img id="seta" onclick="expandirRetrair('formulario9', this)" src="/assets/img/seta-direita.png" alt="seta">
+                </div>
+                <div class="barra"></div>
+                <section id="formulario9" class="formulario-oculto">
+                                      
+                    <div class="nome-campo">
+                        <label for="">Laudos de Exames de Imagem</label>
+                        <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                    </div>
+
+                    <div class="nome-campo">
+                        <label for="">Procedimentos Realizados (cirurgias, curativos, vacinação, etc.)</label>
+                        <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                    </div>
+
+                </section>
+
+                <!--Registro de Internação e Cirurgias-->
+                <div class="menu-seta">
+                    <h2>Registros de Internação e Cirurgias</h2>
+                    <img id="seta" onclick="expandirRetrair('formulario10', this)" src="/assets/img/seta-direita.png" alt="seta">
+                </div>
+                <div class="barra"></div>
+                <section id="formulario10" class="formulario-oculto">
+                                      
+                    <div class="nome-campo">
+                        <label for="">Data de Admissão e Alta Hospitalar</label>
+                        <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                    </div>
+
+                    <div class="nome-campo">
+                        <label for="">Diagnóstico de Internação</label>
+                        <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                    </div>
+
+                    <div class="nome-campo">
+                        <label for="">Procedimentos Cirúrgicos Realizados</label>
+                        <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                    </div>
+
+                    <div class="nome-campo">
+                        <label for="">Médicos Responsáveis</label>
+                        <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                    </div>
+
+                </section>
+
+                <!--Documentação e Consentimentos-->
+                <div class="menu-seta">
+                    <h2>Documentação e Consentimentos</h2>
+                    <img id="seta" onclick="expandirRetrair('formulario11', this)" src="/assets/img/seta-direita.png" alt="seta">
+                </div>
+                <div class="barra"></div>
+                <section id="formulario11" class="formulario-oculto">
+                                      
+                    <div class="nome-campo">
+                        <label for="">Termos de consentimento informado para procedimentos</label>
+                        <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                    </div>
+
+                    <div class="nome-campo">
+                        <label for="">Atestados Médicos</label>
+                        <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                    </div>
+
+                    <div class="nome-campo">
+                        <label for="">Declarações de saúde e formulários legais</label>
+                        <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                    </div>
+
+                </section>
+
+                <!--Agendamentos e Histórico de Consultas-->
+                <div class="menu-seta">
+                    <h2>Agendamentos e Histórico de Consultas</h2>
+                    <img id="seta" onclick="expandirRetrair('formulario12', this)" src="/assets/img/seta-direita.png" alt="seta">
+                </div>
+                <div class="barra"></div>
+                <section id="formulario12" class="formulario-oculto">
+                                      
+                    <div class="nome-campo">
+                        <label for="">Consultas passadas</label>
+                        <!--IMPLEMENTAR A LISTA DE PRONTUÁRIOS PERTENCENTENS A CONSULTAS PASSADAS AQUI-->
+                    </div>
+
+                </section>
+
+                <!--Observações Gerais e Notificações-->
+                <div class="menu-seta">
+                    <h2>Observações Gerais e Notificações</h2>
+                    <img id="seta" onclick="expandirRetrair('formulario13', this)" src="/assets/img/seta-direita.png" alt="seta">
+                </div>
+                <div class="barra"></div>
+                <section id="formulario13" class="formulario-oculto">
+                                      
+                    <div class="nome-campo">
+                        <label for="">Doenças de notificação obrigatória (ex: COVID-19, tuberculose)</label>
+                        <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                    </div>
+
+                    <div class="nome-campo">
+                        <label for="">Observações médicas adicionais</label>
+                        <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                    </div>
+
+                </section>
+
             </section>
+
+            <div class="finalizar-consulta">
+                <button>Finalizar Consulta</button>
+            </div>
         </section>
     </main>
 
@@ -386,6 +512,31 @@
                 botao.textContent = 'Solicitar exame';
             }
         }
+
+        //Função que exibe os remedios prescrevidos ao voltar para o prontuário
+        window.addEventListener('DOMContentLoaded', () => {
+            const medicamentos = JSON.parse(localStorage.getItem('medicamentos')) || [];
+            const lista = document.getElementById('medicamentosPrescricao');
+            const botao = document.getElementById('botaoPrescricao');
+
+            medicamentos.forEach(med => {
+                const container = document.createElement('div');
+                container.classList.add('lista-medicamentos');
+
+                const li = document.createElement('li');
+                li.textContent = med;
+
+                container.appendChild(li);
+                lista.appendChild(container);
+            });
+
+            // Altera o botão se houver prescrições
+            if (medicamentos.length > 0) {
+                botao.textContent = 'Editar prescrição';
+            } else {
+                botao.textContent = 'Criar Prescrição';
+            }
+        });
 
     </script>
 </body>
