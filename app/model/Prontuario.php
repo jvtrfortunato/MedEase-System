@@ -6,6 +6,7 @@ require_once 'Paciente.php';
 require_once 'Medico.php';
 require_once 'Anamnese.php';
 require_once 'ExameFisico.php';
+require_once 'Exame.php';
 require_once 'Prescricao.php';
 
 class Prontuario {
@@ -13,41 +14,63 @@ class Prontuario {
         //Identificação
         private int $id,
         private int $idPaciente,
-        private int $idMedicoResponsavel, //id do ultimo medico que atualizou o prontuario
-        private string $dataUltimaAtualizacao,
+        private int $idMedicoResponsavel,
+        private string $dataCriacaoProntuario,
 
-        //Informações Clínicas
-        private string $sintomas,
+        //Histórico médico e familiar
+        private string $doencasPreExistentes,
+        private string $medcacoesUsoContinuo,
+        private string $cirurugiasAnteriores,
+        private string $alergiasMedicamentos,
+        private array $historicoDoencasFamilia, 
+
+        //Anamnese
         private Anamnese $anamnese,
-        private ExameFisico $exameFisico,
-        private string $diagnostico,
-        private array $historicoDiagnosticos = [], //$diagnostico será adicionado aqui / Talvez somente esse array seja necessário no lugar de $diagnostico
-        private Prescricao $prescricao, 
 
-        //Dados vitais e Exames
-        private string $peso,
-        private string $altura,
-        private string $exameSolicitado, //Talvez implementar uma classe Exame
-        private array $examesSolicitados = [], //$exameSolicitado será adicionado aqui / Talvez somente esse array seja necessário no lugar de $exameSolicitado
-        private array $resultadosExames = [],
-        private array $laudoExames = [],
+        //Exame Físico
+        private ExameFisico $exameFisico, 
 
-        //Outros
-        private string $sexo,
-        private string $nomeMae,
-        private string $nomePai,
-        private string $nomeConjuge,
-        private string $localNascimento,
-        private string $profissao,
-        private string $procedencia, //local de origem
-        private string $relatorioEncaminhamento, //encaminhamento para outro medico
-        private array $historicoEncaminhamentos = [],
-        private array $antecedentesHospitalares = []
+        //Diagnóstico
+        private string $diagnosticoPresuntivo,
+        private string $diagnosticoDiferencial,
+        private string $diagnotiscoDefinitivo,
+        private string $cid10,
+
+        //Exames Solicitados
+        private array $examesSolicitados = [],
+
+        //Prescrição Médica
+        private Prescricao $prescricao,
+
+        //Evolução do Quadro Clínico (observações de consultas sucessivas)
+        private string $evolucaoQuadroClinico,
+
+        //Exames de Imagem e Procedimentos
+        private string $laudosExamesImagens,
+        private string $procedimentosRealizados,
+
+        //Registros de Internação e Cirurgias
+        private string $dataAdmissaoEAlta,
+        private string $diagnosticoInternacao,
+        private string $procedimentosCirurgicos,
+        private string $medicosResponsaveis,
+
+        //Documentação e Consentimentos
+        private string $termosConsentimentoParaProcedimentos,
+        private string $atestados, //ISSO AQUI PROVAVELMENTE VAI SER UM OBJETO DO TIPO ATESTADO - CRIAR TAMBÉM A TELA
+        private string $declaracoesSaudeFormuláriosLegais,
+        
+        //Agendamentos e Histórico de Consultas
+        private array $idProntuarios = [],
+
+        //Observações Gerais e Notificações
+        private string $doencasNotificacaoObrigatoria,
+        private string $observacoesAdicionais
     ){}
 
     //getters e setters
     //Identificação
-    public function getId(): int {
+    public function getId(): int {  //ARRUMAR TODOS OS MÉTODOS DE TODAS AS CLASSES
         return $this->id;
     }
     
@@ -317,7 +340,7 @@ $prontuario = new Prontuario(
     'Pirapozinho - SP',
     'Nenhum encaminhamento',
     ['Histórico encaminhamento teste'],
-    ['Antecedentes hospitalares teste']
+    ['Antecedentes hospitalares teste'] //ARRUMAR TODOS DESSE AQUI
 );
 
 var_dump($prontuario);
