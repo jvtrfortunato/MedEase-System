@@ -29,9 +29,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 cancelarHorario(horario, horaTexto);
             } else {
                 // Armazena data e hora selecionadas no localStorage
+                // Clicar em qualquer horário leva para a tela de detalhes (sem agendar ainda)
                 localStorage.setItem("horaSelecionada", horaTexto);
                 localStorage.setItem("dataSelecionada", dataSelecionada);
-
+                window.location.href = "../../app/views/detalhes-consulta.html";
                 // Redireciona para a página de detalhes da consulta
                 window.location.href = "detalhes-consulta.html";
             }
@@ -45,10 +46,29 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
     // Função para marcar visualmente como agendado
+
     function marcarHorarioAgendado(horarioEl) {
+        const horaTexto = horarioEl.querySelector(".hora")?.textContent || "00:00";
+    
         horarioEl.classList.add("agendado");
-        horarioEl.querySelector(".italico").textContent = "Agendado";
+        
+        // Insere o conteúdo com o botão de ver detalhes
+        horarioEl.innerHTML = `
+            <div class="info">
+                <p class="hora">${horaTexto}</p>
+                <p class="italico">Agendado</p>
+            </div>
+            <a href="../../app/views/detalhes-consulta.html" class="ver-detalhes">Ver detalhes</a>
+        `;
+    
+        // Impede o clique no link de propagar para o container
+        const link = horarioEl.querySelector(".ver-detalhes");
+        link.addEventListener("click", function (event) {
+            event.stopPropagation(); // Impede conflito com o clique no horário
+        });
     }
+    
+    
 
 });
 
