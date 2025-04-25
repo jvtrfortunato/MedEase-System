@@ -119,7 +119,7 @@
         </section>
         <section class="botao">
             <button class="voltar">Voltar</button>
-            <button class="adicionar" type="submit">Adicionar Profissional</button>
+            <a id="botao-adicionar" class="adicionar">Adicionar Profissional</a>
         </section>
     </main>
     <footer></footer>
@@ -146,13 +146,13 @@
             }            
         }
 
-        function adicionarNovo() {
+        document.getElementById('botao-adicionar').addEventListener('click', function() {
             if (tipoAtual === 'medicos') {
-                window.location.href = 'cadastrar-medico.html'; // caminho para a tela de cadastro de médico
+                window.location.href = 'cadastrar-medico.html';
             } else {
-                window.location.href = 'cadastrar-secretario.html'; // caminho para a tela de cadastro de secretário
+                window.location.href = 'cadastrar-secretario.html';
             }
-        }
+        });
     </script>
 </body>
 </html>

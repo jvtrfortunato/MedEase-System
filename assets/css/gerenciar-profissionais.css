@@ -142,7 +142,7 @@ main {
     margin-top: 5px;
 }
 
-.botao button {
+.botao button, a {
     text-align: center;
     padding: 0.3vw 0.8vw;
     border: 1px, solid rgba(136, 136, 136, 0.4);
@@ -152,6 +152,7 @@ main {
     font-weight: 600;
     font-family: "Inter", serif;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .botao .voltar {

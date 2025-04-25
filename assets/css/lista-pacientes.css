@@ -96,6 +96,7 @@ input {
     font-family: "Inter", serif;
     cursor: pointer;
     background-color: #50E3C2;
+    text-decoration: none;
 }
 
 .detalhes:hover {

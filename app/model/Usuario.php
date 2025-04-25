@@ -2,15 +2,19 @@
 
 namespace App\Models;
 
+require_once 'Endereco.php';
+
 Class Usuario {
     public function __construct(
         private int $id,
         private string $nome,
         private string $cpf,
-        private string $telefone,
+        private array $telefone = [],
+        private Endereco $endereco,
+        private string $dataNascimento,
+        private string $sexo,
         private string $email,
         private string $senha,
-        private string $tipo,
         ) {
         }
 
