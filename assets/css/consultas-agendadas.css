@@ -95,8 +95,29 @@ main {
 
 
 .horario.agendado {
-    background-color: #ff4d4d;
+    position: relative;
+    padding: 10px;
+    background-color: #f44336;
     color: white;
-    pointer-events: none; /* Impede que o usuário clique de novo */
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
+
+.horario .ver-detalhes {
+    background-color: white;
+    color: black;
+    padding: 2px 4px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: bold;
+    z-index: 10;
+}
+
+.horario .ver-detalhes:hover {
+    background-color: #ffcdd2;
+}
+
 

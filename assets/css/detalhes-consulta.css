@@ -104,3 +104,8 @@ input, select {
 .botoes .salvar:hover {
     background-color: #3AC3A5;
 }
+
+a {
+    text-decoration: none;
+    color: white;
+}
