@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalhes Consulta</title>
+    <title>Detalhes da Consulta</title>
     <link rel="stylesheet" href="/assets/css/header.css">
     <link rel="stylesheet" href="../../assets/css/detalhes-consulta.css">
     <script src="../../assets/script/detalhes-consulta.js" defer></script>
@@ -13,74 +13,143 @@
         <a class="logo" href="">MedEase</a>    
         <a href="">sair</a>
     </header>
-    <h1>Descrição da Consulta</h1>
-    <section class="detalhes_consulta">
-        <form>
-            <div class="linha">
-                <div class="campo">
-                    <label for="motivo">Motivo</label>
-                    <input type="text" id="motivo" name="motivo">
-                </div>
-                <div class="campo">
-                    <label for="data">Data</label>
-                    <input type="text" id="data" name="data">
-                </div>
-                <div class="campo">
-                    <label for="hora">Hora</label>
-                    <input type="text" id="hora" name="hora" >
-                </div>
-            </div>
     
-            <div class="linha">
-                <div class="campo">
-                    <label for="cpf">CPF</label>
-                    <input type="text" id="cpf" name="cpf">
+    <main>
+        <section class="conteudo-principal">
+            <h1>Descrição da Consulta</h1>
+            <section class="dados-consulta">
+                
+                <div class="linha">
+                    <div class="label-input">
+                        <label for="motivo">Motivo</label>
+                        <input type="text" name="motivo" id="">
+                    </div>
+                    <div class="linha-pequenos">
+                        <div class="label-input">
+                            <label for="data">Data</label>
+                            <input type="date" name="data" id="">
+                        </div>
+                        <div class="label-input">
+                            <label for="hora">Hora</label>
+                            <input type="text" name="hora" id="">
+                        </div>
+                    </div>
                 </div>
-                <div class="campo">
-                    <label for="medico">Médico</label>
-                    <select id="medico" name="medico">
-                        <option selected>Dra Mariana Olívia do Amaral</option>
-                    </select>
+
+                <div class="linha">
+                    <div class="label-input">
+                        <label for="nome">Nome do Paciente</label>
+                        <input type="text" name="nome" id="">
+                    </div>
+                    <div class="linha-pequenos">
+                        <div class="label-input">
+                            <label for="cpf">CPF</label>
+                            <input type="text" name="cpf" id="">
+                        </div>
+                        <div class="label-input">
+                            <label for="telefone">Telefone</label>
+                            <input type="tel" name="telefone" id="">
+                        </div>
+                    </div>
                 </div>
-            </div>
-    
-            <div class="linha">
-                <div class="campo">
-                    <label for="paciente">Paciente</label>
-                    <input type="text" id="paciente" name="paciente" >
+
+                <div class="linha">
+                    <div class="label-input">
+                        <label for="rua">Rua</label>
+                        <input type="text" name="rua" id="">
+                    </div>
+                    <div class="linha-pequenos">
+                        <div class="label-input">
+                            <label for="numero">Número</label>
+                            <input type="text" name="numero" id="">
+                        </div>
+                    </div>
                 </div>
-                <div class="campo">
-                    <label for="especialidade">Especialidade</label>
-                    <input type="text" id="especialidade" name="especialidade">
+
+                <div class="linha">
+                    <div class="label-input">
+                        <label for="bairro">Bairro</label>
+                        <input type="text" name="bairro" id="">
+                    </div>
+                    <div class="label-input">
+                        <label for="cidade">Cidade</label>
+                        <input type="text" name="cidade" id="">
+                    </div>
                 </div>
-            </div>
-    
-            <div class="linha">
-                <div class="campo" style="flex: 1;">
-                    <label for="endereco">Endereço</label>
-                    <input type="text" id="endereco" name="endereco" >
+
+                <div class="linha">
+                    <div class="linha-pequenos">
+                        <div class="label-input">
+                            <label for="estado">Estado</label>
+                            <select name="estado" id="">
+                                <option value="">Selecione</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="label-input">
+                        <label for="cep">CEP</label>
+                        <input type="text" name="cep" id="">
+                    </div>
                 </div>
-            </div>
-    
-            <div class="linha">
-                <div class="campo">
-                    <label for="telefone">Tel. celular</label>
-                    <input type="text" id="telefone" name="telefone" >
+
+                <div class="linha">
+                    <div class="label-input">
+                        <label for="medico">Médico</label>
+                        <select name="medico" id="">
+                            <option value="">Selecione</option>
+                        </select>
+                    </div>
+                    <div class="label-input">
+                        <label for="especialidade">Especialidade</label>
+                        <select name="especialidade" id="">
+                            <option value="">Selecione</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-        </form>
-    </section>
-    
-    <section class="botoes_voltar_admitir">
-        <div>
-            <button id="voltarPagina" class="voltar">Voltar</button>
+
+                <div class="linha">
+                    <div class="label-input">
+                        <label for="salaAtendimento">Sala de atendimento</label>
+                        <select name="salaAtendimento" id="">
+                            <option value="">Selecione</option>
+                        </select>
+                    </div>
+                </div>
+
+            </section>
+        </section>
+        <div class="botoes">
+            <button class="voltar">Voltar</button>
+            <button class="salvar" type="submit">Salvar</button>
         </div>
-        <div>   
-            <button id="cancelarConsulta" class="cancelar">Cancelar Consulta</button>
-            <button class="nao_compareceu">Paciente não compareceu</button>
-            <button id="confirmar-consulta" class="admitir">Confirmar Consulta</button>
-        </div>
-    </section>
+    </main>
     
     <footer></footer>
     <script>

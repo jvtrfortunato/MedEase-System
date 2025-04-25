@@ -14,6 +14,7 @@ main {
     justify-content: center;
 }
 
+
 h1 {
     opacity: 75%;
     font-weight: 500;
@@ -28,149 +29,32 @@ h1 {
 }
 
 .endereco {
-    margin-top: 10px;
+    margin-top: 1%;
 }
 
 .dados-gerais-endereco {
     width: 100%;
-    padding: 20px 20px 15px 20px;
+    padding: 1.5% 1.5% 0.5% 1.5%;
     border: 2px, solid rgba(136, 136, 136, 0.4);
     border-radius: 5px;
 }
 
-/* ESTILIZAÇÃO FORMULÁRIO DOS DADOS GERAIS */
-.cpf {
-    width: 49%;
+.label-input {
     display: flex;
     flex-direction: column;
-    margin-bottom: 15px;
+    width: 49%;
+    margin-bottom: 1%;
 }
 
-.nome-completo-email {
+.linha{
     display: flex;
     justify-content: space-between;
 }
 
-.nome-completo-nome-mae {
+.linha-pequenos{
     width: 49%;
-}
-
-.data-nascimento-sexo {
     display: flex;
     justify-content: space-between;
-}
-
-.celular-email {
-    width: 49%;
-    display: flex;
-    flex-direction: column;
-}
-
-.nome-completo {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-}
-
-.data-nascimento {
-    width: 49.5%;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-}
-
-.sexo {
-    width: 49.5%;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-}
-
-.nome-mae {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-}
-
-.celular {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-}
-
-.tel-residencial {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-}
-
-.email {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-}
-
-/* ESTILIZAÇÃO FORMULÁRIO ENDEREÇO */
-.logradouro-cep {
-    display: flex;
-    justify-content: space-between;
-}
-
-.logradouro-bairro {
-    width: 49%;
-}
-
-.numero-cep {
-    width: 49%;
-}
-
-.estado-cep {
-    display: flex;
-    justify-content: space-between;
-}
-
-.logradouro {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-}
-
-.complemento {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-}
-
-.bairro {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-}
-
-.numero {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-}
-
-.cidade {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-}
-
-.estado {
-    width: 49.5%;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-}
-
-.cep {
-    width: 49.5%;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
 }
 
 label {
@@ -183,21 +67,10 @@ span {
     color: #4A90E2;
 }
 
-input {
+input, select {
     border: 2px, solid rgba(136, 136, 136, 0.4);
     border-radius: 5px;
-    padding: 5px;
     padding: 10px 15px 10px 15px;
-}
-
-select {
-    border: 2px, solid rgba(136, 136, 136, 0.4);
-    border-radius: 5px;
-    padding: 5px;
-}
-
-.medio {
-    width: 50%;
 }
 
 .botoes {

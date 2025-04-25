@@ -5,7 +5,6 @@ namespace App\Models;
 require_once "Usuario.php";
 
 class Secretario extends Usuario {
-
     public function __construct(
         string $id,
         string $nome, 

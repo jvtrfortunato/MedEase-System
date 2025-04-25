@@ -6,7 +6,7 @@ require_once 'Medicamento.php';
 
 class Prescricao {
     public function __construct(
-        private Medicamento $medicamentos = []
+        private $medicamentos = []
     ){}
 
     public function criarPrescricao() {

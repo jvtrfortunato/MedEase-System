@@ -8,12 +8,18 @@ class Paciente {
     public function __construct(
         private int $id,
         private string $nome,
-        private string $cpf,
         private string $dataNascimento,
-        private Endereco $endereco,
+        private string $sexo,
+        private string $estadoCivil,
+        private string $cpf,
+        private string $rg,
         private array $telefone = [],
         private string $email,
-        private string $planoSaude
+        private string $nomeResponsavel,
+        private string $cns,
+        private string $convenio,
+        private string $planoSaude,
+        private Endereco $endereco
     ) {}    
     
     public function getId(): int {

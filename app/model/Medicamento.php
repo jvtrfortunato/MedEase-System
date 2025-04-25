@@ -5,7 +5,7 @@ namespace App\Models;
 class Medicamento {
     public function __construct(
         //Medicamento
-        private string $medicamento,
+        private string $nome,
         private string $concentracao,
         private string $formaFarmaceutica,
         private string $viaAdministracao,
