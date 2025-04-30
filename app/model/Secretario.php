@@ -13,7 +13,6 @@ class Secretario extends Usuario {
         string $email, 
         string $senha, 
         string $tipo, 
-        protected string $horarioTrabalho,
         //protected array $historicoAtividades = [] //Talvez uma classe compositória
     ) {
         parent::__construct($id, $nome, $cpf, $telefone, $email, $senha, $tipo);
@@ -43,7 +42,6 @@ $secretario = new Secretario(
     '(99)99999-9999', 
     'SecTeste@.com', 
     '123', 
-    'Secretário', 
-    '8:00 - 17:00');
+    'Secretário');
 
 var_dump($secretario);

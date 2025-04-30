@@ -25,30 +25,45 @@ h1 {
     opacity: 75%;
     font-weight: 500;
     font-size: 1.9em;
-    margin-bottom: 3vh;
 }
 
 .legenda {
     display: flex;
+    gap: 1%;
+}
+
+.paciente-legenda {
+    width: 49%;
+    padding-left: 1em;
+}
+
+.horario-legenda {
+    width: 30.3%;
+    padding-left: 0.9em;
+}
+
+.status-legenda {
+    width: 60.6%;
+    padding-left: 0.5em;
 }
 
 .legenda p {
-    width: 50%;
     opacity: 75%;
-    padding-left: 25px;
     font-size: 1.4em;
     font-weight: 500;
 }
 
 .horario-status {
-    width: 50%;
+    width: 49%;
     display: flex;
+    justify-content: space-between;
 }
 
 .consultas {
     border: 2px, solid rgba(136, 136, 136, 0.4);
     border-radius: 5px;
-    padding: 10px 17px 10px 17px;
+    padding: 10px 17px 0 17px;
+    margin-bottom: 0.5%;
 }
 
 .consultas p {
@@ -59,7 +74,8 @@ h1 {
 
 .paciente {
     display: flex;
-    justify-content: space-between;
+    gap: 2%;
+    margin-bottom: 10px;
 }
 
 .nome {
@@ -73,12 +89,12 @@ h1 {
 
 .hora-status {
     display: flex;
-    justify-content: space-between;
     width: 49%;
+    justify-content: space-between;
 }
 
 .horario {
-    width: 49%;
+    width: 30.3%;
     border: 2px, solid rgba(136, 136, 136, 0.4);
     border-radius: 5px;
     padding: 5px 10px 5px 10px;
@@ -87,19 +103,19 @@ h1 {
 }
 
 .status {
-    width: 46%;
+    width: 60.6%;
     display: flex;
+    justify-content: space-between;
     align-items: center;
 }
 
 .botoes {
     width: 75%;
     display: flex;
-    justify-content: space-between;
     margin-top: 5px;
 }
 
-.botoes button {
+button, .iniciar-consulta {
     text-align: center;
     padding: 0.3vw 0.8vw;
     border: 1px, solid rgba(136, 136, 136, 0.4);
@@ -109,6 +125,7 @@ h1 {
     font-weight: 600;
     font-family: "Inter", serif;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .botoes .voltar {
@@ -119,10 +136,14 @@ h1 {
     background-color: #E65A50;
 }
 
-.botoes .salvar {
+.iniciar-consulta {
     background-color: #50E3C2;
 }
 
-.botoes .salvar:hover {
+.iniciar-consulta:hover {
     background-color: #3AC3A5;
+}
+
+.atendimentos-finalizados-titulo {
+    margin-top: 2%;
 }
