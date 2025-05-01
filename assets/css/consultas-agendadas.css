@@ -19,7 +19,7 @@ main {
 }
 
 .conteudo-geral h1 {
-    opacity: 75%;
+    opacity: 0.75;
     margin-left: 2%;
     margin-bottom: 1%;
 }
@@ -29,7 +29,7 @@ main {
     justify-content: space-between;
     width: 100%;
     padding: 2% 2% 0 2%;
-    border: 2px, solid rgba(136, 136, 136, 0.4);
+    border: 2px solid rgba(136, 136, 136, 0.4); /* corrigido */
     border-radius: 5px;
     margin-bottom: 1%;
 }
@@ -41,7 +41,7 @@ main {
 }
 
 .periodo h2 {
-    opacity: 75%;
+    opacity: 0.75;
     font-weight: 500;
 }
 
@@ -49,10 +49,10 @@ main {
     display: flex;
     gap: 4%;
     width: 100%;
-    border: 2px, solid rgba(136, 136, 136, 0.4);
+    border: 2px solid rgba(136, 136, 136, 0.4); /* corrigido */
     border-radius: 5px;
     margin-bottom: 3%;
-    padding: 1% 1% 1% 1%;
+    padding: 1%;
     cursor: pointer;
 }
 
@@ -61,7 +61,7 @@ main {
 }
 
 .horario p {
-    opacity: 50%;
+    opacity: 0.5;
     font-size: 1.3em;
 }
 
@@ -93,7 +93,6 @@ main {
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-
 .horario.agendado {
     position: relative;
     padding: 10px;
@@ -117,10 +116,6 @@ main {
     font-size: 0.9rem;
     font-weight: bold;
     z-index: 10;
-}
-
-.horario .ver-detalhes:hover {
-    background-color: #ffcdd2;
 }
 
 .agendado {
@@ -149,9 +144,17 @@ main {
 
 .botoes-acoes button {
     background-color: #fff;
-    color:  black;
+    color: black;
     font-weight: bold;
 }
+
+.botoes-acoes button:hover,
+.botoes-acoes a:hover {
+    background-color: #ffcdd2;
+}
+
+
+
 
 
 
