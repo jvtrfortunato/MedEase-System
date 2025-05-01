@@ -106,6 +106,9 @@ main {
 }
 
 .horario .ver-detalhes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: white;
     color: black;
     padding: 2px 4px;
@@ -119,5 +122,36 @@ main {
 .horario .ver-detalhes:hover {
     background-color: #ffcdd2;
 }
+
+.agendado {
+    background-color: #e74c3c;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.botoes-acoes {
+    display: flex;
+    gap: 8px;
+}
+
+.botoes-acoes a,
+.botoes-acoes button {
+    font-size: 0.9rem;
+    padding: 5px 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.botoes-acoes button {
+    background-color: #fff;
+    color:  black;
+    font-weight: bold;
+}
+
 
 
