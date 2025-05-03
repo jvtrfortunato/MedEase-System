@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <p class="italico">Agendado</p>
             </div>
             <div class="botoes-acoes">
-                <a href="detalhes-consulta.html" class="ver-detalhes">Ver detalhes</a>
+                <a href="detalhes-consulta-apos-agendada.html" class="ver-detalhes">Ver detalhes</a>
                 <button class="cancelar-consulta">Cancelar</button>
             </div>
         `;
@@ -85,5 +85,4 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
     }
 });
-
 
