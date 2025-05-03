@@ -42,7 +42,17 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             // Redireciona para a página de horários da data, já com a data passada por parâmetro na URL
-            window.location.href = `consultas-agendadas.html?data=${dataSelecionada}`;
+            localStorage.setItem("modo", "agendar");
+
+            const modo = localStorage.getItem("modo") || "consultas";
+
+            if (modo === "agendar") {
+                window.location.href = `agendar-consultas.html?data=${dataSelecionada}`;
+            } else {
+                window.location.href = `consultas-agendadas.html?data=${dataSelecionada}`;
+            }
+
+
         } else {
             // Exibe erro se data ou hora estiverem ausentes
             alert("Erro ao confirmar consulta. Tente novamente.");
@@ -50,11 +60,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Evento para o botão "Voltar" (se existir)
-    const voltarPagina = document.getElementById("voltarPagina");
     if (voltarPagina) {
         voltarPagina.addEventListener("click", () => {
-            window.history.back(); // Volta para a página anterior
+            if (window.history.length > 1) {
+                window.history.back(); // volta à página anterior no histórico
+            } else {
+                // Fallback: redireciona manualmente caso não haja histórico
+                window.location.href = "consultas-agendadas.html";
+            }
         });
     }
+
+
+    
 });
 
