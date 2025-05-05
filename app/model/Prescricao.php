@@ -16,12 +16,14 @@ class Prescricao {
         private string $frequenciaDose,
 
         //Período de tratamento
-        private string $dataInicio,
+        private date $dataInicio,
         private int $quantidadeDuracao,
         private string $diaMesOuAno,
         
         //Recomendações
-        private string $recomendacoes
+        private string $recomendacoes,
+
+        private int $idProntuario
     ){}
 }
 

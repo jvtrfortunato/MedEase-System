@@ -4,7 +4,8 @@ namespace App\Models;
 
 class Exame {
     public function __construct(
+        private int $idExame,
         private string $nomeExame,
-        private string $nomeClinica
+        private int $idProntuario
     ){}
 }

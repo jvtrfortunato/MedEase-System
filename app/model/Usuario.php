@@ -6,15 +6,16 @@ require_once 'Endereco.php';
 
 Class Usuario {
     public function __construct(
-        private int $id,
+        private int $idUsuario,
         private string $nome,
         private string $cpf,
-        private array $telefone = [],
-        private Endereco $endereco,
+        private string $telefone,
         private string $dataNascimento,
         private string $sexo,
         private string $email,
         private string $senha,
+        private string $tipo,
+        private Endereco $endereco
         ) {
         }
 

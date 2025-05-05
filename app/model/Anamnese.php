@@ -10,12 +10,11 @@ class Anamnese {
         private string $historiaSocial,
         private string $historiaGinecoObstetrica, //para mulheres
         private string $revisaoSistemas,
-        
         private string $fatoresAgravantes,
         private string $atenuantes,
-        
         private string $tratamentosPrevios,
         private string $respostaTratamentosPrevios,
+        private int $idProntuario
     ) {}
 }
 

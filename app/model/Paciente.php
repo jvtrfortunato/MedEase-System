@@ -6,14 +6,14 @@ require_once 'Endereco.php';
 
 class Paciente {
     public function __construct(
-        private int $id,
+        private int $idPaciente,
         private string $nome,
         private string $dataNascimento,
         private string $sexo,
         private string $estadoCivil,
         private string $cpf,
         private string $rg,
-        private array $telefone = [],
+        private string $telefone,
         private string $email,
         private string $nomeResponsavel,
         private string $cns,

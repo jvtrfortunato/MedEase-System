@@ -8,7 +8,8 @@ class HistoricoMedico {
         private string $medicacoesUsoContinuo,
         private string $cirurgiasAnteriores,
         private string $alergiasMedicamentos,
-        private array $historicoDoencasFamilia
+        private string $historicoDoencasFamilia,
+        private int $idProntuario
     ) {}
     
     // Getters e setters podem ser adicionados aqui

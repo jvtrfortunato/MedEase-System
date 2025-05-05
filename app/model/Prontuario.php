@@ -18,9 +18,7 @@ require_once 'Documentacao.php';
 class Prontuario {
     public function __construct(
         //Identificação
-        private int $id,
-        private int $idPaciente,
-        private int $idMedico,
+        private int $idProntuario,
         private string $dataCriacao,
 
         //Dados Paciente
@@ -47,10 +45,10 @@ class Prontuario {
         private Prescricao $prescricao,
 
         //Evolução do Quadro Clínico (observações de consultas sucessivas)
-        private string $evolucaoQuadroClinico,
+        private string $evolucao,
 
         //Exames de Imagem e Procedimentos
-        private string $laudosExamesImagens, //Talvez um array???
+        private string $laudosExamesImagens,
         private string $procedimentosRealizados,
 
         //Registros de Internação e Cirurgias
@@ -64,7 +62,10 @@ class Prontuario {
 
         //Observações Gerais e Notificações
         private string $doencasNotificacaoObrigatoria,
-        private string $observacoesAdicionais
+        private string $observacoesAdicionais,
+
+        private int $idPaciente,
+        private int $idMedico
     ){}
 }
     

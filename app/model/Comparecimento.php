@@ -11,6 +11,7 @@ class Comparecimento extends Atestado {
 
         protected string $data,
         protected string $horarioChegada,
-        protected string $horarioSaida
+        protected string $horarioSaida,
+        protected int $idAtestado
     ){}
 }

@@ -7,6 +7,7 @@ class Internacao {
         private string $dataAdmissaoEAlta,
         private string $diagnosticoInternacao,
         private string $procedimentosCirurgicos,
-        private string $medicosResponsaveis
+        private string $medicosResponsaveis,
+        private int $idProntuario
     ) {}
 }

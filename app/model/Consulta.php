@@ -9,17 +9,14 @@ require_once 'Medico.php';
 
 class Consulta {
     public function __construct(
-        private int $id, //o valor desse atributo será atribuido automaticamente no banco de dados
+        private int $idConsulta,
         private string $motivo,
         private string $data,
         private string $hora,
-        private string $nomePaciente,
-        private string $cpfPaciente,
-        private string $telefonePaciente,
-        private string $nomeMedico,
-        private string $especialidade,
         private string $salaAtendimento,
-        private StatusConsulta $status
+        private StatusConsulta $status,
+        private int $idSecretario,
+        private int $idPaciente,
     ) {}
 
     public function getId(): int {

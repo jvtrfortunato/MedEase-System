@@ -11,6 +11,7 @@ class Afastamento extends Atestado {
 
         protected int $diasAfastamento,
         protected string $dataInicio,
-        protected string $dataRetorno
+        protected string $dataRetorno,
+        protected int $idAtestado
     ){}
 }
