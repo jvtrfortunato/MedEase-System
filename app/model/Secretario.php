@@ -6,32 +6,29 @@ require_once "Usuario.php";
 
 class Secretario extends Usuario {
     public function __construct(
-        string $id,
+        int $idUsuario,
         string $nome, 
         string $cpf,
         string $telefone, 
+        string $dataNascimento,
+        string $sexo,
         string $email, 
         string $senha, 
-        string $tipo, 
-        //protected array $historicoAtividades = [] //Talvez uma classe compositória
+        string $tipo,
+        Endereco $endereco
     ) {
-        parent::__construct($id, $nome, $cpf, $telefone, $email, $senha, $tipo);
-    }
-
-    public function gethorarioTrabalho(): string {
-        return $this->horarioTrabalho;
-    }
-    
-    public function setHorarioTrabalho($horarioTrabalho): void {
-        $this->horarioTrabalho = $horarioTrabalho;
-    }
-
-    public function getHistoricoAtividades(): array {
-        return $this->historicoAtividades;
-    }
-    
-    public function setHistoricoAtividades($historicoAtividades): void {
-        $this->historicoAtividades = $historicoAtividades;
+        parent::__construct(
+            $idUsuario, 
+            $nome, 
+            $cpf, 
+            $telefone,
+            $dataNascimento,
+            $sexo,
+            $email, 
+            $senha,
+            $tipo,
+            $endereco
+        );
     }
 }
 

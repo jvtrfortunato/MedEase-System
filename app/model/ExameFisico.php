@@ -13,6 +13,7 @@ class ExameFisico {
         private string $exameAbdominal,
         private string $exameNeurologico,
         private string $exameAparelhoLocomotor,
+        private int $idProntuario
     ){}
 }
 

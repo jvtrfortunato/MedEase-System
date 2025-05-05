@@ -5,7 +5,7 @@ namespace App\Models;
 class Endereco {
     public function __construct(
         private string $rua,
-        private int $numero,
+        private string $numero,
         private string $bairro,
         private string $cidade,
         private string $estado,
@@ -66,5 +66,5 @@ class Endereco {
     }
 }
 
-//$endereco = new Endereco("Rua das Flores", 123, "Centro", "São Paulo", "SP", "01010-000");
+//$endereco = new Endereco("Rua das Flores", "123", "Centro", "São Paulo", "SP", "01010-000");
 //var_dump($endereco);

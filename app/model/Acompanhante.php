@@ -14,6 +14,7 @@ class Acompanhante extends Atestado {
         protected string $parentescoAcompanhante, 
         protected string $data,
         protected string $horarioChegada,
-        protected string $horarioSaida
+        protected string $horarioSaida,
+        protected int $idAtestado
     ){}
 }

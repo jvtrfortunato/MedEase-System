@@ -2,24 +2,49 @@
 
 namespace App\Models;
 
-require_once 'Medicamento.php';
-
 class Prescricao {
     public function __construct(
-        private $medicamentos = []
+        //Medicamento
+        private string $nomeMedicamento,
+        private string $concentracao,
+        private string $formaFarmaceutica,
+        private string $viaAdministracao,
+        private string $tipoReceita,
+
+        //Posologia
+        private string $dose,
+        private string $frequenciaDose,
+
+        //Período de tratamento
+        private date $dataInicio,
+        private int $quantidadeDuracao,
+        private string $diaMesOuAno,
+        
+        //Recomendações
+        private string $recomendacoes,
+
+        private int $idProntuario
     ){}
-
-    public function criarPrescricao() {
-        return "Tela de criação de prescrição com todos os campos onde os dados serão inseridos.";
-    }
-
-    public function salvarMedicamento() {
-        return "Armazena o medicamento em uma lista.";
-    }
-
-    public function finalizarPrescricao() {
-        return "Une os medicamentos em uma prescricao e a armazena no prontuário do paciente";
-    }
 }
 
+$medicamento = new Medicamento(
+    //Medicamento
+    'Medicamento teste',
+    'Concentração teste',
+    'Forma farmaceutica teste',
+    'Via administração teste',
+    'Tipo receita teste',
 
+    //Posologia
+    'Dose teste',
+    'Frequência dose teste',
+
+    //Período de tratamento
+    'Início teste',
+    'Dias teste',
+    
+    //Outros
+    'Recomendações teste'   //ARRUMAR TODOS DESSE AQUI
+);
+
+//var_dump($medicaento);

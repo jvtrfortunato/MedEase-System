@@ -3,22 +3,36 @@
 namespace App\Models;
 
 require_once 'Usuario.php';
+require_once 'Endereco.php';
 
 class Medico extends Usuario {
     public function __construct(
-        int $id,
+        int $idUsuario,
         string $nome, 
         string $cpf,
-        string $telefone, 
+        string $telefone,
+        string $dataNascimento,
+        string $sexo,
         string $email, 
         string $senha,
         string $tipo,
+        Endereco $endereco,
+        protected int $idMedico,
         protected string $crm,
-        protected string $especialidade,
-        protected int $salaAtendimento,
-        protected array $historicoConsultas = [] //Talvez uma classe compositória
+        protected string $especialidade
     ) {
-        parent::__construct($id, $nome, $cpf, $telefone, $email, $senha, $tipo);
+        parent::__construct(
+            $idUsuario, 
+            $nome, 
+            $cpf, 
+            $telefone,
+            $dataNascimento,
+            $sexo,
+            $email,
+            $senha, 
+            $tipo, 
+            $endereco
+        );
     }
 
     public function getCrm(): string {
@@ -35,25 +49,7 @@ class Medico extends Usuario {
     
     public function setEspecialidade($especialidade): void {
         $this->especialidade = $especialidade;
-    }
-
-    public function getSalaAtendimento(): int {
-        return $this->salaAtendimento;
-    }
-    
-    public function setSalaAtendimento($salaAtendimento): void {
-        $this->salaAtendimento = $salaAtendimento;
-    }
-
-    public function getHistoricoConsultas(): array {
-        return $this->historicoConsultas;
-    }
-    
-    public function setHistoricoConsultas($historicoConsultas): void {
-        $this->historicoConsultas = $historicoConsultas;
-    }
-
-    
+    } 
 
     public function selecionarConsulta() {
         return "Dados da consulta específica.";
@@ -70,7 +66,6 @@ class Medico extends Usuario {
     public function ConfirmarAtualizacaoProntuario() {
         return "Modificações do prontuário salvas e registros atualizados.";
     }
-
 
 }
 
