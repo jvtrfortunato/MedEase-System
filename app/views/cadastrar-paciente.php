@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar Secretário</title>
-    <link rel="stylesheet" href="/assets/css/header.css">
-    <link rel="stylesheet" href="/assets/css/cadastrar-secretario.css">
+    <title>Cadastrar Paciente</title>
+    <link rel="stylesheet" href="../../assets/css/header.css">
+    <link rel="stylesheet" href="../../assets/css/cadastrar-paciente.css">
 </head>
 <body>
     <header>
@@ -77,13 +77,25 @@
 
                     <div class="linha">
                         <div class="label-input">
-                            <label for="senha">Senha<span>*</span></label>
-                            <input type="password" name="senha" id="">
+                            <label for="nomeResponsavel">Nome do responsável</label>
+                            <input type="text" name="nomeResponsavel" id="">
                         </div>
 
                         <div class="label-input">
-                            <label for="senha-repetir">Repita a senha<span>*</span></label>
-                            <input type="password" name="senha-repetir" id="">
+                            <label for="cns">Cartão Nacional de Saúde (CNS)</label>
+                            <input type="text" name="cns" id="">
+                        </div>
+                    </div>
+
+                    <div class="linha">
+                        <div class="label-input">
+                            <label for="convenio">Convênio</label>
+                            <input type="text" name="convenio" id="">
+                        </div>
+
+                        <div class="label-input">
+                            <label for="planoSaude">Número do Plano de Saúde</label>
+                            <input type="text" name="planoSaude" id="">
                         </div>
                     </div>
 

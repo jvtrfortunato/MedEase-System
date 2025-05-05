@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consultas Agendadas</title>
-    <link rel="stylesheet" href="/assets/css/header.css">
+    <link rel="stylesheet" href="../../assets/css/header.css">
     <link rel="stylesheet" href="../../assets/css/consultas-agendadas.css">
-    <script src="../../assets/script/agendar-horario.js" defer></script>
+    <script src="../../assets/script/agendar-horario2.js" defer></script>
+
 </head>
 <body>
     <header>
@@ -47,7 +48,7 @@
             </section>
             
             <div class="caixa-botao-voltar">
-                <a href="agendar-consulta.html" class="botao-voltar">Voltar</a>
+                <a href="calendario.php?modo=agendar&data" class="botao-voltar">Voltar</a>
             </div>
         </div>
 

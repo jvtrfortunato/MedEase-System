@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/css/header.css">
+    <link rel="stylesheet" href="../../assets/css/header.css">
     <link href="../../assets/css/index-usuarios.css" rel="stylesheet">
     <title>Secretário</title>
 </head>
@@ -19,23 +19,23 @@
             <div class="grid-container">
                 
                 <div class="card">
-                    <a href="cadastrar-paciente.html" target="_blank">
+                    <a href="cadastrar-paciente.php" target="_blank">
                         <img src="../../assets/img/User.png" alt="Cadastrar Paciente">
                         <p>Cadastrar Paciente</p>
                     </a>
                 </div>
 
                 <div class="card">
-                    <a href="" target="">
+                    <a href="calendario.php?modo=agendar&data">
                         <img src="../../assets/img/Planner.png" alt="Agendar Consulta">
                         <p>Agendar Consulta</p>
                     </a>
                 </div>
 
                 <div class="card">
-                    <a href="" target="_blank">
+                    <a href="calendario.php?modo=consultas&data">
                         <img src="../../assets/img/Task Planning.png" alt="Consulta Agendadas">
-                        <p>Consulta Agendadas</p>
+                        <p>Consultas Agendadas</p>
                     </a>
                 </div>
 

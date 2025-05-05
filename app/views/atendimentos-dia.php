@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atendimentos do dia</title>
-    <link rel="stylesheet" href="/assets/css/header.css">
-    <link rel="stylesheet" href="/assets/css/atendimentos-dia.css">
+    <link rel="stylesheet" href="../../assets/css/header.css">
+    <link rel="stylesheet" href="../../assets/css/atendimentos-dia.css">
 </head>
 <body>
     <header>
@@ -37,7 +37,7 @@
                         </div>
                         <div class="status">
                             <p>Receber status</p>
-                            <a href="prontuario.html" class="iniciar-consulta" type="submit">Iniciar Consulta</a>
+                            <a href="prontuario.php" class="iniciar-consulta" type="submit">Iniciar Consulta</a>
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                         </div>
                         <div class="status">
                             <p>Receber status</p>
-                            <a href="prontuario.html" class="iniciar-consulta" type="submit">Iniciar Consulta</a>
+                            <a href="prontuario.php" class="iniciar-consulta" type="submit">Iniciar Consulta</a>
                         </div>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
                         </div>
                         <div class="status">
                             <p>Receber status</p>
-                            <a href="prontuario.html" class="iniciar-consulta" type="submit">Iniciar Consulta</a>
+                            <a href="prontuario.php" class="iniciar-consulta" type="submit">Iniciar Consulta</a>
                         </div>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
                         </div>
                         <div class="status">
                             <p>Receber status</p>
-                            <a href="prontuario.html" class="iniciar-consulta" type="submit">Iniciar Consulta</a>
+                            <a href="prontuario.php" class="iniciar-consulta" type="submit">Iniciar Consulta</a>
                         </div>
                     </div>
                 </div>
@@ -101,7 +101,7 @@
                         </div>
                         <div class="status">
                             <p>Receber status</p>
-                            <a href="prontuario.html" class="iniciar-consulta" type="submit">Iniciar Consulta</a>
+                            <a href="prontuario.php" class="iniciar-consulta" type="submit">Iniciar Consulta</a>
                         </div>
                     </div>
                 </div>
@@ -130,7 +130,7 @@
                         </div>
                         <div class="status">
                             <p>Finalizada</p>
-                            <a href="prontuario.html" class="iniciar-consulta" type="submit">Editar Prontuário</a>
+                            <a href="prontuario.php" class="iniciar-consulta" type="submit">Editar Prontuário</a>
                         </div>
                     </div>
                 </div>
@@ -146,7 +146,7 @@
                         </div>
                         <div class="status">
                             <p>Finalizada</p>
-                            <a href="prontuario.html" class="iniciar-consulta" type="submit">Editar Prontuário</a>
+                            <a href="prontuario.php" class="iniciar-consulta" type="submit">Editar Prontuário</a>
                         </div>
                     </div>
                 </div>
@@ -162,7 +162,7 @@
                         </div>
                         <div class="status">
                             <p>Finalizada</p>
-                            <a href="prontuario.html" class="iniciar-consulta" type="submit">Editar Prontuário</a>
+                            <a href="prontuario.php" class="iniciar-consulta" type="submit">Editar Prontuário</a>
                         </div>
                     </div>
                 </div>
@@ -178,7 +178,7 @@
                         </div>
                         <div class="status">
                             <p>Finalizada</p>
-                            <a href="prontuario.html" class="iniciar-consulta" type="submit">Editar Prontuário</a>
+                            <a href="prontuario.php" class="iniciar-consulta" type="submit">Editar Prontuário</a>
                         </div>
                     </div>
                 </div>
@@ -194,7 +194,7 @@
                         </div>
                         <div class="status">
                             <p>Finalizada</p>
-                            <a href="prontuario.html" class="iniciar-consulta" type="submit">Editar Prontuário</a>
+                            <a href="prontuario.php" class="iniciar-consulta" type="submit">Editar Prontuário</a>
                         </div>
                     </div>
                 </div>

@@ -34,6 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
             localStorage.setItem("horaSelecionada", horaTexto);
             localStorage.setItem("dataSelecionada", dataSelecionada);
 
+            // Redireciona o usuário para a tela de detalhes da consulta
+            window.location.href = "detalhes-consulta.php";
         });
     });
 
@@ -47,40 +49,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 <p class="hora">${horaTexto}</p>
                 <p class="italico">Agendado</p>
             </div>
-            <div class="botoes-acoes">
-                <a href="detalhes-consulta-apos-agendada.php" class="ver-detalhes">Ver detalhes</a>
-                <button class="cancelar-consulta">Cancelar</button>
-            </div>
+           
         `;
 
-        // Adiciona funcionalidade ao botão "Cancelar"
-        const btnCancelar = horarioEl.querySelector(".cancelar-consulta");
-        btnCancelar.addEventListener("click", (event) => {
-            event.stopPropagation(); // Impede que o clique no botão propague para o horário
-            cancelarHorario(horarioEl, horaTexto); // Chama função que desfaz o agendamento
-        });
-
-        // Impede o clique no link "Ver detalhes" de acionar o evento de clique do horário
-        const btnVerDetalhes = horarioEl.querySelector(".ver-detalhes");
-        btnVerDetalhes.addEventListener("click", (event) => {
-            event.stopPropagation();
-        });
-    }
-
-    // Função que cancela um horário agendado e volta para o estado de "Horário Livre"
-    function cancelarHorario(horarioEl, horaTexto) {
-        // Remove o horário da lista de horários agendados
-        horariosAgendados = horariosAgendados.filter(hora => hora !== horaTexto);
-
-        // Atualiza o localStorage com a nova lista
-        localStorage.setItem(dataSelecionada, JSON.stringify(horariosAgendados));
-
-        // Volta o conteúdo HTML do horário para o estado inicial (não agendado)
-        horarioEl.classList.remove("agendado");
-        horarioEl.innerHTML = `
-            <p class="hora">${horaTexto}</p>
-            <p class="italico">Horário Livre</p>
-        `;
+       
     }
 });
-
