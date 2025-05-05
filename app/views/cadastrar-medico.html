@@ -76,6 +76,18 @@
                         </div>
                     </div>
 
+                    <div class="linha">
+                        <div class="label-input">
+                            <label for="senha">Senha<span>*</span></label>
+                            <input type="password" name="senha" id="">
+                        </div>
+
+                        <div class="label-input">
+                            <label for="senha-repetir">Repita a senha<span>*</span></label>
+                            <input type="password" name="senha-repetir" id="">
+                        </div>
+                    </div>  
+
                 </section>
 
                 <h1 class="endereco">Endereço</h1>

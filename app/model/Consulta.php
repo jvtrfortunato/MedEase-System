@@ -122,7 +122,7 @@ $consulta = new Consulta(
     1,
     '10/07/2025', 
     '13:00', 
-    StatusConsulta::Pendente, 
+    StatusConsulta::Agendada, 
     1, 
     'Motivo Teste', 
     $paciente->getId(), 

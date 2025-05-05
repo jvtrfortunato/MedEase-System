@@ -15,8 +15,6 @@ class Medico extends Usuario {
         string $tipo,
         protected string $crm,
         protected string $especialidade,
-        protected int $salaAtendimento,
-        protected array $historicoConsultas = [] //Talvez uma classe compositória
     ) {
         parent::__construct($id, $nome, $cpf, $telefone, $email, $senha, $tipo);
     }
