@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
             localStorage.setItem("dataSelecionada", dataSelecionada);
 
             // Redireciona o usuário para a tela de detalhes da consulta
-            window.location.href = "detalhes-consulta.html";
+            window.location.href = "detalhes-consulta.php";
         });
     });
 
@@ -54,6 +54,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
        
     }
-
-   
 });

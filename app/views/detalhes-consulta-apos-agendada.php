@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalhes da Consulta</title>
-    <link rel="stylesheet" href="/assets/css/header.css">
+    <link rel="stylesheet" href="../../assets/css/header.css">
     <link rel="stylesheet" href="../../assets/css/detalhes-consulta.css">
     <script src="../../assets/script/detalhes-consulta.js" defer></script>
     <script src="../../assets/script/botaoVoltar.js" defer></script>

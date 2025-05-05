@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalhes da Consulta</title>
-    <link rel="stylesheet" href="/assets/css/header.css">
+    <link rel="stylesheet" href="../../assets/css/header.css">
     <link rel="stylesheet" href="../../assets/css/detalhes-consulta.css">
     <script src="../../assets/script/detalhes-consulta.js" defer></script>
 </head>
@@ -87,7 +87,7 @@
         </section>
         <div class="botoes">
             <button id="voltarPagina"class="voltar">Voltar</button>
-            <button id="confirmar-consulta" class="salvar" type="submit">Salvar</button>
+            <button id="confirmar-consulta" class="salvar" type="submit">Agendar</button>
         </div>
     </main>
     

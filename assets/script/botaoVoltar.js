@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 window.history.back(); // volta à página anterior no histórico
             } else {
                 // Fallback: redireciona manualmente caso não haja histórico
-                window.location.href = "consultas-agendadas.html";
+                window.location.href = "consultas-agendadas.php";
             }
         });
     }

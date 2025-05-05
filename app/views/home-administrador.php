@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/css/header.css">
+    <link rel="stylesheet" href="../../assets/css/header.css">
     <link href="../../assets/css/index-usuarios.css" rel="stylesheet">
     <title>Admistrador</title>
 </head>
@@ -19,49 +19,49 @@
             <div class="grid-container">
                 
                 <div class="card">
-                    <a href="cadastrar-paciente.html" target="">
+                    <a href="cadastrar-paciente.php" target="">
                         <img src="../../assets/img/User.png" alt="Cadastrar Usuário">
                         <p>Cadastrar Paciente</p>
                     </a>
                 </div>
 
                 <div class="card">
-                    <a href="calendario.html?modo=agendar">
+                    <a href="calendario.php?modo=agendar&data">
                         <img src="../../assets/img/Planner.png" alt="Agendar Consulta">
                         <p>Agendar Consulta</p>
                     </a>
                 </div>
 
                 <div class="card">
-                    <a href="calendario.html?modo=consultas">
+                    <a href="calendario.php?modo=consultas&data">
                         <img src="../../assets/img/Task Planning.png" alt="Consulta Agendadas">
                         <p>Consultas Agendadas</p>
                     </a>
                 </div>
 
                 <div class="card">
-                    <a href="atendimentos-dia.html" target="">
+                    <a href="atendimentos-dia.php" target="">
                         <img src="../../assets/img/Healthcare.png">
                         <p>Atendimentos do dia</p>
                     </a>                 
                 </div>
 
                 <div class="card">
-                    <a href="lista-prontuarios.html" target="">
+                    <a href="lista-prontuarios.php" target="">
                         <img src="../../assets/img/Medical Record.png" alt="Prontuário">
                         <p>Prontuários</p>
                     </a>
                 </div>
 
                 <div class="card">
-                    <a href="lista-pacientes.html" target="">
+                    <a href="lista-pacientes.php" target="">
                         <img src="../../assets/img/User Group.png" alt="Pacientes">
                         <p>Pacientes</p>
                     </a>
                 </div>
 
                 <div class="card">
-                    <a href="gerenciar-profissionais.html" target="">
+                    <a href="gerenciar-profissionais.php" target="">
                         <img src="../../assets/img/Admin Settings Male.png" alt="Gerenciar Profissionais">
                         <p>Gerenciar Profissionais</p>
                     </a>

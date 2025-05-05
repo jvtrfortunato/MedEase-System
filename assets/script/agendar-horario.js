@@ -34,8 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
             localStorage.setItem("horaSelecionada", horaTexto);
             localStorage.setItem("dataSelecionada", dataSelecionada);
 
-            // Redireciona o usuário para a tela de detalhes da consulta
-            window.location.href = "detalhes-consulta.html";
         });
     });
 
@@ -50,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <p class="italico">Agendado</p>
             </div>
             <div class="botoes-acoes">
-                <a href="detalhes-consulta-apos-agendada.html" class="ver-detalhes">Ver detalhes</a>
+                <a href="detalhes-consulta-apos-agendada.php" class="ver-detalhes">Ver detalhes</a>
                 <button class="cancelar-consulta">Cancelar</button>
             </div>
         `;

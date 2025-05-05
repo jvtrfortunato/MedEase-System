@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar Paciente</title>
-    <link rel="stylesheet" href="/assets/css/header.css">
-    <link rel="stylesheet" href="/assets/css/cadastrar-paciente.css">
+    <title>Cadastrar Médico</title>
+    <link rel="stylesheet" href="../../assets/css/header.css">
+    <link rel="stylesheet" href="../../assets/css/cadastrar-medico.css">
 </head>
 <body>
     <header>
@@ -18,6 +18,31 @@
                 <h1>Dados Gerais</h1>
                 <section class="dados-gerais-endereco">
                     
+                    <div class="linha">
+                        <div class="linha-pequenos">
+                            <div class="label-input">
+                                <label for="cpf">CPF<span>*</span></label>
+                                <input type="text" id="cpf" name="cpf" required pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" placeholder="000.000.000-00">
+                            </div>
+                            <div class="label-input">
+                                <label for="crm">CRM<span>*</span></label>
+                                <input type="text" id="crm" name="crm" maxlength="10"  placeholder="Ex: 123456-SP">
+                            </div>
+                        </div>
+                        <div class="label-input">
+                            <label for="especialidade">Especialidade:</label>
+                            <select id="especialidade" name="especialidade" required>
+                                <option value="nenhuma">Nenhuma</option>
+                                <option value="cardiologia">Cardiologia</option>
+                                <option value="dermatologia">Dermatologia</option>
+                                <option value="pediatria">Pediatria</option>
+                                <option value="ortopedia">Ortopedia</option>
+                                <option value="ginecologia">Ginecologia</option>
+                                <!-- Adicione mais conforme necessário -->
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="linha">         
                         <div class="label-input">
                             <label for="nome">Nome completo<span>*</span></label></label>
@@ -41,30 +66,6 @@
                     
                     <div class="linha">
                         <div class="label-input">
-                            <label for="estadoCivil">Estado Civil</label>
-                            <select name="estadoCivil" id="">
-                                <option value="">Selecione</option>
-                                <option value="solteiro">Solteiro(a)</option>
-                                <option value="casado">Casado(a)</option>
-                                <option value="separado">Separado(a) judicialmente</option>
-                                <option value="divorciado">Divorciado(a)</option>
-                                <option value="viuvo">Viúvo(a)</option>
-                            </select>
-                        </div>
-                        <div class="linha-pequenos">
-                            <div class="label-input">
-                                <label for="cpf">CPF<span>*</span></label></label>
-                                <input type="text" name="cpf" id="">
-                            </div>
-                            <div class="label-input">
-                                <label for="rg">RG</label>
-                                <input type="text" name="rg" id="">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="linha">
-                        <div class="label-input">
                             <label for="telefone">Telefone</label>
                             <input type="tel" name="telefone" id="">
                         </div>
@@ -72,30 +73,6 @@
                         <div class="label-input">
                             <label for="email">Email</label>
                             <input type="email" name="email" id="">
-                        </div>
-                    </div>
-
-                    <div class="linha">
-                        <div class="label-input">
-                            <label for="nomeResponsavel">Nome do responsável</label>
-                            <input type="text" name="nomeResponsavel" id="">
-                        </div>
-
-                        <div class="label-input">
-                            <label for="cns">Cartão Nacional de Saúde (CNS)</label>
-                            <input type="text" name="cns" id="">
-                        </div>
-                    </div>
-
-                    <div class="linha">
-                        <div class="label-input">
-                            <label for="convenio">Convênio</label>
-                            <input type="text" name="convenio" id="">
-                        </div>
-
-                        <div class="label-input">
-                            <label for="planoSaude">Número do Plano de Saúde</label>
-                            <input type="text" name="planoSaude" id="">
                         </div>
                     </div>
 

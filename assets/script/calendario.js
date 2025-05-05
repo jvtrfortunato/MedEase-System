@@ -56,14 +56,13 @@ document.addEventListener('DOMContentLoaded', function () {
         events: agendamentos,
         dateClick: function (info) {
             if (modo === "agendar") {
-                window.location.href = '../../app/views/agendar-consultas.html?data=' + info.dateStr;
+                window.location.href = '../../app/views/agendar-consultas.php?modo=agendar&data=' + info.dateStr;
             } else {
-                window.location.href = '../../app/views/consultas-agendadas.html?data=' + info.dateStr;
+                window.location.href = '../../app/views/consultas-agendadas.php?modo=consultas&data=' + info.dateStr;
             }
         }
     });
 
     calendar.render();
 });
-
 

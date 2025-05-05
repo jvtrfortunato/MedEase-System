@@ -47,9 +47,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const modo = localStorage.getItem("modo") || "consultas";
 
             if (modo === "agendar") {
-                window.location.href = `agendar-consultas.html?data=${dataSelecionada}`;
+                window.location.href = `agendar-consultas.php?modo=agendar&data=${dataSelecionada}`;
             } else {
-                window.location.href = `consultas-agendadas.html?data=${dataSelecionada}`;
+                window.location.href = `consultas-agendadas.php?modo=agendar&data=${dataSelecionada}`;
             }
 
 
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 window.history.back(); // volta à página anterior no histórico
             } else {
                 // Fallback: redireciona manualmente caso não haja histórico
-                window.location.href = "consultas-agendadas.html";
+                window.location.href = "consultas-agendadas.php";
             }
         });
     }
