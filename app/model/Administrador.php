@@ -6,18 +6,30 @@ require_once 'Usuario.php';
 
 class Administrador extends Usuario {
     public function __construct(
-        string $id,
+        string $idUsuario,
         string $nome, 
         string $cpf, 
         string $telefone, 
+        string $dataNascimento,
+        string $sexo,
         string $email, 
-        string $senha) {
-        parent::__construct($id, $nome, $cpf, $telefone, $email, $senha, 'Administrador');
-    }
-
-    public function gerenciarSecretariosEMedicos() {
-        return "Gerenciando secretários e médicos do sistema.";
-    }    
+        string $senha, 
+        string $tipo,
+        Endereco $endereco
+    ) {
+        parent::__construct(
+            $idUsuario, 
+            $nome, 
+            $cpf, 
+            $telefone,
+            $dataNascimento,
+            $sexo,
+            $email, 
+            $senha,
+            $tipo,
+            $endereco
+        );
+    }  
 }
 
 $administrador = new Administrador(

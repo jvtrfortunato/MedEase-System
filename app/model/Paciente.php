@@ -20,79 +20,117 @@ class Paciente {
         private string $convenio,
         private string $planoSaude,
         private Endereco $endereco
-    ) {}    
-    
-    public function getId(): int {
-        return $this->id;
+    ) {}   
+
+    // Getters
+    public function getIdPaciente(): int {
+        return $this->idPaciente;
     }
     
     public function getNome(): string {
         return $this->nome;
     }
-    
-    public function setNome($nome): void {
-        $this->nome = $nome;
-    }
-    
-    public function getCpf(): string {
-        return $this->cpf;
-    }
-    
-    public function setCpf($cpf): void {
-        $this->cpf = $cpf;
-    }
-    
+
     public function getDataNascimento(): string {
         return $this->dataNascimento;
     }
-    
-    public function setDataNascimento($dataNascimento): void {
-        $this->dataNascimento = $dataNascimento;
+
+    public function getSexo(): string {
+        return $this->sexo;
     }
-    
-    public function getEndereco(): Endereco { //Talvez esse get e set tem que estar na classe Endereco
-        return $this->endereco;
+
+    public function getEstadoCivil(): string {
+        return $this->estadoCivil;
     }
-    
-    public function setEndereco($endereco): void {
-        $this->endereco = $endereco;
+
+    public function getCpf(): string {
+        return $this->cpf;
     }
-    
+
+    public function getRg(): string {
+        return $this->rg;
+    }
+
     public function getTelefone(): string {
         return $this->telefone;
     }
-    
-    public function setTelefone($telefone): void {
-        $this->telefone = $telefone;
-    }
-    
+
     public function getEmail(): string {
         return $this->email;
     }
-    
-    public function setEmail($email): void {
-        $this->email = $email;
+
+    public function getNomeResponsavel(): string {
+        return $this->nomeResponsavel;
     }
-    
+
+    public function getCns(): string {
+        return $this->cns;
+    }
+
+    public function getConvenio(): string {
+        return $this->convenio;
+    }
+
     public function getPlanoSaude(): string {
         return $this->planoSaude;
     }
+
+    public function getEndereco(): Endereco {
+        return $this->endereco;
+    }
     
-    public function setPlanoSaude($planoSaude): void {
+    // Setters
+    public function setNome(string $nome): void {
+        $this->nome = $nome;
+    }
+
+    public function setDataNascimento(string $dataNascimento): void {
+        $this->dataNascimento = $dataNascimento;
+    }
+
+    public function setSexo(string $sexo): void {
+        $this->sexo = $sexo;
+    }
+
+    public function setEstadoCivil(string $estadoCivil): void {
+        $this->estadoCivil = $estadoCivil;
+    }
+    
+    public function setCpf(string $cpf): void {
+        $this->cpf = $cpf;
+    }
+
+    public function setRg(string $rg): void {
+        $this->rg = $rg;
+    }
+
+    public function setTelefone(string $telefone): void {
+        $this->telefone = $telefone;
+    }
+
+    public function setEmail(string $email): void {
+        $this->email = $email;
+    }
+    
+    public function setNomeResponsavel(string $nomeResponsavel): void {
+        $this->nomeResponsavel = $nomeResponsavel;
+    }
+
+    public function setCns(string $cns): void {
+        $this->cns = $cns;
+    }
+
+    public function setConvenio(string $convenio): void {
+        $this->convenio = $convenio;
+    }
+
+    public function setPlanoSaude(string $planoSaude): void {
         $this->planoSaude = $planoSaude;
     }
-
-    //Métodos
-    //Secretário
-    public function selecionarPaciente() {
-        return "Histórico de consultas do paciente (finalizadas, em andamento e agendadas).";
-    }
-
-    public function atualizarProntuarioEletronico() {
-        return "Lista de todos os pacientes.";
-    }
-
     
+    public function setEndereco(Endereco $endereco): void {
+        $this->endereco = $endereco;
+    }
 }
 
 $endereco = new Endereco(
