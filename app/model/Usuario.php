@@ -5,7 +5,6 @@ require_once 'Endereco.php';
 
 class Usuario {
     public function __construct(
-<<<<<<< HEAD
         private string $idUsuario = '',
         private string $nome = '',
         private string $cpf = '',
@@ -17,20 +16,6 @@ class Usuario {
         private string $tipo = '',
         private ?Endereco $endereco = null // Correção para Endereco ser opcional
     ) {}
-=======
-        private int $idUsuario,
-        private string $nome,
-        private string $cpf,
-        private string $telefone,
-        private string $dataNascimento,
-        private string $sexo,
-        private string $email,
-        private string $senha,
-        private string $tipo,
-        private Endereco $endereco
-    ) {
-    }
->>>>>>> 63decdc844e0999b9226f13021229d56f077c115
 
     public function autenticar($cpf, $senha) {
         try {
@@ -130,11 +115,7 @@ class Usuario {
         $this->senha = $senha;
     }
 
-<<<<<<< HEAD
     public function setTipo($tipo): void {
-=======
-    public function setTipo(string $tipo): void {
->>>>>>> 63decdc844e0999b9226f13021229d56f077c115
         $this->tipo = $tipo;
     }
 
