@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-require_once "Usuario.php";
+require_once 'Usuario.php';
+require_once 'Endereco.php';
 
 class Secretario extends Usuario {
     public function __construct(

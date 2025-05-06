@@ -3,7 +3,7 @@
 namespace App\Models;
 
 require_once 'StatusConsulta.php';
-require_once 'Endereco.php';
+require_once 'Secretario.php';
 require_once 'Paciente.php';
 require_once 'Medico.php';
 
@@ -15,103 +15,79 @@ class Consulta {
         private string $hora,
         private string $salaAtendimento,
         private StatusConsulta $status,
-        private int $idSecretario,
-        private int $idPaciente,
+        private Secretario $secretario,
+        private Paciente $paciente,
+        private Medico $medico
     ) {}
 
-    public function getId(): int {
-        return $this->id;
-    }
-
-    public function getData(): string {
-        return $this->data;
-    }
-    
-    public function setData($data): void {
-        $this->data = $data;
-    }
-
-    public function getHora(): string {
-        return $this->hora;
-    }
-    
-    public function setHora($hora): void {
-        $this->hora = $hora;
-    }
-
-    public function getStatus(): StatusConsulta { 
-        return $this->status;
-    }
-    
-    public function setStatus($status): void {
-        $this->status = $status;
-    }
-
-    public function getSalaAtendimento(): int {
-        return $this->salaAtendimeto;
-    }
-    
-    public function setSalaAtendimento($salaAtendimento): void {
-        $this->salaAtendimento = $salaAtendimento;
+    // Getters
+    public function getIdConsulta(): int {
+        return $this->idConsulta;
     }
 
     public function getMotivo(): string {
         return $this->motivo;
     }
-    
-    public function setMotivo($motivo): void {
+
+    public function getData(): string {
+        return $this->data;
+    }
+
+    public function getHora(): string {
+        return $this->hora;
+    }
+
+    public function getSalaAtendimento(): string {
+        return $this->salaAtendimento;
+    }
+
+    public function getStatus(): StatusConsulta {
+        return $this->status;
+    }
+
+    public function getSecretario(): Secretario {
+        return $this->secretario;
+    }
+
+    public function getPaciente(): Paciente {
+        return $this->paciente;
+    }
+
+    public function getMedico(): Medico {
+        return $this->medico;
+    }
+
+    // Setters
+    public function setMotivo(string $motivo): void {
         $this->motivo = $motivo;
     }
 
-    public function getIdPaciente(): int {
-        return $this->idPaciente;
-    }
-    
-    public function setIdPaciente($idPaciente): void {
-        $this->idPaciente = $idPaciente;
+    public function setData(string $data): void {
+        $this->data = $data;
     }
 
-    public function getIdMedico(): int {
-        return $this->idMedico;
-    }
-    
-    public function setIdMedico($idMedico): void {
-        $this->idMedico = $idMedico;
+    public function setHora(string $hora): void {
+        $this->hora = $hora;
     }
 
-    //Métodos
-    //Secretario
-    public function agendarConsulta() {
-        return "Calendário com horários disponíveis.";
+    public function setSalaAtendimento(string $salaAtendimento): void {
+        $this->salaAtendimento = $salaAtendimento;
     }
 
-    public function selecionarHorario() {
-        return "Formulário para a inserção dos dados da consulta.";
+    public function setStatus(StatusConsulta $status): void {
+        $this->status = $status;
     }
 
-    public function confirmarAgendamento() {
-        return "Objeto Consulta criado.";
+    public function setSecretario(Secretario $secretario): void {
+        $this->secretario = $secretario;
     }
 
-    public function selecionarConsultaPaciente() {
-        return "Lista de consultas do paciente.";
+    public function setPaciente(Paciente $paciente): void {
+        $this->paciente = $paciente;
     }
 
-    public function admitirPaciente() {
-        return "Atualiza o status da consulta para PacienteAguardando.";
-    }
-
-    //Médico
-    public function listarConsultasAgendadasDia() {
-        return "Lista de consultas agendadas do dia.";
-    }
-
-    public function abrirConsulta() {
-        return "Atualia o status da consulta para EmAndamento e o prontuário do paciente é aberto.";
-    }
-
-    public function finalizarConsulta() {
-        return "Atualiza o status da consulta para Concluida e salva os dados no prontuário.";
+    public function setMedico(Medico $medico): void {
+        $this->medico = $medico;
     }
 }
 

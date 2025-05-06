@@ -13,56 +13,54 @@ class Endereco {
     ) {
     }
 
+    // Getters
     public function getRua(): string {
         return $this->rua;
     }
-    
-    public function setRua($rua): void {
-        $this->rua = $rua;
-    }
 
-    public function getNumero(): int {
+    public function getNumero(): string {
         return $this->numero;
     }
-    
-    public function setNumero($numero): void {
-        $this->numero = $numero;
-    }
 
-    public function getNome(): string {
+    public function getBairro(): string {
         return $this->bairro;
-    }
-    
-    public function setBairro($bairro): void {
-        $this->bairro = $bairro;
     }
 
     public function getCidade(): string {
         return $this->cidade;
     }
-    
-    public function setNome($cidade): void {
-        $this->cidade = $cidade;
-    }
 
     public function getEstado(): string {
         return $this->estado;
-    }
-    
-    public function setEstado($estado): void {
-        $this->estado = $estado;
     }
 
     public function getCep(): string {
         return $this->cep;
     }
-    
-    public function setCep($cep): void {
-        $this->cep = $cep;
-    }
 
-    public function getEnderecoCompleto(): string {
-        return "Endereço completo formatado.";
+    // Setters
+    public function setRua(string $rua): void {
+        $this->rua = $rua;
+    }
+    
+    public function setNumero(string $numero): void {
+        $this->numero = $numero;
+    }
+    
+    public function setBairro(string $bairro): void {
+        $this->bairro = $bairro;
+    }
+    
+    public function setCidade(string $cidade): void {
+        $this->cidade = $cidade;
+    }
+    
+    public function setEstado(string $estado): void {
+        $this->estado = $estado;
+    }
+    
+    public function setCep(string $cep): void {
+        $this->cep = $cep;
     }
 }
 
