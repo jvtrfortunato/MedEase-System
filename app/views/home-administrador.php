@@ -14,7 +14,12 @@
     </header>
     
     <main>
-        <h1>Bem-vindo, Administrador!</h1>
+        <?php
+        session_start();
+        $nomeUsuario = $_SESSION['nome'] ?? 'Administrador';
+        ?>
+        <h1>Bem-vindo, <?= htmlspecialchars($nomeUsuario) ?> !</h1>
+
         <section class="section-principal">
             <div class="grid-container">
                 
