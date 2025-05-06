@@ -17,9 +17,8 @@ class Medico extends Usuario {
         string $senha,
         string $tipo,
         Endereco $endereco,
-        protected int $idMedico,
-        protected string $crm,
-        protected string $especialidade
+        private string $crm,
+        private string $especialidade
     ) {
         parent::__construct(
             $idUsuario, 
@@ -35,38 +34,23 @@ class Medico extends Usuario {
         );
     }
 
+    // Getters
     public function getCrm(): string {
         return $this->crm;
-    }
-    
-    public function setCrm($crm): void {
-        $this->crm = $crm;
     }
 
     public function getEspecialidade(): string {
         return $this->especialidade;
     }
+
+    // Setters
+    public function setCrm(string $crm): void {
+        $this->crm = $crm;
+    }
     
-    public function setEspecialidade($especialidade): void {
+    public function setEspecialidade(string $especialidade): void {
         $this->especialidade = $especialidade;
     } 
-
-    public function selecionarConsulta() {
-        return "Dados da consulta específica.";
-    }
-
-    public function atualizarProntuarioEletronico() {
-        return "Lista de todos os pacientes.";
-    }
-
-    public function selecionarPaciente() {
-        return "Prontuário do paciente aberto.";
-    }
-
-    public function ConfirmarAtualizacaoProntuario() {
-        return "Modificações do prontuário salvas e registros atualizados.";
-    }
-
 }
 
 $medico = new Medico(

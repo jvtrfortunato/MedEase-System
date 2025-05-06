@@ -5,6 +5,7 @@ require_once 'Endereco.php';
 
 class Usuario {
     public function __construct(
+<<<<<<< HEAD
         private string $idUsuario = '',
         private string $nome = '',
         private string $cpf = '',
@@ -16,6 +17,20 @@ class Usuario {
         private string $tipo = '',
         private ?Endereco $endereco = null // Correção para Endereco ser opcional
     ) {}
+=======
+        private int $idUsuario,
+        private string $nome,
+        private string $cpf,
+        private string $telefone,
+        private string $dataNascimento,
+        private string $sexo,
+        private string $email,
+        private string $senha,
+        private string $tipo,
+        private Endereco $endereco
+    ) {
+    }
+>>>>>>> 63decdc844e0999b9226f13021229d56f077c115
 
     public function autenticar($cpf, $senha) {
         try {
@@ -87,39 +102,43 @@ class Usuario {
     }
 
     // Setters
-    public function setNome($nome): void {
+    public function setNome(string $nome): void {
         $this->nome = $nome;
     }
 
-    public function setCpf($cpf): void {
+    public function setCpf(string $cpf): void {
         $this->cpf = $cpf;
     }
 
-    public function setTelefone($telefone): void {
+    public function setTelefone(string $telefone): void {
         $this->telefone = $telefone;
     }
 
-    public function setDataNascimento($dataNascimento): void {
+    public function setDataNascimento(string $dataNascimento): void {
         $this->dataNascimento = $dataNascimento;
     }
 
-    public function setSexo($sexo): void {
+    public function setSexo(string $sexo): void {
         $this->sexo = $sexo;
     }
 
-    public function setEmail($email): void {
+    public function setEmail(string $email): void {
         $this->email = $email;
     }
 
-    public function setSenha($senha): void {
+    public function setSenha(string $senha): void {
         $this->senha = $senha;
     }
 
+<<<<<<< HEAD
     public function setTipo($tipo): void {
+=======
+    public function setTipo(string $tipo): void {
+>>>>>>> 63decdc844e0999b9226f13021229d56f077c115
         $this->tipo = $tipo;
     }
 
-    public function setEndereco($endereco): void {
+    public function setEndereco(Endereco $endereco): void {
         $this->endereco = $endereco;
     }
 }
