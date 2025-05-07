@@ -22,6 +22,7 @@ class SecretariosController {
             $sexo = $_POST['sexo'];
             $email = $_POST['email'];
             $senha = $_POST['senha'];
+            $senhaRepetir = $_POST['senha-repetir'];
             $tipo = 'secretario';
 
             // Endereço
@@ -31,6 +32,23 @@ class SecretariosController {
             $cidade = $_POST['cidade'];
             $estado = $_POST['estado'];
             $cep = $_POST['cep'];
+
+            // Verificar se algum campo está vazio
+            if (
+                empty($nome) || empty($cpf) || empty($telefone) || empty($dataNascimento) ||
+                empty($sexo) || empty($email) || empty($senha) || empty($senhaRepetir) ||
+                empty($rua) || empty($numero) || empty($bairro) ||
+                empty($cidade) || empty($estado) || empty($cep)
+            ) {
+                echo "Erro: Todos os campos são obrigatórios!";
+                return;
+            }
+
+            // Verificação de senha
+            if ($senha !== $senhaRepetir) {
+                echo "Erro: As senhas não coincidem.";
+                return;
+            }
 
             try {
                 // Inserir endereço
