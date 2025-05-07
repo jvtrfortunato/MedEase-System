@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Models;
-
 class Internacao {
     public function __construct(
         private string $dataAdmissaoEAlta,

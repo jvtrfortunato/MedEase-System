@@ -1,6 +1,6 @@
 <?php
 
-require_once '../config/database.php';
+require_once '../app/config/Database.php';
 require_once 'Endereco.php';
 
 class Usuario {

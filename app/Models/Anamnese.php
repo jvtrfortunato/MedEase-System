@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Models;
-
 class Anamnese {
     public function __construct(
         private string $motivoConsulta,

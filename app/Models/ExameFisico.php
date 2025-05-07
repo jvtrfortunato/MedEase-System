@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Models;
-
 class ExameFisico {
     public function __construct(
         private string $avaliacaoGeral,

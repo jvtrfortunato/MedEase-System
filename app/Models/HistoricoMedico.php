@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Models;
-
 class HistoricoMedico {
     public function __construct(
         private string $doencasPreexistentes,

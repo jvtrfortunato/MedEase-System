@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Models;
-
 class Atestado {
     public function __construct(
         private int $idAtestado,

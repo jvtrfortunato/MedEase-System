@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Models;
-
 require_once 'StatusConsulta.php';
 require_once 'Secretario.php';
 require_once 'Paciente.php';

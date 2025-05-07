@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Models;
-
 class Endereco {
     public function __construct(
         private string $rua,

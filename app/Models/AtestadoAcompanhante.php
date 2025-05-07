@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Models;
-
 require_once 'Atestado.php';
 
 class AtestadoAcompanhante extends Atestado {

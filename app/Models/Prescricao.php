@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Models;
-
 class Prescricao {
     public function __construct(
         // Medicamento

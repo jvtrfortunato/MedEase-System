@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Models;
-
 require_once 'HistoricoMedico.php';
 require_once 'Anamnese.php';
 require_once 'ExameFisico.php';

@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Models;
-
 require_once 'Prontuario.php';
 require_once 'Paciente.php';
 

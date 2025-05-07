@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Models;
-
 require_once 'Endereco.php';
 
 class Paciente {
