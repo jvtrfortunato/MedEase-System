@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Models;
-
 require_once 'Usuario.php';
 require_once 'Endereco.php';
 
@@ -27,19 +25,9 @@ class Secretario extends Usuario {
             $sexo,
             $email, 
             $senha,
-            $tipo,
+            'secretario',
             $endereco
         );
     }
 }
 
-$secretario = new Secretario(
-    1,
-    'Secretario Teste', 
-    '999.999.999-99', 
-    '(99)99999-9999', 
-    'SecTeste@.com', 
-    '123', 
-    'Secretário');
-
-var_dump($secretario);

@@ -77,49 +77,49 @@
 
                 <!--Lista Secretários-->
                 <div id="lista-secretarios" class="lista oculto">
-                        <div class="dados">
-                            <div class="nome">
-                                <p>Receber o nome do secretário aqui</p>
-                            </div>
-                            <div class="cpf">
-                                <p>Receber o CPF aqui</p>
-                            </div>
-                            <button class="detalhes">
-                                Ver detalhes
-                            </button>
+                    <div class="dados">
+                        <div class="nome">
+                            <p>Receber o nome do secretário aqui</p>
                         </div>
-    
-                        <div class="dados">
-                            <div class="nome">
-                                <p>Receber o nome do secretário aqui</p>
-                            </div>
-                            <div class="cpf">
-                                <p>Receber o CPF aqui</p>
-                            </div>
-                            <button class="detalhes">
-                                Ver detalhes
-                            </button>
+                        <div class="cpf">
+                            <p>Receber o CPF aqui</p>
                         </div>
-    
-                        <div class="dados">
-                            <div class="nome">
-                                <p>Receber o nome do secretário aqui</p>
-                            </div>
-                            <div class="cpf">
-                                <p>Receber o CPF aqui</p>
-                            </div>
-                            <button class="detalhes">
-                                Ver detalhes
-                            </button>
-                        </div>
+                        <button class="detalhes">
+                            Ver detalhes
+                        </button>
                     </div>
+
+                    <div class="dados">
+                        <div class="nome">
+                            <p>Receber o nome do secretário aqui</p>
+                        </div>
+                        <div class="cpf">
+                            <p>Receber o CPF aqui</p>
+                        </div>
+                        <button class="detalhes">
+                            Ver detalhes
+                        </button>
+                    </div>
+
+                    <div class="dados">
+                        <div class="nome">
+                            <p>Receber o nome do secretário aqui</p>
+                        </div>
+                        <div class="cpf">
+                            <p>Receber o CPF aqui</p>
+                        </div>
+                        <button class="detalhes">
+                            Ver detalhes
+                        </button>
+                    </div>
+                </div>
 
             </section>
 
         </section>
         <section class="botao">
-            <button class="voltar">Voltar</button>
-            <a id="botao-adicionar" class="adicionar">Adicionar Profissional</a>
+            <button class="voltar" onclick="history.back()">Voltar</button>
+            <button id="botao-adicionar" class="adicionar">Adicionar Profissional</button>
         </section>
     </main>
     <footer></footer>
@@ -129,28 +129,28 @@
 
         function mostrar(tipo){
             tipoAtual = tipo;
-            //Esconde ambas as listas
+            // Esconde ambas as listas
             document.getElementById('lista-medicos').classList.add('oculto');
             document.getElementById('lista-secretarios').classList.add('oculto');
 
-            //Remove o destaque dos botões
+            // Remove o destaque dos botões
             document.getElementById('opcao-medico').classList.remove('ativo');
             document.getElementById('opcao-secretario').classList.remove('ativo');
 
             if (tipo === 'medicos') {
                 document.getElementById('lista-medicos').classList.remove('oculto');
-                document.getElementById('opcao-medico').classList.add('ativo')
+                document.getElementById('opcao-medico').classList.add('ativo');
             } else {
                 document.getElementById('lista-secretarios').classList.remove('oculto');
-                document.getElementById('opcao-secretario').classList.add('ativo')
+                document.getElementById('opcao-secretario').classList.add('ativo');
             }            
         }
 
         document.getElementById('botao-adicionar').addEventListener('click', function() {
             if (tipoAtual === 'medicos') {
-                window.location.href = 'cadastrar-medico.html';
+                window.location.href = 'cadastrar-medico.php';
             } else {
-                window.location.href = 'cadastrar-secretario.html';
+                window.location.href = 'cadastrar-secretario.php';
             }
         });
     </script>
