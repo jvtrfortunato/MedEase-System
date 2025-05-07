@@ -14,7 +14,7 @@
     </header>
     <main>
         <section class="conteudo-principal">
-            <form action="#" method="post">
+            <form action="../controller/PacienteController.php" method="post">
                 <h1>Dados Gerais</h1>
                 <section class="dados-gerais-endereco">
                     
@@ -167,11 +167,11 @@
                         </div>
                     </div>
                 </section>
+                <section class="botoes">
+                    <button class="voltar">Voltar</button>
+                    <button class="salvar" type="submit">Salvar</button>
+                </section>
             </form>
-        </section>
-        <section class="botoes">
-            <button class="voltar">Voltar</button>
-            <button class="salvar" type="submit">Salvar</button>
         </section>
     </main>
 </body>

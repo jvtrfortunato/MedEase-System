@@ -1,6 +1,7 @@
 <?php
 
 require_once 'models/Paciente.php';
+require_once 'models/Endereco.php';
 require_once 'config/Database.php';
 
 class PacienteController {
@@ -120,5 +121,38 @@ class PacienteController {
         $sql = "DELETE FROM pacientes WHERE id_paciente = :id_paciente";
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([':id_paciente' => $id]);
+    }
+}
+
+// A partir daqui, fora da classe, vem o código que trata a requisição POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    require_once '../models/Paciente.php';
+    require_once '../config/Database.php';
+
+    $paciente = new Paciente(
+        null,
+        $_POST['nome'] ?? '',
+        $_POST['dataNascimento'] ?? '',
+        $_POST['sexo'] ?? '',
+        $_POST['estadoCivil'] ?? '',
+        $_POST['cpf'] ?? '',
+        $_POST['rg'] ?? '',
+        $_POST['telefone'] ?? '',
+        $_POST['email'] ?? '',
+        $_POST['nomeResponsavel'] ?? '',
+        $_POST['cns'] ?? '',
+        $_POST['convenio'] ?? '',
+        $_POST['planoSaude'] ?? ''
+    );
+
+    $controller = new PacienteController();
+    $resultado = $controller->salvar($paciente);
+
+    if ($resultado) {
+        header('Location: ../views/sucesso.html');
+        exit();
+    } else {
+        header('Location: ../views/erro.html');
+        exit();
     }
 }

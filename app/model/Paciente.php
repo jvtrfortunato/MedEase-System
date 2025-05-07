@@ -130,23 +130,3 @@ class Paciente {
         $this->endereco = $endereco;
     }
 }
-
-$endereco = new Endereco(
-    "Rua das Flores", 
-    123, 
-    "Centro", 
-    "São Paulo", 
-    "SP", 
-    "01010-000");
-
-$paciente = new Paciente(
-    2,
-    'Paciente Teste', 
-    '999.999.999-99', 
-    '99/99/9999', 
-    $endereco, 
-    ['(99)99999-9999'], 
-    'Paciente@.com', 
-    'UniMed');
-
-//var_dump($paciente);

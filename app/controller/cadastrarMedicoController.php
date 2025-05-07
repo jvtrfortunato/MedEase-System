@@ -5,11 +5,11 @@ require_once '../model/Endereco.php';
 require_once '../config/Database.php';
 
 class MedicosController {
-    private $conexao;
+    private $conn;
 
     public function __construct() {
         $database = new Database();
-        $this->conexao = $database->conectar();
+        $this->conn = $database->conectar();
     }
 
     public function cadastrar() {
@@ -55,21 +55,21 @@ class MedicosController {
                 // Inserir endereço
                 $sqlEndereco = "INSERT INTO enderecos (rua, numero, bairro, cidade, estado, cep)
                                 VALUES (?, ?, ?, ?, ?, ?)";
-                $stmt = $this->conexao->prepare($sqlEndereco);
+                $stmt = $this->conn->prepare($sqlEndereco);
                 $stmt->execute([$rua, $numero, $bairro, $cidade, $estado, $cep]);
-                $idEndereco = $this->conexao->lastInsertId();
+                $idEndereco = $this->conn->lastInsertId();
 
                 // Inserir usuário
                 $sqlUsuario = "INSERT INTO usuarios (nome, cpf, telefone, data_nascimento, sexo, email, senha, tipo)
                                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-                $stmt = $this->conexao->prepare($sqlUsuario);
+                $stmt = $this->conn->prepare($sqlUsuario);
                 $stmt->execute([$nome, $cpf, $telefone, $dataNascimento, $sexo, $email, $senha, $tipo]);
-                $idUsuario = $this->conexao->lastInsertId();
+                $idUsuario = $this->conn->lastInsertId();
 
                 // Inserir médico
                 $sqlMedico = "INSERT INTO medicos (crm, especialidade, id_usuario)
                               VALUES (?, ?, ?)";
-                $stmt = $this->conexao->prepare($sqlMedico);
+                $stmt = $this->conn->prepare($sqlMedico);
                 $stmt->execute([$crm, $especialidade, $idUsuario]);
 
                 echo "Médico cadastrado com sucesso!";
