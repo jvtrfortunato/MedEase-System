@@ -1,5 +1,9 @@
 <?php
 
+<<<<<<< HEAD:app/Models/Endereco.php
+=======
+
+>>>>>>> 8f4f2ea3c0986ba97b5698050bc61528979e6bb7:app/model/Endereco.php
 class Endereco {
     public function __construct(
         private string $rua,

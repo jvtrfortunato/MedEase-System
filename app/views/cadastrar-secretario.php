@@ -14,7 +14,7 @@
     </header>
     <main>
         <section class="conteudo-principal">
-            <form action="#" method="post">
+            <form action="../controller/cadastrarSecretarioController.php" method="post">
                 <h1>Dados Gerais</h1>
                 <section class="dados-gerais-endereco">
                     
@@ -28,7 +28,12 @@
                                 <label for="dataNascimento">Data de Nascimento</label>
                                 <input type="text" name="dataNascimento" id="">
                             </div>                        
-                            <div class="label-input">
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="linha">
+                        <div class="label-input">
                                 <label for="sexo">Sexo</label>
                                 <select name="sexo" id="">
                                     <option value="">Selecione</option>
@@ -36,29 +41,10 @@
                                     <option value="feminino">Feminino</option>
                                 </select>
                             </div>
-                        </div>
-                    </div>
-                    
-                    <div class="linha">
-                        <div class="label-input">
-                            <label for="estadoCivil">Estado Civil</label>
-                            <select name="estadoCivil" id="">
-                                <option value="">Selecione</option>
-                                <option value="solteiro">Solteiro(a)</option>
-                                <option value="casado">Casado(a)</option>
-                                <option value="separado">Separado(a) judicialmente</option>
-                                <option value="divorciado">Divorciado(a)</option>
-                                <option value="viuvo">Viúvo(a)</option>
-                            </select>
-                        </div>
                         <div class="linha-pequenos">
                             <div class="label-input">
                                 <label for="cpf">CPF<span>*</span></label></label>
                                 <input type="text" name="cpf" id="">
-                            </div>
-                            <div class="label-input">
-                                <label for="rg">RG</label>
-                                <input type="text" name="rg" id="">
                             </div>
                         </div>
                     </div>
@@ -155,11 +141,11 @@
                         </div>
                     </div>
                 </section>
+                <section class="botoes">
+                    <button class="voltar" onclick="history.back()">Voltar</button>
+                    <button class="salvar" type="submit">Salvar</button>
+                </section>
             </form>
-        </section>
-        <section class="botoes">
-            <button class="voltar">Voltar</button>
-            <button class="salvar" type="submit">Salvar</button>
         </section>
     </main>
 </body>
