@@ -4,17 +4,17 @@ require_once '../model/Secretario.php';
 require_once '../model/Endereco.php';
 require_once '../config/Database.php';
 
-class SecretariosController {
-    private $conexao;
+class SecretarioController {
+    private $conn;
 
     public function __construct() {
         $database = new Database();
-        $this->conexao = $database->conectar();
+        $this->conn = $database->conectar();
     }
 
     public function cadastrar() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Dados pessoais
+            // Recebendo dados do formulário
             $nome = $_POST['nome'];
             $cpf = $_POST['cpf'];
             $telefone = $_POST['telefone'];
@@ -23,9 +23,7 @@ class SecretariosController {
             $email = $_POST['email'];
             $senha = $_POST['senha'];
             $senhaRepetir = $_POST['senha-repetir'];
-            $tipo = 'secretario';
 
-            // Endereço
             $rua = $_POST['rua'];
             $numero = $_POST['numero'];
             $bairro = $_POST['bairro'];
@@ -33,7 +31,7 @@ class SecretariosController {
             $estado = $_POST['estado'];
             $cep = $_POST['cep'];
 
-            // Verificar se algum campo está vazio
+            // Verificações
             if (
                 empty($nome) || empty($cpf) || empty($telefone) || empty($dataNascimento) ||
                 empty($sexo) || empty($email) || empty($senha) || empty($senhaRepetir) ||
@@ -44,32 +42,63 @@ class SecretariosController {
                 return;
             }
 
-            // Verificação de senha
             if ($senha !== $senhaRepetir) {
                 echo "Erro: As senhas não coincidem.";
                 return;
             }
 
             try {
-                // Inserir endereço
+                // 1. Criar objeto Endereco
+                $endereco = new Endereco($rua, $numero, $bairro, $cidade, $estado, $cep);
+
+                // 2. Inserir Endereço no banco
                 $sqlEndereco = "INSERT INTO enderecos (rua, numero, bairro, cidade, estado, cep)
                                 VALUES (?, ?, ?, ?, ?, ?)";
-                $stmt = $this->conexao->prepare($sqlEndereco);
-                $stmt->execute([$rua, $numero, $bairro, $cidade, $estado, $cep]);
-                $idEndereco = $this->conexao->lastInsertId();
+                $stmt = $this->conn->prepare($sqlEndereco);
+                $stmt->execute([
+                    $endereco->getRua(),
+                    $endereco->getNumero(),
+                    $endereco->getBairro(),
+                    $endereco->getCidade(),
+                    $endereco->getEstado(),
+                    $endereco->getCep()
+                ]);
 
-                // Inserir usuário
+                $idEndereco = $this->conn->lastInsertId();
+
+                // 3. Criar objeto Secretario
+                $secretario = new Secretario(
+                    0,
+                    $nome,
+                    $cpf,
+                    $telefone,
+                    $dataNascimento,
+                    $sexo,
+                    $email,
+                    $senha,
+                    $endereco
+                );
+
+                // 4. Inserir usuário no banco
                 $sqlUsuario = "INSERT INTO usuarios (nome, cpf, telefone, data_nascimento, sexo, email, senha, tipo)
                                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-                $stmt = $this->conexao->prepare($sqlUsuario);
+                $stmt = $this->conn->prepare($sqlUsuario);
                 $stmt->execute([
-                    $nome, $cpf, $telefone, $dataNascimento, $sexo, $email, $senha, $tipo
+                    $secretario->getNome(),
+                    $secretario->getCpf(),
+                    $secretario->getTelefone(),
+                    $secretario->getDataNascimento(),
+                    $secretario->getSexo(),
+                    $secretario->getEmail(),
+                    $secretario->getSenha(),
+                    $secretario->getTipo()
                 ]);
-                $idUsuario = $this->conexao->lastInsertId();
 
-                // Inserir secretário
+                $idUsuario = $this->conn->lastInsertId();
+
+                // 5. Inserir dados específicos de secretário
                 $sqlSecretario = "INSERT INTO secretarios (id_usuario) VALUES (?)";
-                $stmt = $this->conexao->prepare($sqlSecretario);
+                $stmt = $this->conn->prepare($sqlSecretario);
                 $stmt->execute([$idUsuario]);
 
                 echo "Secretário cadastrado com sucesso!";
@@ -81,7 +110,7 @@ class SecretariosController {
 }
 
 // Executar cadastro
-$controller = new SecretariosController();
+$controller = new SecretarioController();
 $controller->cadastrar();
 
 ?>
