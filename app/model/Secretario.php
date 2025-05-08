@@ -13,7 +13,6 @@ class Secretario extends Usuario {
         string $sexo,
         string $email, 
         string $senha, 
-        string $tipo,
         Endereco $endereco
     ) {
         parent::__construct(

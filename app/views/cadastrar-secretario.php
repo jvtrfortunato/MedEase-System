@@ -14,7 +14,7 @@
     </header>
     <main>
         <section class="conteudo-principal">
-            <form action="../controller/cadastrarSecretarioController.php" method="post">
+            <form action="../controller/SecretarioController.php" method="post">
                 <h1>Dados Gerais</h1>
                 <section class="dados-gerais-endereco">
                     
