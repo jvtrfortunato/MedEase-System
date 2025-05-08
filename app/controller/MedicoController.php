@@ -53,7 +53,7 @@ class MedicoController {
             }
     
             // Criar objeto Endereco
-            $endereco = new Endereco(0, $rua, $numero, $bairro, $cidade, $estado, $cep);
+            $endereco = new Endereco($rua, $numero, $bairro, $cidade, $estado, $cep);
     
             // Criar objeto Medico
             $medico = new Medico(

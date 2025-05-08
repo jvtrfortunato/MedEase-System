@@ -1,6 +1,7 @@
 <?php
 
 require_once 'Endereco.php';
+require_once '../controller/PacienteController.php';
 
 class Paciente {
     public function __construct(
@@ -128,5 +129,25 @@ class Paciente {
     
     public function setEndereco(Endereco $endereco): void {
         $this->endereco = $endereco;
+    }
+}
+
+$controller = new PacienteController();
+
+$acao = $_POST['acao'] ?? '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    switch ($acao) {
+        case 'salvar':
+            $controller->salvarPaciente();
+            break;
+        case 'editar':
+            $controller->editarPaciente();
+            break;
+        case 'deletar':
+            $controller->deletarPaciente();
+            break;
+        default:
+            echo "Ação inválida.";
     }
 }

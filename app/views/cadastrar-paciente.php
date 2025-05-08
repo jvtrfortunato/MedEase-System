@@ -14,7 +14,8 @@
     </header>
     <main>
         <section class="conteudo-principal">
-            <form action="../controller/PacienteController.php" method="post">
+            <form action="../model/Paciente.php" method="post">
+                <input type="hidden" name="acao" value="salvar">
                 <h1>Dados Gerais</h1>
                 <section class="dados-gerais-endereco">
                     

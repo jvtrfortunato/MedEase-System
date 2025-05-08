@@ -158,9 +158,3 @@ class PacienteController {
         return $stmt->execute([':id_paciente' => $id]);
     }
 }
-
-// Executa se for um POST
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $controller = new PacienteController();
-    $controller->salvarPaciente();
-}

@@ -4,6 +4,7 @@ require_once 'StatusConsulta.php';
 require_once 'Secretario.php';
 require_once 'Paciente.php';
 require_once 'Medico.php';
+require_once 'ConsultaController.php';
 
 class Consulta {
     public function __construct(
@@ -11,11 +12,10 @@ class Consulta {
         private string $motivo,
         private string $data,
         private string $hora,
-        private string $salaAtendimento,
         private StatusConsulta $status,
-        private Secretario $secretario,
-        private Paciente $paciente,
-        private Medico $medico
+        private int $idSecretario,
+        private int $idPaciente,
+        private int $idMedico
     ) {}
 
     // Getters
@@ -89,15 +89,22 @@ class Consulta {
     }
 }
 
-$consulta = new Consulta(
-    1,
-    '10/07/2025', 
-    '13:00', 
-    StatusConsulta::Agendada, 
-    1, 
-    'Motivo Teste', 
-    $paciente->getId(), 
-    $medico->getId()
-);
-    
-var_dump($consulta);
+$controller = new ConsultaController();
+
+$acao = $_POST['acao'] ?? '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    switch ($acao) {
+        case 'salvar':
+            $controller->salvarConsulta();
+            break;
+        case 'editar':
+            $controller->editarConsulta();
+            break;
+        case 'deletar':
+            $controller->deletarConsulta();
+            break;
+        default:
+            echo "Ação inválida.";
+    }
+}

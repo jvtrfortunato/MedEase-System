@@ -1,3 +1,23 @@
+<?php
+require_once '../config/Database.php';
+
+$db = new Database();
+$pdo = $db->conectar();
+
+// Buscar pacientes
+$sqlPacientes = $pdo->query("SELECT id_paciente, nome, cpf FROM pacientes ORDER BY nome");
+$pacientes = $sqlPacientes->fetchAll(PDO::FETCH_ASSOC);
+
+// Buscar médicos
+$sqlMedicos = $pdo->query("
+    SELECT medicos.id_medico AS id_medico, usuarios.nome AS nome, medicos.especialidade AS especialidade
+    FROM medicos
+    INNER JOIN usuarios ON medicos.id_usuario = usuarios.id_usuario
+    ORDER BY usuarios.nome
+");
+$medicos = $sqlMedicos->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -17,84 +37,63 @@
     <main>
         <section class="conteudo-principal">
             <h1>Descrição da Consulta</h1>
-            <section class="dados-consulta">
-                
-                <div class="linha">
-                    <div class="label-input">
-                        <label for="motivo">Motivo</label>
-                        <input type="text" name="motivo" id="">
-                    </div>
-                    <div class="linha-pequenos">
-                        <div class="label-input">
-                            <label for="data">Data</label>
-                            <input type="date" name="data" id="">
-                        </div>
-                        <div class="label-input">
-                            <label for="hora">Hora</label>
-                            <input type="text" name="hora" id="">
-                        </div>
-                    </div>
-                </div>
+            <form action="../model/Consulta.php" method="post">
+                <input type="hidden" name="acao" value="salvar">
+                <section class="dados-consulta">
 
-                <div class="linha">
-                    <div class="label-input">
-                        <label for="nome">Nome do Paciente</label>
-                        <input type="text" name="nome" id="">
-                    </div>
-                    <div class="linha-pequenos">
+                    <div class="linha">
                         <div class="label-input">
-                            <label for="cpf">CPF</label>
-                            <input type="text" name="cpf" id="">
+                            <label for="motivo">Motivo</label>
+                            <input type="text" name="motivo" require>
                         </div>
-                        <div class="label-input">
-                            <label for="telefone">Telefone</label>
-                            <input type="tel" name="telefone" id="">
+                        <div class="linha-pequenos">
+                            <div class="label-input">
+                                <label for="data">Data</label>
+                                <input type="date" name="data" require>
+                            </div>
+                            <div class="label-input">
+                                <label for="hora">Hora</label>
+                                <input type="text" name="hora" require>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="linha">
-                    <div class="label-input">
-                        <label for="medico">Médico</label>
-                        <select name="medico" id="">
-                            <option value="">Selecione</option>
-                            <option value="">Médico 1</option>
-                            <option value="">Médico 2</option>
-                        </select>
+                    <div class="linha">
+                        <div class="label-input">
+                            <!-- Nome do paciente -->
+                            <label for="id_paciente">Paciente</label>
+                            <select name="id_paciente" required>
+                                <option value="">Selecione</option>
+                                <?php foreach ($pacientes as $paciente): ?>
+                                    <option value="<?= $paciente['id_paciente'] ?>">
+                                        <?= htmlspecialchars($paciente['nome']) ?> - CPF: <?= htmlspecialchars($paciente['cpf']) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="label-input">
+                            <!-- Médico -->
+                            <label for="id_medico">Médico</label>
+                            <select name="id_medico" required>
+                                <option value="">Selecione</option>
+                                <?php foreach ($medicos as $medico): ?>
+                                    <option value="<?= $medico['id_medico'] ?>">
+                                        <?= htmlspecialchars($medico['nome']) ?> - <?= htmlspecialchars($medico['especialidade']) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
                     </div>
-                    <div class="label-input">
-                        <label for="especialidade">Especialidade</label>
-                        <select name="especialidade" id="">
-                            <option value="">Selecione</option>
-                            <option value="">Neurologia</option>
-                            <option value="">Cardiologia</option>
-                        </select>
-                    </div>
-                </div>
 
-                <div class="linha">
-                    <div class="label-input">
-                        <label for="salaAtendimento">Sala de atendimento</label>
-                        <select name="salaAtendimento" id="">
-                            <option value="">Selecione</option>
-                            <option value="">Sala 1</option>
-                            <option value="">Sala 2</option>
-                        </select>
-                    </div>
+                </section>               
+                <div class="botoes">
+                    <button id="voltarPagina"class="voltar">Voltar</button>
+                    <button id="confirmar-consulta" class="salvar" type="submit">Agendar</button>
                 </div>
-
-            </section>
+            </form>
         </section>
-        <div class="botoes">
-            <button id="voltarPagina"class="voltar">Voltar</button>
-            <button id="confirmar-consulta" class="salvar" type="submit">Agendar</button>
-        </div>
     </main>
     
     <footer></footer>
-    <script>
-       
-
-    </script>
 </body>
 </html>
