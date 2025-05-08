@@ -1,44 +1,64 @@
 <?php
 
-require_once '../model/Usuario.php';
+require_once '../config/Database.php';
+session_start();
 
-class LoginController
-{
-    public function login()
-    {
-        // Inicia a sessão logo no início
-        session_start();
+class LoginController {
+    private $conn;
 
+    public function __construct() {
+        $database = new Database();
+        $this->conn = $database->conectar();
+    }
+
+    public function autenticar() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Sanitização dos dados recebidos
-            $cpf = filter_input(INPUT_POST, 'cpf', FILTER_SANITIZE_STRING);
-            $senha = filter_input(INPUT_POST, 'senha', FILTER_SANITIZE_STRING);
+            $cpf = $_POST['cpf'];
+            $senha = $_POST['senha'];
 
-            $usuario = new Usuario();
-
-            // Tenta autenticar o usuário
-            if ($usuario->autenticar($cpf, $senha)) {
-                // Se a autenticação for bem-sucedida, armazena o CPF na sessão
-                $_SESSION['usuario'] = $cpf;
-                $_SESSION['nome'] = $usuario->getNome();
-
-                // Redireciona para a página do administrador
-                header('Location: http://localhost/MedEase-System/app/views/home-administrador.php');
-                exit;
-            } else {
-                // Se falhar, redireciona de volta para o login com erro
-                header('Location: http://localhost/MedEase-System/app/views/login.php?erro=1');
-                exit;
+            if (empty($cpf) || empty($senha)) {
+                echo "CPF e senha são obrigatórios.";
+                return;
             }
-        } else {
-            // Se não for um POST, redireciona para a página de login
-            header('Location: /app/views/login.php');
-            exit;
+
+            $sql = "SELECT * FROM usuarios WHERE cpf = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([$cpf]);
+            $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($usuario) {
+                
+                if ($usuario['senha'] === $senha) {
+                    $_SESSION['usuario_id'] = $usuario['id'];
+                    $_SESSION['usuario_nome'] = $usuario['nome'];
+                    $_SESSION['usuario_tipo'] = $usuario['tipo'];
+
+                    // Redirecionar conforme o tipo
+                    switch ($usuario['tipo']) {
+                        case 'administrador':
+                            header("Location: ../views/home-administrador.php");
+                            break;
+                        case 'medico':
+                            header("Location: ../views/home-medico.php");
+                            break;
+                        case 'secretario':
+                            header("Location: ../views/home-secretario.php");
+                            break;
+                        default:
+                            echo "Tipo de usuário inválido.";
+                            break;
+                    }
+                    exit;
+                } else {
+                    echo "Senha incorreta.";
+                }
+            } else {
+                echo "Usuário não encontrado.";
+            }
         }
     }
 }
 
 $controller = new LoginController();
-$controller->login();
-
+$controller->autenticar();
 ?>
