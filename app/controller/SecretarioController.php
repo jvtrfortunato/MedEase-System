@@ -48,25 +48,8 @@ class SecretarioController {
             }
 
             try {
-                // 1. Criar objeto Endereco
-                $endereco = new Endereco($rua, $numero, $bairro, $cidade, $estado, $cep);
 
-                // 2. Inserir Endereço no banco
-                $sqlEndereco = "INSERT INTO enderecos (rua, numero, bairro, cidade, estado, cep)
-                                VALUES (?, ?, ?, ?, ?, ?)";
-                $stmt = $this->conn->prepare($sqlEndereco);
-                $stmt->execute([
-                    $endereco->getRua(),
-                    $endereco->getNumero(),
-                    $endereco->getBairro(),
-                    $endereco->getCidade(),
-                    $endereco->getEstado(),
-                    $endereco->getCep()
-                ]);
-
-                $idEndereco = $this->conn->lastInsertId();
-
-                // 3. Criar objeto Secretario
+                //Criar objeto Secretario
                 $secretario = new Secretario(
                     0,
                     $nome,
@@ -75,11 +58,10 @@ class SecretarioController {
                     $dataNascimento,
                     $sexo,
                     $email,
-                    $senha,
-                    $endereco
+                    $senha
                 );
 
-                // 4. Inserir usuário no banco
+                // Inserir usuário no banco
                 $sqlUsuario = "INSERT INTO usuarios (nome, cpf, telefone, data_nascimento, sexo, email, senha, tipo)
                                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                 $stmt = $this->conn->prepare($sqlUsuario);
@@ -96,10 +78,29 @@ class SecretarioController {
 
                 $idUsuario = $this->conn->lastInsertId();
 
-                // 5. Inserir dados específicos de secretário
+                // Inserir dados específicos de secretário
                 $sqlSecretario = "INSERT INTO secretarios (id_usuario) VALUES (?)";
                 $stmt = $this->conn->prepare($sqlSecretario);
                 $stmt->execute([$idUsuario]);
+
+                $idSecretario = $idUsuario;
+
+                // Criar objeto Endereco
+                $endereco = new Endereco($rua, $numero, $bairro, $cidade, $estado, $cep, $idSecretario, null);
+
+                // Inserir Endereço no banco
+                $sqlEndereco = "INSERT INTO enderecos (rua, numero, bairro, cidade, estado, cep, id_usuario)
+                                VALUES (?, ?, ?, ?, ?, ?, ?)";
+                $stmt = $this->conn->prepare($sqlEndereco);
+                $stmt->execute([
+                    $endereco->getRua(),
+                    $endereco->getNumero(),
+                    $endereco->getBairro(),
+                    $endereco->getCidade(),
+                    $endereco->getEstado(),
+                    $endereco->getCep(),
+                    $idSecretario
+                ]);
 
                 echo "Secretário cadastrado com sucesso!";
             } catch (PDOException $e) {

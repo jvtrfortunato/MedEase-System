@@ -13,7 +13,6 @@ class Secretario extends Usuario {
         string $sexo,
         string $email, 
         string $senha, 
-        Endereco $endereco
     ) {
         parent::__construct(
             $idUsuario, 
@@ -24,8 +23,7 @@ class Secretario extends Usuario {
             $sexo,
             $email, 
             $senha,
-            'secretario',
-            $endereco
+            'secretario'
         );
     }
 }

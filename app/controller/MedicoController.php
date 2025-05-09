@@ -1,5 +1,6 @@
 <?php
 
+require_once '../model/Usuario.php';
 require_once '../model/Medico.php';
 require_once '../model/Endereco.php';
 require_once '../config/Database.php';
@@ -52,9 +53,6 @@ class MedicoController {
                 return;
             }
     
-            // Criar objeto Endereco
-            $endereco = new Endereco($rua, $numero, $bairro, $cidade, $estado, $cep);
-    
             // Criar objeto Medico
             $medico = new Medico(
                 0, // ID do usuário ainda não gerado
@@ -65,25 +63,12 @@ class MedicoController {
                 $sexo,
                 $email,
                 $senha,
-                $endereco,
                 $crm,
                 $especialidade
             );
-    
+            
+
             try {
-                // Inserir Endereço
-                $sqlEndereco = "INSERT INTO enderecos (rua, numero, bairro, cidade, estado, cep)
-                                VALUES (?, ?, ?, ?, ?, ?)";
-                $stmt = $this->conn->prepare($sqlEndereco);
-                $stmt->execute([
-                    $endereco->getRua(),
-                    $endereco->getNumero(),
-                    $endereco->getBairro(),
-                    $endereco->getCidade(),
-                    $endereco->getEstado(),
-                    $endereco->getCep()
-                ]);
-                $idEndereco = $this->conn->lastInsertId();
     
                 // Inserir Usuário
                 $sqlUsuario = "INSERT INTO usuarios (nome, cpf, telefone, data_nascimento, sexo, email, senha, tipo)
@@ -110,7 +95,28 @@ class MedicoController {
                     $medico->getEspecialidade(),
                     $idUsuario
                 ]);
-    
+
+                // Recuperar o ID do medico recém-inserido
+                $idMedico = $idUsuario;
+            
+                
+                // Criar objeto Endereco
+                $endereco = new Endereco($rua, $numero, $bairro, $cidade, $estado, $cep, $idMedico, null);
+                
+                // Inserir Endereço
+                $sqlEndereco = "INSERT INTO enderecos (rua, numero, bairro, cidade, estado, cep, id_usuario)
+                                VALUES (?, ?, ?, ?, ?, ?, ?)";
+                $stmt = $this->conn->prepare($sqlEndereco);
+                $stmt->execute([
+                    $endereco->getRua(),
+                    $endereco->getNumero(),
+                    $endereco->getBairro(),
+                    $endereco->getCidade(),
+                    $endereco->getEstado(),
+                    $endereco->getCep(),
+                    $idMedico
+                ]);
+
                 echo "Médico cadastrado com sucesso!";
             } catch (PDOException $e) {
                 echo "Erro ao cadastrar médico: " . $e->getMessage();

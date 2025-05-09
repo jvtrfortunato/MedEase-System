@@ -18,7 +18,6 @@ class Medico extends Usuario
         string $sexo,
         string $email,
         string $senha,
-        Endereco $endereco,
         string $crm,
         string $especialidade
     ) {
@@ -32,7 +31,6 @@ class Medico extends Usuario
             $email,
             $senha,
             'medico', // tipo fixado como 'medico'
-            $endereco
         );
 
         $this->crm = $crm;
@@ -40,6 +38,7 @@ class Medico extends Usuario
     }
 
     // Getters
+
     public function getCrm(): string
     {
         return $this->crm;
