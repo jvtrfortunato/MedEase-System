@@ -35,6 +35,12 @@ class PacienteController {
         $estado = $_POST['estado'];
         $cep = $_POST['cep'];
 
+        // Verificar campos vazios
+            if (empty($nome) || empty($cpf)) {
+                echo "Erro: Insira pelo menos o nome completo e o CPF!";
+                return;
+            }
+
         try {
             // 2. Inserir o paciente no banco
             $stmtPaciente = $this->conn->prepare("INSERT INTO pacientes (nome, data_nascimento, sexo, estado_civil, cpf, rg, telefone, email, nome_responsavel, cns, convenio, plano_saude)

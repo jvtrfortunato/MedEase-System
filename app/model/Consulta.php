@@ -1,10 +1,7 @@
 <?php
 
 require_once 'StatusConsulta.php';
-require_once 'Secretario.php';
-require_once 'Paciente.php';
-require_once 'Medico.php';
-require_once 'ConsultaController.php';
+require_once '../controller/ConsultaController.php';
 
 class Consulta {
     public function __construct(
@@ -12,10 +9,12 @@ class Consulta {
         private string $motivo,
         private string $data,
         private string $hora,
-        private StatusConsulta $status,
-        private int $idSecretario,
+        //private StatusConsulta $status, USAR ENUM OU NÃO?
+        private string $status,
         private int $idPaciente,
-        private int $idMedico
+        private int $idMedico,
+        private ?int $idSecretario = null,
+        private ?int $idAdministrador = null
     ) {}
 
     // Getters
@@ -35,24 +34,24 @@ class Consulta {
         return $this->hora;
     }
 
-    public function getSalaAtendimento(): string {
-        return $this->salaAtendimento;
-    }
-
-    public function getStatus(): StatusConsulta {
+    public function getStatus(): string {
         return $this->status;
     }
 
-    public function getSecretario(): Secretario {
-        return $this->secretario;
+    public function getIdPaciente(): int {
+        return $this->idPaciente;
     }
 
-    public function getPaciente(): Paciente {
-        return $this->paciente;
+    public function getIdMedico(): int {
+        return $this->idMedico;
     }
 
-    public function getMedico(): Medico {
-        return $this->medico;
+    public function getIdSecretario(): int {
+        return $this->idSecretario;
+    }
+
+    public function getIdAdministrador(): int {
+        return $this->idAdministrador;
     }
 
     // Setters
@@ -68,29 +67,29 @@ class Consulta {
         $this->hora = $hora;
     }
 
-    public function setSalaAtendimento(string $salaAtendimento): void {
-        $this->salaAtendimento = $salaAtendimento;
-    }
-
-    public function setStatus(StatusConsulta $status): void {
+    public function setStatus(string $status): void {
         $this->status = $status;
     }
 
-    public function setSecretario(Secretario $secretario): void {
-        $this->secretario = $secretario;
+    public function setIdPaciente(int $idPaciente): void {
+        $this->idPaciente = $idPaciente;
     }
 
-    public function setPaciente(Paciente $paciente): void {
-        $this->paciente = $paciente;
+    public function setIdMedico(int $idMedico): void {
+        $this->idMedico = $idMedico;
     }
 
-    public function setMedico(Medico $medico): void {
-        $this->medico = $medico;
+    public function setIdSecretario(int $idSecretario): void {
+        $this->idSecretario = $idSecretario;
+    }
+
+    public function setIdAdministrador(int $idAdministrador): void {
+        $this->idAdministrador = $idAdministrador;
     }
 }
 
+// Controller dispatch
 $controller = new ConsultaController();
-
 $acao = $_POST['acao'] ?? '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

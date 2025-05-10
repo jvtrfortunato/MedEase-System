@@ -22,7 +22,7 @@
                     <div class="linha">         
                         <div class="label-input">
                             <label for="nome">Nome completo<span>*</span></label></label>
-                            <input type="text" name="nome" id="">
+                            <input type="text" name="nome" id="" require>
                         </div>          
                         <div class="linha-pequenos">           
                             <div class="label-input">
@@ -55,7 +55,7 @@
                         <div class="linha-pequenos">
                             <div class="label-input">
                                 <label for="cpf">CPF<span>*</span></label></label>
-                                <input type="text" name="cpf" id="">
+                                <input type="text" name="cpf" id="" require>
                             </div>
                             <div class="label-input">
                                 <label for="rg">RG</label>
@@ -169,11 +169,27 @@
                     </div>
                 </section>
                 <section class="botoes">
-                    <button class="voltar">Voltar</button>
+                    <button id="voltarPagina" class="voltar" type="button">Voltar</button>
                     <button class="salvar" type="submit">Salvar</button>
                 </section>
             </form>
         </section>
     </main>
+    
+    <footer></footer>
+    
+    <script>
+        // Evento para o botão "Voltar" (se existir)
+        if (voltarPagina) {
+            voltarPagina.addEventListener("click", () => {
+                if (window.history.length > 1) {
+                    window.history.back(); // volta à página anterior no histórico
+                } else {
+                    // Fallback: redireciona manualmente caso não haja histórico
+                    window.location.href = "consultas-agendadas.php";
+                }
+            });
+        }
+    </script>
 </body>
 </html>

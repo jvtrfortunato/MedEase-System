@@ -18,13 +18,13 @@
         session_start();
         $nomeUsuario = $_SESSION['usuario_nome'] ?? 'Secretario';
         ?>
-        <h1>Bem-vindo, Secretário(a) <?= htmlspecialchars($nomeUsuario) ?> !</h1>
+        <h1>Bem-vindo(a), <?= htmlspecialchars($nomeUsuario) ?>!</h1>
         
         <section class="section-principal">
             <div class="grid-container">
                 
                 <div class="card">
-                    <a href="cadastrar-paciente.php" target="_blank">
+                    <a href="cadastrar-paciente.php">
                         <img src="../../assets/img/User.png" alt="Cadastrar Paciente">
                         <p>Cadastrar Paciente</p>
                     </a>
