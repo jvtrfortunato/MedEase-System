@@ -1,3 +1,10 @@
+<?php
+require_once '../controller/PacienteController.php';
+
+$controller = new PacienteController();
+$pacientes = $controller->listarPacientes();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -16,7 +23,7 @@
         <section class="conteudo-principal">
 
             <section class="busca">
-                <img src="/assets/img/lupa.png" alt="Lupa de pesquisa">
+                <img src="../../assets/img/lupa.png" alt="Lupa de pesquisa">
                 <input type="text" placeholder="Buscar Paciente (nome do paciente)">
             </section>
 
@@ -27,48 +34,26 @@
                     <p>CPF</p>
                 </div>
                 
-                <!--Pacientes-->
-                <div class="dados">
-                    <div class="nome">
-                        <p>Receber o nome aqui</p>
+                <!--Lista dinãmica de pacientes-->
+                <?php foreach ($pacientes as $paciente): ?>
+                    <div class="dados">
+                        <div class="nome">
+                            <p><?= htmlspecialchars($paciente->getNome()) ?></p>
+                        </div>
+                        <div class="cpf">
+                            <p><?= htmlspecialchars($paciente->getCpf()) ?></p>
+                        </div>
+                        <a href="detalhes-paciente.html" class="detalhes">
+                            Ver detalhes
+                        </a>
                     </div>
-                    <div class="cpf">
-                        <p>Receber o CPF aqui</p>
-                    </div>
-                    <a href="detalhes-paciente.html" class="detalhes">
-                        Ver detalhes
-                    </a>
-                </div>
-
-                <div class="dados">
-                    <div class="nome">
-                        <p>Receber o nome aqui</p>
-                    </div>
-                    <div class="cpf">
-                        <p>Receber o CPF aqui</p>
-                    </div>
-                    <a href="detalhes-paciente.html" class="detalhes">
-                        Ver detalhes
-                    </a>
-                </div>
-
-                <div class="dados">
-                    <div class="nome">
-                        <p>Receber o nome aqui</p>
-                    </div>
-                    <div class="cpf">
-                        <p>Receber o CPF aqui</p>
-                    </div>
-                    <a href="detalhes-paciente.html" class="detalhes">
-                        Ver detalhes
-                    </a>
-                </div>
-
+                <?php endforeach; ?>
+                
             </section>
 
         </section>
         <section class="botao">
-            <button class="voltar">Voltar</button>
+            <button class="voltar" type="button">Voltar</button>
         </section>
     </main>
     <footer></footer>

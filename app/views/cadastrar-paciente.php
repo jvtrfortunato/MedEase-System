@@ -1,3 +1,8 @@
+<?php
+session_start();
+$tipoUsuario = $_SESSION['usuario_tipo'];
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -26,7 +31,7 @@
                         </div>          
                         <div class="linha-pequenos">           
                             <div class="label-input">
-                                <label for="dataNascimento">Data de Nascimento</label>
+                                <label for="dataNascimento">Data de nascimento</label>
                                 <input type="text" name="dataNascimento" id="">
                             </div>                        
                             <div class="label-input">
@@ -42,7 +47,7 @@
                     
                     <div class="linha">
                         <div class="label-input">
-                            <label for="estadoCivil">Estado Civil</label>
+                            <label for="estadoCivil">Estado civil</label>
                             <select name="estadoCivil" id="">
                                 <option value="">Selecione</option>
                                 <option value="solteiro">Solteiro(a)</option>
@@ -186,7 +191,12 @@
                     window.history.back(); // volta à página anterior no histórico
                 } else {
                     // Fallback: redireciona manualmente caso não haja histórico
-                    window.location.href = "consultas-agendadas.php";
+                    if ($tipoUsuario === 'administrador') {
+                        window.location.href = "home-administrador.php";
+                    }
+                    else {
+                        window.location.href = "home-secretario.php";
+                    }
                 }
             });
         }
