@@ -115,7 +115,7 @@ h1 {
     margin-top: 5px;
 }
 
-button, .iniciar-consulta {
+button, .iniciar-consulta, .editar-prontuario {
     text-align: center;
     padding: 0.3vw 0.8vw;
     border: 1px, solid rgba(136, 136, 136, 0.4);
@@ -136,11 +136,11 @@ button, .iniciar-consulta {
     background-color: #E65A50;
 }
 
-.iniciar-consulta {
+.iniciar-consulta, .editar-prontuario {
     background-color: #50E3C2;
 }
 
-.iniciar-consulta:hover {
+.iniciar-consulta:hover, .editar-prontuario:hover {
     background-color: #3AC3A5;
 }
 

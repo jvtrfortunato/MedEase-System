@@ -24,14 +24,14 @@
             <div class="grid-container">
                 
                 <div class="card">
-                    <a href="#" target="_blank">
+                    <a href="atendimentos-dia.php">
                         <img src="../../assets/img/Healthcare.png">
                         <p>Atendimentos do dia</p>
                     </a>                 
                 </div>
 
                 <div class="card">
-                    <a href="#" target="_blank">
+                    <a href="prontuario.php">
                         <img src="../../assets/img/Medical Record.png" alt="Prontuário">
                         <p>Prontuários</p>
                     </a>
@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="card">
-                    <a href="#" target="_blank">
+                    <a href="lista-pacientes.php">
                         <img src="../../assets/img/User Group.png" alt="Pacientes">
                         <p>Pacientes</p>
                     </a>

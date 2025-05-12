@@ -97,4 +97,43 @@ class ConsultaController {
             echo "Erro ao salvar consulta: " . $e->getMessage();
         }
     }
+
+    public function listarConsultasDoDia($id_medico) {
+    try {
+        date_default_timezone_set('America/Sao_Paulo');
+        $dataAtual = date('Y-m-d');
+
+        // Consultas pendentes (Agendada ou Cancelada)
+        $stmtPendentes = $this->conn->prepare("
+            SELECT c.*, p.nome AS nome_paciente
+            FROM consultas c
+            JOIN pacientes p ON c.id_paciente = p.id_paciente
+            WHERE c.data = ? AND c.id_medico = ? AND (c.status = 'Agendada' OR c.status = 'Cancelada')
+            ORDER BY c.hora ASC
+        ");
+        $stmtPendentes->execute([$dataAtual, $id_medico]);
+        $consultasPendentes = $stmtPendentes->fetchAll(PDO::FETCH_ASSOC);
+
+        // Consultas realizadas
+        $stmtRealizadas = $this->conn->prepare("
+            SELECT c.*, p.nome AS nome_paciente
+            FROM consultas c
+            JOIN pacientes p ON c.id_paciente = p.id_paciente
+            WHERE c.data = ? AND c.id_medico = ? AND c.status = 'Realizada'
+            ORDER BY c.hora ASC
+        ");
+        $stmtRealizadas->execute([$dataAtual, $id_medico]);
+        $consultasRealizadas = $stmtRealizadas->fetchAll(PDO::FETCH_ASSOC);
+
+        return [
+            'pendentes' => $consultasPendentes,
+            'realizadas' => $consultasRealizadas
+        ];
+
+    } catch (Exception $e) {
+        echo "Erro ao listar consultas: " . $e->getMessage();
+        return [];
+    }
+    }
+
 }

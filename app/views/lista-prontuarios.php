@@ -35,7 +35,7 @@
                     <div class="cpf">
                         <p>Receber o CPF aqui</p>
                     </div>
-                    <a href="prontuario.html" class="detalhes">
+                    <a href="prontuario.php" class="detalhes">
                         Prontuários
                     </a>
                 </div>
@@ -47,7 +47,7 @@
                     <div class="cpf">
                         <p>Receber o CPF aqui</p>
                     </div>
-                    <a href="prontuario.html" class="detalhes">
+                    <a href="prontuario.php" class="detalhes">
                         Prontuários
                     </a>
                 </div>
@@ -59,7 +59,7 @@
                     <div class="cpf">
                         <p>Receber o CPF aqui</p>
                     </div>
-                    <a href="prontuario.html" class="detalhes">
+                    <a href="prontuario.php" class="detalhes">
                         Prontuários
                     </a>
                 </div>

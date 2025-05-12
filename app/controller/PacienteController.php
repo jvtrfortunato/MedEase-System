@@ -98,7 +98,7 @@ class PacienteController {
     }
 
     return $pacientes;
-}
+    }
 
     public function buscarPacienteCompleto(int $id): ?Paciente {
     // Busca o paciente

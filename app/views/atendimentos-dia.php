@@ -8,6 +8,20 @@
     <link rel="stylesheet" href="../../assets/css/atendimentos-dia.css">
 </head>
 <body>
+    <?php
+    require_once '../controller/ConsultaController.php';
+
+    if (!isset($_SESSION['usuario_id']) || $_SESSION['usuario_tipo'] !== 'medico') {
+        header("Location: login.php");
+        exit;
+    }
+
+    $id_medico = $_SESSION['medico_id'];
+    $controller = new ConsultaController();
+    $consultas = $controller->listarConsultasDoDia($id_medico);
+    date_default_timezone_set('America/Sao_Paulo');
+    $dataHoje = date('d/m/Y');
+    ?>
     <header>
         <a class="logo" href="">MedEase</a>    
         <a href="">sair</a>
@@ -15,189 +29,61 @@
     <main>
         <section class="conteudo-principal">
             <!-- ATENDIMENTOS PENDENTES -->
-            <h1>Atendimentos pendentes - "data do dia"</h1>
-            <div class="legenda">                
-                
+            <h1>Atendimentos pendentes - <?php echo $dataHoje; ?></h1>
+            <div class="legenda">                             
                 <p class="paciente-legenda">Paciente</p>               
                 <div class="horario-status">
                     <p class="horario-legenda">Horário</p>
                     <p class="status-legenda">Status</p>
                 </div>
-
-            </div>
+            </div>           
             <section class="consultas">
-                <div class="paciente">
-                    <div class="nome">
-                        <p>Receber nome do paciente aqui</p>
-                    </div>
+                <?php foreach ($consultas['pendentes'] as $consulta): ?>
+                    <div class="paciente">
+                        <div class="nome">
+                            <p><?php echo htmlspecialchars($consulta['nome_paciente']); ?></p>
+                        </div>
 
-                    <div class="hora-status">
-                        <div class="horario">
-                            <p>Receber horário</p>
-                        </div>
-                        <div class="status">
-                            <p>Receber status</p>
-                            <a href="prontuario.php" class="iniciar-consulta" type="submit">Iniciar Consulta</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="paciente">
-                    <div class="nome">
-                        <p>Receber nome do paciente aqui</p>
-                    </div>
-
-                    <div class="hora-status">
-                        <div class="horario">
-                            <p>Receber horário</p>
-                        </div>
-                        <div class="status">
-                            <p>Receber status</p>
-                            <a href="prontuario.php" class="iniciar-consulta" type="submit">Iniciar Consulta</a>
+                        <div class="hora-status">
+                            <div class="horario">
+                                <p><?php echo date('H:i', strtotime($consulta['hora'])); ?></p>
+                            </div>
+                            <div class="status">
+                                <p><?php echo htmlspecialchars($consulta['status']); ?></p>
+                                <a href="prontuario.php" class="iniciar-consulta" type="submit">Iniciar Consulta</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="paciente">
-                    <div class="nome">
-                        <p>Receber nome do paciente aqui</p>
-                    </div>
-
-                    <div class="hora-status">
-                        <div class="horario">
-                            <p>Receber horário</p>
-                        </div>
-                        <div class="status">
-                            <p>Receber status</p>
-                            <a href="prontuario.php" class="iniciar-consulta" type="submit">Iniciar Consulta</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="paciente">
-                    <div class="nome">
-                        <p>Receber nome do paciente aqui</p>
-                    </div>
-
-                    <div class="hora-status">
-                        <div class="horario">
-                            <p>Receber horário</p>
-                        </div>
-                        <div class="status">
-                            <p>Receber status</p>
-                            <a href="prontuario.php" class="iniciar-consulta" type="submit">Iniciar Consulta</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="paciente">
-                    <div class="nome">
-                        <p>Receber nome do paciente aqui</p>
-                    </div>
-
-                    <div class="hora-status">
-                        <div class="horario">
-                            <p>Receber horário</p>
-                        </div>
-                        <div class="status">
-                            <p>Receber status</p>
-                            <a href="prontuario.php" class="iniciar-consulta" type="submit">Iniciar Consulta</a>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </section>
 
-            <!-- ATENDIMENTOS FINALIZADOS -->
-            <h1 class="atendimentos-finalizados-titulo">Atendimentos finalizados - "data do dia"</h1>
-            <div class="legenda">                
-                
+            <!-- ATENDIMENTOS REALIZADOS -->
+            <h1 class="atendimentos-finalizados-titulo">Atendimentos realizados - <?php echo $dataHoje; ?></h1>
+            <div class="legenda">                              
                 <p class="paciente-legenda">Paciente</p>               
                 <div class="horario-status">
                     <p class="horario-legenda">Horário</p>
                     <p class="status-legenda">Status</p>
                 </div>
-
             </div>
             <section class="consultas">
-                <div class="paciente">
-                    <div class="nome">
-                        <p>Receber nome do paciente</p>
-                    </div>
+                <?php foreach ($consultas['realizadas'] as $consulta): ?>
+                    <div class="paciente">
+                        <div class="nome">
+                            <p><?php echo htmlspecialchars($consulta['nome_paciente']); ?></p>
+                        </div>
 
-                    <div class="hora-status">
-                        <div class="horario">
-                            <p>Receber horário</p>
-                        </div>
-                        <div class="status">
-                            <p>Finalizada</p>
-                            <a href="prontuario.php" class="iniciar-consulta" type="submit">Editar Prontuário</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="paciente">
-                    <div class="nome">
-                        <p>Receber nome do paciente</p>
-                    </div>
-
-                    <div class="hora-status">
-                        <div class="horario">
-                            <p>Receber horário</p>
-                        </div>
-                        <div class="status">
-                            <p>Finalizada</p>
-                            <a href="prontuario.php" class="iniciar-consulta" type="submit">Editar Prontuário</a>
+                        <div class="hora-status">
+                            <div class="horario">
+                                <p><?php echo date('H:i', strtotime($consulta['hora'])); ?></p>
+                            </div>
+                            <div class="status">
+                                <p><?php echo htmlspecialchars($consulta['status']); ?></p>
+                                <a href="prontuario.php" class="editar-prontuario" type="submit">Editar Prontuário</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="paciente">
-                    <div class="nome">
-                        <p>Receber nome do paciente</p>
-                    </div>
-
-                    <div class="hora-status">
-                        <div class="horario">
-                            <p>Receber horário</p>
-                        </div>
-                        <div class="status">
-                            <p>Finalizada</p>
-                            <a href="prontuario.php" class="iniciar-consulta" type="submit">Editar Prontuário</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="paciente">
-                    <div class="nome">
-                        <p>Receber nome do paciente</p>
-                    </div>
-
-                    <div class="hora-status">
-                        <div class="horario">
-                            <p>Receber horário</p>
-                        </div>
-                        <div class="status">
-                            <p>Finalizada</p>
-                            <a href="prontuario.php" class="iniciar-consulta" type="submit">Editar Prontuário</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="paciente">
-                    <div class="nome">
-                        <p>Receber nome do paciente</p>
-                    </div>
-
-                    <div class="hora-status">
-                        <div class="horario">
-                            <p>Receber horário</p>
-                        </div>
-                        <div class="status">
-                            <p>Finalizada</p>
-                            <a href="prontuario.php" class="iniciar-consulta" type="submit">Editar Prontuário</a>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </section>
         </section>
         <section class="botoes">

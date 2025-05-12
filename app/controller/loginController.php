@@ -33,6 +33,18 @@ class LoginController {
                     $_SESSION['usuario_nome'] = $usuario['nome'];
                     $_SESSION['usuario_tipo'] = $usuario['tipo'];
 
+                    // Se for médico, buscar o id_medico
+                    if ($usuario['tipo'] === 'medico') {
+                        $sqlMedico = "SELECT id_medico FROM medicos WHERE id_usuario = ?";
+                        $stmtMedico = $this->conn->prepare($sqlMedico);
+                        $stmtMedico->execute([$usuario['id_usuario']]);
+                        $medico = $stmtMedico->fetch(PDO::FETCH_ASSOC);
+
+                        if ($medico) {
+                            $_SESSION['medico_id'] = $medico['id_medico'];
+                        }
+                    }
+
                     // Redirecionar conforme o tipo
                     switch ($usuario['tipo']) {
                         case 'administrador':
