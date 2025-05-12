@@ -38,18 +38,19 @@
                 </div>
             </div>           
             <section class="consultas">
-                <?php foreach ($consultas['pendentes'] as $consulta): ?>
+                <?php foreach ($consultas['pendentes'] as $item): ?>
+                    <?php $consulta = $item['consulta']; ?>
                     <div class="paciente">
                         <div class="nome">
-                            <p><?php echo htmlspecialchars($consulta['nome_paciente']); ?></p>
+                            <p><?php echo htmlspecialchars($item['nome_paciente']); ?></p>
                         </div>
 
                         <div class="hora-status">
                             <div class="horario">
-                                <p><?php echo date('H:i', strtotime($consulta['hora'])); ?></p>
+                                <p><?php echo date('H:i', strtotime($consulta->getHora())); ?></p>
                             </div>
                             <div class="status">
-                                <p><?php echo htmlspecialchars($consulta['status']); ?></p>
+                                <p><?php echo htmlspecialchars($consulta->getStatus()); ?></p>
                                 <a href="prontuario.php" class="iniciar-consulta" type="submit">Iniciar Consulta</a>
                             </div>
                         </div>
@@ -67,18 +68,19 @@
                 </div>
             </div>
             <section class="consultas">
-                <?php foreach ($consultas['realizadas'] as $consulta): ?>
+                <?php foreach ($consultas['realizadas'] as $item): ?>
+                    <?php $consulta = $item['consulta']; ?>
                     <div class="paciente">
                         <div class="nome">
-                            <p><?php echo htmlspecialchars($consulta['nome_paciente']); ?></p>
+                            <p><?php echo htmlspecialchars($item['nome_paciente']); ?></p>
                         </div>
 
                         <div class="hora-status">
                             <div class="horario">
-                                <p><?php echo date('H:i', strtotime($consulta['hora'])); ?></p>
+                                <p><?php echo date('H:i', strtotime($consulta->getHora())); ?></p>
                             </div>
                             <div class="status">
-                                <p><?php echo htmlspecialchars($consulta['status']); ?></p>
+                                <p><?php echo htmlspecialchars($consulta->getStatus()); ?></p>
                                 <a href="prontuario.php" class="editar-prontuario" type="submit">Editar Prontuário</a>
                             </div>
                         </div>

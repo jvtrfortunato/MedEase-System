@@ -4,6 +4,7 @@ session_start(); // Inicia a sessão
 require_once '../config/Database.php';
 //require_once '../model/StatusConsulta.php';
 require_once '../model/Consulta.php';
+require_once '../model/Paciente.php';
 
 if (!isset($_SESSION['usuario_id'])) {
     // Se o usuário não estiver logado, redireciona
@@ -98,42 +99,81 @@ class ConsultaController {
         }
     }
 
-    public function listarConsultasDoDia($id_medico) {
-    try {
-        date_default_timezone_set('America/Sao_Paulo');
-        $dataAtual = date('Y-m-d');
+    public function listarConsultasDoDia(int $id_medico): array {
+        try {
+            require_once '../config/Database.php';
+            require_once '../model/Consulta.php';
 
-        // Consultas pendentes (Agendada ou Cancelada)
-        $stmtPendentes = $this->conn->prepare("
-            SELECT c.*, p.nome AS nome_paciente
-            FROM consultas c
-            JOIN pacientes p ON c.id_paciente = p.id_paciente
-            WHERE c.data = ? AND c.id_medico = ? AND (c.status = 'Agendada' OR c.status = 'Cancelada')
-            ORDER BY c.hora ASC
-        ");
-        $stmtPendentes->execute([$dataAtual, $id_medico]);
-        $consultasPendentes = $stmtPendentes->fetchAll(PDO::FETCH_ASSOC);
+            date_default_timezone_set('America/Sao_Paulo');
+            $dataAtual = date('Y-m-d');
 
-        // Consultas realizadas
-        $stmtRealizadas = $this->conn->prepare("
-            SELECT c.*, p.nome AS nome_paciente
-            FROM consultas c
-            JOIN pacientes p ON c.id_paciente = p.id_paciente
-            WHERE c.data = ? AND c.id_medico = ? AND c.status = 'Realizada'
-            ORDER BY c.hora ASC
-        ");
-        $stmtRealizadas->execute([$dataAtual, $id_medico]);
-        $consultasRealizadas = $stmtRealizadas->fetchAll(PDO::FETCH_ASSOC);
+            $database = new Database();
+            $conn = $database->conectar();
 
-        return [
-            'pendentes' => $consultasPendentes,
-            'realizadas' => $consultasRealizadas
-        ];
+            // Consultas pendentes (Agendada ou Cancelada)
+            $stmtPendentes = $conn->prepare("
+                SELECT c.*, p.nome AS nome_paciente
+                FROM consultas c
+                JOIN pacientes p ON c.id_paciente = p.id_paciente
+                WHERE c.data = ? AND c.id_medico = ? AND (c.status = 'Agendada' OR c.status = 'Cancelada')
+                ORDER BY c.hora ASC
+            ");
+            $stmtPendentes->execute([$dataAtual, $id_medico]);
+            $resultPendentes = $stmtPendentes->fetchAll(PDO::FETCH_ASSOC);
 
-    } catch (Exception $e) {
-        echo "Erro ao listar consultas: " . $e->getMessage();
-        return [];
-    }
-    }
+            $consultasPendentes = array_map(function ($row) {
+                return [
+                    'consulta' => new Consulta(
+                        $row['id_consulta'],
+                        $row['motivo'],
+                        $row['data'],
+                        $row['hora'],
+                        $row['status'],
+                        $row['id_paciente'],
+                        $row['id_medico'],
+                        $row['id_secretario'] ?? null,
+                        $row['id_administrador'] ?? null
+                    ),
+                    'nome_paciente' => $row['nome_paciente']
+                ];
+            }, $resultPendentes);
 
+            // Consultas realizadas
+            $stmtRealizadas = $conn->prepare("
+                SELECT c.*, p.nome AS nome_paciente
+                FROM consultas c
+                JOIN pacientes p ON c.id_paciente = p.id_paciente
+                WHERE c.data = ? AND c.id_medico = ? AND c.status = 'Realizada'
+                ORDER BY c.hora ASC
+            ");
+            $stmtRealizadas->execute([$dataAtual, $id_medico]);
+            $resultRealizadas = $stmtRealizadas->fetchAll(PDO::FETCH_ASSOC);
+
+            $consultasRealizadas = array_map(function ($row) {
+                return [
+                    'consulta' => new Consulta(
+                        $row['id_consulta'],
+                        $row['motivo'],
+                        $row['data'],
+                        $row['hora'],
+                        $row['status'],
+                        $row['id_paciente'],
+                        $row['id_medico'],
+                        $row['id_secretario'] ?? null,
+                        $row['id_administrador'] ?? null
+                    ),
+                    'nome_paciente' => $row['nome_paciente']
+                ];
+            }, $resultRealizadas);
+
+            return [
+                'pendentes' => $consultasPendentes,
+                'realizadas' => $consultasRealizadas
+            ];
+
+        } catch (Exception $e) {
+            echo "Erro ao listar consultas: " . $e->getMessage();
+            return [];
+        }
+    }  
 }
