@@ -74,7 +74,15 @@ class PacienteController {
     }
 
     public function listarPacientes(): array {
-    $query = "SELECT * FROM paciente";
+    $query = "
+    SELECT 
+        p.*, 
+        e.*,  
+        e.id_paciente AS endereco_id_paciente
+    FROM pacientes p
+    JOIN enderecos e ON p.id_paciente = e.id_paciente
+    ORDER BY p.nome ASC
+    ";
     $stmt = $this->conn->prepare($query);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -147,5 +155,24 @@ class PacienteController {
         $dataPaciente['plano_saude'],
         $endereco
     );
+    }
+}
+
+$controller = new PacienteController();
+$acao = $_POST['acao'] ?? '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    switch ($acao) {
+        case 'salvar':
+            $controller->salvarPaciente();
+            break;
+        case 'editar':
+            $controller->editarPaciente();
+            break;
+        case 'deletar':
+            $controller->deletarPaciente();
+            break;
+        default:
+            echo "Ação inválida.";
     }
 }

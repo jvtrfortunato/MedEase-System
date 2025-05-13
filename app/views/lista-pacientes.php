@@ -43,7 +43,7 @@ $pacientes = $controller->listarPacientes();
                         <div class="cpf">
                             <p><?= htmlspecialchars($paciente->getCpf()) ?></p>
                         </div>
-                        <a href="detalhes-paciente.html" class="detalhes">
+                        <a href="detalhes-paciente.php?id=<?= $paciente->getIdPaciente() ?>" class="detalhes">
                             Ver detalhes
                         </a>
                     </div>

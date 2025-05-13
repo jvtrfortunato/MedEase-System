@@ -45,16 +45,23 @@
                 </div>
 
                 <div class="card">
-                    <a href="" target="_blank">
+                    <a href="atendimentos-dia.php">
                         <img src="../../assets/img/Healthcare.png">
                         <p>Atendimentos do dia</p>
                     </a>                 
                 </div>
 
                 <div class="card">
-                    <a href="" target="_blank">
+                    <a href="lista-pacientes.php">
                         <img src="../../assets/img/User Group.png" alt="Pacientes">
                         <p>Pacientes</p>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a href="#" target="">
+                        <img src="../../assets/img/Health Graph.png" alt="Relatórios">
+                        <p>Relatórios</p>
                     </a>
                 </div>
 

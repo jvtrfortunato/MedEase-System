@@ -21,7 +21,7 @@
                 <!--Identificação do Paciente-->
                 <div class="menu-seta">
                     <h2>Identificação do Paciente</h2>
-                    <img id="seta" onclick="expandirRetrair('formulario1', this)" src="/assets/img/seta-direita.png" alt="seta">
+                    <img id="seta" onclick="expandirRetrair('formulario1', this)" src="../../assets/img/seta-direita.png" alt="seta">
                 </div>
                 <div class="barra"></div>                
                 <section id="formulario1" class="formulario-oculto">
@@ -141,7 +141,7 @@
                 <!--Histórico Médico e Familiar-->
                 <div class="menu-seta">
                     <h2>Histórico Médico e Familiar</h2>
-                    <img id="seta" onclick="expandirRetrair('formulario2', this)" src="/assets/img/seta-direita.png" alt="seta">
+                    <img id="seta" onclick="expandirRetrair('formulario2', this)" src="../../assets/img/seta-direita.png" alt="seta">
                 </div>
                 <div class="barra"></div>
                 <section id="formulario2" class="formulario-oculto">
@@ -178,7 +178,7 @@
                 <!--Anamnese-->
                 <div class="menu-seta">
                     <h2>Anamnese</h2>
-                    <img id="seta" onclick="expandirRetrair('formulario3', this)" src="/assets/img/seta-direita.png" alt="seta">
+                    <img id="seta" onclick="expandirRetrair('formulario3', this)" src="../../assets/img/seta-direita.png" alt="seta">
                 </div>
                 <div class="barra"></div>
                 <section id="formulario3" class="formulario-oculto">
@@ -220,7 +220,7 @@
                 <!--Exame Físico-->
                 <div class="menu-seta">
                     <h2>Exame Físico</h2>
-                    <img id="seta" onclick="expandirRetrair('formulario4', this)" src="/assets/img/seta-direita.png" alt="seta">
+                    <img id="seta" onclick="expandirRetrair('formulario4', this)" src="../../assets/img/seta-direita.png" alt="seta">
                 </div>
                 <div class="barra"></div>
                 <section id="formulario4" class="formulario-oculto">
@@ -277,7 +277,7 @@
                 <!--Diagnóstico-->
                 <div class="menu-seta">
                     <h2>Diagnóstico</h2>
-                    <img id="seta" onclick="expandirRetrair('formulario5', this)" src="/assets/img/seta-direita.png" alt="seta">
+                    <img id="seta" onclick="expandirRetrair('formulario5', this)" src="../../assets/img/seta-direita.png" alt="seta">
                 </div>
                 <div class="barra"></div>
                 <section id="formulario5" class="formulario-oculto">
@@ -314,7 +314,7 @@
                 <!--Exames Solicitados-->
                 <div class="menu-seta">
                     <h2>Exames Solicitados</h2>
-                    <img id="seta" onclick="expandirRetrair('formulario6', this)" src="/assets/img/seta-direita.png" alt="seta">
+                    <img id="seta" onclick="expandirRetrair('formulario6', this)" src="../../assets/img/seta-direita.png" alt="seta">
                 </div>
                 <div class="barra"></div>
                 <section id="formulario6" class="formulario-oculto">
@@ -327,7 +327,7 @@
                 <!--Prescrições Médicas-->
                 <div class="menu-seta">
                     <h2>Prescrição Médica</h2>
-                    <img id="seta" onclick="expandirRetrair('formulario7', this)" src="/assets/img/seta-direita.png" alt="seta">
+                    <img id="seta" onclick="expandirRetrair('formulario7', this)" src="../../assets/img/seta-direita.png" alt="seta">
                 </div>
                 <div class="barra"></div>
                 <section id="formulario7" class="formulario-oculto">
@@ -340,7 +340,7 @@
                 <!--Evolução do Quadro Clínico-->
                 <div class="menu-seta">
                     <h2>Evolução do Quadro Clínico (observações de consultas sucessivas)</h2>
-                    <img id="seta" onclick="expandirRetrair('formulario8', this)" src="/assets/img/seta-direita.png" alt="seta">
+                    <img id="seta" onclick="expandirRetrair('formulario8', this)" src="../../assets/img/seta-direita.png" alt="seta">
                 </div>
                 <div class="barra"></div>
                 <section id="formulario8" class="formulario-oculto">
@@ -352,7 +352,7 @@
                 <!--Exames de Imagem e Procedimentos-->
                 <div class="menu-seta">
                     <h2>Exames de Imagem e Procedimentos</h2>
-                    <img id="seta" onclick="expandirRetrair('formulario9', this)" src="/assets/img/seta-direita.png" alt="seta">
+                    <img id="seta" onclick="expandirRetrair('formulario9', this)" src="../../assets/img/seta-direita.png" alt="seta">
                 </div>
                 <div class="barra"></div>
                 <section id="formulario9" class="formulario-oculto">
@@ -372,7 +372,7 @@
                 <!--Registro de Internação e Cirurgias-->
                 <div class="menu-seta">
                     <h2>Registros de Internação e Cirurgias</h2>
-                    <img id="seta" onclick="expandirRetrair('formulario10', this)" src="/assets/img/seta-direita.png" alt="seta">
+                    <img id="seta" onclick="expandirRetrair('formulario10', this)" src="../../assets/img/seta-direita.png" alt="seta">
                 </div>
                 <div class="barra"></div>
                 <section id="formulario10" class="formulario-oculto">
@@ -402,7 +402,7 @@
                 <!--Documentação e Consentimentos-->
                 <div class="menu-seta">
                     <h2>Documentação e Consentimentos</h2>
-                    <img id="seta" onclick="expandirRetrair('formulario11', this)" src="/assets/img/seta-direita.png" alt="seta">
+                    <img id="seta" onclick="expandirRetrair('formulario11', this)" src="../../assets/img/seta-direita.png" alt="seta">
                 </div>
                 <div class="barra"></div>
                 <section id="formulario11" class="formulario-oculto">
@@ -427,7 +427,7 @@
                 <!--Agendamentos e Histórico de Consultas-->
                 <div class="menu-seta">
                     <h2>Agendamentos e Histórico de Consultas</h2>
-                    <img id="seta" onclick="expandirRetrair('formulario12', this)" src="/assets/img/seta-direita.png" alt="seta">
+                    <img id="seta" onclick="expandirRetrair('formulario12', this)" src="../../assets/img/seta-direita.png" alt="seta">
                 </div>
                 <div class="barra"></div>
                 <section id="formulario12" class="formulario-oculto">
@@ -442,7 +442,7 @@
                 <!--Observações Gerais e Notificações-->
                 <div class="menu-seta">
                     <h2>Observações Gerais e Notificações</h2>
-                    <img id="seta" onclick="expandirRetrair('formulario13', this)" src="/assets/img/seta-direita.png" alt="seta">
+                    <img id="seta" onclick="expandirRetrair('formulario13', this)" src="../../assets/img/seta-direita.png" alt="seta">
                 </div>
                 <div class="barra"></div>
                 <section id="formulario13" class="formulario-oculto">
@@ -479,11 +479,11 @@
             if (visivel) {
                 formulario.classList.remove('formulario-visivel');
                 formulario.classList.add('formulario-oculto');
-                setaImg.src = '/assets/img/seta-direita.png';
+                setaImg.src = '../../assets/img/seta-direita.png';
             }   else {
                 formulario.classList.remove('formulario-oculto');
                 formulario.classList.add('formulario-visivel');
-                setaImg.src = '/assets/img/seta-baixo.png';
+                setaImg.src = '../../assets/img/seta-baixo.png';
             }
         }
 

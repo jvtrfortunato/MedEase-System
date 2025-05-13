@@ -51,6 +51,13 @@
                     </a>
                 </div>
 
+                <div class="card">
+                    <a href="#" target="">
+                        <img src="../../assets/img/Health Graph.png" alt="Relatórios">
+                        <p>Relatórios</p>
+                    </a>
+                </div>
+
             </div>
     </section>
     </main>

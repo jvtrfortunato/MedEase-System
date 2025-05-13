@@ -13,8 +13,7 @@
 
     $controller = new PacienteController();
 
-    //$id = $_GET['id'] ?? null;
-    $id = 21;
+    $id = $_GET['id'] ?? null;
 
     if (!$id) {
         echo "ID do paciente não fornecido.";

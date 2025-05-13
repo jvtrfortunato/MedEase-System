@@ -131,23 +131,3 @@ class Paciente {
         $this->endereco = $endereco;
     }
 }
-
-$controller = new PacienteController();
-
-$acao = $_POST['acao'] ?? '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    switch ($acao) {
-        case 'salvar':
-            $controller->salvarPaciente();
-            break;
-        case 'editar':
-            $controller->editarPaciente();
-            break;
-        case 'deletar':
-            $controller->deletarPaciente();
-            break;
-        default:
-            echo "Ação inválida.";
-    }
-}
