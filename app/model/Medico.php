@@ -49,7 +49,7 @@ class Medico extends Usuario
     // Salvar no banco (com transação completa)
     public function salvar(PDO $conn, Endereco $endereco): bool {
     try {
-        $conn->beginTransaction();$conn->beginTransaction();
+        $conn->beginTransaction();
 
         // Inserir usuário
         $sqlUsuario = "INSERT INTO usuarios (nome, cpf, telefone, data_nascimento, sexo, email, senha, tipo)
