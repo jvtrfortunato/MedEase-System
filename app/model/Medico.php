@@ -48,6 +48,7 @@ class Medico extends Usuario
 
     // Salvar no banco (com transação completa)
     public function salvar(PDO $conn, Endereco $endereco): bool {
+        
     try {
         $conn->beginTransaction();
 
@@ -100,6 +101,18 @@ class Medico extends Usuario
         throw $e;
     }
     }
+
+    public function listarMedicos(PDO $conn) {
+    try {
+        $stmt = $conn->query("SELECT u.nome, u.cpf FROM usuarios u INNER JOIN medicos m ON u.id_usuario = m.id_usuario");
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo "Erro ao listar médicos: " . $e->getMessage();
+        return [];
+    }
+    }
+
 
     // Representar como array
     public function toArray(): array {

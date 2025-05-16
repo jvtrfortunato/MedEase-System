@@ -1,3 +1,9 @@
+<?php
+require_once '../controller/MedicoController.php';
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -38,42 +44,25 @@
                 
                 <!--Lista Médicos-->
                 <div id="lista-medicos" class="lista">
-                    <div class="dados">
-                        <div class="nome">
-                            <p>Receber o nome do médico aqui</p>
-                        </div>
-                        <div class="cpf">
-                            <p>Receber o CPF aqui</p>
-                        </div>
-                        <button class="detalhes">
-                            Ver detalhes
-                        </button>
-                    </div>
+                    <?php if (!empty($medicos)): ?>
+                        <?php foreach ($medicos as $medico): ?>
+                            <div class="dados">
+                                <div class="nome">
+                                    <p><?= htmlspecialchars($medico['nome']) ?></p>
+                                </div>
+                                <div class="cpf">
+                                    <p><?= htmlspecialchars($medico['cpf']) ?></p>
+                                </div>
+                                <a href="detalhes-paciente.php?id=<?= htmlspecialchars($medico['id_medico'] ?? '') ?>" class="detalhes">
+                                    Ver detalhes
+                                </a>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p>Nenhum médico cadastrado.</p>
+                    <?php endif; ?>
+                </div>  
 
-                    <div class="dados">
-                        <div class="nome">
-                            <p>Receber o nome do médico aqui</p>
-                        </div>
-                        <div class="cpf">
-                            <p>Receber o CPF aqui</p>
-                        </div>
-                        <button class="detalhes">
-                            Ver detalhes
-                        </button>
-                    </div>
-
-                    <div class="dados">
-                        <div class="nome">
-                            <p>Receber o nome do médico aqui</p>
-                        </div>
-                        <div class="cpf">
-                            <p>Receber o CPF aqui</p>
-                        </div>
-                        <button class="detalhes">
-                            Ver detalhes
-                        </button>
-                    </div>
-                </div>
 
                 <!--Lista Secretários-->
                 <div id="lista-secretarios" class="lista oculto">

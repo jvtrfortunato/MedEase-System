@@ -76,8 +76,24 @@ class MedicoController {
             }
         }
     }
+
+    public function exibirDados() {
+    // Conexão
+    $conn = $this->conn;
+
+    // Criar instância fictícia de Medico só para listar
+    $medicoModel = new Medico(0, '', '', '', '', '', '', '', '', '');
+
+    // Chamada dos métodos com conexão
+    $medicos = $medicoModel->listarMedicos($conn);
+
+    // Enviar para a view
+    require '../views/gerenciar-profissionais.php';
+}
+
 }
 
 // Executar cadastro
 $controller = new MedicoController();
 $controller->cadastrar();
+$controller->exibirDados();
