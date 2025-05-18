@@ -1,5 +1,12 @@
 <?php
 require_once '../controller/MedicoController.php';
+require_once '../controller/SecretarioController.php';
+
+$medicoController = new MedicoController();
+$medicos = $medicoController->exibirDados();
+
+$secretarioController = new SecretarioController();
+$secretarios = $secretarioController->exibirDados();
 
 ?>
 
@@ -64,43 +71,25 @@ require_once '../controller/MedicoController.php';
                 </div>  
 
 
-                <!--Lista Secretários-->
+                <!-- Lista Secretários -->
                 <div id="lista-secretarios" class="lista oculto">
-                    <div class="dados">
-                        <div class="nome">
-                            <p>Receber o nome do secretário aqui</p>
-                        </div>
-                        <div class="cpf">
-                            <p>Receber o CPF aqui</p>
-                        </div>
-                        <button class="detalhes">
-                            Ver detalhes
-                        </button>
-                    </div>
-
-                    <div class="dados">
-                        <div class="nome">
-                            <p>Receber o nome do secretário aqui</p>
-                        </div>
-                        <div class="cpf">
-                            <p>Receber o CPF aqui</p>
-                        </div>
-                        <button class="detalhes">
-                            Ver detalhes
-                        </button>
-                    </div>
-
-                    <div class="dados">
-                        <div class="nome">
-                            <p>Receber o nome do secretário aqui</p>
-                        </div>
-                        <div class="cpf">
-                            <p>Receber o CPF aqui</p>
-                        </div>
-                        <button class="detalhes">
-                            Ver detalhes
-                        </button>
-                    </div>
+                    <?php if (!empty($secretarios)): ?>
+                        <?php foreach ($secretarios as $secretario): ?>
+                            <div class="dados">
+                                <div class="nome">
+                                    <p><?= htmlspecialchars($secretario['nome']) ?></p>
+                                </div>
+                                <div class="cpf">
+                                    <p><?= htmlspecialchars($secretario['cpf']) ?></p>
+                                </div>
+                                <a href="detalhes-secretario.php?id=<?= htmlspecialchars($secretario['id_secretario'] ?? '') ?>" class="detalhes">
+                                    Ver detalhes
+                                </a>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p>Nenhum secretário cadastrado.</p>
+                    <?php endif; ?>
                 </div>
 
             </section>
