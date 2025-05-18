@@ -66,17 +66,29 @@ class SecretarioController {
 
                 // Salvar médico com endereço
                 $secretario->salvar($this->conn, $endereco);
-                echo "Secretário cadastrado com sucesso!";
+                
+                session_start();
+                $_SESSION['mensagem'] = "Secretário cadastrado com sucesso!";
+                header("Location: ../views/cadastrar-secretario.php");
+                exit;
 
             } catch (PDOException $e) {
                 echo "Erro ao cadastrar secretário: " . $e->getMessage();
             }
         }
     }
-}
 
-// Executar cadastro
-$controller = new SecretarioController();
-$controller->cadastrar();
+
+    public function exibirDados() {
+        // Conexão
+        $conn = $this->conn;
+
+        // Criar instância fictícia de secretario só para listar
+        $secretarioModel = new Secretario(0, '', '', '', '', '', '', '');
+
+        // Chamada dos métodos com conexão
+        return $secretarioModel->listarSecretarios($conn);
+    }
+}
 
 ?>

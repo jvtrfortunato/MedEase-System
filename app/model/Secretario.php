@@ -83,5 +83,16 @@ class Secretario extends Usuario {
     }
     }
 
+    public function listarSecretarios(PDO $conn) {
+    try {
+        $stmt = $conn->query("SELECT u.nome, u.cpf FROM usuarios u INNER JOIN secretarios s ON u.id_usuario = s.id_usuario");
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo "Erro ao listar secretários: " . $e->getMessage();
+        return [];
+    }
+    }
+
 }
 

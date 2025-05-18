@@ -1,3 +1,20 @@
+<?php
+require_once '../controller/SecretarioController.php';
+session_start();
+
+$controller = new SecretarioController();
+$controller->cadastrar();
+
+$mensagem = '';
+if (isset($_SESSION['mensagem'])) {
+    $mensagem = $_SESSION['mensagem'];
+    unset($_SESSION['mensagem']);
+}
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -15,9 +32,17 @@
         <a class="logo" href="">MedEase</a>    
         <a href="">sair</a>
     </header>
+
+     <?php if (!empty($mensagem)): ?>
+    <div style="background-color: #d4edda; color: #155724; padding: 10px; margin: 10px; border-radius: 5px;">
+        <?= htmlspecialchars($mensagem) ?>
+    </div>
+    <?php endif; ?>
+
+
     <main>
         <section class="conteudo-principal">
-            <form action="../controller/SecretarioController.php" method="post">
+            <form action="" method="post">
                 <h1>Dados Gerais</h1>
                 <section class="dados-gerais-endereco">
                     

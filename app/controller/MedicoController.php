@@ -70,7 +70,13 @@ class MedicoController {
 
                 // Salvar médico com endereço
                 $medico->salvar($this->conn, $endereco);
-                echo "Médico cadastrado com sucesso!";
+
+
+                session_start();
+                $_SESSION['mensagem'] = "Médico cadastrado com sucesso!";
+                header("Location: ../views/cadastrar-medico.php");
+                exit;
+
             } catch (PDOException $e) {
                 echo "Erro ao cadastrar médico: " . $e->getMessage();
             }
@@ -85,15 +91,9 @@ class MedicoController {
     $medicoModel = new Medico(0, '', '', '', '', '', '', '', '', '');
 
     // Chamada dos métodos com conexão
-    $medicos = $medicoModel->listarMedicos($conn);
-
-    // Enviar para a view
-    require '../views/gerenciar-profissionais.php';
+    return $medicoModel->listarMedicos($conn);
 }
 
 }
 
-// Executar cadastro
-$controller = new MedicoController();
-$controller->cadastrar();
-$controller->exibirDados();
+
