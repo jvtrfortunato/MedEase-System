@@ -7,7 +7,6 @@ require_once 'Prescricao.php';
 require_once 'Internacao.php';
 require_once 'Documentacao.php';
 require_once 'Paciente.php';
-require_once 'Medico.php';
 
 class Prontuario {
     public function __construct(
@@ -57,7 +56,7 @@ class Prontuario {
         private string $observacoesAdicionais,
 
         private Paciente $paciente,
-        private Medico $medico
+        private int $idMedico
     ){}
 
     // Getters
@@ -141,8 +140,8 @@ class Prontuario {
         return $this->paciente;
     }
 
-    public function getMedico(): Medico {
-        return $this->medico;
+    public function getIdMedico(): int {
+        return $this->idMedico;
     }
 
     // Setters
@@ -218,7 +217,7 @@ class Prontuario {
         $this->paciente = $paciente;
     }
 
-    public function setMedico(Medico $medico): void {
-        $this->medico = $medico;
+    public function setIdMedico($idMedico): void {
+        $this->idMedico = $idMedico;
     }
 }
