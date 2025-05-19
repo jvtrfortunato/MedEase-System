@@ -1,3 +1,17 @@
+<?php
+require_once '../controller/MedicoController.php';
+session_start();
+
+$controller = new MedicoController();
+$controller->cadastrar();
+
+$mensagem = '';
+if (isset($_SESSION['mensagem'])) {
+    $mensagem = $_SESSION['mensagem'];
+    unset($_SESSION['mensagem']);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -6,15 +20,26 @@
     <title>Cadastrar Médico</title>
     <link rel="stylesheet" href="../../assets/css/header.css">
     <link rel="stylesheet" href="../../assets/css/cadastrar-medico.css">
+    <script src="../../assets/script/mascaraCPF.js"></script>
+    <script src="../../assets/script/mascaraTelefone.js"></script>
+    <script src="../../assets/script/mascaraCEP.js"></script>
 </head>
 <body>
     <header>
         <a class="logo" href="">MedEase</a>    
         <a href="">sair</a>
     </header>
+
+    <?php if (!empty($mensagem)): ?>
+    <div style="background-color: #d4edda; color: #155724; padding: 10px; margin: 10px; border-radius: 5px;">
+        <?= htmlspecialchars($mensagem) ?>
+    </div>
+    <?php endif; ?>
+
+
     <main>
         <section class="conteudo-principal">
-            <form action="../controller/MedicoController.php" method="post">
+            <form action="" method="post">
                 <h1>Dados Gerais</h1>
                 <section class="dados-gerais-endereco">
                     
@@ -51,7 +76,7 @@
                         <div class="linha-pequenos">           
                             <div class="label-input">
                                 <label for="dataNascimento">Data de Nascimento</label>
-                                <input type="text" name="dataNascimento" id="">
+                                <input type="date" name="dataNascimento" id="">
                             </div>                        
                             <div class="label-input">
                                 <label for="sexo">Sexo</label>
@@ -67,7 +92,7 @@
                     <div class="linha">
                         <div class="label-input">
                             <label for="telefone">Telefone</label>
-                            <input type="tel" name="telefone" id="">
+                            <input type="tel" name="telefone" id="telefone">
                         </div>
 
                         <div class="label-input">
@@ -151,7 +176,7 @@
                             </div>
                             <div class="label-input">
                                 <label for="cep">CEP</label>
-                                <input type="text" id="" name="cep" pattern="\d{5}-\d{3}" placeholder="00000-000">
+                                <input type="text" id="cep" name="cep" pattern="\d{5}-\d{3}" placeholder="00000-000">
                             </div>
                         </div>
                     </div>

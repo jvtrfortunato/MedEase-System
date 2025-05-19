@@ -1,3 +1,20 @@
+<?php
+require_once '../controller/SecretarioController.php';
+session_start();
+
+$controller = new SecretarioController();
+$controller->cadastrar();
+
+$mensagem = '';
+if (isset($_SESSION['mensagem'])) {
+    $mensagem = $_SESSION['mensagem'];
+    unset($_SESSION['mensagem']);
+}
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -6,15 +23,26 @@
     <title>Cadastrar Secretário</title>
     <link rel="stylesheet" href="../../assets/css/header.css">
     <link rel="stylesheet" href="../../assets/css/cadastrar-secretario.css">
+    <script src="../../assets/script/mascaraCPF.js"></script>
+    <script src="../../assets/script/mascaraTelefone.js"></script>
+    <script src="../../assets/script/mascaraCEP.js"></script>
 </head>
 <body>
     <header>
         <a class="logo" href="">MedEase</a>    
         <a href="">sair</a>
     </header>
+
+     <?php if (!empty($mensagem)): ?>
+    <div style="background-color: #d4edda; color: #155724; padding: 10px; margin: 10px; border-radius: 5px;">
+        <?= htmlspecialchars($mensagem) ?>
+    </div>
+    <?php endif; ?>
+
+
     <main>
         <section class="conteudo-principal">
-            <form action="../controller/SecretarioController.php" method="post">
+            <form action="" method="post">
                 <h1>Dados Gerais</h1>
                 <section class="dados-gerais-endereco">
                     
@@ -26,7 +54,7 @@
                         <div class="linha-pequenos">           
                             <div class="label-input">
                                 <label for="dataNascimento">Data de Nascimento</label>
-                                <input type="text" name="dataNascimento" id="">
+                                <input type="date" name="dataNascimento" id="">
                             </div>                        
                             
                         </div>
@@ -44,7 +72,7 @@
                         <div class="linha-pequenos">
                             <div class="label-input">
                                 <label for="cpf">CPF<span>*</span></label></label>
-                                <input type="text" name="cpf" id="">
+                                <input type="text" name="cpf" id="cpf">
                             </div>
                         </div>
                     </div>
@@ -52,7 +80,7 @@
                     <div class="linha">
                         <div class="label-input">
                             <label for="telefone">Telefone</label>
-                            <input type="tel" name="telefone" id="">
+                            <input type="tel" name="telefone" id="telefone">
                         </div>
 
                         <div class="label-input">

@@ -11,6 +11,10 @@ $tipoUsuario = $_SESSION['usuario_tipo'];
     <title>Cadastrar Paciente</title>
     <link rel="stylesheet" href="../../assets/css/header.css">
     <link rel="stylesheet" href="../../assets/css/cadastrar-paciente.css">
+    <script src="../../assets/script/mascaraCPF.js"></script>
+    <script src="../../assets/script/mascaraRG.js"></script>
+    <script src="../../assets/script/mascaraTelefone.js"></script>
+    <script src="../../assets/script/mascaraCEP.js"></script>
 </head>
 <body>
     <header>
@@ -32,7 +36,7 @@ $tipoUsuario = $_SESSION['usuario_tipo'];
                         <div class="linha-pequenos">           
                             <div class="label-input">
                                 <label for="dataNascimento">Data de nascimento</label>
-                                <input type="text" name="dataNascimento" id="">
+                                <input type="date" name="dataNascimento" id="">
                             </div>                        
                             <div class="label-input">
                                 <label for="sexo">Sexo</label>
@@ -60,11 +64,11 @@ $tipoUsuario = $_SESSION['usuario_tipo'];
                         <div class="linha-pequenos">
                             <div class="label-input">
                                 <label for="cpf">CPF<span>*</span></label></label>
-                                <input type="text" name="cpf" id="" require>
+                                <input type="text" name="cpf" id="cpf" require>
                             </div>
                             <div class="label-input">
                                 <label for="rg">RG</label>
-                                <input type="text" name="rg" id="">
+                                <input type="text" name="rg" id="rg">
                             </div>
                         </div>
                     </div>
@@ -72,7 +76,7 @@ $tipoUsuario = $_SESSION['usuario_tipo'];
                     <div class="linha">
                         <div class="label-input">
                             <label for="telefone">Telefone</label>
-                            <input type="tel" name="telefone" id="">
+                            <input type="tel" name="telefone" id="telefone">
                         </div>
 
                         <div class="label-input">

@@ -61,57 +61,34 @@ class SecretarioController {
                     $senha
                 );
 
-                // Inserir usuário no banco
-                $sqlUsuario = "INSERT INTO usuarios (nome, cpf, telefone, data_nascimento, sexo, email, senha, tipo)
-                               VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-                $stmt = $this->conn->prepare($sqlUsuario);
-                $stmt->execute([
-                    $secretario->getNome(),
-                    $secretario->getCpf(),
-                    $secretario->getTelefone(),
-                    $secretario->getDataNascimento(),
-                    $secretario->getSexo(),
-                    $secretario->getEmail(),
-                    $secretario->getSenha(),
-                    $secretario->getTipo()
-                ]);
-
-                $idUsuario = $this->conn->lastInsertId();
-
-                // Inserir dados específicos de secretário
-                $sqlSecretario = "INSERT INTO secretarios (id_usuario) VALUES (?)";
-                $stmt = $this->conn->prepare($sqlSecretario);
-                $stmt->execute([$idUsuario]);
-
-                $idSecretario = $idUsuario;
-
                 // Criar objeto Endereco
-                $endereco = new Endereco($rua, $numero, $bairro, $cidade, $estado, $cep, $idSecretario, null);
+                $endereco = new Endereco($rua, $numero, $bairro, $cidade, $estado, $cep, null);
 
-                // Inserir Endereço no banco
-                $sqlEndereco = "INSERT INTO enderecos (rua, numero, bairro, cidade, estado, cep, id_usuario)
-                                VALUES (?, ?, ?, ?, ?, ?, ?)";
-                $stmt = $this->conn->prepare($sqlEndereco);
-                $stmt->execute([
-                    $endereco->getRua(),
-                    $endereco->getNumero(),
-                    $endereco->getBairro(),
-                    $endereco->getCidade(),
-                    $endereco->getEstado(),
-                    $endereco->getCep(),
-                    $idSecretario
-                ]);
+                // Salvar médico com endereço
+                $secretario->salvar($this->conn, $endereco);
+                
+                session_start();
+                $_SESSION['mensagem'] = "Secretário cadastrado com sucesso!";
+                header("Location: ../views/cadastrar-secretario.php");
+                exit;
 
-                echo "Secretário cadastrado com sucesso!";
             } catch (PDOException $e) {
                 echo "Erro ao cadastrar secretário: " . $e->getMessage();
             }
         }
     }
-}
 
-// Executar cadastro
-$controller = new SecretarioController();
-$controller->cadastrar();
+
+    public function exibirDados() {
+        // Conexão
+        $conn = $this->conn;
+
+        // Criar instância fictícia de secretario só para listar
+        $secretarioModel = new Secretario(0, '', '', '', '', '', '', '');
+
+        // Chamada dos métodos com conexão
+        return $secretarioModel->listarSecretarios($conn);
+    }
+}
 
 ?>

@@ -16,29 +16,26 @@ class MedicoController {
     public function cadastrar() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Coletar e validar os dados do POST
-            
-            // Recebe dados do formulário
-                $nome = $_POST['nome'] ?? '';
-                $cpf = $_POST['cpf'] ?? '';
-                $telefone = $_POST['telefone'] ?? '';
-                $dataNascimento = $_POST['dataNascimento'] ?? '';
-                $sexo = $_POST['sexo'] ?? '';
-                $email = $_POST['email'] ?? '';
-                $senha = $_POST['senha'] ?? '';
-                $senhaRepetir = $_POST['senha-repetir'] ?? '';
-                $tipo = 'medico';
-                $crm = $_POST['crm'] ?? '';
-                $especialidade = $_POST['especialidade'] ?? '';
-    
-                // Endereço
-                $rua = $_POST['rua'] ?? '';
-                $numero = $_POST['numero'] ?? '';
-                $bairro = $_POST['bairro'] ?? '';
-                $cidade = $_POST['cidade'] ?? '';
-                $estado = $_POST['estado'] ?? '';
-                $cep = $_POST['cep'] ?? '';
-    
-            // Verificar campos vazios
+            $nome = $_POST['nome'] ?? '';
+            $cpf = $_POST['cpf'] ?? '';
+            $telefone = $_POST['telefone'] ?? '';
+            $dataNascimento = $_POST['dataNascimento'] ?? '';
+            $sexo = $_POST['sexo'] ?? '';
+            $email = $_POST['email'] ?? '';
+            $senha = $_POST['senha'] ?? '';
+            $senhaRepetir = $_POST['senha-repetir'] ?? '';
+            $crm = $_POST['crm'] ?? '';
+            $especialidade = $_POST['especialidade'] ?? '';
+
+            // Endereço
+            $rua = $_POST['rua'] ?? '';
+            $numero = $_POST['numero'] ?? '';
+            $bairro = $_POST['bairro'] ?? '';
+            $cidade = $_POST['cidade'] ?? '';
+            $estado = $_POST['estado'] ?? '';
+            $cep = $_POST['cep'] ?? '';
+
+            // Validação básica
             if (
                 empty($nome) || empty($cpf) || empty($telefone) || empty($dataNascimento) || empty($sexo) ||
                 empty($email) || empty($senha) || empty($senhaRepetir) || empty($crm) || empty($especialidade) ||
@@ -47,86 +44,56 @@ class MedicoController {
                 echo "Erro: Todos os campos são obrigatórios!";
                 return;
             }
-    
+
             if ($senha !== $senhaRepetir) {
                 echo "Erro: As senhas não coincidem.";
                 return;
             }
-    
-            // Criar objeto Medico
-            $medico = new Medico(
-                0, // ID do usuário ainda não gerado
-                $nome,
-                $cpf,
-                $telefone,
-                $dataNascimento,
-                $sexo,
-                $email,
-                $senha,
-                $crm,
-                $especialidade
-            );
-            
 
             try {
-    
-                // Inserir Usuário
-                $sqlUsuario = "INSERT INTO usuarios (nome, cpf, telefone, data_nascimento, sexo, email, senha, tipo)
-                               VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-                $stmt = $this->conn->prepare($sqlUsuario);
-                $stmt->execute([
-                    $medico->getNome(),
-                    $medico->getCpf(),
-                    $medico->getTelefone(),
-                    $medico->getDataNascimento(),
-                    $medico->getSexo(),
-                    $medico->getEmail(),
-                    $medico->getSenha(),
-                    $medico->getTipo(),
-                ]);
-                $idUsuario = $this->conn->lastInsertId();
-    
-                // Inserir Médico
-                $sqlMedico = "INSERT INTO medicos (crm, especialidade, id_usuario)
-                              VALUES (?, ?, ?)";
-                $stmt = $this->conn->prepare($sqlMedico);
-                $stmt->execute([
-                    $medico->getCrm(),
-                    $medico->getEspecialidade(),
-                    $idUsuario
-                ]);
+                // Criar objeto Medico
+                $medico = new Medico(
+                    0,
+                    $nome,
+                    $cpf,
+                    $telefone,
+                    $dataNascimento,
+                    $sexo,
+                    $email,
+                    $senha,
+                    $crm,
+                    $especialidade
+                );
 
-                // Recuperar o ID do medico recém-inserido
-                $idMedico = $idUsuario;
-            
-                
-                // Criar objeto Endereco
-                $endereco = new Endereco($rua, $numero, $bairro, $cidade, $estado, $cep, $idMedico, null);
-                
-                // Inserir Endereço
-                $sqlEndereco = "INSERT INTO enderecos (rua, numero, bairro, cidade, estado, cep, id_usuario)
-                                VALUES (?, ?, ?, ?, ?, ?, ?)";
-                $stmt = $this->conn->prepare($sqlEndereco);
-                $stmt->execute([
-                    $endereco->getRua(),
-                    $endereco->getNumero(),
-                    $endereco->getBairro(),
-                    $endereco->getCidade(),
-                    $endereco->getEstado(),
-                    $endereco->getCep(),
-                    $idMedico
-                ]);
+                // Criar objeto Endereco (sem id_usuario ainda)
+                $endereco = new Endereco($rua, $numero, $bairro, $cidade, $estado, $cep);
 
-                echo "Médico cadastrado com sucesso!";
+                // Salvar médico com endereço
+                $medico->salvar($this->conn, $endereco);
+
+
+                session_start();
+                $_SESSION['mensagem'] = "Médico cadastrado com sucesso!";
+                header("Location: ../views/cadastrar-medico.php");
+                exit;
+
             } catch (PDOException $e) {
                 echo "Erro ao cadastrar médico: " . $e->getMessage();
             }
         }
     }
+
+    public function exibirDados() {
+    // Conexão
+    $conn = $this->conn;
+
+    // Criar instância fictícia de Medico só para listar
+    $medicoModel = new Medico(0, '', '', '', '', '', '', '', '', '');
+
+    // Chamada dos métodos com conexão
+    return $medicoModel->listarMedicos($conn);
 }
 
-// Executar cadastro
-$controller = new MedicoController();
-$controller->cadastrar();
+}
 
-?>
+
