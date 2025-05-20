@@ -18,7 +18,7 @@ class Consulta {
     ) {}
 
     // Getters
-    public function getIdConsulta(): int {
+    public function getId(): int {
         return $this->idConsulta;
     }
 

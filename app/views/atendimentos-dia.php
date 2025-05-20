@@ -51,7 +51,7 @@
                             </div>
                             <div class="status">
                                 <p><?php echo htmlspecialchars($consulta->getStatus()); ?></p>
-                                <a href="prontuario.php" class="iniciar-consulta" type="submit">Iniciar Consulta</a>
+                                <a href="../controller/ProntuarioController.php?acao=iniciar&consulta_id=<?php echo $consulta->getId(); ?>" class="iniciar-consulta">Iniciar Consulta</a>
                             </div>
                         </div>
                     </div>

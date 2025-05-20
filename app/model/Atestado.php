@@ -2,10 +2,10 @@
 
 class Atestado {
     public function __construct(
-        private int $idAtestado,
+        private ?int $idAtestado = null,
         private string $cid10,
         private string $textoPrincipal,
-        private int $idDocumentacao
+        private ?int $idDocumentacao = null
     ) {}
 
     // Getters

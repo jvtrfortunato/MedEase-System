@@ -11,7 +11,7 @@ class ExameFisico {
         private string $exameAbdominal,
         private string $exameNeurologico,
         private string $exameAparelhoLocomotor,
-        private int $idProntuario
+        private ?int $idProntuario = null
     ) {}
 
     // Getters
@@ -96,69 +96,3 @@ class ExameFisico {
         $this->idProntuario = $idProntuario;
     }
 }
-
-$exameFisico = new ExameFisico(
-    //Avaliação geral
-    'Nível de consciência teste',
-    'Posição e postura teste',
-    'Facies teste',
-    'Estado nutricional teste',
-    'Hidratação teste',
-    'Coloração da pele teste',
-
-    //Sinais vitais
-    'Pressão arterial teste',
-    'Frequência cardíaca teste',
-    'Frequência respiratória teste',
-    'Temperatura corporal teste',
-    'Saturação do oxigênio teste',
-
-    //Exame da pele e anexos (cabelos, unhas, mucosas)
-    'Lesões teste',
-    'Manchas teste',
-    'Feridas teste',
-    'Hematomas teste',
-    'Elasticidade da pele teste',
-    'Umidade da pele teste',
-    'Coloração das mucosas teste',
-
-    //Exame da cabeça e pescoço
-    'Couro cabeludo teste',
-    'Crânio teste',
-    'Olhos teste',
-    'Avaliação da boca e garganta teste',
-    'Linfonodos cervicais teste',
-    'Tireoide teste',
-
-    //Exame cardiovascular
-    'Inspeção cardiovascular do tórax teste',
-    'Precórdio teste',
-    'Ausculta cardíaca teste',
-    'Pulsos periféricos teste',
-
-    //Exame respiratório
-    'Movimento respiratório teste',
-    'Inspeção respiratória do tórax teste',
-    'Percussão torácica teste',
-    'Ausculta pulmonar teste',
-
-    //Exame abdominal
-    'Inspeção abdominal teste',
-    'Ausculta intestinal teste',
-    'Percussão abdominal teste',
-    'Palpação abdominal teste',
-
-    //Exame neurológico
-    'Teste de reflexos teste',
-    'Força muscular teste',
-    'Coordenação motora teste',
-    'Sensibilidade teste',
-
-    //Exame do aparelho locomotor
-    'Inspeção das articulações teste',
-    'Amplitude dos movimentos teste',
-    'Dor teste',
-    'Limitação funcional teste'
-);
-
-//var_dump($exameFisico);

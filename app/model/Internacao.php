@@ -6,7 +6,7 @@ class Internacao {
         private string $diagnosticoInternacao,
         private string $procedimentosCirurgicos,
         private string $medicosResponsaveis,
-        private int $idProntuario
+        private ?int $idProntuario = null
     ) {}
 
     // Getters
