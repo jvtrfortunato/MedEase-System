@@ -7,7 +7,7 @@ class HistoricoMedico {
         private string $cirurgiasAnteriores,
         private string $alergiasMedicamentos,
         private string $historicoDoencasFamilia,
-        private int $idProntuario
+        private ?int $idProntuario = null
     ) {}
 
     // Getters

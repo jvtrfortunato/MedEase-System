@@ -2,11 +2,11 @@
 
 class Documentacao {
     public function __construct(
-        private int $idDocumentacao,
+        private ?int $idDocumentacao = null,
         private string $termosConsentimento,
         private Atestado $atestado,
         private string $declaracoesSaude,
-        private int $idProntuario
+        private ?int $idProntuario = null
     ) {}
 
     // Getters

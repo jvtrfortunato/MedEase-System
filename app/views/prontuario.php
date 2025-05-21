@@ -8,6 +8,26 @@
     <link rel="stylesheet" href="../../assets/css/prontuario.css">
 </head>
 <body>
+    <?php
+    require_once '../model/Prontuario.php';
+    require_once '../model/Paciente.php';
+    require_once '../model/Endereco.php';
+    require_once '../model/HistoricoMedico.php';
+    require_once '../model/Anamnese.php';
+    require_once '../model/ExameFisico.php';
+    require_once '../model/Prescricao.php';
+    require_once '../model/Internacao.php';
+    require_once '../model/Documentacao.php';
+    require_once '../model/Atestado.php';
+
+    session_start();
+
+    $prontuario = isset($_SESSION['prontuario']) ? unserialize($_SESSION['prontuario']) : null;
+
+    $paciente = $prontuario ? $prontuario->getPaciente() : null;
+    $endereco = $paciente ? $paciente->getEndereco() : null;
+    ?>
+
     <header>
         <a class="logo" href="">MedEase</a>    
         <a href="">sair</a>
@@ -17,125 +37,137 @@
         <section class="conteudo-principal">
             <h1>Prontuário Eletrônico do Paciente</h1>
             <section class="dados-prontuario">
-                
+            
+            <form action="../controller/ProntuarioController.php" method="post">
+                <input type="hidden" name="acao" value="salvar">
                 <!--Identificação do Paciente-->
                 <div class="menu-seta">
                     <h2>Identificação do Paciente</h2>
-                    <img id="seta" onclick="expandirRetrair('formulario1', this)" src="../../assets/img/seta-direita.png" alt="seta">
+                    <img id="seta" onclick="expandirRetrair('formulario1', this)" src="../../assets/img/seta-baixo.png" alt="seta">
                 </div>
                 <div class="barra"></div>                
-                <section id="formulario1" class="formulario-oculto">
-                    <form action="">
+                <section id="formulario1" class="formulario-visivel">
                         
-                        <!--Primeira linha-->
                         <div class="linha-dados">
                             <div class="input-grande">
                                 <label for="">Nome completo</label>
-                                <input class="input-estilizacao-padrao" type="text">
+                                <input class="input-estilizacao-padrao" type="text"
+                                value="<?= $paciente ? htmlspecialchars($paciente->getNome()) : '' ?>">
                             </div>
                             <div class="div-medios">
                                 <div class="input-medio">
                                     <label for="">Data de Nascimento</label>
-                                    <input class="input-estilizacao-padrao" type="date">
+                                    <input class="input-estilizacao-padrao" type="date"
+                                     value="<?= $paciente ? $paciente->getDataNascimento() : '' ?>">
                                 </div>
                                 <div class="input-medio">
                                     <label for="">Sexo</label>
-                                    <input class="input-estilizacao-padrao" type="text">
+                                    <input class="input-estilizacao-padrao" type="text"
+                                    value="<?= $paciente ? htmlspecialchars($paciente->getSexo()) : '' ?>">
                                 </div>
                             </div>
                         </div>
 
-                        <!--Segunda linha-->
                         <div class="linha-dados">
                             <div class="input-grande">
                                 <label for="">Estado Civil</label>
-                                <input class="input-estilizacao-padrao" type="text">
+                                <input class="input-estilizacao-padrao" type="text"
+                                value="<?= $paciente ? htmlspecialchars($paciente->getEstadoCivil()) : '' ?>">
                             </div>
                             <div class="div-medios">
                                 <div class="input-medio">
                                     <label for="">CPF</label>
-                                    <input class="input-estilizacao-padrao" type="text">
+                                    <input class="input-estilizacao-padrao" type="text"
+                                    value="<?= $paciente ? htmlspecialchars($paciente->getCpf()) : '' ?>">
                                 </div>
                                 <div class="input-medio">
                                     <label for="">RG</label>
-                                    <input class="input-estilizacao-padrao" type="text">
+                                    <input class="input-estilizacao-padrao" type="text"
+                                    value="<?= $paciente ? htmlspecialchars($paciente->getRg()) : '' ?>">
                                 </div>
                             </div>
                         </div>
 
-                        <!--Terceira linha-->
                         <div class="linha-dados">
                             <div class="input-grande">
                                 <label for="">Rua</label>
-                                <input class="input-estilizacao-padrao" type="text">
+                                <input class="input-estilizacao-padrao" type="text"
+                                value="<?= $endereco ? htmlspecialchars($endereco->getRua()) : '' ?>">
                             </div>
                             <div class="div-medios">
                                 <div class="input-medio">
                                     <label for="">Número</label>
-                                    <input class="input-estilizacao-padrao" type="number">
+                                    <input class="input-estilizacao-padrao" type="number"
+                                    value="<?= $endereco ? htmlspecialchars($endereco->getNumero()) : '' ?>">
                                 </div>
                                 <div class="input-medio">
                                     <label for="">Bairro</label>
-                                    <input class="input-estilizacao-padrao" type="text">
+                                    <input class="input-estilizacao-padrao" type="text"
+                                    value="<?= $endereco ? htmlspecialchars($endereco->getBairro()) : '' ?>">
                                 </div>
                             </div>
                         </div>
 
-                        <!--Quarta linha-->
                         <div class="linha-dados">
                             <div class="input-grande">
                                 <label for="">Cidade</label>
-                                <input class="input-estilizacao-padrao" type="text">
+                                <input class="input-estilizacao-padrao" type="text"
+                                value="<?= $endereco ? htmlspecialchars($endereco->getCidade()) : '' ?>">
                             </div>
                             <div class="div-medios">
                                 <div class="input-medio">
                                     <label for="">Estado</label>
-                                    <input class="input-estilizacao-padrao" type="text">
+                                    <input class="input-estilizacao-padrao" type="text"
+                                    value="<?= $endereco ? htmlspecialchars($endereco->getEstado()) : '' ?>">
                                 </div>
                                 <div class="input-medio">
                                     <label for="">CEP</label>
-                                    <input class="input-estilizacao-padrao" type="text">
+                                    <input class="input-estilizacao-padrao" type="text"
+                                    value="<?= $endereco ? htmlspecialchars($endereco->getCep()) : '' ?>">
                                 </div>
                             </div>
                         </div>
 
-                        <!--Quinta linha-->
                         <div class="linha-dados">
                             <div class="input-grande">
                                 <label for="">Telefone</label>
-                                <input class="input-estilizacao-padrao" type="text">
+                                <input class="input-estilizacao-padrao" type="text"
+                                value="<?= $paciente ? htmlspecialchars($paciente->getTelefone()) : '' ?>">
                             </div>
                             <div class="input-grande">
                                 <label for="">Email</label>
-                                <input class="input-estilizacao-padrao" type="text">
+                                <input class="input-estilizacao-padrao" type="text"
+                                value="<?= $paciente ? htmlspecialchars($paciente->getEmail()) : '' ?>">
                             </div>
                         </div>
 
-                        <!--Sexta linha-->
                         <div class="linha-dados">
                             <div class="input-grande">
                                 <label for="">Nome do responsável</label>
-                                <input class="input-estilizacao-padrao" type="text">
+                                <input class="input-estilizacao-padrao" type="text"
+                                value="<?= $paciente ? htmlspecialchars($paciente->getNomeResponsavel()) : '' ?>">
                             </div>
                             <div class="input-grande">
                                 <label for="">Cartão Nacional de Saúde (CNS)</label>
-                                <input class="input-estilizacao-padrao" type="text">
+                                <input class="input-estilizacao-padrao" type="text"
+                                value="<?= $paciente ? htmlspecialchars($paciente->getCns()) : '' ?>">
                             </div>
                         </div>
 
-                        <!--Sétima linha-->
                         <div class="linha-dados">
                             <div class="input-grande">
                                 <label for="">Convênio</label>
-                                <input class="input-estilizacao-padrao" type="text">
+                                <input class="input-estilizacao-padrao" type="text"
+                                value="<?= $paciente ? htmlspecialchars($paciente->getConvenio()) : '' ?>">
                             </div>
                             <div class="input-grande">
                                 <label for="">Número do Plano de Saúde</label>
-                                <input class="input-estilizacao-padrao" type="text">
+                                <input class="input-estilizacao-padrao" type="text"
+                                value="<?= $paciente ? htmlspecialchars($paciente->getPlanoSaude()) : '' ?>">
                             </div>
                         </div>
 
-                    </form>
+                    
                 </section>
 
                 <!--Histórico Médico e Familiar-->
@@ -145,7 +177,7 @@
                 </div>
                 <div class="barra"></div>
                 <section id="formulario2" class="formulario-oculto">
-                    <form action="">
+                    
 
                         <div class="nome-campo">
                             <label for="">Doenças pré-existentes</label>
@@ -172,7 +204,7 @@
                             <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
                         </div>   
 
-                    </form>
+                    
                 </section>
 
                 <!--Anamnese-->
@@ -182,7 +214,7 @@
                 </div>
                 <div class="barra"></div>
                 <section id="formulario3" class="formulario-oculto">
-                    <form action="">
+                    
 
                         <h3>Motivo da consulta</h3>
                         <div class="motivo-consulta">
@@ -214,7 +246,7 @@
                             <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
                         </div>
 
-                    </form>
+                    
                 </section>
 
                 <!--Exame Físico-->
@@ -224,7 +256,7 @@
                 </div>
                 <div class="barra"></div>
                 <section id="formulario4" class="formulario-oculto">
-                    <form action="">
+                    
 
                         <div class="nome-campo">
                             <label for="">Avaliação geral</label>
@@ -271,7 +303,7 @@
                             <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
                         </div>
 
-                    </form>
+                    
                 </section>
 
                 <!--Diagnóstico-->
@@ -281,7 +313,7 @@
                 </div>
                 <div class="barra"></div>
                 <section id="formulario5" class="formulario-oculto">
-                    <form action="">
+                    
 
                         <div class="nome-campo">
                             <label for="">Diagnóstico presuntivo</label>
@@ -308,7 +340,7 @@
                             </select>
                         </div>
 
-                    </form>
+                    
                 </section>
 
                 <!--Exames Solicitados-->
@@ -459,11 +491,12 @@
 
                 </section>
 
-            </section>
+                <div class="finalizar-consulta">
+                    <button type='submit'>Finalizar Consulta</button>
+                </div>
+            </form>
 
-            <div class="finalizar-consulta">
-                <button>Finalizar Consulta</button>
-            </div>
+            </section>
         </section>
     </main>
 

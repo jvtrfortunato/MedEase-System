@@ -53,9 +53,28 @@ $pacientes = $controller->listarPacientes();
 
         </section>
         <section class="botao">
-            <button class="voltar" type="button">Voltar</button>
+            <button id="voltarPagina" class="voltar" type="button">Voltar</button>
         </section>
     </main>
     <footer></footer>
+
+    <script>
+        // Evento para o botão "Voltar" (se existir)
+        if (voltarPagina) {
+            voltarPagina.addEventListener("click", () => {
+                if (window.history.length > 1) {
+                    window.history.back(); // volta à página anterior no histórico
+                } else {
+                    // Fallback: redireciona manualmente caso não haja histórico
+                    if ($tipoUsuario === 'administrador') {
+                        window.location.href = "home-administrador.php";
+                    }
+                    else {
+                        window.location.href = "home-secretario.php";
+                    }
+                }
+            });
+        }
+    </script>
 </body>
 </html>

@@ -21,7 +21,7 @@ class Prescricao {
         // Recomendações
         private string $recomendacoes,
 
-        private int $idProntuario
+        private ?int $idProntuario = null
     ) {}
 
     // Getters
@@ -122,26 +122,3 @@ class Prescricao {
         $this->idProntuario = $idProntuario;
     }
 }
-
-
-$medicamento = new Medicamento(
-    //Medicamento
-    'Medicamento teste',
-    'Concentração teste',
-    'Forma farmaceutica teste',
-    'Via administração teste',
-    'Tipo receita teste',
-
-    //Posologia
-    'Dose teste',
-    'Frequência dose teste',
-
-    //Período de tratamento
-    'Início teste',
-    'Dias teste',
-    
-    //Outros
-    'Recomendações teste'   //ARRUMAR TODOS DESSE AQUI
-);
-
-//var_dump($medicaento);
