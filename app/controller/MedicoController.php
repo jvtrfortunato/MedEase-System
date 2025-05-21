@@ -84,15 +84,28 @@ class MedicoController {
     }
 
     public function exibirDados() {
-    // Conexão
-    $conn = $this->conn;
+        // Conexão
+        $conn = $this->conn;
 
-    // Criar instância fictícia de Medico só para listar
-    $medicoModel = new Medico(0, '', '', '', '', '', '', '', '', '');
+        $enderecoVazio = new Endereco('', '', '', '', '', '');
+        $medicoModel = new Medico(0, '', '', '', '', '', '', '', '', '', $enderecoVazio);
 
-    // Chamada dos métodos com conexão
-    return $medicoModel->listarMedicos($conn);
-}
+        // Chamada dos métodos com conexão
+        return $medicoModel->listarMedicos($conn);
+    }
+
+    public function dadosMedico($idMedico)
+    {
+       $medico = Medico::buscarMedico($this->conn, $idMedico);
+
+        if ($medico) {
+            return $medico; // <-- Retorna o objeto diretamente, sem toArray()
+        }
+
+
+        return null;
+    }
+    
 
 }
 

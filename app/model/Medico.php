@@ -9,6 +9,7 @@ class Medico extends Usuario
 {
     private string $crm;
     private string $especialidade;
+    private Endereco $endereco;
 
     public function __construct(
         int $idUsuario,
@@ -20,7 +21,8 @@ class Medico extends Usuario
         string $email,
         string $senha,
         string $crm,
-        string $especialidade
+        string $especialidade,
+        Endereco $endereco
     ) {
         parent::__construct(
             $idUsuario,
@@ -36,15 +38,22 @@ class Medico extends Usuario
 
         $this->crm = $crm;
         $this->especialidade = $especialidade;
+        $this->endereco = $endereco;
     }
 
     // Getters
     public function getCrm(): string { return $this->crm; }
     public function getEspecialidade(): string { return $this->especialidade; }
+    public function getEndereco(): Endereco {return $this->endereco;}
 
     // Setters
     public function setCrm(string $crm): void { $this->crm = $crm; }
     public function setEspecialidade(string $especialidade): void { $this->especialidade = $especialidade; }
+    public function setEndereco(Endereco $endereco): void {$this->endereco = $endereco;}
+
+
+
+
 
     // Salvar no banco (com transação completa)
     public function salvar(PDO $conn, Endereco $endereco): bool {
@@ -104,7 +113,7 @@ class Medico extends Usuario
 
     public function listarMedicos(PDO $conn) {
     try {
-        $stmt = $conn->query("SELECT u.nome, u.cpf FROM usuarios u INNER JOIN medicos m ON u.id_usuario = m.id_usuario");
+        $stmt = $conn->query("SELECT u.nome, u.cpf, m.id_medico FROM usuarios u INNER JOIN medicos m ON u.id_usuario = m.id_usuario");
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
@@ -113,11 +122,72 @@ class Medico extends Usuario
     }
     }
 
+    public static function buscarMedico(PDO $conn, $id)
+{
+    try {
+
+        //  buscar dados do médico
+        $sql = "SELECT u.*, m.id_medico, m.crm, m.especialidade 
+                FROM usuarios u 
+                INNER JOIN medicos m ON u.id_usuario = m.id_usuario 
+                WHERE m.id_medico = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([':id' => $id]);
+
+        $dados = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $idUsuario = $dados['id_usuario'];       
+
+
+        // depois buscar endereço
+        $sqlEndereco = "SELECT * FROM enderecos WHERE id_usuario = :idUsuario";
+        $stmtEndereco = $conn->prepare($sqlEndereco);
+        $stmtEndereco->execute([':idUsuario' => $idUsuario]);
+        $dataEndereco = $stmtEndereco->fetch(PDO::FETCH_ASSOC);
+
+        $endereco = null;
+        if ($dataEndereco) {
+            $endereco = new Endereco(
+                $dataEndereco['rua'],
+                $dataEndereco['numero'],
+                $dataEndereco['bairro'],
+                $dataEndereco['cidade'],
+                $dataEndereco['estado'],
+                $dataEndereco['cep']
+            );
+        } else {
+            // Pode definir um endereço vazio, ou lançar exceção, se quiser
+            $endereco = new Endereco('', '', '', '', '', '');
+        }
+
+        if ($dados) {
+            return new Medico(
+                (int)($dados['id_usuario'] ?? 0),
+                $dados['nome'],
+                $dados['cpf'],
+                $dados['telefone'],
+                $dados['data_nascimento'],
+                $dados['sexo'],
+                $dados['email'],
+                $dados['senha'],
+                $dados['crm'],
+                $dados['especialidade'],
+                $endereco    // <-- PASSA O OBJETO ENDEREÇO AQUI
+            );
+        }
+
+        return null;
+
+    } catch (PDOException $e) {
+        echo "Erro ao buscar médico: " . $e->getMessage();
+        return null;
+    }
+}
+
 
     // Representar como array
     public function toArray(): array {
         return [
-            'idUsuario' => $this->getIdUsuario(),
             'nome' => $this->getNome(),
             'cpf' => $this->getCpf(),
             'telefone' => $this->getTelefone(),
@@ -132,6 +202,7 @@ class Medico extends Usuario
         ];
     }
 }
+
 
 // $conn->beginTransaction();
 // Essa função inicia uma transação. A partir daí, todas as operações feitas (inserir, atualizar, deletar) ficam "pendentes", ou seja, não são salvas de forma permanente no banco até que você diga que está tudo certo.
