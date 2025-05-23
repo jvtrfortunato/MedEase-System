@@ -146,7 +146,7 @@
                         <!--IMPLEMENTAR OS BOTÕES AGORA-->
                     </form>
                     <div class="botoes">
-                        <button class="vermelho" type="button" onclick="window.location.href='prontuario.html'">Voltar</button>
+                        <button class="vermelho" type="button" onclick="window.location.href='prontuario.php'">Voltar</button>
                         <div class="botoes-direita">
                             <button type="button" class="vermelho" onclick="limparCampos()">Limpar campos</button>
                             <button class="verde" type="button" onclick="salvarMedicamentos()">Salvar</button>
@@ -331,7 +331,7 @@
             }
 
             localStorage.setItem('medicamentos', JSON.stringify(medicamentos));
-            window.location.href = 'prontuario.html';
+            window.location.href = 'prontuario.php';
         }
 
         function carregarMedicamentosSalvos() {

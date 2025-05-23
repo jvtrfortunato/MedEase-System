@@ -26,6 +26,13 @@
 
     $paciente = $prontuario ? $prontuario->getPaciente() : null;
     $endereco = $paciente ? $paciente->getEndereco() : null;
+
+    // Recuperar o motivo da consulta a partir da anamnese
+    $motivoConsulta = null;
+
+    if ($prontuario && $prontuario->getAnamnese()) {
+        $motivoConsulta = $prontuario->getAnamnese()->getMotivoConsulta();
+    }
     ?>
 
     <header>
@@ -40,6 +47,7 @@
             
             <form action="../controller/ProntuarioController.php" method="post">
                 <input type="hidden" name="acao" value="salvar">
+                <input type="hidden" name="examesSolicitados" id="examesSolicitadosInput">
                 <!--Identificação do Paciente-->
                 <div class="menu-seta">
                     <h2>Identificação do Paciente</h2>
@@ -52,17 +60,20 @@
                             <div class="input-grande">
                                 <label for="">Nome completo</label>
                                 <input class="input-estilizacao-padrao" type="text"
+                                name="nome"
                                 value="<?= $paciente ? htmlspecialchars($paciente->getNome()) : '' ?>">
                             </div>
                             <div class="div-medios">
                                 <div class="input-medio">
                                     <label for="">Data de Nascimento</label>
                                     <input class="input-estilizacao-padrao" type="date"
-                                     value="<?= $paciente ? $paciente->getDataNascimento() : '' ?>">
+                                    name="dataNascimento"
+                                    value="<?= $paciente ? $paciente->getDataNascimento() : '' ?>">
                                 </div>
                                 <div class="input-medio">
                                     <label for="">Sexo</label>
                                     <input class="input-estilizacao-padrao" type="text"
+                                    name="sexo"
                                     value="<?= $paciente ? htmlspecialchars($paciente->getSexo()) : '' ?>">
                                 </div>
                             </div>
@@ -72,17 +83,20 @@
                             <div class="input-grande">
                                 <label for="">Estado Civil</label>
                                 <input class="input-estilizacao-padrao" type="text"
+                                name="estadoCivil"
                                 value="<?= $paciente ? htmlspecialchars($paciente->getEstadoCivil()) : '' ?>">
                             </div>
                             <div class="div-medios">
                                 <div class="input-medio">
                                     <label for="">CPF</label>
                                     <input class="input-estilizacao-padrao" type="text"
+                                    name="cpf"
                                     value="<?= $paciente ? htmlspecialchars($paciente->getCpf()) : '' ?>">
                                 </div>
                                 <div class="input-medio">
                                     <label for="">RG</label>
                                     <input class="input-estilizacao-padrao" type="text"
+                                    name="rg"
                                     value="<?= $paciente ? htmlspecialchars($paciente->getRg()) : '' ?>">
                                 </div>
                             </div>
@@ -92,17 +106,20 @@
                             <div class="input-grande">
                                 <label for="">Rua</label>
                                 <input class="input-estilizacao-padrao" type="text"
+                                name="rua"
                                 value="<?= $endereco ? htmlspecialchars($endereco->getRua()) : '' ?>">
                             </div>
                             <div class="div-medios">
                                 <div class="input-medio">
                                     <label for="">Número</label>
                                     <input class="input-estilizacao-padrao" type="number"
+                                    name="numero"
                                     value="<?= $endereco ? htmlspecialchars($endereco->getNumero()) : '' ?>">
                                 </div>
                                 <div class="input-medio">
                                     <label for="">Bairro</label>
                                     <input class="input-estilizacao-padrao" type="text"
+                                    name="bairro"
                                     value="<?= $endereco ? htmlspecialchars($endereco->getBairro()) : '' ?>">
                                 </div>
                             </div>
@@ -112,17 +129,20 @@
                             <div class="input-grande">
                                 <label for="">Cidade</label>
                                 <input class="input-estilizacao-padrao" type="text"
+                                name="cidade"
                                 value="<?= $endereco ? htmlspecialchars($endereco->getCidade()) : '' ?>">
                             </div>
                             <div class="div-medios">
                                 <div class="input-medio">
                                     <label for="">Estado</label>
                                     <input class="input-estilizacao-padrao" type="text"
+                                    name="estado"
                                     value="<?= $endereco ? htmlspecialchars($endereco->getEstado()) : '' ?>">
                                 </div>
                                 <div class="input-medio">
                                     <label for="">CEP</label>
                                     <input class="input-estilizacao-padrao" type="text"
+                                    name="cep"
                                     value="<?= $endereco ? htmlspecialchars($endereco->getCep()) : '' ?>">
                                 </div>
                             </div>
@@ -132,11 +152,13 @@
                             <div class="input-grande">
                                 <label for="">Telefone</label>
                                 <input class="input-estilizacao-padrao" type="text"
+                                name="telefone"
                                 value="<?= $paciente ? htmlspecialchars($paciente->getTelefone()) : '' ?>">
                             </div>
                             <div class="input-grande">
                                 <label for="">Email</label>
                                 <input class="input-estilizacao-padrao" type="text"
+                                name="email"
                                 value="<?= $paciente ? htmlspecialchars($paciente->getEmail()) : '' ?>">
                             </div>
                         </div>
@@ -145,11 +167,13 @@
                             <div class="input-grande">
                                 <label for="">Nome do responsável</label>
                                 <input class="input-estilizacao-padrao" type="text"
+                                name="nomeResponsavel"
                                 value="<?= $paciente ? htmlspecialchars($paciente->getNomeResponsavel()) : '' ?>">
                             </div>
                             <div class="input-grande">
                                 <label for="">Cartão Nacional de Saúde (CNS)</label>
                                 <input class="input-estilizacao-padrao" type="text"
+                                name="cns"
                                 value="<?= $paciente ? htmlspecialchars($paciente->getCns()) : '' ?>">
                             </div>
                         </div>
@@ -158,11 +182,13 @@
                             <div class="input-grande">
                                 <label for="">Convênio</label>
                                 <input class="input-estilizacao-padrao" type="text"
+                                name="convenio"
                                 value="<?= $paciente ? htmlspecialchars($paciente->getConvenio()) : '' ?>">
                             </div>
                             <div class="input-grande">
                                 <label for="">Número do Plano de Saúde</label>
                                 <input class="input-estilizacao-padrao" type="text"
+                                name="planoSaude"
                                 value="<?= $paciente ? htmlspecialchars($paciente->getPlanoSaude()) : '' ?>">
                             </div>
                         </div>
@@ -216,10 +242,10 @@
                 <section id="formulario3" class="formulario-oculto">
                     
 
-                        <h3>Motivo da consulta</h3>
-                        <div class="motivo-consulta">
-                            <p>Receber aqui o motivo da consulta coletada no agendamento</p> <!--Receber aqui o motivo da consulta coletada no agendamento-->
-                        </div>
+                            <h3>Motivo da consulta</h3>
+                            <div class="motivo-consulta">
+                                <p><?php echo htmlspecialchars($motivoConsulta); ?></p> 
+                            </div>
 
                         <div class="nome-campo">
                             <label for="">Queixa e duração</label>
@@ -352,7 +378,7 @@
                 <section id="formulario6" class="formulario-oculto">
                     <ul id="lista-exames"></ul>
                     <div class="botao-solicitar-criar">
-                        <button id="botao-exame" onclick="window.location.href='solicitar-exames.html'">Solicitar exame</button>
+                        <button type='button' id="botao-exame" onclick="window.location.href='solicitar-exames.php'">Solicitar exame</button>
                     </div>                   
                 </section>
 
@@ -365,7 +391,7 @@
                 <section id="formulario7" class="formulario-oculto">
                     <ul id="medicamentosPrescricao"></ul>
                     <div class="botao-solicitar-criar">
-                        <button id="botaoPrescricao" type="button" onclick="window.location.href='criar-prescricao.html'">Criar prescrição</button>
+                        <button id="botaoPrescricao" type="button" onclick="window.location.href='criar-prescricao.php'">Criar prescrição</button>
                     </div>                   
                 </section>
 
@@ -569,6 +595,12 @@
             } else {
                 botao.textContent = 'Criar Prescrição';
             }
+        });
+
+        //Função que preenche o array dos exames solicitados
+        document.querySelector('form').addEventListener('submit', function () {
+        const exames = JSON.parse(localStorage.getItem('examesSolicitados')) || [];
+        document.getElementById('examesSolicitadosInput').value = JSON.stringify(exames);
         });
 
     </script>

@@ -98,7 +98,7 @@ class ProntuarioController {
                     null
                 ),
                 $anamnese = new Anamnese(
-                    '',
+                    $dadosConsulta['motivo'],
                     '',
                     '',
                     '',
@@ -171,12 +171,15 @@ class ProntuarioController {
         }
     }
 
-
+    public function salvarProntuario() {
+        $examesSolicitadosJson = $_POST['examesSolicitados'] ?? '[]';
+        $examesSolicitadosArray = json_decode($examesSolicitadosJson, true);
+    }
 }
 
 $controller = new ProntuarioController();
 
-if ($_GET['acao'] === 'iniciar' && isset($_GET['consulta_id'])) {
+if (isset($_GET['acao']) === 'iniciar' && isset($_GET['consulta_id'])) {
     $controller->iniciarProntuario();
 }
 

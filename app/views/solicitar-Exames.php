@@ -28,14 +28,6 @@
             </section>
             <section class="nome_medico">
                 <div>
-                    <!--Descobrir como e de onde recuperar os dados do médico-->
-                    <p class="solicitado_por">Solicitado por</p>
-                    <p>DRA MARIANA OLÍVIA</p>
-                    <p>MÉDICA NEUROLOGISTA</p>
-                    <p>CRM: 99999999</p>
-                    <p>NOME DA CLÍNICA</p>
-                </div>
-                <div>
                     <button onclick="adicionarExame()">Confirmar</button>
                 </div>
             </section>
@@ -45,7 +37,6 @@
             <div class="conteudo_exames_solicitados">
                 <p class="titulo">Nome do exame</p>
                 <div class="barra_separacao"></div>
-                <!--Descobrir como e de onde recuperar os dados-->
                 <ul id="lista-exames"></ul>
             </div>
         </section>
@@ -98,7 +89,7 @@
         }
 
         function finalizar() {
-            window.location.href = 'prontuario.html';
+            window.location.href = 'prontuario.php';
         }
 
         // Atualiza a lista ao carregar a página
