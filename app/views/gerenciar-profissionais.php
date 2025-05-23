@@ -31,9 +31,10 @@ $secretarios = $secretarioController->exibirDados();
             <div class="busca-opcoes">
                 
                 <div class="busca">
-                    <img src="/assets/img/lupa.png" alt="Lupa de pesquisa">
+                    <img src="../../assets/img/lupa.png" alt="Lupa de pesquisa">
                     <input type="text" placeholder="Buscar Profissional (nome do profissional)">
                 </div>
+                
 
                 <div class="opcoes">
                     <button id="opcao-medico" onclick="mostrar('medicos')" class="opcao ativo">Médicos</button>
@@ -53,6 +54,7 @@ $secretarios = $secretarioController->exibirDados();
                 <div id="lista-medicos" class="lista">
                     <?php if (!empty($medicos)): ?>
                         <?php foreach ($medicos as $medico): ?>
+                            <!-- <pre><?php var_dump($medico); ?></pre> DEBUG -->
                             <div class="dados">
                                 <div class="nome">
                                     <p><?= htmlspecialchars($medico['nome']) ?></p>
@@ -60,7 +62,7 @@ $secretarios = $secretarioController->exibirDados();
                                 <div class="cpf">
                                     <p><?= htmlspecialchars($medico['cpf']) ?></p>
                                 </div>
-                                <a href="detalhes-paciente.php?id=<?= htmlspecialchars($medico['id_medico'] ?? '') ?>" class="detalhes">
+                                <a href="detalhes-medico.php?id=<?= htmlspecialchars($medico['id_medico'] ?? '') ?>" class="detalhes">
                                     Ver detalhes
                                 </a>
                             </div>
