@@ -89,6 +89,17 @@ class SecretarioController {
         // Chamada dos métodos com conexão
         return $secretarioModel->listarSecretarios($conn);
     }
+
+    public function dadosSecretario($idSecretario){
+
+        $secretario = Secretario::buscarSecretario($this->conn, $idSecretario);
+
+        if($secretario){
+            return $secretario;
+        }
+
+        return null;
+    }
 }
 
 ?>
