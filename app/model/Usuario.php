@@ -83,8 +83,12 @@ class Usuario {
     }
 
     public function getEndereco(): Endereco {
+    if ($this->endereco === null) {
+        return new Endereco('', '', '', '', '', '');
+    }
         return $this->endereco;
     }
+
 
     // Setters
     public function setNome(string $nome): void {

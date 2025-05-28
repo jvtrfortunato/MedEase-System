@@ -51,10 +51,7 @@ class Medico extends Usuario
     public function setEspecialidade(string $especialidade): void { $this->especialidade = $especialidade; }
     public function setEndereco(Endereco $endereco): void {$this->endereco = $endereco;}
 
-
-
-
-
+    
     // Salvar no banco (com transação completa)
     public function salvar(PDO $conn, Endereco $endereco): bool {
         

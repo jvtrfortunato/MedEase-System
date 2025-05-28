@@ -1,5 +1,6 @@
 <?php
-
+require_once '../config/Database.php';
+require_once '../controller/SecretarioController.php';
 require_once 'Usuario.php';
 require_once 'Endereco.php';
 
@@ -12,7 +13,8 @@ class Secretario extends Usuario {
         string $dataNascimento,
         string $sexo,
         string $email, 
-        string $senha, 
+        string $senha,
+        Endereco $endereco
     ) {
         parent::__construct(
             $idUsuario, 
@@ -25,7 +27,12 @@ class Secretario extends Usuario {
             $senha,
             'secretario'
         );
+
+        $this->endereco = $endereco;
     }
+
+    public function getEndereco(): Endereco {return $this->endereco;}
+    public function setEndereco(Endereco $endereco): void {$this->endereco = $endereco;}
 
 
     public function salvar(PDO $conn, Endereco $endereco): bool {
@@ -101,14 +108,29 @@ class Secretario extends Usuario {
 
     public static function buscarSecretario(PDO $conn, $id){
 
-        try{
-             $sqlSecretario = " SELECT u.* FROM usuarios u
-                            INNER JOIN secretarios s ON u.id_usuario = s.id_usuario 
-                            WHERE s.id_secretario = :id";
-            $stmt = $conn->prepare($sqlSecretario);
-            $stmt->execute([':id' => $id]);
+        try{ 
+    
+                $sqlSecretario = "SELECT u.* FROM usuarios u 
+                    INNER JOIN secretarios s ON u.id_usuario = s.id_usuario 
+                    WHERE s.id_secretario = :id";
 
-            $dados = $stmt->fetch(PDO::FETCH_ASSOC);
+                $stmt = $conn->prepare($sqlSecretario);
+                $stmt->execute([':id' => $id]);
+
+                $dados = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                // Verifica se encontrou algum dado
+                if (!$dados) {
+                    echo "Secretário não encontrado.";
+                    return null;
+                }
+
+            // Agora sim, é seguro continuar o processamento com $dados['id_usuario'], etc.
+
+            if (!$dados) {
+                echo "Secretário não encontrado.";
+                return null;
+            }
 
             $idUsuario = $dados['id_usuario'];   
         

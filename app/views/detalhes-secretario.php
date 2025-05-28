@@ -1,9 +1,9 @@
 <?php
 require_once '../controller/SecretarioController.php';
 
-// echo "<pre>";
-// var_dump($_GET);
-// echo "</pre>";
+//  echo "<pre>";
+//  var_dump($_GET);
+//  echo "</pre>";
 
 if (!isset($_GET['id'])) {
     echo "ID do secretário não fornecido.";

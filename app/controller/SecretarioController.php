@@ -83,8 +83,10 @@ class SecretarioController {
         // Conexão
         $conn = $this->conn;
 
+        $enderecoVazio = new Endereco('', '', '', '', '', '');
+
         // Criar instância fictícia de secretario só para listar
-        $secretarioModel = new Secretario(0, '', '', '', '', '', '', '');
+        $secretarioModel = new Secretario(0, '', '', '', '', '', '', '', $enderecoVazio);
 
         // Chamada dos métodos com conexão
         return $secretarioModel->listarSecretarios($conn);
