@@ -11,14 +11,25 @@
     <?php
     require_once '../controller/ConsultaController.php';
 
-    if (!isset($_SESSION['usuario_id']) || $_SESSION['usuario_tipo'] !== 'medico') {
+    if (!isset($_SESSION['usuario_id']) || 
+        ($_SESSION['usuario_tipo'] !== 'medico' && $_SESSION['usuario_tipo'] !== 'administrador')) {
         header("Location: login.php");
         exit;
     }
 
-    $id_medico = $_SESSION['medico_id'];
-    $controller = new ConsultaController();
-    $consultas = $controller->listarConsultasDoDia($id_medico);
+    if ($_SESSION['usuario_tipo'] == 'medico') {
+        $id_medico = $_SESSION['medico_id'];
+        $controller = new ConsultaController();
+        $consultas = $controller->listarConsultasDoDia($id_medico);
+    }
+
+    if ($_SESSION['usuario_tipo'] == 'administrador') {
+        $controller = new ConsultaController();
+        $consultas = $controller->listarTodasConsultasDoDia();
+    }
+
+    
+    
     date_default_timezone_set('America/Sao_Paulo');
     $dataHoje = date('d/m/Y');
     ?>

@@ -45,13 +45,6 @@
                 </div>
 
                 <div class="card">
-                    <a href="atendimentos-dia.php">
-                        <img src="../../assets/img/Healthcare.png">
-                        <p>Atendimentos do dia</p>
-                    </a>                 
-                </div>
-
-                <div class="card">
                     <a href="lista-pacientes.php">
                         <img src="../../assets/img/User Group.png" alt="Pacientes">
                         <p>Pacientes</p>

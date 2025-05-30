@@ -1,5 +1,7 @@
 <?php
 
+session_start(); // Inicia a sessão
+
 require_once 'StatusConsulta.php';
 require_once '../controller/ConsultaController.php';
 
@@ -85,6 +87,15 @@ class Consulta {
 
     public function setIdAdministrador(int $idAdministrador): void {
         $this->idAdministrador = $idAdministrador;
+    }
+
+    //Métodos
+    public function salvarConsulta() {
+
+    }
+
+    public function listarConsultasDoDia() {
+        
     }
 }
 

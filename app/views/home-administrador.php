@@ -17,8 +17,9 @@
         <?php
         session_start();
         $nomeUsuario = $_SESSION['usuario_nome'] ?? 'Administrador';
+        $idAdministrador = $_SESSION['administrador_id']
         ?>
-        <h1>Bem-vindo(a), Administrador(a) <?= htmlspecialchars($nomeUsuario) ?> !</h1>
+        <h1>Bem-vindo(a), <?= htmlspecialchars($nomeUsuario) ?>!</h1>
 
         <section class="section-principal">
             <div class="grid-container">

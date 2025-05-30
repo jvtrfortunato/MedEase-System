@@ -182,7 +182,7 @@ if (isset($_SESSION['mensagem'])) {
                     </div>
                 </section>
                 <section class="botoes">
-                    <button class="voltar" onclick="history.back()">Voltar</button>
+                    <button class="voltar" type="button" onclick="history.back()">Voltar</button>
                     <button class="salvar" type="submit">Salvar</button>
                 </section>
             </form>

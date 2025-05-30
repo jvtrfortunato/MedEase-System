@@ -51,6 +51,9 @@ class MedicoController {
             }
 
             try {
+                // Criar objeto Endereco (sem id_usuario ainda)
+                $endereco = new Endereco($rua, $numero, $bairro, $cidade, $estado, $cep);
+
                 // Criar objeto Medico
                 $medico = new Medico(
                     0,
@@ -62,11 +65,11 @@ class MedicoController {
                     $email,
                     $senha,
                     $crm,
-                    $especialidade
+                    $especialidade,
+                    $endereco
                 );
 
-                // Criar objeto Endereco (sem id_usuario ainda)
-                $endereco = new Endereco($rua, $numero, $bairro, $cidade, $estado, $cep);
+                
 
                 // Salvar médico com endereço
                 $medico->salvar($this->conn, $endereco);

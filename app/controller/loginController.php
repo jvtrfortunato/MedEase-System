@@ -45,6 +45,30 @@ class LoginController {
                         }
                     }
 
+                    // Se for secretário, buscar o id_secretario
+                    if ($usuario['tipo'] === 'secretario') {
+                        $sqlSecretario = "SELECT id_secretario FROM secretarios WHERE id_usuario = ?";
+                        $stmtSecretario = $this->conn->prepare($sqlSecretario);
+                        $stmtSecretario->execute([$usuario['id_usuario']]);
+                        $secretario = $stmtSecretario->fetch(PDO::FETCH_ASSOC);
+
+                        if ($secretario) {
+                            $_SESSION['secretario_id'] = $secretario['id_secretario'];
+                        }
+                    }
+
+                    // Se for administrador, buscar o id_administrador
+                    if ($usuario['tipo'] === 'administrador') {
+                        $sqlAdministrador = "SELECT id_administrador FROM administradores WHERE id_usuario = ?";
+                        $stmtAdministrador = $this->conn->prepare($sqlAdministrador);
+                        $stmtAdministrador->execute([$usuario['id_usuario']]);
+                        $administrador = $stmtAdministrador->fetch(PDO::FETCH_ASSOC);
+
+                        if ($administrador) {
+                            $_SESSION['administrador_id'] = $administrador['id_administrador'];
+                        }
+                    }
+
                     // Redirecionar conforme o tipo
                     switch ($usuario['tipo']) {
                         case 'administrador':
