@@ -52,9 +52,6 @@ class Medico extends Usuario
     public function setEndereco(Endereco $endereco): void {$this->endereco = $endereco;}
 
 
-
-
-
     // Salvar no banco (com transação completa)
     public function salvar(PDO $conn, Endereco $endereco): bool {
         
@@ -184,33 +181,5 @@ class Medico extends Usuario
     }
 }
 
-
-    // Representar como array
-    public function toArray(): array {
-        return [
-            'nome' => $this->getNome(),
-            'cpf' => $this->getCpf(),
-            'telefone' => $this->getTelefone(),
-            'dataNascimento' => $this->getDataNascimento(),
-            'sexo' => $this->getSexo(),
-            'email' => $this->getEmail(),
-            'senha' => $this->getSenha(),
-            'tipo' => $this->getTipo(),
-            'crm' => $this->crm,
-            'especialidade' => $this->especialidade
-            // 'endereco' => $this->getEndereco()->toArray() // Removido por não existir
-        ];
-    }
 }
 
-
-// $conn->beginTransaction();
-// Essa função inicia uma transação. A partir daí, todas as operações feitas (inserir, atualizar, deletar) ficam "pendentes", ou seja, não são salvas de forma permanente no banco até que você diga que está tudo certo.
-
-// $conn->commit();
-// Essa função confirma (grava de verdade) todas as operações feitas desde o beginTransaction(). A partir disso, os dados são efetivamente salvos no banco.
-
-// $conn->rollBack();
-// Se aconteceu algum erro durante a transação (por exemplo, um insert falhou), você pode usar essa função para cancelar todas as operações feitas até o momento.
-
-// Assim, nenhuma alteração será salva no banco.

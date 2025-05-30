@@ -54,7 +54,7 @@ $secretarios = $secretarioController->exibirDados();
                 <div id="lista-medicos" class="lista">
                     <?php if (!empty($medicos)): ?>
                         <?php foreach ($medicos as $medico): ?>
-                            <!-- <pre><?php var_dump($medico); ?></pre> DEBUG -->
+                           <!-- <pre><?php var_dump($medico); ?></pre> -->
                             <div class="dados">
                                 <div class="nome">
                                     <p><?= htmlspecialchars($medico['nome']) ?></p>
@@ -77,6 +77,7 @@ $secretarios = $secretarioController->exibirDados();
                 <div id="lista-secretarios" class="lista oculto">
                     <?php if (!empty($secretarios)): ?>
                         <?php foreach ($secretarios as $secretario): ?>
+                           <!-- <pre><?php var_dump($secretario); ?></pre> -->
                             <div class="dados">
                                 <div class="nome">
                                     <p><?= htmlspecialchars($secretario['nome']) ?></p>
