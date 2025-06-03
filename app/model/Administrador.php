@@ -29,13 +29,3 @@ class Administrador extends Usuario {
         );
     }  
 }
-
-$administrador = new Administrador(
-    1, 
-    'Adm Teste', 
-    '999.999.999-99', 
-    '(99)99999-9999', 
-    'AdmTeste@.com', 
-    '123');
-var_dump($administrador);
-echo $administrador->gerenciarSecretariosEMedicos();

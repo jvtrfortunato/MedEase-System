@@ -100,7 +100,7 @@
             </section>
         </section>
         <section class="botoes">
-            <button class="voltar">Voltar</button>
+            <button class="voltar" type="button" onclick="history.back()">Voltar</button>
         </section>
     </main>
     <footer></footer>

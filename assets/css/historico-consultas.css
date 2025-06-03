@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.conteudo-principal {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+h1 {
+    font-size: 3vh;
+    margin-bottom: 3vh;
+    font-weight: 500;
+    opacity: 75%;
+}
+
+.opcoes {
+    margin-bottom: 3vh;
+}
+
+.opcoes button {
+    border: 2px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    padding: 10px 17px 10px 17px;
+    background-color: transparent;
+    font-weight: 700;
+    opacity: 50%;
+}
+
+.opcao {
+    border: 2px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    padding: 10px 17px 10px 17px;
+    background-color: #FFFFFF;
+    font-weight: 700;
+    opacity: 50%;
+    cursor: pointer;
+}
+
+.opcao.ativo {
+    color: #FFFFFF;
+    background-color: #6C6767;
+}
+
+.oculto {
+    display: none;
+}
+
+form {
+    display: flex;
+    gap: 3vh;
+}
+
+input, select {
+    border: 2px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    padding: 10px 15px 10px 15px;
+}

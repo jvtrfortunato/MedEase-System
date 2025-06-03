@@ -60,3 +60,22 @@ h1 {
 .card:hover {
     background: #b9b9b9;
 }
+
+button {
+    text-align: center;
+    padding: 0.3vw 0.8vw;
+    border: 1px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    font-size: 1vw;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-family: "Inter", serif;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: #FF6F61;
+    margin-top: 3vh;
+}
+
+button:hover {
+    background-color: #E65A50;
+}
