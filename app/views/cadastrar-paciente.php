@@ -23,8 +23,8 @@ $tipoUsuario = $_SESSION['usuario_tipo'];
     </header>
     <main>
         <section class="conteudo-principal">
-            <form action="../controller/PacienteController.php" method="post">
-                <input type="hidden" name="acao" value="salvar">
+            <form action="../routers/roteadorPaciente.php" method="post">
+                <input type="hidden" name="acao" value="salvarPaciente">
                 <h1>Dados Gerais</h1>
                 <section class="dados-gerais-endereco">
                     

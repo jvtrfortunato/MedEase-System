@@ -37,8 +37,8 @@ $medicos = $sqlMedicos->fetchAll(PDO::FETCH_ASSOC);
     <main>
         <section class="conteudo-principal">
             <h1>Descrição da Consulta</h1>
-            <form action="../model/Consulta.php" method="post">
-                <input type="hidden" name="acao" value="salvar">
+            <form action="../routers/roteadorConsulta.php" method="post">
+                <input type="hidden" name="acao" value="salvarConsulta">
                 <section class="dados-consulta">
 
                     <div class="linha">

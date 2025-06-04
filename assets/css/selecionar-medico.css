@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.conteudo-principal {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+label {
+    opacity: 75%;
+    font-weight: 500;
+    font-size: 2em;
+}
+
+label {
+    opacity: 75%;
+    font-weight: 500;
+    font-size: 1.4em;
+}
+
+select {
+    border: 2px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    padding: 10px 15px 10px 15px;
+    width: 50%;
+}
+
+.botoes {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    text-align: center;
+    padding: 0.3vw 0.8vw;
+    border: 1px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    font-size: 1vw;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-family: "Inter", serif;
+    cursor: pointer;
+    background-color: #FF6F61;
+}
+
+.botoes .voltar {
+    background-color: #FF6F61;
+}
+
+.botoes .voltar:hover {
+    background-color: #E65A50;
+}
+
+.botoes .salvar {
+    background-color: #50E3C2;
+}
+
+.botoes .salvar:hover {
+    background-color: #3AC3A5;
+}

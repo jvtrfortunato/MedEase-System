@@ -53,7 +53,7 @@ $pacientes = $controller->listarPacientes();
 
         </section>
         <section class="botao">
-            <button class="voltar">Voltar</button>
+            <button class="voltar" onclick="history.back()">Voltar</button>
         </section>
     </main>
     <footer></footer>

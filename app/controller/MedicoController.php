@@ -97,19 +97,15 @@ class MedicoController {
         return $medicoModel->listarMedicos($conn);
     }
 
-    public function dadosMedico($idMedico)
-    {
-       $medico = Medico::buscarMedico($this->conn, $idMedico);
+    public function dadosMedico($idMedico) {
+        $medico = Medico::buscarMedico($this->conn, $idMedico);
 
         if ($medico) {
             return $medico; // <-- Retorna o objeto diretamente, sem toArray()
         }
 
-
         return null;
     }
-    
-
 }
 
 

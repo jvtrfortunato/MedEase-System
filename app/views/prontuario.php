@@ -10,8 +10,6 @@
 <body>
     <?php
     require_once '../model/Prontuario.php';
-    require_once '../model/Paciente.php';
-    require_once '../model/Endereco.php';
     require_once '../model/HistoricoMedico.php';
     require_once '../model/Anamnese.php';
     require_once '../model/ExameFisico.php';
@@ -19,20 +17,23 @@
     require_once '../model/Internacao.php';
     require_once '../model/Documentacao.php';
     require_once '../model/Atestado.php';
+    require_once '../controller/PacienteController.php';
+    require_once '../controller/ConsultaController.php';
 
-    session_start();
 
     $prontuario = isset($_SESSION['prontuario']) ? unserialize($_SESSION['prontuario']) : null;
 
-    $paciente = $prontuario ? $prontuario->getPaciente() : null;
-    $endereco = $paciente ? $paciente->getEndereco() : null;
+    //Busca o paciente
+    $pacienteController = new PacienteController();
+    $paciente = $pacienteController->buscarPacienteCompleto($_SESSION['paciente_id']);
 
-    // Recuperar o motivo da consulta a partir da anamnese
-    $motivoConsulta = null;
+    $_SESSION['paciente_id'] = $paciente->getIdPaciente();
 
-    if ($prontuario && $prontuario->getAnamnese()) {
-        $motivoConsulta = $prontuario->getAnamnese()->getMotivoConsulta();
-    }
+    //Busca a consulta
+    $consultaController = new ConsultaController();
+    $consulta = $consultaController->buscarConsulta($_SESSION['consulta_id']);
+    
+    $_SESSION['consulta_motivo'] = $consulta->getMotivo();
     ?>
 
     <header>
@@ -45,157 +46,122 @@
             <h1>Prontuário Eletrônico do Paciente</h1>
             <section class="dados-prontuario">
             
-            <form action="../controller/ProntuarioController.php" method="post">
-                <input type="hidden" name="acao" value="salvar">
-                <input type="hidden" name="examesSolicitados" id="examesSolicitadosInput">
-                <!--Identificação do Paciente-->
-                <div class="menu-seta">
-                    <h2>Identificação do Paciente</h2>
-                    <img id="seta" onclick="expandirRetrair('formulario1', this)" src="../../assets/img/seta-baixo.png" alt="seta">
-                </div>
-                <div class="barra"></div>                
-                <section id="formulario1" class="formulario-visivel">
-                        
-                        <div class="linha-dados">
-                            <div class="input-grande">
-                                <label for="">Nome completo</label>
-                                <input class="input-estilizacao-padrao" type="text"
-                                name="nome"
-                                value="<?= $paciente ? htmlspecialchars($paciente->getNome()) : '' ?>">
-                            </div>
-                            <div class="div-medios">
-                                <div class="input-medio">
-                                    <label for="">Data de Nascimento</label>
-                                    <input class="input-estilizacao-padrao" type="date"
-                                    name="dataNascimento"
-                                    value="<?= $paciente ? $paciente->getDataNascimento() : '' ?>">
-                                </div>
-                                <div class="input-medio">
-                                    <label for="">Sexo</label>
-                                    <input class="input-estilizacao-padrao" type="text"
-                                    name="sexo"
-                                    value="<?= $paciente ? htmlspecialchars($paciente->getSexo()) : '' ?>">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="linha-dados">
-                            <div class="input-grande">
-                                <label for="">Estado Civil</label>
-                                <input class="input-estilizacao-padrao" type="text"
-                                name="estadoCivil"
-                                value="<?= $paciente ? htmlspecialchars($paciente->getEstadoCivil()) : '' ?>">
-                            </div>
-                            <div class="div-medios">
-                                <div class="input-medio">
-                                    <label for="">CPF</label>
-                                    <input class="input-estilizacao-padrao" type="text"
-                                    name="cpf"
-                                    value="<?= $paciente ? htmlspecialchars($paciente->getCpf()) : '' ?>">
-                                </div>
-                                <div class="input-medio">
-                                    <label for="">RG</label>
-                                    <input class="input-estilizacao-padrao" type="text"
-                                    name="rg"
-                                    value="<?= $paciente ? htmlspecialchars($paciente->getRg()) : '' ?>">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="linha-dados">
-                            <div class="input-grande">
-                                <label for="">Rua</label>
-                                <input class="input-estilizacao-padrao" type="text"
-                                name="rua"
-                                value="<?= $endereco ? htmlspecialchars($endereco->getRua()) : '' ?>">
-                            </div>
-                            <div class="div-medios">
-                                <div class="input-medio">
-                                    <label for="">Número</label>
-                                    <input class="input-estilizacao-padrao" type="number"
-                                    name="numero"
-                                    value="<?= $endereco ? htmlspecialchars($endereco->getNumero()) : '' ?>">
-                                </div>
-                                <div class="input-medio">
-                                    <label for="">Bairro</label>
-                                    <input class="input-estilizacao-padrao" type="text"
-                                    name="bairro"
-                                    value="<?= $endereco ? htmlspecialchars($endereco->getBairro()) : '' ?>">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="linha-dados">
-                            <div class="input-grande">
-                                <label for="">Cidade</label>
-                                <input class="input-estilizacao-padrao" type="text"
-                                name="cidade"
-                                value="<?= $endereco ? htmlspecialchars($endereco->getCidade()) : '' ?>">
-                            </div>
-                            <div class="div-medios">
-                                <div class="input-medio">
-                                    <label for="">Estado</label>
-                                    <input class="input-estilizacao-padrao" type="text"
-                                    name="estado"
-                                    value="<?= $endereco ? htmlspecialchars($endereco->getEstado()) : '' ?>">
-                                </div>
-                                <div class="input-medio">
-                                    <label for="">CEP</label>
-                                    <input class="input-estilizacao-padrao" type="text"
-                                    name="cep"
-                                    value="<?= $endereco ? htmlspecialchars($endereco->getCep()) : '' ?>">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="linha-dados">
-                            <div class="input-grande">
-                                <label for="">Telefone</label>
-                                <input class="input-estilizacao-padrao" type="text"
-                                name="telefone"
-                                value="<?= $paciente ? htmlspecialchars($paciente->getTelefone()) : '' ?>">
-                            </div>
-                            <div class="input-grande">
-                                <label for="">Email</label>
-                                <input class="input-estilizacao-padrao" type="text"
-                                name="email"
-                                value="<?= $paciente ? htmlspecialchars($paciente->getEmail()) : '' ?>">
-                            </div>
-                        </div>
-
-                        <div class="linha-dados">
-                            <div class="input-grande">
-                                <label for="">Nome do responsável</label>
-                                <input class="input-estilizacao-padrao" type="text"
-                                name="nomeResponsavel"
-                                value="<?= $paciente ? htmlspecialchars($paciente->getNomeResponsavel()) : '' ?>">
-                            </div>
-                            <div class="input-grande">
-                                <label for="">Cartão Nacional de Saúde (CNS)</label>
-                                <input class="input-estilizacao-padrao" type="text"
-                                name="cns"
-                                value="<?= $paciente ? htmlspecialchars($paciente->getCns()) : '' ?>">
-                            </div>
-                        </div>
-
-                        <div class="linha-dados">
-                            <div class="input-grande">
-                                <label for="">Convênio</label>
-                                <input class="input-estilizacao-padrao" type="text"
-                                name="convenio"
-                                value="<?= $paciente ? htmlspecialchars($paciente->getConvenio()) : '' ?>">
-                            </div>
-                            <div class="input-grande">
-                                <label for="">Número do Plano de Saúde</label>
-                                <input class="input-estilizacao-padrao" type="text"
-                                name="planoSaude"
-                                value="<?= $paciente ? htmlspecialchars($paciente->getPlanoSaude()) : '' ?>">
-                            </div>
-                        </div>
-
+            
+            <!--Identificação do Paciente-->
+            <div class="menu-seta">
+                <h2>Identificação do Paciente</h2>
+                <img id="seta" onclick="expandirRetrair('formulario1', this)" src="../../assets/img/seta-baixo.png" alt="seta">
+            </div>
+            <div class="barra"></div>                
+            <section id="formulario1" class="formulario-visivel">
                     
-                </section>
+                    <div class="linha-dados">
+                        <div class="input-grande">
+                            <p class="label">Nome completo</p>
+                            <div class="input-estilizacao-padrao"> <?= $paciente ? htmlspecialchars($paciente->getNome()) : '' ?></div>
+                        </div>
+                        <div class="div-medios">
+                            <div class="input-medio">
+                                <p class="label">Data de Nascimento</p>
+                                <div class="input-estilizacao-padrao"> <?= $paciente ? htmlspecialchars($paciente->getDataNascimento()) : '' ?></div>
+                            </div>
+                            <div class="input-medio">
+                                <p class="label">Sexo</p>
+                                <div class="input-estilizacao-padrao"> <?= $paciente ? htmlspecialchars($paciente->getSexo()) : '' ?></div>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="linha-dados">
+                        <div class="input-grande">
+                            <p class="label">Estado Civil</p>
+                            <div class="input-estilizacao-padrao"> <?= $paciente ? htmlspecialchars($paciente->getEstadoCivil()) : '' ?></div>
+                        </div>
+                        <div class="div-medios">
+                            <div class="input-medio">
+                                <p class="label">CPF</p>
+                                <div class="input-estilizacao-padrao"> <?= $paciente ? htmlspecialchars($paciente->getCpf()) : '' ?></div>
+                            </div>
+                            <div class="input-medio">
+                                <p class="label">RG</p>
+                                <div class="input-estilizacao-padrao"> <?= $paciente ? htmlspecialchars($paciente->getRg()) : '' ?></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="linha-dados">
+                        <div class="input-grande">
+                            <p class="label">Rua</p>
+                            <div class="input-estilizacao-padrao"> <?= $paciente ? htmlspecialchars($paciente->getEndereco()->getRua()) : '' ?></div>
+                        </div>
+                        <div class="div-medios">
+                            <div class="input-medio">
+                                <p class="label">Número</p>
+                                <div class="input-estilizacao-padrao"> <?= $paciente ? htmlspecialchars($paciente->getEndereco()->getNumero()) : '' ?></div>
+                            </div>
+                            <div class="input-medio">
+                                <p class="label">Bairro</p>
+                                <div class="input-estilizacao-padrao"> <?= $paciente ? htmlspecialchars($paciente->getEndereco()->getBairro()) : '' ?></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="linha-dados">
+                        <div class="input-grande">
+                            <p class="label">Cidade</p>
+                            <div class="input-estilizacao-padrao"> <?= $paciente ? htmlspecialchars($paciente->getEndereco()->getCidade()) : '' ?></div>
+                        </div>
+                        <div class="div-medios">
+                            <div class="input-medio">
+                                <p class="label">Estado</p>
+                                <div class="input-estilizacao-padrao"> <?= $paciente ? htmlspecialchars($paciente->getEndereco()->getEstado()) : '' ?></div>
+                            </div>
+                            <div class="input-medio">
+                                <p class="label">CEP</p>
+                                <div class="input-estilizacao-padrao"> <?= $paciente ? htmlspecialchars($paciente->getEndereco()->getCep()) : '' ?></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="linha-dados">
+                        <div class="input-grande">
+                            <p class="label">Telefone</p>
+                            <div class="input-estilizacao-padrao"> <?= $paciente ? htmlspecialchars($paciente->getTelefone()) : '' ?></div>
+                        </div>
+                        <div class="input-grande">
+                            <p class="label">Email</p>
+                            <div class="input-estilizacao-padrao"> <?= $paciente ? htmlspecialchars($paciente->getEmail()) : '' ?></div>
+                        </div>
+                    </div>
+
+                    <div class="linha-dados">
+                        <div class="input-grande">
+                            <p class="label">Nome do responsável</p>
+                            <div class="input-estilizacao-padrao"> <?= $paciente ? htmlspecialchars($paciente->getNomeResponsavel()) : '' ?></div>
+                        </div>
+                        <div class="input-grande">
+                            <p class="label">CNS</p>
+                            <div class="input-estilizacao-padrao"> <?= $paciente ? htmlspecialchars($paciente->getCns()) : '' ?></div>
+                        </div>
+                    </div>
+
+                    <div class="linha-dados">
+                        <div class="input-grande">
+                            <p class="label">Convênio</p>
+                            <div class="input-estilizacao-padrao"> <?= $paciente ? htmlspecialchars($paciente->getConvenio()) : '' ?></div>
+                        </div>
+                        <div class="input-grande">
+                            <p class="label">Nº do Plano de Saúde</p>
+                            <div class="input-estilizacao-padrao"> <?= $paciente ? htmlspecialchars($paciente->getPlanoSaude()) : '' ?></div>
+                        </div>
+                    </div>
+
+                
+            </section>
+
+            <form action="../routers/roteadorProntuario.php" method="post">
+                <input type="hidden" name="acao" value="salvarProntuario">
+                <!--<input type="hidden" name="examesSolicitados" id="examesSolicitadosInput">-->
                 <!--Histórico Médico e Familiar-->
                 <div class="menu-seta">
                     <h2>Histórico Médico e Familiar</h2>
@@ -244,7 +210,7 @@
 
                             <h3>Motivo da consulta</h3>
                             <div class="motivo-consulta">
-                                <p><?php echo htmlspecialchars($motivoConsulta); ?></p> 
+                                <p><?= $consulta ? htmlspecialchars($consulta->getMotivo()) : '' ?></p> 
                             </div>
 
                         <div class="nome-campo">
@@ -358,12 +324,7 @@
 
                         <div class="nome-campo">
                             <label for="">CID-10 (classificação internacional de doenças)</label>
-                            <select name="" id="">
-                                <option value="">Selecione</option>
-                                <option value="">A00 - Cólera</option>
-                                <option value="">J45 - Asma</option>
-                                <option value="">F32.1 - Episódio depressivo moderado</option>
-                            </select>
+                            <input type="text" name="">
                         </div>
 
                     
@@ -598,10 +559,10 @@
         });
 
         //Função que preenche o array dos exames solicitados
-        document.querySelector('form').addEventListener('submit', function () {
+        /*document.querySelector('form').addEventListener('submit', function () {
         const exames = JSON.parse(localStorage.getItem('examesSolicitados')) || [];
         document.getElementById('examesSolicitadosInput').value = JSON.stringify(exames);
-        });
+        });*/
 
     </script>
 </body>

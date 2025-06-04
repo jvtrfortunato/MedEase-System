@@ -55,7 +55,7 @@ class Prontuario {
         private string $doencasNotificacaoObrigatoria,
         private string $observacoesAdicionais,
 
-        private Paciente $paciente,
+        private int $idPaciente,
         private int $idMedico
     ){}
 
@@ -136,8 +136,8 @@ class Prontuario {
         return $this->observacoesAdicionais;
     }
 
-    public function getPaciente(): Paciente {
-        return $this->paciente;
+    public function getIdPaciente(): int {
+        return $this->idPaciente;
     }
 
     public function getIdMedico(): int {
@@ -213,8 +213,8 @@ class Prontuario {
         $this->observacoesAdicionais = $observacoesAdicionais;
     }
 
-    public function setPaciente(Paciente $paciente): void {
-        $this->paciente = $paciente;
+    public function setIdPaciente(int $idPaciente): void {
+        $this->idPaciente = $idPaciente;
     }
 
     public function setIdMedico($idMedico): void {

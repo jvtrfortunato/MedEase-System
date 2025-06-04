@@ -32,6 +32,8 @@
     
     date_default_timezone_set('America/Sao_Paulo');
     $dataHoje = date('d/m/Y');
+    $_SESSION['data_hoje'] = $dataHoje;
+
     ?>
     <header>
         <a class="logo" href="">MedEase</a>    
@@ -62,7 +64,7 @@
                             </div>
                             <div class="status">
                                 <p><?php echo htmlspecialchars($consulta->getStatus()); ?></p>
-                                <a href="../controller/ProntuarioController.php?acao=iniciar&consulta_id=<?php echo $consulta->getId(); ?>" class="iniciar-consulta">Iniciar Consulta</a>
+                                <a href="../controller/ConsultaController.php?acao=iniciarConsulta&consulta_id=<?php echo $consulta->getId(); ?>" class="iniciar-consulta">Iniciar Consulta</a>
                             </div>
                         </div>
                     </div>

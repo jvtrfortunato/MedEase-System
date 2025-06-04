@@ -87,7 +87,7 @@ main {
     width: 48%;
 }
 
-label {
+label, .label {
     opacity: 50%;
     font-weight: 500;
     font-size: 1.1em;
@@ -129,7 +129,7 @@ h3 {
     font-size: 1.1em;
 }
 
-select {
+select, input {
     border: 2px, solid rgba(136, 136, 136, 0.4);
     border-radius: 5px;
     padding: 5px;

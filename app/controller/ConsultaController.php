@@ -5,6 +5,7 @@ require_once '../config/Database.php';
 require_once '../model/Consulta.php';
 require_once '../model/Paciente.php';
 
+
 if (!isset($_SESSION['usuario_id'])) {
     // Se o usuário não estiver logado, redireciona
     header("Location: ../views/login.php");
@@ -175,77 +176,134 @@ class ConsultaController {
     } 
     
     public function listarTodasConsultasDoDia(): array {
-    try {
-        date_default_timezone_set('America/Sao_Paulo');
-        $dataAtual = date('Y-m-d');
+        try {
+            date_default_timezone_set('America/Sao_Paulo');
+            $dataAtual = date('Y-m-d');
 
-        $database = new Database();
-        $conn = $database->conectar();
+            $database = new Database();
+            $conn = $database->conectar();
 
-        // Consultas pendentes (Agendada ou Cancelada)
-        $stmtPendentes = $conn->prepare("
-            SELECT c.*, p.nome AS nome_paciente
-            FROM consultas c
-            JOIN pacientes p ON c.id_paciente = p.id_paciente
-            WHERE c.data = ? AND (c.status = 'Agendada' OR c.status = 'Cancelada')
-            ORDER BY c.hora ASC
-        ");
-        $stmtPendentes->execute([$dataAtual]);
-        $resultPendentes = $stmtPendentes->fetchAll(PDO::FETCH_ASSOC);
+            // Consultas pendentes (Agendada ou Cancelada)
+            $stmtPendentes = $conn->prepare("
+                SELECT c.*, p.nome AS nome_paciente
+                FROM consultas c
+                JOIN pacientes p ON c.id_paciente = p.id_paciente
+                WHERE c.data = ? AND (c.status = 'Agendada' OR c.status = 'Cancelada')
+                ORDER BY c.hora ASC
+            ");
+            $stmtPendentes->execute([$dataAtual]);
+            $resultPendentes = $stmtPendentes->fetchAll(PDO::FETCH_ASSOC);
 
-        $consultasPendentes = array_map(function ($row) {
+            $consultasPendentes = array_map(function ($row) {
+                return [
+                    'consulta' => new Consulta(
+                        $row['id_consulta'],
+                        $row['motivo'],
+                        $row['data'],
+                        $row['hora'],
+                        $row['status'],
+                        $row['id_paciente'],
+                        $row['id_medico'],
+                        $row['id_secretario'] ?? null,
+                        $row['id_administrador'] ?? null
+                    ),
+                    'nome_paciente' => $row['nome_paciente']
+                ];
+            }, $resultPendentes);
+
+            // Consultas realizadas
+            $stmtRealizadas = $conn->prepare("
+                SELECT c.*, p.nome AS nome_paciente
+                FROM consultas c
+                JOIN pacientes p ON c.id_paciente = p.id_paciente
+                WHERE c.data = ? AND c.status = 'Realizada'
+                ORDER BY c.hora ASC
+            ");
+            $stmtRealizadas->execute([$dataAtual]);
+            $resultRealizadas = $stmtRealizadas->fetchAll(PDO::FETCH_ASSOC);
+
+            $consultasRealizadas = array_map(function ($row) {
+                return [
+                    'consulta' => new Consulta(
+                        $row['id_consulta'],
+                        $row['motivo'],
+                        $row['data'],
+                        $row['hora'],
+                        $row['status'],
+                        $row['id_paciente'],
+                        $row['id_medico'],
+                        $row['id_secretario'] ?? null,
+                        $row['id_administrador'] ?? null
+                    ),
+                    'nome_paciente' => $row['nome_paciente']
+                ];
+            }, $resultRealizadas);
+
             return [
-                'consulta' => new Consulta(
-                    $row['id_consulta'],
-                    $row['motivo'],
-                    $row['data'],
-                    $row['hora'],
-                    $row['status'],
-                    $row['id_paciente'],
-                    $row['id_medico'],
-                    $row['id_secretario'] ?? null,
-                    $row['id_administrador'] ?? null
-                ),
-                'nome_paciente' => $row['nome_paciente']
+                'pendentes' => $consultasPendentes,
+                'realizadas' => $consultasRealizadas
             ];
-        }, $resultPendentes);
+        } catch (Exception $e) {
+            echo "Erro ao listar consultas: " . $e->getMessage();
+            return [];
+        }
+    }
 
-        // Consultas realizadas
-        $stmtRealizadas = $conn->prepare("
-            SELECT c.*, p.nome AS nome_paciente
-            FROM consultas c
-            JOIN pacientes p ON c.id_paciente = p.id_paciente
-            WHERE c.data = ? AND c.status = 'Realizada'
-            ORDER BY c.hora ASC
-        ");
-        $stmtRealizadas->execute([$dataAtual]);
-        $resultRealizadas = $stmtRealizadas->fetchAll(PDO::FETCH_ASSOC);
+    public function buscarConsulta(int $id_consulta): ?Consulta {
+        //Busca a consulta
+        $sqlConsulta = "SELECT * FROM consultas WHERE id_consulta = :id_consulta";
+        $stmtConsulta = $this->conn->prepare($sqlConsulta);
+        $this->conn->beginTransaction();
+        $stmtConsulta->execute([':id_consulta' => $id_consulta]);
+        $dataConsulta = $stmtConsulta->fetch(PDO::FETCH_ASSOC);
 
-        $consultasRealizadas = array_map(function ($row) {
-            return [
-                'consulta' => new Consulta(
-                    $row['id_consulta'],
-                    $row['motivo'],
-                    $row['data'],
-                    $row['hora'],
-                    $row['status'],
-                    $row['id_paciente'],
-                    $row['id_medico'],
-                    $row['id_secretario'] ?? null,
-                    $row['id_administrador'] ?? null
-                ),
-                'nome_paciente' => $row['nome_paciente']
-            ];
-        }, $resultRealizadas);
+        if (!$dataConsulta) {
+            return null;
+        }
 
-        return [
-            'pendentes' => $consultasPendentes,
-            'realizadas' => $consultasRealizadas
-        ];
-    } catch (Exception $e) {
-        echo "Erro ao listar consultas: " . $e->getMessage();
-        return [];
+        return new Consulta(
+            $dataConsulta['id_consulta'],
+            $dataConsulta['motivo'],
+            $dataConsulta['data'],
+            $dataConsulta['hora'],
+            $dataConsulta['status'],
+            $dataConsulta['id_paciente'],
+            $dataConsulta['id_medico'],
+            $dataConsulta['id_secretario'],
+            $dataConsulta['id_administrador']
+        );
+    }
+
+    public function iniciarConsulta() {
+        $idConsulta = $_GET['consulta_id'];
+        $_SESSION['consulta_id'] = $idConsulta;
+
+        try {
+            $stmtConsulta = $this->conn->prepare("SELECT * FROM consultas WHERE id_consulta = ?");
+            $stmtConsulta->execute([$idConsulta]);
+            $dadosConsulta = $stmtConsulta->fetch(PDO::FETCH_ASSOC);
+
+            if (!$dadosConsulta) {
+                throw new Exception('Consulta não encontrada.');
+            }
+
+            $idPaciente = $dadosConsulta['id_paciente'];
+            $idMedico = $dadosConsulta['id_medico'];
+            
+            $_SESSION['paciente_id'] = $idPaciente;
+
+            // Redireciona para a tela do prontuário
+            header("Location: ../views/prontuario.php");
+            exit;      
+
+        } catch(Exception $e) {
+            echo "Erro ao iniciar consulta: " . $e->getMessage();
+        }
     }
 }
 
+$controller = new ConsultaController();
+
+if (isset($_GET['acao']) && $_GET['acao'] === 'iniciarConsulta' && isset($_GET['consulta_id'])) {
+    $controller->iniciarConsulta();
 }

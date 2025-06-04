@@ -88,33 +88,4 @@ class Consulta {
     public function setIdAdministrador(int $idAdministrador): void {
         $this->idAdministrador = $idAdministrador;
     }
-
-    //Métodos
-    public function salvarConsulta() {
-
-    }
-
-    public function listarConsultasDoDia() {
-        
-    }
-}
-
-// Controller dispatch
-$controller = new ConsultaController();
-$acao = $_POST['acao'] ?? '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    switch ($acao) {
-        case 'salvar':
-            $controller->salvarConsulta();
-            break;
-        case 'editar':
-            $controller->editarConsulta();
-            break;
-        case 'deletar':
-            $controller->deletarConsulta();
-            break;
-        default:
-            echo "Ação inválida.";
-    }
 }

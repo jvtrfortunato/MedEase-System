@@ -74,105 +74,86 @@ class PacienteController {
     }
 
     public function listarPacientes(): array {
-    $query = "
-    SELECT 
-        p.*, 
-        e.*,  
-        e.id_paciente AS endereco_id_paciente
-    FROM pacientes p
-    JOIN enderecos e ON p.id_paciente = e.id_paciente
-    ORDER BY p.nome ASC
-    ";
-    $stmt = $this->conn->prepare($query);
-    $stmt->execute();
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $query = "
+        SELECT 
+            p.*, 
+            e.*,  
+            e.id_paciente AS endereco_id_paciente
+        FROM pacientes p
+        JOIN enderecos e ON p.id_paciente = e.id_paciente
+        ORDER BY p.nome ASC
+        ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $pacientes = [];
+        $pacientes = [];
 
-    foreach ($result as $row) {
-        $endereco = new Endereco(
-            $row['rua'], $row['numero'], $row['bairro'], $row['cidade'], 
-            $row['estado'], $row['cep'], $row['id_usuario'], $row['id_paciente']
-        );
+        foreach ($result as $row) {
+            $endereco = new Endereco(
+                $row['rua'], $row['numero'], $row['bairro'], $row['cidade'], 
+                $row['estado'], $row['cep'], $row['id_usuario'], $row['id_paciente']
+            );
 
-        $paciente = new Paciente(
-            $row['id_paciente'], $row['nome'], $row['data_nascimento'], $row['sexo'],
-            $row['estado_civil'], $row['cpf'], $row['rg'], $row['telefone'],
-            $row['email'], $row['nome_responsavel'], $row['cns'],
-            $row['convenio'], $row['plano_saude'], $endereco
-        );
+            $paciente = new Paciente(
+                $row['id_paciente'], $row['nome'], $row['data_nascimento'], $row['sexo'],
+                $row['estado_civil'], $row['cpf'], $row['rg'], $row['telefone'],
+                $row['email'], $row['nome_responsavel'], $row['cns'],
+                $row['convenio'], $row['plano_saude'], $endereco
+            );
 
-        $pacientes[] = $paciente;
-    }
+            $pacientes[] = $paciente;
+        }
 
-    return $pacientes;
+        return $pacientes;
     }
 
     public function buscarPacienteCompleto(int $id): ?Paciente {
-    // Busca o paciente
-    $sqlPaciente = "SELECT * FROM pacientes WHERE id_paciente = :id";
-    $stmtPaciente = $this->conn->prepare($sqlPaciente);
-    $stmtPaciente->execute([':id' => $id]);
-    $dataPaciente = $stmtPaciente->fetch(PDO::FETCH_ASSOC);
+        // Busca o paciente
+        $sqlPaciente = "SELECT * FROM pacientes WHERE id_paciente = :id";
+        $stmtPaciente = $this->conn->prepare($sqlPaciente);
+        $stmtPaciente->execute([':id' => $id]);
+        $dataPaciente = $stmtPaciente->fetch(PDO::FETCH_ASSOC);
 
-    if (!$dataPaciente) {
-        return null;
-    }
+        if (!$dataPaciente) {
+            return null;
+        }
 
-    // Busca o endereço
-    $sqlEndereco = "SELECT * FROM enderecos WHERE id_paciente = :id";
-    $stmtEndereco = $this->conn->prepare($sqlEndereco);
-    $stmtEndereco->execute([':id' => $id]);
-    $dataEndereco = $stmtEndereco->fetch(PDO::FETCH_ASSOC);
+        // Busca o endereço
+        $sqlEndereco = "SELECT * FROM enderecos WHERE id_paciente = :id";
+        $stmtEndereco = $this->conn->prepare($sqlEndereco);
+        $stmtEndereco->execute([':id' => $id]);
+        $dataEndereco = $stmtEndereco->fetch(PDO::FETCH_ASSOC);
 
-    $endereco = null;
-    if ($dataEndereco) {
-        $endereco = new Endereco(
-            $dataEndereco['rua'],
-            $dataEndereco['numero'],
-            $dataEndereco['bairro'],
-            $dataEndereco['cidade'],
-            $dataEndereco['estado'],
-            $dataEndereco['cep'],
-            $dataEndereco['id_usuario'] ?? null,
-            $id
+        $endereco = null;
+        if ($dataEndereco) {
+            $endereco = new Endereco(
+                $dataEndereco['rua'],
+                $dataEndereco['numero'],
+                $dataEndereco['bairro'],
+                $dataEndereco['cidade'],
+                $dataEndereco['estado'],
+                $dataEndereco['cep'],
+                $dataEndereco['id_usuario'] ?? null,
+                $id
+            );
+        }
+
+        return new Paciente(
+            $dataPaciente['id_paciente'],
+            $dataPaciente['nome'],
+            $dataPaciente['data_nascimento'],
+            $dataPaciente['sexo'],
+            $dataPaciente['estado_civil'],
+            $dataPaciente['cpf'],
+            $dataPaciente['rg'],
+            $dataPaciente['telefone'],
+            $dataPaciente['email'],
+            $dataPaciente['nome_responsavel'],
+            $dataPaciente['cns'],
+            $dataPaciente['convenio'],
+            $dataPaciente['plano_saude'],
+            $endereco
         );
-    }
-
-    return new Paciente(
-        $dataPaciente['id_paciente'],
-        $dataPaciente['nome'],
-        $dataPaciente['data_nascimento'],
-        $dataPaciente['sexo'],
-        $dataPaciente['estado_civil'],
-        $dataPaciente['cpf'],
-        $dataPaciente['rg'],
-        $dataPaciente['telefone'],
-        $dataPaciente['email'],
-        $dataPaciente['nome_responsavel'],
-        $dataPaciente['cns'],
-        $dataPaciente['convenio'],
-        $dataPaciente['plano_saude'],
-        $endereco
-    );
-    }
-}
-
-$controller = new PacienteController();
-$acao = $_POST['acao'] ?? '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    switch ($acao) {
-        case 'salvar':
-            $controller->salvarPaciente();
-            break;
-        case 'editar':
-            $controller->editarPaciente();
-            break;
-        case 'deletar':
-            $controller->deletarPaciente();
-            break;
-        default:
-            echo "Ação inválida.";
     }
 }
