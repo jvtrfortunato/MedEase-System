@@ -21,17 +21,11 @@
             <div class="dados-lista">
                 <section class="dados-medicamento">
                     <form id="form-medicamento" action="">
+                        <input type="hidden" name="medicamentosJSON" id="medicamentosJSON">
                         <!--Princípioativo-->
                         <div class="label-input">
                             <label for="medicamento">Princípio ativo / Medicamento <span class="azul">*</span></label>
-                            <select name="medicamento" id="principioAtivo" required>
-                                <option value="">Selecione o Medicamento</option>
-                                <option value="DIPIRONA SODICA">DIPIRONA SÓDICA</option>
-                                <option value="AMOXILINA">AMOXILINA</option>
-                                <option value="LOSARTANA-POTASSICA">LOSARTANA POTÁSSICA</option>
-                                <option value="METFORMINA">METFORMINA</option>
-                                <option value="OMEPRAZOL">OMEPRAZOL</option>
-                            </select>
+                            <input type="text" name="medicamento" id="principioAtivo" required>
                         </div>
                         <!--Concentração até Forma farmaceutica-->
                         <div class="concentracao-forma">
@@ -54,8 +48,10 @@
                                 <label for="receita">Tipo de receita <span class="azul">*</span></label>
                                 <select name="receita" id="tipoReceita" required>
                                     <option value="">Selecione</option>
-                                    <option value="Comum">Comum</option>
-                                    <option value="Controlada">Controlada</option>
+                                    <option value="simples">Simples</option>
+                                    <option value="controle">Controle especial</option>
+                                    <option value="azul">Azul</option>
+                                    <option value="amarela">Amarela</option>
                                 </select>
                             </div>
                         </div>
@@ -142,16 +138,15 @@
                         <!--Recomendações-->
                         <h2>Recomendações</h2>
                         <textarea name="" id="" cols="86" rows="9"></textarea>
-                        <!--PAREI AQUI-->
-                        <!--IMPLEMENTAR OS BOTÕES AGORA-->
-                    </form>
-                    <div class="botoes">
+                        
+                        <div class="botoes">
                         <button class="vermelho" type="button" onclick="window.location.href='prontuario.php'">Voltar</button>
                         <div class="botoes-direita">
                             <button type="button" class="vermelho" onclick="limparCampos()">Limpar campos</button>
-                            <button class="verde" type="button" onclick="salvarMedicamentos()">Salvar</button>
+                            <button class="verde" type="submit" onclick="enviarMedicamentos()">Salvar</button>
                         </div>
-                    </div>
+                        </div>
+                    </form>
                 </section>
 
                 <section class="lista-medicamentos">
@@ -216,16 +211,16 @@
 
         //Função para alternar entre as opções das labels Intervalo e Turno
         function selecionarOpcao(elemento) {
-        // Remove a seleção de todos os elementos selecionáveis
-        const todasAsOpcoes = document.querySelectorAll('.opcao-selecionavel');
-        todasAsOpcoes.forEach(op => op.classList.remove('selecionado'));
+            // Remove a seleção de todos os elementos selecionáveis
+            const todasAsOpcoes = document.querySelectorAll('.opcao-selecionavel');
+            todasAsOpcoes.forEach(op => op.classList.remove('selecionado'));
 
-        // Limpa os inputs manuais
-        const inputs = document.querySelectorAll('.opcao-selecionavel[type="text"], .opcao-selecionavel[type="number"]');
-        inputs.forEach(input => input.value = '');
+            // Limpa os inputs manuais
+            const inputs = document.querySelectorAll('.opcao-selecionavel[type="text"], .opcao-selecionavel[type="number"]');
+            inputs.forEach(input => input.value = '');
 
-        // Marca o elemento clicado ou focado como selecionado
-        elemento.classList.add('selecionado');
+            // Marca o elemento clicado ou focado como selecionado
+            elemento.classList.add('selecionado');
         }
 
         //função que limpa todos os campos do formulário
@@ -256,7 +251,9 @@
             selecionarAba('intervalo');
         }
 
-        //Função para adicionar o nome de cada medicamento
+        //Função para adicionar cada medicamento
+        let medicamentos = JSON.parse(localStorage.getItem('medicamentosPrescricao')) || [];
+        
         function adicionarMedicamento() {
             const principio = document.getElementById('principioAtivo');
             const concentracao = document.getElementById('concentracao');
@@ -292,6 +289,23 @@
                 return;
             }
 
+            // Criar objeto com os dados do medicamento
+            const medicamento = {
+                principioAtivo: principio.value.trim(),
+                concentracao: concentracao.value.trim(),
+                forma: forma.value.trim(),
+                via: via.value.trim(),
+                tipoReceita: tipoReceita.value.trim(),
+                intervalo: intervaloInput?.value.trim() || '',
+                frequencia: frequenciaInput?.value.trim() || '',
+                turno: turnoSelecionado?.textContent.trim() || '',
+                inicioTratamento: inicioTratamento.value.trim(),
+                duracao: duracao.value.trim()
+            };
+
+            medicamentos.push(medicamento);
+            localStorage.setItem('medicamentosPrescricao', JSON.stringify(medicamentos));
+
             // Cria item da lista
             const lista = document.getElementById('listaMedicamentos');
             
@@ -317,8 +331,12 @@
             document.querySelectorAll('.opcao-selecionavel.selecionado').forEach(el => el.classList.remove('selecionado'));
         }
 
-        function salvarMedicamentos() {
-            const lista = document.querySelectorAll('#listaMedicamentos .item-lista li');
+        function enviarMedicamentos() {
+            const medicamentos = localStorage.getItem('medicamentosPrescricao');
+            document.getElementById('medicamentosJSON').value = medicamentos;
+            
+            //LÓGICA ANTIGA (PROVAVELMENTE RESPONSÁVEL POR MOSTRAR A )
+            /*const lista = document.querySelectorAll('#listaMedicamentos .item-lista li');
             const medicamentos = [];
 
             lista.forEach(item => {
@@ -331,7 +349,7 @@
             }
 
             localStorage.setItem('medicamentos', JSON.stringify(medicamentos));
-            window.location.href = 'prontuario.php';
+            window.location.href = 'prontuario.php';*/
         }
 
         function carregarMedicamentosSalvos() {

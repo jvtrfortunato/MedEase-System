@@ -10,6 +10,7 @@
 <body>
     <?php
     require_once '../controller/ConsultaController.php';
+    require_once '../routers/roteadorConsulta.php';
 
     if (!isset($_SESSION['usuario_id']) || 
         ($_SESSION['usuario_tipo'] !== 'medico' && $_SESSION['usuario_tipo'] !== 'administrador')) {
@@ -28,8 +29,6 @@
         $consultas = $controller->listarTodasConsultasDoDia();
     }
 
-    
-    
     date_default_timezone_set('America/Sao_Paulo');
     $dataHoje = date('d/m/Y');
     $_SESSION['data_hoje'] = $dataHoje;
@@ -64,7 +63,7 @@
                             </div>
                             <div class="status">
                                 <p><?php echo htmlspecialchars($consulta->getStatus()); ?></p>
-                                <a href="../controller/ConsultaController.php?acao=iniciarConsulta&consulta_id=<?php echo $consulta->getId(); ?>" class="iniciar-consulta">Iniciar Consulta</a>
+                                <a href="../routers/roteadorConsulta.php?acao=iniciarConsulta&consulta_id=<?php echo $consulta->getId(); ?>" class="iniciar-consulta">Iniciar Consulta</a>
                             </div>
                         </div>
                     </div>

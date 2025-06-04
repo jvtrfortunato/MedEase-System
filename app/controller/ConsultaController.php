@@ -300,10 +300,20 @@ class ConsultaController {
             echo "Erro ao iniciar consulta: " . $e->getMessage();
         }
     }
-}
 
-$controller = new ConsultaController();
+    public function finalizarConsulta() {
+        try {
+            // Atualiza o status da consulta para "Realizada"
+            $stmtUpdate = $this->conn->prepare("UPDATE consultas SET status = 'Realizada' WHERE id_consulta = ?");
+            $stmtUpdate->execute([$_SESSION['consulta_id']]);
 
-if (isset($_GET['acao']) && $_GET['acao'] === 'iniciarConsulta' && isset($_GET['consulta_id'])) {
-    $controller->iniciarConsulta();
+            // Redireciona para a tela do prontuário
+            header("Location: ../views/atendimentos-dia.php");
+            exit;
+
+        } catch (Exception $e) {
+            echo "Erro ao finalizar consulta: " . $e->getMessage();
+        }
+    }
+
 }

@@ -11,6 +11,7 @@ require_once '../model/Prescricao.php';
 require_once '../model/Internacao.php';
 require_once '../model/Documentacao.php';
 require_once '../model/Atestado.php';
+require_once 'ConsultaController.php';
 
 class ProntuarioController {
     private $conn;
@@ -21,83 +22,79 @@ class ProntuarioController {
     }
 
     public function salvarProntuario() {
-        try { 
+        try {
+            //Transformar o examesJson em um array
+            $examesJSON = $_POST['examesJSON'];
+            $examesArray = json_decode($examesJSON, true);
+            
             //Salvar o objeto prontuario
             $prontuario = new Prontuario(
                 idProntuario: 0,
                 dataCriacao: $_SESSION['data_hoje'],
                 historicoMedico: new HistoricoMedico(
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
+                    $_POST['doencasPreExistentes'],
+                    $_POST['medicacoesUsoContinuo'],
+                    $_POST['cirurgiasAnteriores'],
+                    $_POST['alergias'],
+                    $_POST['doencasFamilia'],
                     null
                 ),
                 anamnese: new Anamnese(
                     $_SESSION['consulta_motivo'],
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
+                    $_POST['queixa'],
+                    $_POST['doencaAtual'],
+                    $_POST['historiaSocial'],
+                    $_POST['ginecoObstetrica'],
+                    $_POST['revisaoSistemas'],
+                    $_POST['fatoresAgravantes'],
+                    $_POST['atenuantes'],
+                    $_POST['tratamentosPrevios'],
+                    $_POST['respostaTratamentosPrevios'],
                     null
                 ),
-                exameFisico: $exameFisico = new ExameFisico(
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
+                exameFisico: new ExameFisico(
+                    $_POST['avaliacaoGeral'],
+                    $_POST['sinaisVitais'],
+                    $_POST['examePele'],
+                    $_POST['exameCabeca'],
+                    $_POST['exameCardio'],
+                    $_POST['exameRespiratorio'],
+                    $_POST['exameAbdominal'],
+                    $_POST['exameNeuro'],
+                    $_POST['exameLocomotor'],
                     null
                 ),
-                diagnosticoPresuntivo: '',
-                diagnosticoDiferencial: '',
-                diagnosticoDefinitivo: '',
-                cid10: '',
-                examesSolicitados: [],
+                diagnosticoPresuntivo: $_POST['diagPresuntivo'],
+                diagnosticoDiferencial: $_POST['diagDiferencial'],
+                diagnosticoDefinitivo: $_POST['diagDefinitivo'],
+                cid10: $_POST['cid10'],
+                examesSolicitados: $examesArray,
                 prescricao: new Prescricao(
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
                     0,
-                    '',
+                    [], //MEDICAMENTOS
                     '',
                     null
                 ),
-                evolucao: '',
-                laudosExamesImagens: '',
-                procedimentosRealizados: '',
+                evolucao: $_POST['evolucao'],
+                laudosExamesImagens: '', //TIRAR??
+                procedimentosRealizados: '', //TIRAR??
                 internacao: new Internacao(
-                    '',
-                    '',
-                    '',
-                    '',
+                    $_POST['dataAdmissaoAlta'],
+                    $_POST['diagInternacao'],
+                    $_POST['cirurgiasInternacao'],
+                    $_POST['medicosInternacao'],
                     null
                 ),
                 documentacao: new Documentacao(
-                    null,
-                    '',
-                    $atestado = new Atestado(null, '', '', null),
-                    '',
+                    0,
+                    $_POST['termosConsentimento'],
+                    $atestado = new Atestado(0, '', '', null),
+                    $_POST['declaracoesSaude'],
                     null
                 ),
-                historicoProntuarios: [],
-                doencasNotificacaoObrigatoria: '',
-                observacoesAdicionais: '',
+                historicoProntuarios: [], //COMO IMPLEMENTAR OS PRONTUÁRIOS ANTIGOS AQUI? TALVEZ OS IDS?
+                doencasNotificacaoObrigatoria: $_POST['notificacoesObrigatorias'],
+                observacoesAdicionais: $_POST['obsMedicas'],
                 idPaciente: $_SESSION['paciente_id'],
                 idMedico: $_SESSION['medico_id']
             );
@@ -119,7 +116,6 @@ class ProntuarioController {
                     )
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ");
-
             $stmt->execute([
                 $prontuario->getDataCriacao(),
                 $prontuario->getDiagnosticoPresuntivo(),
@@ -140,24 +136,94 @@ class ProntuarioController {
 
             //Salvar o Histórico Médico
             $prontuario->getHistoricoMedico()->setIdProntuario($idProntuario);
-            $stmt = $this->conn->prepare("INSERT INTO historicos_medicos (id_prontuario) VALUES (?)");
-            $stmt->execute([$prontuario->getHistoricoMedico()->getIdProntuario()]);
+            $stmt = $this->conn->prepare("
+                INSERT INTO historicos_medicos (
+                    doencas_preexistentes,
+                    medicacoes_uso_continuo,
+                    cirurgias_anteriores,
+                    alergias_medicamentos,
+                    historico_doencas_familia,
+                    id_prontuario
+                ) 
+                VALUES (?, ?, ?, ?, ?, ?)
+            ");
+            $stmt->execute([
+                $prontuario->getHistoricoMedico()->getDoencasPreexistentes(),
+                $prontuario->getHistoricoMedico()->getMedicacoesUsoContinuo(),
+                $prontuario->getHistoricoMedico()->getCirurgiasAnteriores(),
+                $prontuario->getHistoricoMedico()->getAlergiasMedicamentos(),
+                $prontuario->getHistoricoMedico()->getHistoricoDoencasFamilia(),
+                $prontuario->getHistoricoMedico()->getIdProntuario()
+            ]);
 
             //Salvar a Anamnese
             $prontuario->getAnamnese()->setIdProntuario($idProntuario);
-            $stmt = $this->conn->prepare("INSERT INTO anamneses (motivo_consulta, id_prontuario) VALUES (?, ?)");
+            $stmt = $this->conn->prepare("
+                INSERT INTO anamneses (
+                    motivo_consulta,
+                    queixa_duracao,
+                    historia_doenca_atual,
+                    historia_social,
+                    historia_gineco_obstetrica,
+                    revisao_sistemas,
+                    fatores_agravantes,
+                    atenuantes,
+                    tratamentos_previos,
+                    resposta_tratamentos_previos, 
+                    id_prontuario) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ");
             $stmt->execute([
                 $prontuario->getAnamnese()->getMotivoConsulta(),
+                $prontuario->getAnamnese()->getQueixaDuracao(),
+                $prontuario->getAnamnese()->getHistoriaDoencaAtual(),
+                $prontuario->getAnamnese()->getHistoriaSocial(),
+                $prontuario->getAnamnese()->getHistoriaGinecoObstetrica(),
+                $prontuario->getAnamnese()->getRevisaoSistemas(),
+                $prontuario->getAnamnese()->getFatoresAgravantes(),
+                $prontuario->getAnamnese()->getAtenuantes(),
+                $prontuario->getAnamnese()->getTratamentosPrevios(),
+                $prontuario->getAnamnese()->getRespostaTratamentosPrevios(),
                 $prontuario->getAnamnese()->getIdProntuario()
             ]);
 
             //Salvar o Exame Físico
             $prontuario->getExameFisico()->setIdProntuario($idProntuario);
-            $stmt = $this->conn->prepare("INSERT INTO exames_fisicos (id_prontuario) VALUES (?)");
-            $stmt->execute([$prontuario->getExameFisico()->getIdProntuario()]);
+            $stmt = $this->conn->prepare("
+                INSERT INTO exames_fisicos (
+                    avaliacao_geral,
+                    sinais_vitais,
+                    exame_pele_anexos,
+                    exame_cabeca_pescoco,
+                    exame_cardiovascular,
+                    exame_respiratorio,
+                    exame_abdominal,
+                    exame_neurologico,
+                    exame_aparelho_locomotor,
+                    id_prontuario) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ");
+            $stmt->execute([
+                $prontuario->getExameFisico()->getAvaliacaoGeral(),
+                $prontuario->getExameFisico()->getSinaisVitais(),
+                $prontuario->getExameFisico()->getExamePeleAnexos(),
+                $prontuario->getExameFisico()->getExameCabecaPescoco(),
+                $prontuario->getExameFisico()->getExameCardiovascular(),
+                $prontuario->getExameFisico()->getExameRespiratorio(),
+                $prontuario->getExameFisico()->getExameAbdominal(),
+                $prontuario->getExameFisico()->getExameNeurologico(),
+                $prontuario->getExameFisico()->getExameAparelhoLocomotor(),
+                $prontuario->getExameFisico()->getIdProntuario()
+            ]);
 
             //Pensar em como salvar a lista com o nome dos exames solicitados
-            //Lógica aqui
+            foreach ($examesArray as $exameNome) {
+                $stmt = $this->conn->prepare("
+                    INSERT INTO exames (nome, id_prontuario)
+                    VALUES (?, ?)
+                ");
+                $stmt->execute([$exameNome, $idProntuario]);
+            }
 
             //Salvar a prescrição
             $prontuario->getPrescricao()->setIdProntuario($idProntuario);
@@ -166,16 +232,42 @@ class ProntuarioController {
 
             //Salvar internação
             $prontuario->getInternacao()->setIdProntuario($idProntuario);
-            $stmt = $this->conn->prepare("INSERT INTO internacoes (id_prontuario) VALUES (?)");
-            $stmt->execute([$prontuario->getInternacao()->getIdProntuario()]);
+            $stmt = $this->conn->prepare("
+                INSERT INTO internacoes (
+                    data_admissao_e_alta,
+                    diagnostico_internacao,
+                    procedimentos_cirurgicos,
+                    medicos_responsaveis,
+                    id_prontuario) 
+                VALUES (?, ?, ?, ?, ?)
+            ");
+            $stmt->execute([
+                $prontuario->getInternacao()->getDataAdmissaoEAlta(),
+                $prontuario->getInternacao()->getDiagnosticoInternacao(),
+                $prontuario->getInternacao()->getProcedimentosCirurgicos(),
+                $prontuario->getInternacao()->getMedicosResponsaveis(),
+                $prontuario->getInternacao()->getIdProntuario()
+            ]);
 
             //Salvar documentação
             $prontuario->getDocumentacao()->setIdProntuario($idProntuario);
-            $stmt = $this->conn->prepare("INSERT INTO documentacoes (id_prontuario) VALUES (?)");
-            $stmt->execute([$prontuario->getDocumentacao()->getIdProntuario()]);
+            $stmt = $this->conn->prepare("
+                INSERT INTO documentacoes (
+                    termos_consentimento,
+                    declaracao_saude,
+                    id_prontuario) 
+                VALUES (?, ?, ?)
+            ");
+            $stmt->execute([
+                $prontuario->getDocumentacao()->getTermosConsentimento(),
+                $prontuario->getDocumentacao()->getDeclaracoesSaude(),
+                $prontuario->getDocumentacao()->getIdProntuario()
+            ]);
 
-            //header("Location: ../views/atendimentos-dia.php");
-                //exit;
+            //FINALIZAR A CONSULTA
+            //$controller = new ConsultaController();
+            //$controller->finalizarConsulta();
+
         } catch (Exception $e) {
             echo "Erro ao salvar consulta: " . $e->getMessage();
         }

@@ -19,3 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "Erro ao gerenciar consulta.";
     }
 }
+
+if (isset($_GET['acao']) && $_GET['acao'] === 'iniciarConsulta' && isset($_GET['consulta_id'])) {
+    $controller->iniciarConsulta();
+}

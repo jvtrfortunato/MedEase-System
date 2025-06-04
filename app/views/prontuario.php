@@ -159,7 +159,7 @@
                 
             </section>
 
-            <form action="../routers/roteadorProntuario.php" method="post">
+            <form id="salvarProntuario" action="../routers/roteadorProntuario.php" method="post">
                 <input type="hidden" name="acao" value="salvarProntuario">
                 <!--<input type="hidden" name="examesSolicitados" id="examesSolicitadosInput">-->
                 <!--Histórico Médico e Familiar-->
@@ -172,28 +172,28 @@
                     
 
                         <div class="nome-campo">
-                            <label for="">Doenças pré-existentes</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                            <label for="doencasPreExistentes">Doenças pré-existentes</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="doencasPreExistentes"></textarea>
                         </div>
 
                         <div class="nome-campo">
-                            <label for="">Medicaçõs de uso contínuo</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                            <label for="medicacoesUsoContinuo">Medicaçõs de uso contínuo</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="medicacoesUsoContinuo"></textarea>
                         </div>
 
                         <div class="nome-campo">
-                            <label for="">Cirurgias anteriores</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                            <label for="cirurgiasAnteriores">Cirurgias anteriores</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="cirurgiasAnteriores"></textarea>
                         </div>
 
                         <div class="nome-campo">
-                            <label for="">Alergias e reações adversas a medicamentos</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                            <label for="alergias">Alergias e reações adversas a medicamentos</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="alergias"></textarea>
                         </div>
 
                         <div class="nome-campo">
-                            <label for="">Histórico de doenças na família</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                            <label for="doencasFamilia">Histórico de doenças na família</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="doencasFamilia"></textarea>
                         </div>   
 
                     
@@ -214,28 +214,48 @@
                             </div>
 
                         <div class="nome-campo">
-                            <label for="">Queixa e duração</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                            <label for="queixa">Queixa e duração</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="queixa"></textarea>
                         </div>
 
                         <div class="nome-campo">
-                            <label for="">História da doença atual</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                            <label for="doencaAtual">História da doença atual</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="doencaAtual"></textarea>
                         </div>
 
                         <div class="nome-campo">
-                            <label for="">História social</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                            <label for="historiaSocial">História social</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="historiaSocial"></textarea>
                         </div>
 
                         <div class="nome-campo">
-                            <label for="">História gineco-obstétrica (para mulheres)</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                            <label for="ginecoObstetrica">História gineco-obstétrica (para mulheres)</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="ginecoObstetrica"></textarea>
                         </div>
 
                         <div class="nome-campo">
-                            <label for="">Revisão de sistemas (sintomas em difentes sistemas do organismo) </label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                            <label for="revisaoSistemas">Revisão de sistemas (sintomas em difentes sistemas do organismo) </label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="revisaoSistemas"></textarea>
+                        </div>
+
+                        <div class="nome-campo">
+                            <label for="fatoresAgravantes">Fatores agravantes</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="fatoresAgravantes"></textarea>
+                        </div>
+
+                        <div class="nome-campo">
+                            <label for="atenuantes">Atenuantes</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="atenuantes"></textarea>
+                        </div>
+
+                        <div class="nome-campo">
+                            <label for="tratamentosPrevios">Tratamentos Prévios</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="tratamentosPrevios"></textarea>
+                        </div>
+
+                        <div class="nome-campo">
+                            <label for="respostaTratamentosPrevios">Resposta aos tratamentos prévios</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="respostaTratamentosPrevios"></textarea>
                         </div>
 
                     
@@ -251,48 +271,48 @@
                     
 
                         <div class="nome-campo">
-                            <label for="">Avaliação geral</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                            <label for="avaliacaoGeral">Avaliação geral</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="avaliacaoGeral"></textarea>
                         </div>
 
                         <div class="nome-campo">
-                            <label for="">Sinais vitais</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                            <label for="sinaisVitais">Sinais vitais</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="sinaisVitais"></textarea>
                         </div>
 
                         <div class="nome-campo">
-                            <label for="">Exame da pele e anexos (cabelos, unhas, mucosas)</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                            <label for="examePele">Exame da pele e anexos (cabelos, unhas, mucosas)</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="examePele"></textarea>
                         </div>
 
                         <div class="nome-campo">
-                            <label for="">Exame da cabeça e pescoço</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                            <label for="exameCabeca">Exame da cabeça e pescoço</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="exameCabeca"></textarea>
                         </div>
 
                         <div class="nome-campo">
-                            <label for="">Exame cardiovascular</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                            <label for="exameCardio">Exame cardiovascular</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="exameCardio"></textarea>
                         </div>
 
                         <div class="nome-campo">
-                            <label for="">Exame respiratório</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                            <label for="exameRespiratorio">Exame respiratório</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="exameRespiratorio"></textarea>
                         </div>
 
                         <div class="nome-campo">
-                            <label for="">Exame abdominal</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                            <label for="exameAbdominal">Exame abdominal</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="exameAbdominal"></textarea>
                         </div>
 
                         <div class="nome-campo">
-                            <label for="">Exame neurológico</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                            <label for="exameNeuro">Exame neurológico</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="exameNeuro"></textarea>
                         </div>
 
                         <div class="nome-campo">
-                            <label for="">Exame do aparelho locomotor</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                            <label for="exameLocomotor">Exame do aparelho locomotor</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="exameLocomotor"></textarea>
                         </div>
 
                     
@@ -308,23 +328,23 @@
                     
 
                         <div class="nome-campo">
-                            <label for="">Diagnóstico presuntivo</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                            <label for="diagPresuntivo">Diagnóstico presuntivo</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="diagPresuntivo"></textarea>
                         </div>
 
                         <div class="nome-campo">
-                            <label for="">Diagnóstico diferencial</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                            <label for="diagDiferencial">Diagnóstico diferencial</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="diagDiferencial"></textarea>
                         </div>
 
                         <div class="nome-campo">
-                            <label for="">Diagnóstico definitivo</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                            <label for="diagDefinitivo">Diagnóstico definitivo</label>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="diagDefinitivo"></textarea>
                         </div>
 
                         <div class="nome-campo">
-                            <label for="">CID-10 (classificação internacional de doenças)</label>
-                            <input type="text" name="">
+                            <label for="cid10">CID-10 (classificação internacional de doenças)</label>
+                            <input type="text" name="cid10">
                         </div>
 
                     
@@ -338,6 +358,7 @@
                 <div class="barra"></div>
                 <section id="formulario6" class="formulario-oculto">
                     <ul id="lista-exames"></ul>
+                    <input type="hidden" name="examesJSON" id="examesJSON">
                     <div class="botao-solicitar-criar">
                         <button type='button' id="botao-exame" onclick="window.location.href='solicitar-exames.php'">Solicitar exame</button>
                     </div>                   
@@ -364,7 +385,7 @@
                 <div class="barra"></div>
                 <section id="formulario8" class="formulario-oculto">
                     <div class="nome-campo">
-                        <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        <textarea rows="8" cols="50" placeholder="Digite aqui..." name="evolucao"></textarea>
                     </div>                   
                 </section>
 
@@ -397,23 +418,23 @@
                 <section id="formulario10" class="formulario-oculto">
                                       
                     <div class="nome-campo">
-                        <label for="">Data de Admissão e Alta Hospitalar</label>
-                        <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        <label for="dataAdmissaoAlta">Data de Admissão e Alta Hospitalar</label>
+                        <textarea rows="8" cols="50" placeholder="Digite aqui..." name="dataAdmissaoAlta"></textarea>
                     </div>
 
                     <div class="nome-campo">
-                        <label for="">Diagnóstico de Internação</label>
-                        <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        <label for="diagInternacao">Diagnóstico de Internação</label>
+                        <textarea rows="8" cols="50" placeholder="Digite aqui..." name="diagInternacao"></textarea>
                     </div>
 
                     <div class="nome-campo">
-                        <label for="">Procedimentos Cirúrgicos Realizados</label>
-                        <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        <label for="cirurgiasInternacao">Procedimentos Cirúrgicos Realizados</label>
+                        <textarea rows="8" cols="50" placeholder="Digite aqui..." name="cirurgiasInternacao"></textarea>
                     </div>
 
                     <div class="nome-campo">
-                        <label for="">Médicos Responsáveis</label>
-                        <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        <label for="medicosInternacao">Médicos Responsáveis</label>
+                        <textarea rows="8" cols="50" placeholder="Digite aqui..." name="medicosInternacao"></textarea>
                     </div>
 
                 </section>
@@ -427,18 +448,15 @@
                 <section id="formulario11" class="formulario-oculto">
                                       
                     <div class="nome-campo">
-                        <label for="">Termos de consentimento informado para procedimentos</label>
-                        <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        <label for="termosConsentimento">Termos de consentimento informado para procedimentos</label>
+                        <textarea rows="8" cols="50" placeholder="Digite aqui..." name="termosConsentimento"></textarea>
                     </div>
 
-                    <div class="nome-campo">
-                        <label for="">Atestados Médicos</label>
-                        <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
-                    </div>
+                    <!-- Implementar botão para a interface atestado aqui -->
 
                     <div class="nome-campo">
-                        <label for="">Declarações de saúde e formulários legais</label>
-                        <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        <label for="declaracoesSaude">Declarações de saúde e formulários legais</label>
+                        <textarea rows="8" cols="50" placeholder="Digite aqui..." name="declaracoesSaude"></textarea>
                     </div>
 
                 </section>
@@ -467,13 +485,13 @@
                 <section id="formulario13" class="formulario-oculto">
                                       
                     <div class="nome-campo">
-                        <label for="">Doenças de notificação obrigatória (ex: COVID-19, tuberculose)</label>
-                        <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        <label for="notificacoesObrigatorias">Doenças de notificação obrigatória (ex: COVID-19, tuberculose)</label>
+                        <textarea rows="8" cols="50" placeholder="Digite aqui..." name="notificacoesObrigatorias"></textarea>
                     </div>
 
                     <div class="nome-campo">
-                        <label for="">Observações médicas adicionais</label>
-                        <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
+                        <label for="obsMedicas">Observações médicas adicionais</label>
+                        <textarea rows="8" cols="50" placeholder="Digite aqui..." name="obsMedicas"></textarea>
                     </div>
 
                 </section>
@@ -559,10 +577,10 @@
         });
 
         //Função que preenche o array dos exames solicitados
-        /*document.querySelector('form').addEventListener('submit', function () {
-        const exames = JSON.parse(localStorage.getItem('examesSolicitados')) || [];
-        document.getElementById('examesSolicitadosInput').value = JSON.stringify(exames);
-        });*/
+        document.getElementById('salvarProntuario').addEventListener('submit', function() {
+            const exames = JSON.parse(localStorage.getItem('examesSolicitados')) || [];
+            document.getElementById('examesJSON').value = JSON.stringify(exames);
+        });
 
     </script>
 </body>
