@@ -54,16 +54,16 @@ class ConsultaController {
                 hora: $_POST['hora'],
                 //status: $status,
                 status: 'Agendada',
-                idPaciente: (int) $_POST['id_paciente'],
-                idMedico: (int) $_POST['id_medico'],
+                idAdministrador: $id_administrador,
                 idSecretario: $id_secretario,
-                idAdministrador: $id_administrador
+                idMedico: (int) $_POST['id_medico'],
+                idPaciente: (int) $_POST['id_paciente'],
             );
 
             // Monta SQL conforme o agendador
             if ($id_secretario !== null) {
                 $stmt = $this->conn->prepare("
-                    INSERT INTO consultas (motivo, data, hora, status, id_secretario, id_paciente, id_medico)
+                    INSERT INTO consultas (motivo, data, hora, status, id_secretario, id_medico, id_paciente)
                     VALUES (?, ?, ?, ?, ?, ?, ?)
                 ");
                 $stmt->execute([
@@ -72,12 +72,12 @@ class ConsultaController {
                     $consulta->getHora(),
                     $consulta->getStatus(),
                     $consulta->getIdSecretario(),
-                    $consulta->getIdPaciente(),
-                    $consulta->getIdMedico()
+                    $consulta->getIdMedico(),
+                    $consulta->getIdPaciente()
                 ]);
             } else {
                 $stmt = $this->conn->prepare("
-                    INSERT INTO consultas (motivo, data, hora, status, id_administrador, id_paciente, id_medico)
+                    INSERT INTO consultas (motivo, data, hora, status, id_administrador, id_medico, id_paciente)
                     VALUES (?, ?, ?, ?, ?, ?, ?)
                 ");
                 $stmt->execute([
@@ -86,8 +86,8 @@ class ConsultaController {
                     $consulta->getHora(),
                     $consulta->getStatus(),
                     $consulta->getIdAdministrador(),
-                    $consulta->getIdPaciente(),
-                    $consulta->getIdMedico()
+                    $consulta->getIdMedico(),
+                    $consulta->getIdPaciente()
                 ]);
             }
 
@@ -127,10 +127,10 @@ class ConsultaController {
                         $row['data'],
                         $row['hora'],
                         $row['status'],
-                        $row['id_paciente'],
-                        $row['id_medico'],
+                        $row['id_administrador'] ?? null,
                         $row['id_secretario'] ?? null,
-                        $row['id_administrador'] ?? null
+                        $row['id_medico'],
+                        $row['id_paciente']
                     ),
                     'nome_paciente' => $row['nome_paciente']
                 ];
@@ -155,10 +155,10 @@ class ConsultaController {
                         $row['data'],
                         $row['hora'],
                         $row['status'],
-                        $row['id_paciente'],
-                        $row['id_medico'],
+                        $row['id_administrador'] ?? null,
                         $row['id_secretario'] ?? null,
-                        $row['id_administrador'] ?? null
+                        $row['id_medico'],
+                        $row['id_paciente']
                     ),
                     'nome_paciente' => $row['nome_paciente']
                 ];
@@ -202,10 +202,10 @@ class ConsultaController {
                         $row['data'],
                         $row['hora'],
                         $row['status'],
-                        $row['id_paciente'],
-                        $row['id_medico'],
+                        $row['id_administrador'] ?? null,
                         $row['id_secretario'] ?? null,
-                        $row['id_administrador'] ?? null
+                        $row['id_medico'],
+                        $row['id_paciente']
                     ),
                     'nome_paciente' => $row['nome_paciente']
                 ];
@@ -230,10 +230,10 @@ class ConsultaController {
                         $row['data'],
                         $row['hora'],
                         $row['status'],
-                        $row['id_paciente'],
-                        $row['id_medico'],
+                        $row['id_administrador'] ?? null,
                         $row['id_secretario'] ?? null,
-                        $row['id_administrador'] ?? null
+                        $row['id_medico'],
+                        $row['id_paciente']
                     ),
                     'nome_paciente' => $row['nome_paciente']
                 ];
@@ -267,10 +267,10 @@ class ConsultaController {
             $dataConsulta['data'],
             $dataConsulta['hora'],
             $dataConsulta['status'],
-            $dataConsulta['id_paciente'],
-            $dataConsulta['id_medico'],
+            $dataConsulta['id_administrador'],
             $dataConsulta['id_secretario'],
-            $dataConsulta['id_administrador']
+            $dataConsulta['id_paciente'],
+            $dataConsulta['id_medico']
         );
     }
 

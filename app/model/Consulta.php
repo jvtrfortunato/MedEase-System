@@ -13,10 +13,10 @@ class Consulta {
         private string $hora,
         //private StatusConsulta $status, USAR ENUM OU NÃO?
         private string $status,
-        private int $idPaciente,
-        private int $idMedico,
+        private ?int $idAdministrador = null,
         private ?int $idSecretario = null,
-        private ?int $idAdministrador = null
+        private int $idMedico,
+        private int $idPaciente
     ) {}
 
     // Getters
