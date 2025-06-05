@@ -23,6 +23,28 @@ class ProntuarioController {
 
     public function salvarProntuario() {
         try {
+            //converter json para objetos medicamento
+            $listaMedicamentos = [];
+            if (isset($_POST['medicamentos'])) {
+                $medicamentosArray = json_decode($_POST['medicamentos'], true);
+
+                foreach ($medicamentosArray as $med) {
+                    $medicamento = new Medicamento(
+                        principioAtivo: $med['principioAtivo'],
+                        concentracao: $med['concentracao'],
+                        forma: $med['forma'],
+                        via: $med['via'],
+                        tipoReceita: $med['tipoReceita'],
+                        intervalo: $med['intervalo'],
+                        frequencia: $med['frequencia'],
+                        turno: $med['turno'],
+                        inicioTratamento: $med['inicioTratamento'],
+                        duracao: $med['duracao']
+                    );
+                    $listaMedicamentos[] = $medicamento;
+                }
+            }
+
             //Transformar o examesJson em um array
             $examesJSON = $_POST['examesJSON'];
             $examesArray = json_decode($examesJSON, true);
@@ -71,7 +93,7 @@ class ProntuarioController {
                 examesSolicitados: $examesArray,
                 prescricao: new Prescricao(
                     0,
-                    [], //MEDICAMENTOS
+                    $listaMedicamentos, //MEDICAMENTOS
                     '',
                     null
                 ),
@@ -264,6 +286,7 @@ class ProntuarioController {
                 $prontuario->getDocumentacao()->getIdProntuario()
             ]);
 
+            var_dump($listaMedicamentos);
             //FINALIZAR A CONSULTA
             //$controller = new ConsultaController();
             //$controller->finalizarConsulta();

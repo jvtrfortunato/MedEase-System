@@ -499,6 +499,7 @@
                 <div class="finalizar-consulta">
                     <button type='submit'>Finalizar Consulta</button>
                 </div>
+                
             </form>
 
             </section>
@@ -508,6 +509,24 @@
     <footer></footer>
     
     <script>
+
+        //recupera os medicamentos e os injeta no form
+        window.onload = () => {
+            const medicamentos = JSON.parse(localStorage.getItem('medicamentos')) || [];
+
+            if (medicamentos.length > 0) {
+                // Cria um input hidden com os dados no form salvarProntuario
+                const form = document.getElementById('salvarProntuario');
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'medicamentos';
+                input.value = JSON.stringify(medicamentos); // envia como JSON
+                form.appendChild(input);
+
+                // Opcional: limpa o localStorage se os dados já estiverem no form
+                localStorage.removeItem('medicamentos');
+            }
+        };
 
         //Função para expandir ou retrair os campos do prontuário
         function expandirRetrair(idFormulario, setaImg) {

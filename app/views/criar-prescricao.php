@@ -252,7 +252,7 @@
         }
 
         //Função para adicionar cada medicamento
-        let medicamentos = JSON.parse(localStorage.getItem('medicamentosPrescricao')) || [];
+        let medicamentos = JSON.parse(localStorage.getItem('medicamentos')) || [];
         
         function adicionarMedicamento() {
             const principio = document.getElementById('principioAtivo');
@@ -265,6 +265,7 @@
             const intervaloInput = document.getElementById('input-intervalo');
             const frequenciaInput = document.getElementById('input-frequencia');
             const turnoSelecionado = document.querySelector('#conteudo-turno .opcao-selecionavel.selecionado');
+            
             const algumHorarioPreenchido =
                 intervaloSelecionado ||
                 turnoSelecionado ||
@@ -304,7 +305,7 @@
             };
 
             medicamentos.push(medicamento);
-            localStorage.setItem('medicamentosPrescricao', JSON.stringify(medicamentos));
+            localStorage.setItem('medicamentos', JSON.stringify(medicamentos));
 
             // Cria item da lista
             const lista = document.getElementById('listaMedicamentos');
@@ -318,7 +319,12 @@
             imgRemover.src = '/assets/img/lixeira.png'
             imgRemover.alt = 'Remover';
             imgRemover.classList.add('icone-remover');
-            imgRemover.onclick = () => container.remove();
+            imgRemover.onclick = () => {
+                const index = [...lista.children].indexOf(container);
+                medicamentos.splice(index, 1);
+                localStorage.setItem('medicamentos', JSON.stringify(medicamentos));
+                container.remove();
+            }
 
             li.textContent = principio.value.trim(); // você pode incluir a dose também se quiser
             
@@ -332,11 +338,7 @@
         }
 
         function enviarMedicamentos() {
-            const medicamentos = localStorage.getItem('medicamentosPrescricao');
-            document.getElementById('medicamentosJSON').value = medicamentos;
-            
-            //LÓGICA ANTIGA (PROVAVELMENTE RESPONSÁVEL POR MOSTRAR A )
-            /*const lista = document.querySelectorAll('#listaMedicamentos .item-lista li');
+            const lista = document.querySelectorAll('#listaMedicamentos .item-lista li');
             const medicamentos = [];
 
             lista.forEach(item => {
@@ -349,7 +351,7 @@
             }
 
             localStorage.setItem('medicamentos', JSON.stringify(medicamentos));
-            window.location.href = 'prontuario.php';*/
+            window.location.href = 'prontuario.php';
         }
 
         function carregarMedicamentosSalvos() {
