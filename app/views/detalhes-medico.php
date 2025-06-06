@@ -6,14 +6,14 @@ require_once '../controller/MedicoController.php';
 // var_dump($_GET);
 // echo "</pre>";
 
-if (!isset($_GET['id'])) {
+if (!isset($_GET['id_medico'])) {
     echo "ID do médico não fornecido.";
     exit;
 }
 
-$id = $_GET['id'];
+$idMedico = $_GET['id_medico'];
 $controller = new MedicoController();
-$medico = $controller->dadosMedico($id);
+$medico = $controller->dadosMedico($idMedico);
 
 if (!$medico) {
     echo "Médico não encontrado.";

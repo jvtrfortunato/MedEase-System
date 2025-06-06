@@ -1,16 +1,6 @@
 <?php
 require_once '../controller/SecretarioController.php';
 session_start();
-
-$controller = new SecretarioController();
-$controller->cadastrar();
-
-$mensagem = '';
-if (isset($_SESSION['mensagem'])) {
-    $mensagem = $_SESSION['mensagem'];
-    unset($_SESSION['mensagem']);
-}
-
 ?>
 
 
@@ -42,7 +32,8 @@ if (isset($_SESSION['mensagem'])) {
 
     <main>
         <section class="conteudo-principal">
-            <form action="" method="post">
+            <form action="../routers/roteadorSecretario.php" method="post">
+                <input type="hidden" name="acao" value="salvarMedico">
                 <h1>Dados Gerais</h1>
                 <section class="dados-gerais-endereco">
                     

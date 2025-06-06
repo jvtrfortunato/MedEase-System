@@ -13,7 +13,7 @@ class MedicoController {
         $this->conn = $database->conectar();
     }
 
-    public function cadastrar() {
+    public function salvarMedico() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Coletar e validar os dados do POST
             $nome = $_POST['nome'] ?? '';
@@ -75,9 +75,7 @@ class MedicoController {
                 $medico->salvar($this->conn, $endereco);
 
 
-                session_start();
-                $_SESSION['mensagem'] = "Médico cadastrado com sucesso!";
-                header("Location: ../views/cadastrar-medico.php");
+                header("Location: ../views/gerenciar-profissionais.php");
                 exit;
 
             } catch (PDOException $e) {
@@ -161,6 +159,68 @@ class MedicoController {
         // 5. Redireciona para a tela de gerenciamento
         header("Location: ../views/gerenciar-profissionais.php");
         exit();
+    }
+
+    public function atualizarMedico($dados) {
+        //Atualiza os dados na tabela usuarios
+        $sqlMedico = "UPDATE usuarios 
+                SET nome = :nome, 
+                    cpf = :cpf,
+                    telefone = :telefone,
+                    data_nascimento = :data_nascimento,
+                    sexo = :sexo,
+                    email = :email,
+                    senha = :senha
+                WHERE id_usuario = :id_usuario";
+        
+        $stmtMedico = $this->conn->prepare($sqlMedico);
+        $stmtMedico->bindParam(":nome", $dados['nome'], PDO::PARAM_STR);
+        $stmtMedico->bindParam(":cpf", $dados['cpf'], PDO::PARAM_STR);
+        $stmtMedico->bindParam(":telefone", $dados['telefone'], PDO::PARAM_STR);
+        $stmtMedico->bindParam(":data_nascimento", $dados['dataNascimento'], PDO::PARAM_STR);
+        $stmtMedico->bindParam(":sexo", $dados['sexo'], PDO::PARAM_STR);
+        $stmtMedico->bindParam(":email", $dados['email'], PDO::PARAM_STR);
+        $stmtMedico->bindParam(":senha", $dados['senha'], PDO::PARAM_STR);
+        $stmtMedico->bindParam(":id_usuario", $dados['idUsuario'], PDO::PARAM_STR);
+        $stmtMedico->execute(); // Linha 187
+
+        //Atualiza os dados na tabela medicos
+        $sqlMedico = "UPDATE medicos 
+                SET crm = :crm, 
+                    especialidade = :especialidade
+                WHERE id_usuario = :id_usuario";
+        
+        $stmtMedico = $this->conn->prepare($sqlMedico);
+        $stmtMedico->bindParam(":crm", $dados['crm'], PDO::PARAM_STR);
+        $stmtMedico->bindParam(":especialidade", $dados['especialidade'], PDO::PARAM_STR);
+        $stmtMedico->bindParam(":id_usuario", $dados['idUsuario'], PDO::PARAM_STR);
+        $stmtMedico->execute();
+
+        //Atualiza o endereço do medico
+        $sqlEndereco = "UPDATE enderecos 
+                SET rua = :rua, 
+                    numero = :numero,
+                    bairro = :bairro,
+                    cidade = :cidade,
+                    estado = :estado,
+                    cep = :cep
+                WHERE id_usuario = :id_usuario";
+
+        $stmtEndereco = $this->conn->prepare($sqlEndereco);
+        $stmtEndereco->bindParam(":rua", $dados['rua'], PDO::PARAM_STR);
+        $stmtEndereco->bindParam(":numero", $dados['numero'], PDO::PARAM_STR);
+        $stmtEndereco->bindParam(":bairro", $dados['bairro'], PDO::PARAM_STR);
+        $stmtEndereco->bindParam(":cidade", $dados['cidade'], PDO::PARAM_STR);
+        $stmtEndereco->bindParam(":estado", $dados['estado'], PDO::PARAM_STR);
+        $stmtEndereco->bindParam(":cep", $dados['cep'], PDO::PARAM_STR);
+        $stmtEndereco->bindParam(":id_usuario", $dados['idUsuario'], PDO::PARAM_INT);
+
+        if ($stmtEndereco->execute()) {
+            header("Location: ../views/gerenciar-profissionais.php?status=sucesso");
+            exit;
+        } else {
+            echo "<script>alert('Erro ao editar os dados do paciente.'); history.back();</script>";
+        }
     }
 }
 

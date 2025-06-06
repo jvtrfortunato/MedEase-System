@@ -1,14 +1,14 @@
 <?php
 require_once '../controller/MedicoController.php';
 
-if (!isset($_GET['id'])) {
+if (!isset($_GET['id_medico'])) {
     echo "ID do médico não fornecido.";
     exit;
 }
 
-$id = $_GET['id'];
+$id_medico = $_GET['id_medico'];
 $controller = new MedicoController();
-$medico = $controller->dadosMedico($id);
+$medico = $controller->dadosMedico($id_medico);
 
 if (!$medico) {
     echo "Médico não encontrado.";
@@ -43,9 +43,9 @@ if (!$medico) {
 
     <main>
         <section class="conteudo-principal">
-            <form action="" method="post">
+            <form action="../routers/roteadorMedico.php" method="post">
                 <input type="hidden" name="acao" value="atualizarMedico">
-                <input type="hidden" name="idMedico" value="<?= htmlspecialchars($medico->getIdMedico()) ?>">
+                <input type="hidden" name="idUsuario" value="<?= htmlspecialchars($medico->getIdUsuario()) ?>">
                 <h1>Dados Gerais</h1>
                 <section class="dados-gerais-endereco">
                     
@@ -57,7 +57,7 @@ if (!$medico) {
                             </div>
                             <div class="label-input">
                                 <label for="crm">CRM<span>*</span></label>
-                                <input type="text" id="crm" name="crm" maxlength="10" value="<?= htmlspecialchars($medico->getCRM()) ?>">
+                                <input type="text" id="crm" name="crm" value="<?= htmlspecialchars($medico->getCRM()) ?>">
                             </div>
                         </div>
                         <div class="label-input">

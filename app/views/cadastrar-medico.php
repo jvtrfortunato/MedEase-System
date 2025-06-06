@@ -1,15 +1,6 @@
 <?php
 require_once '../controller/MedicoController.php';
-session_start();
-
-$controller = new MedicoController();
-$controller->cadastrar();
-
-$mensagem = '';
-if (isset($_SESSION['mensagem'])) {
-    $mensagem = $_SESSION['mensagem'];
-    unset($_SESSION['mensagem']);
-}
+session_start();    
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +30,8 @@ if (isset($_SESSION['mensagem'])) {
 
     <main>
         <section class="conteudo-principal">
-            <form action="" method="post">
+            <form action="../routers/roteadorMedico.php" method="post">
+                <input type="hidden" name="acao" value="salvarMedico">
                 <h1>Dados Gerais</h1>
                 <section class="dados-gerais-endereco">
                     
@@ -51,7 +43,7 @@ if (isset($_SESSION['mensagem'])) {
                             </div>
                             <div class="label-input">
                                 <label for="crm">CRM<span>*</span></label>
-                                <input type="text" id="crm" name="crm" maxlength="10"  placeholder="Ex: 123456-SP">
+                                <input type="text" id="crm" name="crm" placeholder="Ex: 123456-SP">
                             </div>
                         </div>
                         <div class="label-input">

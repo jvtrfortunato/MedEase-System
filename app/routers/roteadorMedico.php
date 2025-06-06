@@ -6,6 +6,9 @@ $controller = new MedicoController();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     switch ($acao) {
+        case 'salvarMedico':
+            $controller->salvarMedico($_POST);
+            break;
         case 'atualizarMedico':
             $controller->atualizarMedico($_POST);
             break;

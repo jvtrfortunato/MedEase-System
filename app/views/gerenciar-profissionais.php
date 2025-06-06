@@ -61,10 +61,10 @@ $secretarios = $secretarioController->exibirDados();
                                 <div class="cpf">
                                     <p><?= htmlspecialchars($medico['crm']) ?></p>
                                 </div>
-                                <a href="detalhes-medico.php?id=<?= htmlspecialchars($medico['id_medico'] ?? '') ?>" class="detalhesEditar">
+                                <a href="detalhes-medico.php?id_medico=<?= htmlspecialchars($medico['id_medico'] ?? '') ?>" class="detalhesEditar">
                                     Detalhes
                                 </a>
-                                <a href="editar-medico.php?id=<?= htmlspecialchars($medico['id_medico'] ?? '') ?>" class="detalhesEditar">
+                                <a href="editar-medico.php?id_medico=<?= htmlspecialchars($medico['id_medico'] ?? '') ?>" class="detalhesEditar">
                                     Editar
                                 </a>
                                 <a href="../routers/roteadorMedico.php?acao=excluirMedico&medico_id=<?= htmlspecialchars($medico['id_medico'] ?? '') ?>" onclick="return confirm('Deseja excluir este profissional?');" class="excluir">
