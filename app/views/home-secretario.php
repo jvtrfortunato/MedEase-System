@@ -24,9 +24,9 @@
             <div class="grid-container">
                 
                 <div class="card">
-                    <a href="cadastrar-paciente.php">
-                        <img src="../../assets/img/User.png" alt="Cadastrar Paciente">
-                        <p>Cadastrar Paciente</p>
+                    <a href="gerenciar-pacientes.php" target="">
+                        <img src="../../assets/img/User.png" alt="Pacientes">
+                        <p>Gerenciar Pacientes</p>
                     </a>
                 </div>
 
@@ -41,13 +41,6 @@
                     <a href="calendario.php?modo=consultas&data">
                         <img src="../../assets/img/Task Planning.png" alt="Consulta Agendadas">
                         <p>Consultas Agendadas</p>
-                    </a>
-                </div>
-
-                <div class="card">
-                    <a href="gerenciar-pacientes.php">
-                        <img src="../../assets/img/User Group.png" alt="Pacientes">
-                        <p>Pacientes</p>
                     </a>
                 </div>
 

@@ -12,7 +12,7 @@ class SecretarioController {
         $this->conn = $database->conectar();
     }
 
-    public function cadastrar() {
+    public function salvarSecretario() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Recebendo dados do formulário
             $nome = $_POST['nome'];
@@ -48,6 +48,8 @@ class SecretarioController {
             }
 
             try {
+                // Criar objeto Endereco (sem id_usuario ainda)
+                $endereco = new Endereco($rua, $numero, $bairro, $cidade, $estado, $cep);
 
                 //Criar objeto Secretario
                 $secretario = new Secretario(
@@ -58,18 +60,14 @@ class SecretarioController {
                     $dataNascimento,
                     $sexo,
                     $email,
-                    $senha
+                    $senha,
+                    $endereco
                 );
-
-                // Criar objeto Endereco
-                $endereco = new Endereco($rua, $numero, $bairro, $cidade, $estado, $cep, null);
 
                 // Salvar médico com endereço
                 $secretario->salvar($this->conn, $endereco);
                 
-                session_start();
-                $_SESSION['mensagem'] = "Secretário cadastrado com sucesso!";
-                header("Location: ../views/cadastrar-secretario.php");
+                header("Location: ../views/gerenciar-profissionais.php");
                 exit;
 
             } catch (PDOException $e) {
@@ -101,6 +99,105 @@ class SecretarioController {
         }
 
         return null;
+    }
+
+    public function atualizarSecretario($dados) {
+        //Atualiza os dados na tabela usuarios
+        $sqlSecretario = "UPDATE usuarios 
+                SET nome = :nome, 
+                    cpf = :cpf,
+                    telefone = :telefone,
+                    data_nascimento = :data_nascimento,
+                    sexo = :sexo,
+                    email = :email,
+                    senha = :senha
+                WHERE id_usuario = :id_usuario";
+        
+        $stmtSecretario = $this->conn->prepare($sqlSecretario);
+        $stmtSecretario->bindParam(":nome", $dados['nome'], PDO::PARAM_STR);
+        $stmtSecretario->bindParam(":cpf", $dados['cpf'], PDO::PARAM_STR);
+        $stmtSecretario->bindParam(":telefone", $dados['telefone'], PDO::PARAM_STR);
+        $stmtSecretario->bindParam(":data_nascimento", $dados['dataNascimento'], PDO::PARAM_STR);
+        $stmtSecretario->bindParam(":sexo", $dados['sexo'], PDO::PARAM_STR);
+        $stmtSecretario->bindParam(":email", $dados['email'], PDO::PARAM_STR);
+        $stmtSecretario->bindParam(":senha", $dados['senha'], PDO::PARAM_STR);
+        $stmtSecretario->bindParam(":id_usuario", $dados['idUsuario'], PDO::PARAM_STR);
+        $stmtSecretario->execute(); // Linha 187
+
+        //Atualiza o endereço do secretário
+        $sqlEndereco = "UPDATE enderecos 
+                SET rua = :rua, 
+                    numero = :numero,
+                    bairro = :bairro,
+                    cidade = :cidade,
+                    estado = :estado,
+                    cep = :cep
+                WHERE id_usuario = :id_usuario";
+
+        $stmtEndereco = $this->conn->prepare($sqlEndereco);
+        $stmtEndereco->bindParam(":rua", $dados['rua'], PDO::PARAM_STR);
+        $stmtEndereco->bindParam(":numero", $dados['numero'], PDO::PARAM_STR);
+        $stmtEndereco->bindParam(":bairro", $dados['bairro'], PDO::PARAM_STR);
+        $stmtEndereco->bindParam(":cidade", $dados['cidade'], PDO::PARAM_STR);
+        $stmtEndereco->bindParam(":estado", $dados['estado'], PDO::PARAM_STR);
+        $stmtEndereco->bindParam(":cep", $dados['cep'], PDO::PARAM_STR);
+        $stmtEndereco->bindParam(":id_usuario", $dados['idUsuario'], PDO::PARAM_INT);
+
+        if ($stmtEndereco->execute()) {
+            header("Location: ../views/gerenciar-profissionais.php?status=sucesso");
+            exit;
+        } else {
+            echo "<script>alert('Erro ao editar os dados do paciente.'); history.back();</script>";
+        }
+    }
+
+    public function excluirSecretario($id_secretario) {
+        // Verifica se existem consultas associadas
+        $sqlConsultas = "SELECT COUNT(*) as total FROM consultas WHERE id_secretario = :id_secretario";
+        $stmtConsultas = $this->conn->prepare($sqlConsultas);
+        $stmtConsultas->bindParam(":id_secretario", $id_secretario, PDO::PARAM_INT);
+        $stmtConsultas->execute();
+        $consultas = $stmtConsultas->fetch(PDO::FETCH_ASSOC)['total'];
+
+        // Se houver qualquer relação, impede exclusão
+        if ($consultas > 0) {
+            echo "<script>
+                alert('Não é possível excluir: este secretário possui consultas vinculados.');
+                window.location.href='../views/gerenciar-profissionais.php';
+            </script>";
+            return;
+        }
+
+        // 1. Buscar o id_usuario associado ao id_secretario
+        $sqlBuscaUsuario = "SELECT id_usuario FROM secretarios WHERE id_secretario = :id_secretario";
+        $stmtBuscaUsuario = $this->conn->prepare($sqlBuscaUsuario);
+        $stmtBuscaUsuario->bindParam(":id_secretario", $id_secretario, PDO::PARAM_INT);
+        $stmtBuscaUsuario->execute();
+        $id_usuario = $stmtBuscaUsuario->fetchColumn(); // retorna só o valor da coluna
+
+        if ($id_usuario) {
+            // 2. Deleta o Secretário
+            $sqlSecretario = "DELETE FROM secretarios WHERE id_secretario = :id_secretario";
+            $stmtSecretario = $this->conn->prepare($sqlSecretario);
+            $stmtSecretario->bindParam(":id_secretario", $id_secretario, PDO::PARAM_INT);
+            $stmtSecretario->execute();
+
+            // 3. Deleta o Endereço
+            $sqlEndereco = "DELETE FROM enderecos WHERE id_usuario = :id_usuario";
+            $stmtEndereco = $this->conn->prepare($sqlEndereco);
+            $stmtEndereco->bindParam(":id_usuario", $id_usuario, PDO::PARAM_INT);
+            $stmtEndereco->execute();
+
+            // 4. Deleta o Usuário
+            $sqlUsuario = "DELETE FROM usuarios WHERE id_usuario = :id_usuario";
+            $stmtUsuario = $this->conn->prepare($sqlUsuario);
+            $stmtUsuario->bindParam(":id_usuario", $id_usuario, PDO::PARAM_INT);
+            $stmtUsuario->execute();
+        }
+
+        // 5. Redireciona para a tela de gerenciamento
+        header("Location: ../views/gerenciar-profissionais.php");
+        exit();
     }
 }
 

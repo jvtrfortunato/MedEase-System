@@ -84,6 +84,13 @@ input {
     padding: 5px 10px 5px 10px;
 }
 
+.botao {
+    display: flex;
+    justify-content: space-between;
+    width: 75%;
+    margin-top: 5px;
+}
+
 .botaoVerde {
     text-align: center;
     padding: 0.3vw 0.8vw;
@@ -100,11 +107,6 @@ input {
 
 .botaoVerde:hover {
     background-color: #3AC3A5;
-}
-
-.botao {
-    width: 75%;
-    margin-top: 5px;
 }
 
 .botaoVermelho {

@@ -66,7 +66,8 @@ class PacienteController {
                 $endereco->getIdPaciente()
             ]);
 
-            echo "Paciente e endereço cadastrados com sucesso!";
+            header("Location: ../views/gerenciar-pacientes.php");
+                exit;
 
         } catch (PDOException $e) {
             echo "Erro ao cadastrar paciente: " . $e->getMessage();

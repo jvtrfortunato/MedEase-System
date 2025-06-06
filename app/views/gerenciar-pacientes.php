@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once '../controller/PacienteController.php';
 
 $controller = new PacienteController();
@@ -60,24 +61,24 @@ $pacientes = $controller->listarPacientes();
         </section>
         <section class="botao">
             <button id="voltarPagina" class="botaoVermelho" type="button">Voltar</button>
+            <button class="botaoVerde" onClick="window.location.href = 'cadastrar-paciente.php'">Cadastrar Paciente</button>
         </section>
+        
     </main>
     <footer></footer>
 
     <script>
-        // Evento para o botão "Voltar" (se existir)
+        //Função para voltar para a home
+        const voltarPagina = document.getElementById("voltarPagina"); // Certifique-se de que existe esse elemento
+
+        const tipoUsuario = "<?php echo $_SESSION['usuario_tipo']; ?>"; // Exemplo usando sessão
+
         if (voltarPagina) {
             voltarPagina.addEventListener("click", () => {
-                if (window.history.length > 1) {
-                    window.history.back(); // volta à página anterior no histórico
+                if (tipoUsuario === 'administrador') {
+                    window.location.href = "home-administrador.php";
                 } else {
-                    // Fallback: redireciona manualmente caso não haja histórico
-                    if ($tipoUsuario === 'administrador') {
-                        window.location.href = "home-administrador.php";
-                    }
-                    else {
-                        window.location.href = "home-secretario.php";
-                    }
+                    window.location.href = "home-secretario.php";
                 }
             });
         }

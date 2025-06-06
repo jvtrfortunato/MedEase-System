@@ -71,36 +71,20 @@ main {
     padding: 10px 17px 10px 17px;
 }
 
-.legenda {
-    display: flex;
-    gap: 1%;
-    margin-bottom: 5px;
-}
-
-.legenda p {
-    font-size: 1.4em;
-    font-weight: 500;
-    opacity: 75%;
-}
-
 .oculto {
     display: none;
-}
-
-.dados p {
-    opacity: 50%;
-    font-size: 1.4em;
-    font-weight: 500;
-}
-
-.nome-legenda {
-    width: 64%;
 }
 
 .dados {
     display: flex;
     gap: 1%;
     margin-bottom: 5px;
+}
+
+.dados p {
+    opacity: 50%;
+    font-size: 1.4em;
+    font-weight: 500;
 }
 
 .nome {
@@ -117,42 +101,6 @@ main {
     padding: 5px 10px 5px 10px;
 }
 
-.detalhesEditar {
-    width: 15%;
-    text-align: center;
-    padding: 0.3vw 0.8vw;
-    border: 1px, solid rgba(136, 136, 136, 0.4);
-    border-radius: 5px;
-    font-size: 1vw;
-    color: #FFFFFF;
-    font-weight: 600;
-    font-family: "Inter", serif;
-    cursor: pointer;
-    background-color: #50E3C2;
-}
-
-.detalhesEditar:hover {
-    background-color: #3AC3A5;
-}
-
-.excluir {
-    width: 15%;
-    text-align: center;
-    padding: 0.3vw 0.8vw;
-    border: 1px, solid rgba(136, 136, 136, 0.4);
-    border-radius: 5px;
-    font-size: 1vw;
-    color: #FFFFFF;
-    font-weight: 600;
-    font-family: "Inter", serif;
-    cursor: pointer;
-    background-color: #FF6F61;
-}
-
-.excluir:hover {
-    background-color: #E65A50;
-}
-
 .botao {
     display: flex;
     justify-content: space-between;
@@ -160,7 +108,7 @@ main {
     margin-top: 5px;
 }
 
-.botao button, a {
+.botaoVerde {
     text-align: center;
     padding: 0.3vw 0.8vw;
     border: 1px, solid rgba(136, 136, 136, 0.4);
@@ -170,21 +118,28 @@ main {
     font-weight: 600;
     font-family: "Inter", serif;
     cursor: pointer;
+    background-color: #50E3C2;
     text-decoration: none;
 }
 
-.botao .voltar {
-    background-color: #FF6F61;
-}
-
-.botao .voltar:hover {
-    background-color: #E65A50;
-}
-
-.botao .adicionar {
-    background-color: #50E3C2;
-}
-
-.botao .adicionar:hover {
+.botaoVerde:hover {
     background-color: #3AC3A5;
+}
+
+.botaoVermelho {
+    text-align: center;
+    padding: 0.3vw 0.8vw;
+    border: 1px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    font-size: 1vw;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-family: "Inter", serif;
+    cursor: pointer;
+    background-color: #FF6F61;
+    text-decoration: none;
+}
+
+.botaoVermelho:hover {
+    background-color: #E65A50;
 }

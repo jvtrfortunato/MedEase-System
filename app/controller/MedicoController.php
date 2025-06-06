@@ -67,9 +67,7 @@ class MedicoController {
                     $crm,
                     $especialidade,
                     $endereco
-                );
-
-                
+                );      
 
                 // Salvar médico com endereço
                 $medico->salvar($this->conn, $endereco);

@@ -59,12 +59,12 @@ if (!$medico) {
 
                 <div class="linha">         
                     <div class="label-input">
-                        <p class="label">Nome completo</p>
+                        <p class="label">Nome</p>
                         <div class="input"><p><?= htmlspecialchars($medico->getNome()) ?></p></div>
                     </div>          
                     <div class="linha-pequenos">           
                         <div class="label-input">
-                            <p class="label">Data de Nascimento</p>
+                            <p class="label">Data de nascimento</p>
                             <div class="input"><p><?= htmlspecialchars(date('d/m/Y', strtotime($medico->getDataNascimento()))) ?></p></div>
                         </div>                        
                         <div class="label-input">

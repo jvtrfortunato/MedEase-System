@@ -1,18 +1,32 @@
 <?php
-session_start();
-$tipoUsuario = $_SESSION['usuario_tipo'];
+require_once '../controller/SecretarioController.php';
+
+if (!isset($_GET['id'])) {
+    echo "ID do secretário não fornecido.";
+    exit;
+}
+
+$id = $_GET['id'];
+$controller = new SecretarioController();
+$secretario = $controller->dadosSecretario($id);
+
+if (!$secretario) {
+    echo "Secretário não encontrado.";
+    exit;
+}
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar Paciente</title>
+    <title>Editar Secretário</title>
     <link rel="stylesheet" href="../../assets/css/header.css">
-    <link rel="stylesheet" href="../../assets/css/cadastrar-paciente.css">
+    <link rel="stylesheet" href="../../assets/css/cadastrar-secretario.css">
     <script src="../../assets/script/mascaraCPF.js"></script>
-    <script src="../../assets/script/mascaraRG.js"></script>
     <script src="../../assets/script/mascaraTelefone.js"></script>
     <script src="../../assets/script/mascaraCEP.js"></script>
 </head>
@@ -21,54 +35,50 @@ $tipoUsuario = $_SESSION['usuario_tipo'];
         <a class="logo" href="">MedEase</a>    
         <a href="">sair</a>
     </header>
+
+     <?php if (!empty($mensagem)): ?>
+    <div style="background-color: #d4edda; color: #155724; padding: 10px; margin: 10px; border-radius: 5px;">
+        <?= htmlspecialchars($mensagem) ?>
+    </div>
+    <?php endif; ?>
+
+
     <main>
         <section class="conteudo-principal">
-            <form action="../routers/roteadorPaciente.php" method="post">
-                <input type="hidden" name="acao" value="salvarPaciente">
+            <form action="../routers/roteadorSecretario.php" method="post">
+                <input type="hidden" name="acao" value="atualizarSecretario">
+                <input type="hidden" name="idUsuario" value="<?= htmlspecialchars($secretario->getIdUsuario()) ?>">
                 <h1>Dados Gerais</h1>
                 <section class="dados-gerais-endereco">
                     
                     <div class="linha">         
                         <div class="label-input">
-                            <label for="nome">Nome completo<span>*</span></label></label>
-                            <input type="text" name="nome" id="" require>
+                            <label for="nome">Nome<span>*</span></label></label>
+                            <input type="text" name="nome" id="" value="<?= htmlspecialchars($secretario->getNome()) ?>">
                         </div>          
                         <div class="linha-pequenos">           
                             <div class="label-input">
-                                <label for="dataNascimento">Data de nascimento</label>
-                                <input type="date" name="dataNascimento" id="" required>
-                            </div>                        
+                                <label for="dataNascimento">Data de Nascimento</label>
+                                <input type="input" name="dataNascimento" id="" value="<?= htmlspecialchars(date('d/m/Y', strtotime($secretario->getDataNascimento()))) ?>">
+                            </div>                          
+                        </div>
+                    </div>
+                    
+                    <div class="linha">
+                        <div class="linha-pequenos">
                             <div class="label-input">
                                 <label for="sexo">Sexo</label>
-                                <select name="sexo" id="" required>
-                                    <option value="">Selecione</option>
+                                <select name="sexo" id="" value="">
+                                    <option value="<?= htmlspecialchars($secretario->getSexo()) ?>"><?= htmlspecialchars($secretario->getSexo()) ?></option>
                                     <option value="masculino">Masculino</option>
                                     <option value="feminino">Feminino</option>
                                 </select>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="linha">
-                        <div class="label-input">
-                            <label for="estadoCivil">Estado civil</label>
-                            <select name="estadoCivil" id="" required>
-                                <option value="">Selecione</option>
-                                <option value="solteiro">Solteiro(a)</option>
-                                <option value="casado">Casado(a)</option>
-                                <option value="separado">Separado(a) judicialmente</option>
-                                <option value="divorciado">Divorciado(a)</option>
-                                <option value="viuvo">Viúvo(a)</option>
-                            </select>
-                        </div>
                         <div class="linha-pequenos">
                             <div class="label-input">
                                 <label for="cpf">CPF<span>*</span></label></label>
-                                <input type="text" name="cpf" id="cpf" placeholder="000.000.000-00" required>
-                            </div>
-                            <div class="label-input">
-                                <label for="rg">RG</label>
-                                <input type="text" name="rg" id="rg" required>
+                                <input type="text" name="cpf" id="cpf" value="<?= htmlspecialchars($secretario->getCpf()) ?>">
                             </div>
                         </div>
                     </div>
@@ -76,36 +86,24 @@ $tipoUsuario = $_SESSION['usuario_tipo'];
                     <div class="linha">
                         <div class="label-input">
                             <label for="telefone">Telefone</label>
-                            <input type="tel" name="telefone" id="telefone" placeholder="(00)00000-0000" required>
+                            <input type="tel" name="telefone" id="telefone" value="<?= htmlspecialchars($secretario->getTelefone()) ?>">
                         </div>
 
                         <div class="label-input">
                             <label for="email">Email</label>
-                            <input type="email" name="email" id="" required>
+                            <input type="email" name="email" id="" value="<?= htmlspecialchars($secretario->getEmail()) ?>">
                         </div>
                     </div>
 
                     <div class="linha">
                         <div class="label-input">
-                            <label for="nomeResponsavel">Nome do responsável</label>
-                            <input type="text" name="nomeResponsavel" id="">
+                            <label for="senha">Senha<span>*</span></label>
+                            <input name="senha" id="" value="<?= htmlspecialchars($secretario->getSenha()) ?>">
                         </div>
 
                         <div class="label-input">
-                            <label for="cns">Cartão Nacional de Saúde (CNS)</label>
-                            <input type="text" name="cns" id="" placeholder="000.000.000.000" required>
-                        </div>
-                    </div>
-
-                    <div class="linha">
-                        <div class="label-input">
-                            <label for="convenio">Convênio</label>
-                            <input type="text" name="convenio" id="" required>
-                        </div>
-
-                        <div class="label-input">
-                            <label for="planoSaude">Número do Plano de Saúde</label>
-                            <input type="text" name="planoSaude" id="" required>
+                            <label for="senha-repetir">Repita a senha<span>*</span></label>
+                            <input name="senha-repetir" id="">
                         </div>
                     </div>
 
@@ -117,16 +115,16 @@ $tipoUsuario = $_SESSION['usuario_tipo'];
                     <div class="linha">
                         <div class="label-input">
                             <label for="rua">Rua</label>
-                            <input type="text" id="" name="rua" required>
+                            <input type="text" id="" name="rua" value="<?= htmlspecialchars($secretario->getEndereco()->getRua()) ?>">
                         </div>
                         <div class="linha-pequenos">
                             <div class="label-input">
                                 <label for="numero">Número</label>
-                                <input type="number" id="" name="numero" required>
+                                <input type="number" id="" name="numero" value="<?= htmlspecialchars($secretario->getEndereco()->getNumero()) ?>">
                             </div>
                             <div class="label-input">
                                 <label for="bairro">Bairro</label>
-                                <input type="text" id="" name="bairro" required>
+                                <input type="text" id="" name="bairro" value="<?= htmlspecialchars($secretario->getEndereco()->getBairro()) ?>">
                             </div>
                         </div>
                     </div>
@@ -134,13 +132,13 @@ $tipoUsuario = $_SESSION['usuario_tipo'];
                     <div class="linha">
                         <div class="label-input">
                             <label for="cidade">Cidade</label>
-                            <input type="text" id="" name="cidade" required>
+                            <input type="text" id="" name="cidade" value="<?= htmlspecialchars($secretario->getEndereco()->getCidade()) ?>">
                         </div>
                         <div class="linha-pequenos">
                             <div class="label-input">
                                 <label for="estado">Estado (UF)</label>
-                                <select id="" name="estado" required>
-                                    <option value="">Selecione</option>
+                                <select id="" name="estado">
+                                    <option value="<?= htmlspecialchars($secretario->getEndereco()->getEstado()) ?>"><?= htmlspecialchars($secretario->getEndereco()->getEstado()) ?></option>
                                     <option value="AC">Acre</option>
                                     <option value="AL">Alagoas</option>
                                     <option value="AP">Amapá</option>
@@ -172,7 +170,7 @@ $tipoUsuario = $_SESSION['usuario_tipo'];
                             </div>
                             <div class="label-input">
                                 <label for="cep">CEP</label>
-                                <input type="text" id="" name="cep" placeholder="00000-000">
+                                <input type="text" id="cep" name="cep" pattern="\d{5}-\d{3}" value="<?= htmlspecialchars($secretario->getEndereco()->getCEP()) ?>">
                             </div>
                         </div>
                     </div>
@@ -184,26 +182,5 @@ $tipoUsuario = $_SESSION['usuario_tipo'];
             </form>
         </section>
     </main>
-    
-    <footer></footer>
-    
-    <script>
-        // Evento para o botão "Voltar" (se existir)
-        if (voltarPagina) {
-            voltarPagina.addEventListener("click", () => {
-                if (window.history.length > 1) {
-                    window.history.back(); // volta à página anterior no histórico
-                } else {
-                    // Fallback: redireciona manualmente caso não haja histórico
-                    if ($tipoUsuario === 'administrador') {
-                        window.location.href = "home-administrador.php";
-                    }
-                    else {
-                        window.location.href = "home-secretario.php";
-                    }
-                }
-            });
-        }
-    </script>
 </body>
 </html>

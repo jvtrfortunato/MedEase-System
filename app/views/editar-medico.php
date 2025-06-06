@@ -34,6 +34,7 @@ if (!$medico) {
         <a href="">sair</a>
     </header>
 
+    <!-- TIRAR ISSO AQUI? -->
     <?php if (!empty($mensagem)): ?>
     <div style="background-color: #d4edda; color: #155724; padding: 10px; margin: 10px; border-radius: 5px;">
         <?= htmlspecialchars($mensagem) ?>
@@ -115,7 +116,7 @@ if (!$medico) {
 
                         <div class="label-input">
                             <label for="senha-repetir">Repita a senha<span>*</span></label>
-                            <input type="password" name="senha-repetir" id="">
+                            <input name="senha-repetir" id="">
                         </div>
                     </div>  
 

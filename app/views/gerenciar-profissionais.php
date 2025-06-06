@@ -44,11 +44,7 @@ $secretarios = $secretarioController->exibirDados();
             </div>
 
             <section class="profissionais">
-                
-                <div class="legenda">
-                    <p class="nome-legenda">Nome</p>
-                </div>
-                
+         
                 <!--Lista Médicos-->
                 <div id="lista-medicos" class="lista">
                     <?php if (!empty($medicos)): ?>
@@ -61,13 +57,13 @@ $secretarios = $secretarioController->exibirDados();
                                 <div class="cpf">
                                     <p><?= htmlspecialchars($medico['crm']) ?></p>
                                 </div>
-                                <a href="detalhes-medico.php?id_medico=<?= htmlspecialchars($medico['id_medico'] ?? '') ?>" class="detalhesEditar">
+                                <a href="detalhes-medico.php?id_medico=<?= htmlspecialchars($medico['id_medico'] ?? '') ?>" class="botaoVerde">
                                     Detalhes
                                 </a>
-                                <a href="editar-medico.php?id_medico=<?= htmlspecialchars($medico['id_medico'] ?? '') ?>" class="detalhesEditar">
+                                <a href="editar-medico.php?id_medico=<?= htmlspecialchars($medico['id_medico'] ?? '') ?>" class="botaoVerde">
                                     Editar
                                 </a>
-                                <a href="../routers/roteadorMedico.php?acao=excluirMedico&medico_id=<?= htmlspecialchars($medico['id_medico'] ?? '') ?>" onclick="return confirm('Deseja excluir este profissional?');" class="excluir">
+                                <a href="../routers/roteadorMedico.php?acao=excluirMedico&medico_id=<?= htmlspecialchars($medico['id_medico'] ?? '') ?>" onclick="return confirm('Deseja excluir este profissional?');" class="botaoVermelho">
                                     Excluir
                                 </a> 
                             </div>
@@ -90,13 +86,13 @@ $secretarios = $secretarioController->exibirDados();
                                 <div class="cpf">
                                     <p><?= htmlspecialchars($secretario['cpf']) ?></p>
                                 </div>
-                                <a href="detalhes-secretario.php?id=<?= htmlspecialchars($secretario['id_secretario'] ?? '') ?>" class="detalhesEditar">
+                                <a href="detalhes-secretario.php?id=<?= htmlspecialchars($secretario['id_secretario'] ?? '') ?>" class="botaoVerde">
                                     Detalhes
                                 </a>
-                                <a href="detalhes-secretario.php?id=<?= htmlspecialchars($secretario['id_secretario'] ?? '') ?>" class="detalhesEditar">
+                                <a href="editar-secretario.php?id=<?= htmlspecialchars($secretario['id_secretario'] ?? '') ?>" class="botaoVerde">
                                     Editar
                                 </a>
-                                <a href="detalhes-secretario.php?id=<?= htmlspecialchars($secretario['id_secretario'] ?? '') ?>" class="excluir">
+                                <a href="../routers/roteadorSecretario.php?acao=excluirSecretario&secretario_id=<?= htmlspecialchars($secretario['id_secretario'] ?? '') ?>" onclick="return confirm('Deseja excluir este profissional?');" class="botaoVermelho">
                                     Excluir
                                 </a> 
                             </div>
@@ -110,8 +106,8 @@ $secretarios = $secretarioController->exibirDados();
 
         </section>
         <section class="botao">
-            <button class="voltar" onclick="history.back()">Voltar</button>
-            <button id="botao-adicionar" class="adicionar">Adicionar Profissional</button>
+            <button class="botaoVermelho" onclick="window.location.href = 'home-administrador.php';">Voltar</button>
+            <button id="botao-adicionar" class="botaoVerde">Cadastrar Profissional</button>
         </section>
     </main>
     <footer></footer>
@@ -145,6 +141,7 @@ $secretarios = $secretarioController->exibirDados();
                 window.location.href = 'cadastrar-secretario.php';
             }
         });
+
     </script>
 </body>
 </html>

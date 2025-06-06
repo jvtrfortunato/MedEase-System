@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
+
+/* Reset e configuração base com rem */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%; /* 1rem = 10px */
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  font-size: 1.6rem; /* 16px */
+  line-height: 1.5;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+/* Outros ajustes */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}

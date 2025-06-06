@@ -43,7 +43,7 @@ session_start();
                             </div>
                             <div class="label-input">
                                 <label for="crm">CRM<span>*</span></label>
-                                <input type="text" id="crm" name="crm" placeholder="Ex: 123456-SP">
+                                <input type="text" id="crm" name="crm" placeholder="Ex: CRM-SP-12345" required>
                             </div>
                         </div>
                         <div class="label-input">
@@ -63,16 +63,16 @@ session_start();
                     <div class="linha">         
                         <div class="label-input">
                             <label for="nome">Nome completo<span>*</span></label></label>
-                            <input type="text" name="nome" id="">
+                            <input type="text" name="nome" id="" required>
                         </div>          
                         <div class="linha-pequenos">           
                             <div class="label-input">
                                 <label for="dataNascimento">Data de Nascimento</label>
-                                <input type="date" name="dataNascimento" id="">
+                                <input type="date" name="dataNascimento" id="" required>
                             </div>                        
                             <div class="label-input">
                                 <label for="sexo">Sexo</label>
-                                <select name="sexo" id="">
+                                <select name="sexo" id="" required>
                                     <option value="">Selecione</option>
                                     <option value="masculino">Masculino</option>
                                     <option value="feminino">Feminino</option>
@@ -84,24 +84,24 @@ session_start();
                     <div class="linha">
                         <div class="label-input">
                             <label for="telefone">Telefone</label>
-                            <input type="tel" name="telefone" id="telefone">
+                            <input type="tel" name="telefone" id="telefone" placeholder="(00)00000-0000" required>
                         </div>
 
                         <div class="label-input">
                             <label for="email">Email</label>
-                            <input type="email" name="email" id="">
+                            <input type="email" name="email" id="" required>
                         </div>
                     </div>
 
                     <div class="linha">
                         <div class="label-input">
                             <label for="senha">Senha<span>*</span></label>
-                            <input type="password" name="senha" id="">
+                            <input type="password" name="senha" id="" required>
                         </div>
 
                         <div class="label-input">
                             <label for="senha-repetir">Repita a senha<span>*</span></label>
-                            <input type="password" name="senha-repetir" id="">
+                            <input type="password" name="senha-repetir" id="" required>
                         </div>
                     </div>  
 
@@ -113,16 +113,16 @@ session_start();
                     <div class="linha">
                         <div class="label-input">
                             <label for="rua">Rua</label>
-                            <input type="text" id="" name="rua">
+                            <input type="text" id="" name="rua" required>
                         </div>
                         <div class="linha-pequenos">
                             <div class="label-input">
                                 <label for="numero">Número</label>
-                                <input type="number" id="" name="numero">
+                                <input type="number" id="" name="numero" required>
                             </div>
                             <div class="label-input">
                                 <label for="bairro">Bairro</label>
-                                <input type="text" id="" name="bairro">
+                                <input type="text" id="" name="bairro" required>
                             </div>
                         </div>
                     </div>
@@ -130,12 +130,12 @@ session_start();
                     <div class="linha">
                         <div class="label-input">
                             <label for="cidade">Cidade</label>
-                            <input type="text" id="" name="cidade">
+                            <input type="text" id="" name="cidade" required>
                         </div>
                         <div class="linha-pequenos">
                             <div class="label-input">
                                 <label for="estado">Estado (UF)</label>
-                                <select id="" name="estado">
+                                <select id="" name="estado" required>
                                     <option value="">Selecione</option>
                                     <option value="AC">Acre</option>
                                     <option value="AL">Alagoas</option>
@@ -168,7 +168,7 @@ session_start();
                             </div>
                             <div class="label-input">
                                 <label for="cep">CEP</label>
-                                <input type="text" id="cep" name="cep" pattern="\d{5}-\d{3}" placeholder="00000-000">
+                                <input type="text" id="cep" name="cep" pattern="\d{5}-\d{3}" placeholder="00000-000" required>
                             </div>
                         </div>
                     </div>
