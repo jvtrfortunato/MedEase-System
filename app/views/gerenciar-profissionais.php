@@ -64,7 +64,7 @@ $secretarios = $secretarioController->exibirDados();
                                 <a href="detalhes-medico.php?id=<?= htmlspecialchars($medico['id_medico'] ?? '') ?>" class="detalhesEditar">
                                     Detalhes
                                 </a>
-                                <a href="detalhes-medico.php?id=<?= htmlspecialchars($medico['id_medico'] ?? '') ?>" class="detalhesEditar">
+                                <a href="editar-medico.php?id=<?= htmlspecialchars($medico['id_medico'] ?? '') ?>" class="detalhesEditar">
                                     Editar
                                 </a>
                                 <a href="../routers/roteadorMedico.php?acao=excluirMedico&medico_id=<?= htmlspecialchars($medico['id_medico'] ?? '') ?>" onclick="return confirm('Deseja excluir este profissional?');" class="excluir">

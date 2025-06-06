@@ -56,7 +56,7 @@ h1 {
     justify-content: space-between;
 }
 
-label {
+.label {
     opacity: 75%;
     font-weight: 500;
     font-size: 1.4em;
@@ -66,7 +66,7 @@ span {
     color: #4A90E2;
 }
 
-input, select {
+.input {
     border: 2px, solid rgba(136, 136, 136, 0.4);
     border-radius: 5px;
     padding: 5px;
@@ -74,7 +74,7 @@ input, select {
 }
 
 .botoes {
-    width: 100%;
+    width: 75%;
     display: flex;
     justify-content: space-between;
     margin-top: 5px;

@@ -28,7 +28,7 @@ if (!$medico) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalhes do Médico</title>
     <link rel="stylesheet" href="../../assets/css/header.css">
-    <link rel="stylesheet" href="../../assets/css/cadastrar-medico.css">
+    <link rel="stylesheet" href="../../assets/css/detalhes-medico.css">
 </head>
 <body>
     <header>
@@ -43,46 +43,46 @@ if (!$medico) {
                 <div class="linha">
                     <div class="linha-pequenos">
                         <div class="label-input">
-                            <label>CPF</label>
-                            <p><?= htmlspecialchars($medico->getCpf()) ?></p>
+                            <p class="label">CPF</p>
+                            <div class="input"><p><?= htmlspecialchars($medico->getCpf()) ?></p></div>
                         </div>
                         <div class="label-input">
-                            <label>CRM</label>
-                            <p><?= htmlspecialchars($medico->getCRM()) ?></p>
+                            <p class="label">CRM</p>
+                            <div class="input"><p><?= htmlspecialchars($medico->getCRM()) ?></p></div>
                         </div>
                     </div>
                     <div class="label-input">
-                        <label>Especialidade</label>
-                        <p><?= htmlspecialchars($medico->getEspecialidade()) ?></p>
+                        <p class="label">Especialidade</p>
+                        <div class="input"><p><?= htmlspecialchars($medico->getEspecialidade()) ?></p></div>
                     </div>
                 </div>
 
                 <div class="linha">         
                     <div class="label-input">
-                        <label>Nome completo</label>
-                        <p><?= htmlspecialchars($medico->getNome()) ?></p>
+                        <p class="label">Nome completo</p>
+                        <div class="input"><p><?= htmlspecialchars($medico->getNome()) ?></p></div>
                     </div>          
                     <div class="linha-pequenos">           
                         <div class="label-input">
-                            <label>Data de Nascimento</label>
-                            <p><?= htmlspecialchars(date('d/m/Y', strtotime($medico->getDataNascimento()))) ?></p>
+                            <p class="label">Data de Nascimento</p>
+                            <div class="input"><p><?= htmlspecialchars(date('d/m/Y', strtotime($medico->getDataNascimento()))) ?></p></div>
                         </div>                        
                         <div class="label-input">
-                            <label>Sexo</label>
-                            <p><?= htmlspecialchars($medico->getSexo()) ?></p>
+                            <p class="label">Sexo</p>
+                            <div class="input"><p><?= htmlspecialchars($medico->getSexo()) ?></p></div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="linha">
                     <div class="label-input">
-                        <label>Telefone</label>
-                        <p><?= htmlspecialchars($medico->getTelefone()) ?></p>
+                        <p class="label">Telefone</p>
+                        <div class="input"><p><?= htmlspecialchars($medico->getTelefone()) ?></p></div>        
                     </div>
 
                     <div class="label-input">
-                        <label>Email</label>
-                        <p><?= htmlspecialchars($medico->getEmail()) ?></p>
+                        <p class="label">Email</p>
+                        <div class="input"><p><?= htmlspecialchars($medico->getEmail()) ?></p></div>
                     </div>
                 </div>
             </section>
@@ -91,34 +91,34 @@ if (!$medico) {
             <section class="dados-gerais-endereco">
                 <div class="linha">
                     <div class="label-input">
-                        <label>Rua</label>
-                        <p><?= htmlspecialchars($medico->getEndereco()->getRua()) ?></p>
+                        <p class="label">Rua</p>
+                        <div class="input"><p><?= htmlspecialchars($medico->getEndereco()->getRua()) ?></p></div>
                     </div>
                     <div class="linha-pequenos">
                         <div class="label-input">
-                            <label>Número</label>
-                            <p><?= htmlspecialchars($medico->getEndereco()->getNumero()) ?></p>
+                            <p class="label">Número</p>
+                            <div class="input"><p><?= htmlspecialchars($medico->getEndereco()->getNumero()) ?></p></div>   
                         </div>
                         <div class="label-input">
-                            <label>Bairro</label>
-                            <p><?= htmlspecialchars($medico->getEndereco()->getBairro()) ?></p>
+                            <p class="label">Bairro</p>
+                            <div class="input"><p><?= htmlspecialchars($medico->getEndereco()->getBairro()) ?></p></div>   
                         </div>
                     </div>
                 </div>
 
                 <div class="linha">
                     <div class="label-input">
-                        <label>Cidade</label>
-                        <p><?= htmlspecialchars($medico->getEndereco()->getCidade()) ?></p>
+                        <p class="label">Cidade</p>
+                        <div class="input"><p><?= htmlspecialchars($medico->getEndereco()->getCidade()) ?></p></div>
                     </div>
                     <div class="linha-pequenos">
                         <div class="label-input">
-                            <label>Estado</label>
-                            <p><?= htmlspecialchars($medico->getEndereco()->getEstado()) ?></p>
+                            <p class="label">Estado (UF)</p>
+                            <div class="input"><p><?= htmlspecialchars($medico->getEndereco()->getEstado()) ?></p></div>
                         </div>
                         <div class="label-input">
-                            <label>CEP</label>
-                            <p><?= htmlspecialchars($medico->getEndereco()->getCEP()) ?></p>
+                            <p class="label">CEP</p>
+                            <div class="input"><p><?= htmlspecialchars($medico->getEndereco()->getCEP()) ?></p></div>
                         </div>
                     </div>
                 </div>

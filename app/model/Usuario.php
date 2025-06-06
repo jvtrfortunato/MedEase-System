@@ -50,6 +50,10 @@ class Usuario {
     
 
     // Getters e Setters
+    public function getIdUsuario(): int {
+        return $this->idUsuario;
+    }
+
     public function getNome(): string {
         return $this->nome;
     }
