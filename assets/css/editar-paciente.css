@@ -20,7 +20,7 @@ h1 {
     font-size: 2em;
 }
 
-h2 {
+h2, label {
     opacity: 75%;
     font-weight: 500;
     font-size: 1.4em;
@@ -31,6 +31,7 @@ h2 {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    margin-bottom: 2.5em;
 }
 
 .endereco {
@@ -69,11 +70,10 @@ h2 {
 }
 
 .botoes {
-    width: 75%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     margin-top: 5px;
-    margin-bottom: 2.5em;
 }
 
 .botoes button {
@@ -93,4 +93,12 @@ h2 {
 
 .botoes .voltar:hover {
     background-color: #E65A50;
+}
+
+.botoes .salvar {
+    background-color: #50E3C2;
+}
+
+.botoes .salvar:hover {
+    background-color: #3AC3A5;
 }

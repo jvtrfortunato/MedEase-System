@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="card">
-                    <a href="lista-pacientes.php">
+                    <a href="gerenciar-pacientes.php">
                         <img src="../../assets/img/User Group.png" alt="Pacientes">
                         <p>Pacientes</p>
                     </a>

@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="card">
-                    <a href="prontuario.php">
+                    <a href="lista-prontuarios.php">
                         <img src="../../assets/img/Medical Record.png" alt="Prontuário">
                         <p>Prontuários</p>
                     </a>
