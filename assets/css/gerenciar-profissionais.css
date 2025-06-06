@@ -117,7 +117,7 @@ main {
     padding: 5px 10px 5px 10px;
 }
 
-.detalhes {
+.detalhesEditar {
     width: 15%;
     text-align: center;
     padding: 0.3vw 0.8vw;
@@ -131,8 +131,26 @@ main {
     background-color: #50E3C2;
 }
 
-.detalhes:hover {
+.detalhesEditar:hover {
     background-color: #3AC3A5;
+}
+
+.excluir {
+    width: 15%;
+    text-align: center;
+    padding: 0.3vw 0.8vw;
+    border: 1px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    font-size: 1vw;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-family: "Inter", serif;
+    cursor: pointer;
+    background-color: #FF6F61;
+}
+
+.excluir:hover {
+    background-color: #E65A50;
 }
 
 .botao {

@@ -106,6 +106,62 @@ class MedicoController {
 
         return null;
     }
+
+    public function excluirMedico($id_medico) {
+        // Verifica se existem consultas associadas
+        $sqlConsultas = "SELECT COUNT(*) as total FROM consultas WHERE id_medico = :id_medico";
+        $stmtConsultas = $this->conn->prepare($sqlConsultas);
+        $stmtConsultas->bindParam(":id_medico", $id_medico, PDO::PARAM_INT);
+        $stmtConsultas->execute();
+        $consultas = $stmtConsultas->fetch(PDO::FETCH_ASSOC)['total'];
+
+        // Verifica se existem prontuários associados
+        $sqlProntuarios = "SELECT COUNT(*) as total FROM prontuarios WHERE id_medico = :id_medico";
+        $stmtProntuarios = $this->conn->prepare($sqlProntuarios);
+        $stmtProntuarios->bindParam(":id_medico", $id_medico, PDO::PARAM_INT);
+        $stmtProntuarios->execute();
+        $prontuarios = $stmtProntuarios->fetch(PDO::FETCH_ASSOC)['total'];
+
+        // Se houver qualquer relação, impede exclusão
+        if ($consultas > 0 || $prontuarios > 0) {
+            echo "<script>
+                alert('Não é possível excluir: este médico possui consultas ou prontuários vinculados.');
+                window.location.href='../views/gerenciar-profissionais.php';
+            </script>";
+            return;
+        }
+
+        // 1. Buscar o id_usuario associado ao id_medico
+        $sqlBuscaUsuario = "SELECT id_usuario FROM medicos WHERE id_medico = :id_medico";
+        $stmtBuscaUsuario = $this->conn->prepare($sqlBuscaUsuario);
+        $stmtBuscaUsuario->bindParam(":id_medico", $id_medico, PDO::PARAM_INT);
+        $stmtBuscaUsuario->execute();
+        $id_usuario = $stmtBuscaUsuario->fetchColumn(); // retorna só o valor da coluna
+
+        if ($id_usuario) {
+            // 2. Deleta o Médico
+            $sqlMedico = "DELETE FROM medicos WHERE id_medico = :id_medico";
+            $stmtMedico = $this->conn->prepare($sqlMedico);
+            $stmtMedico->bindParam(":id_medico", $id_medico, PDO::PARAM_INT);
+            $stmtMedico->execute();
+
+            // 3. Deleta o Endereço
+            $sqlEndereco = "DELETE FROM enderecos WHERE id_usuario = :id_usuario";
+            $stmtEndereco = $this->conn->prepare($sqlEndereco);
+            $stmtEndereco->bindParam(":id_usuario", $id_usuario, PDO::PARAM_INT);
+            $stmtEndereco->execute();
+
+            // 4. Deleta o Usuário
+            $sqlUsuario = "DELETE FROM usuarios WHERE id_usuario = :id_usuario";
+            $stmtUsuario = $this->conn->prepare($sqlUsuario);
+            $stmtUsuario->bindParam(":id_usuario", $id_usuario, PDO::PARAM_INT);
+            $stmtUsuario->execute();
+        }
+
+        // 5. Redireciona para a tela de gerenciamento
+        header("Location: ../views/gerenciar-profissionais.php");
+        exit();
+    }
 }
 
 

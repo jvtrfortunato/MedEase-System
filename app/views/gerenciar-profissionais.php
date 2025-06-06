@@ -46,8 +46,7 @@ $secretarios = $secretarioController->exibirDados();
             <section class="profissionais">
                 
                 <div class="legenda">
-                    <p class="nome-legenda">Nome Completo</p>
-                    <p>CPF</p>
+                    <p class="nome-legenda">Nome</p>
                 </div>
                 
                 <!--Lista Médicos-->
@@ -57,14 +56,20 @@ $secretarios = $secretarioController->exibirDados();
                            <!-- <pre><?php var_dump($medico); ?></pre> -->
                             <div class="dados">
                                 <div class="nome">
-                                    <p><?= htmlspecialchars($medico['nome']) ?></p>
+                                    <p><?= htmlspecialchars($medico['nome']) ?> - <?= htmlspecialchars($medico['especialidade']) ?></p>
                                 </div>
                                 <div class="cpf">
-                                    <p><?= htmlspecialchars($medico['cpf']) ?></p>
+                                    <p><?= htmlspecialchars($medico['crm']) ?></p>
                                 </div>
-                                <a href="detalhes-medico.php?id=<?= htmlspecialchars($medico['id_medico'] ?? '') ?>" class="detalhes">
-                                    Ver detalhes
+                                <a href="detalhes-medico.php?id=<?= htmlspecialchars($medico['id_medico'] ?? '') ?>" class="detalhesEditar">
+                                    Detalhes
                                 </a>
+                                <a href="detalhes-medico.php?id=<?= htmlspecialchars($medico['id_medico'] ?? '') ?>" class="detalhesEditar">
+                                    Editar
+                                </a>
+                                <a href="../routers/roteadorMedico.php?acao=excluirMedico&medico_id=<?= htmlspecialchars($medico['id_medico'] ?? '') ?>" onclick="return confirm('Deseja excluir este profissional?');" class="excluir">
+                                    Excluir
+                                </a> 
                             </div>
                         <?php endforeach; ?>
                     <?php else: ?>
@@ -85,9 +90,15 @@ $secretarios = $secretarioController->exibirDados();
                                 <div class="cpf">
                                     <p><?= htmlspecialchars($secretario['cpf']) ?></p>
                                 </div>
-                                <a href="detalhes-secretario.php?id=<?= htmlspecialchars($secretario['id_secretario'] ?? '') ?>" class="detalhes">
-                                    Ver detalhes
+                                <a href="detalhes-secretario.php?id=<?= htmlspecialchars($secretario['id_secretario'] ?? '') ?>" class="detalhesEditar">
+                                    Detalhes
                                 </a>
+                                <a href="detalhes-secretario.php?id=<?= htmlspecialchars($secretario['id_secretario'] ?? '') ?>" class="detalhesEditar">
+                                    Editar
+                                </a>
+                                <a href="detalhes-secretario.php?id=<?= htmlspecialchars($secretario['id_secretario'] ?? '') ?>" class="excluir">
+                                    Excluir
+                                </a> 
                             </div>
                         <?php endforeach; ?>
                     <?php else: ?>

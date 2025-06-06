@@ -60,9 +60,9 @@
                 </div>
 
                 <div class="card">
-                    <a href="lista-pacientes.php" target="">
+                    <a href="gerenciar-pacientes.php" target="">
                         <img src="../../assets/img/User Group.png" alt="Pacientes">
-                        <p>Pacientes</p>
+                        <p>Gerenciar Pacientes</p>
                     </a>
                 </div>
 

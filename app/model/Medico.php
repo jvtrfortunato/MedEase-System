@@ -109,7 +109,7 @@ class Medico extends Usuario
 
     public function listarMedicos(PDO $conn) {
         try {
-            $stmt = $conn->query("SELECT u.nome, u.cpf, m.id_medico FROM usuarios u INNER JOIN medicos m ON u.id_usuario = m.id_usuario");
+            $stmt = $conn->query("SELECT u.nome, u.cpf, m.id_medico, m.crm, m.especialidade FROM usuarios u INNER JOIN medicos m ON u.id_usuario = m.id_usuario ORDER BY u.nome ASC");
 
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
