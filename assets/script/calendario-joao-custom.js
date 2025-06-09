@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', function() {
     //Recebe o SELETOR calendar do atributo id
     var calendarEl = document.getElementById('calendar');
 
+    //Receber o seletor da janela modal cadastrar
+    const cadastrarModal = new bootstrap.Modal(document.getElementById("cadastrarModal"));
+
     //Instacia o FullCalendar e o atribui à variável calendar
     var calendar = new FullCalendar.Calendar(calendarEl, {
 
@@ -119,9 +122,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             }
 
-            //Receber o seletor da janela modal cadastrar
-            const cadastrarModal = new bootstrap.Modal(document.getElementById("cadastrarModal"));
-
             //Chamar a função para converter a data selecionada para ISO8601 e enviar para o formulário
             document.getElementById("cad_start").value = converterData(info.start);
             document.getElementById("cad_end").value = converterData(info.start);
@@ -198,27 +198,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 //Enviar a mensagem para o HTML
                 document.getElementById("msgCadConsulta").innerHTML = `<div class="alert alert-danger" role="alert">${resposta['msg']}</div>`;
-                
-                //Limpar o formulário
-                formCadConsulta.reset();
-
-                //Criar o objeto com os dados da consulta
-                const novaConsulta = {
-                    id: resposta['id'],
-                    id: resposta['id'],
-                    id: resposta['id'],
-                    id: resposta['id'],
-                    id: resposta['id'],
-                    id: resposta['id'],
-                }
-
-                //Adicionar a consulta ao calendário
 
             }else{
 
                 //Enviar a mensagem para o HTML
                 msg.innerHTML = `<div class="alert alert-success" role="alert">${resposta['msg']}</div>`;
 
+                //Limpar o formulário
+                formCadConsulta.reset();
+
+                //Criar o objeto com os dados da consulta
+                const novaConsulta = {
+                    title: resposta['title'],
+                    nome_paciente: resposta['nome_paciente'],
+                    nome_medico: resposta['nome_medico'],
+                    start: resposta['start'],
+                    end: resposta['end'],
+                    status: resposta['status_consulta'],
+                }
+
+                //Adicionar consulta ao calendário
+                calendar.addEvent(novaConsulta);
+
+                //Fechar a janela modal
+                cadastrarModal.hide();
             }
             
             //Apresentar no botão o texto cadastrar

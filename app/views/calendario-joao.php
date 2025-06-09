@@ -111,7 +111,7 @@
 
                         <input type="hidden" name="cad_status" class="form-control" id="cad_status" value="Agendada">
 
-                        <button type="submit" name="btnCadConsulta" class="btn btn-success" id="formCadConsulta">Cadastrar</button>
+                        <button type="submit" name="btnCadConsulta" class="btn btn-success" id="btnCadConsulta">Cadastrar</button>
 
                     </form>
 
