@@ -1,12 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Inter", sans-serif;
-}
-
 main {
     display: flex;
     flex-direction: column;
@@ -18,14 +9,14 @@ main {
 h1 {
     opacity: 75%;
     font-weight: 500;
-    font-size: 2em;
+    font-size: 2.5rem;
 }
 
 .conteudo-principal {
     width: 75%;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 0.5rem;
 }
 
 .endereco {
@@ -35,8 +26,8 @@ h1 {
 .dados-gerais-endereco {
     width: 100%;
     padding: 1.5% 1.5% 0.5% 1.5%;
-    border: 2px, solid rgba(136, 136, 136, 0.4);
-    border-radius: 5px;
+    border: 0.2rem, solid rgba(136, 136, 136, 0.4);
+    border-radius: 0.5rem;
 }
 
 .label-input {
@@ -60,7 +51,7 @@ h1 {
 label {
     opacity: 75%;
     font-weight: 500;
-    font-size: 1.4em;
+    font-size: 1.7rem;
 }
 
 span {
@@ -77,15 +68,16 @@ input, select {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    margin-top: 5px;
+    margin-top: 1%;
+    margin-bottom: 5rem;
 }
 
 .botoes button {
     text-align: center;
-    padding: 0.3vw 0.8vw;
+    padding: 0.5rem 1rem;
     border: 1px, solid rgba(136, 136, 136, 0.4);
     border-radius: 5px;
-    font-size: 1vw;
+    font-size: 1.8rem;
     color: #FFFFFF;
     font-weight: 600;
     cursor: pointer;

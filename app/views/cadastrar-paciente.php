@@ -10,6 +10,7 @@ $tipoUsuario = $_SESSION['usuario_tipo'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Paciente</title>
     <link rel="stylesheet" href="../../assets/css/header.css">
+    <link rel="stylesheet" href="../../assets/css/reset.css">
     <link rel="stylesheet" href="../../assets/css/cadastrar-paciente.css">
     <script src="../../assets/script/mascaraCPF.js"></script>
     <script src="../../assets/script/mascaraRG.js"></script>

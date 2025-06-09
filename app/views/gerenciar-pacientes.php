@@ -13,6 +13,7 @@ $pacientes = $controller->listarPacientes();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pacientes</title>
     <link rel="stylesheet" href="../../assets/css/header.css">
+    <link rel="stylesheet" href="../../assets/css/reset.css">
     <link rel="stylesheet" href="../../assets/css/gerenciar-pacientes.css">
 </head>
 <body>
@@ -29,11 +30,6 @@ $pacientes = $controller->listarPacientes();
             </section>
 
             <section class="pacientes">
-                
-                <div class="legenda">
-                    <p class="nome-legenda">Nome Completo</p>
-                    <p>CPF</p>
-                </div>
                 
                 <!--Lista dinãmica de pacientes-->
                 <?php foreach ($pacientes as $paciente): ?>
