@@ -59,7 +59,7 @@
 
                         <div class="hora-status">
                             <div class="horario">
-                                <p><?php echo date('H:i', strtotime($consulta->getHora())); ?></p>
+                                <p><?php echo date('H:i', strtotime($consulta->getDataInicio())); ?></p>
                             </div>
                             <div class="status">
                                 <p><?php echo htmlspecialchars($consulta->getStatus()); ?></p>
@@ -89,7 +89,7 @@
 
                         <div class="hora-status">
                             <div class="horario">
-                                <p><?php echo date('H:i', strtotime($consulta->getHora())); ?></p>
+                                <p><?php echo date('H:i', strtotime($consulta->getDataInicio())); ?></p>
                             </div>
                             <div class="status">
                                 <p><?php echo htmlspecialchars($consulta->getStatus()); ?></p>

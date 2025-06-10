@@ -1,12 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Inter", sans-serif;
-}
-
 main {
     display: flex;
     flex-direction: column;
@@ -18,17 +9,17 @@ main {
     width: 75%;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 0.5rem;
 }
 
 .busca {
-    width: 25%;
-    border: 2px, solid rgba(136, 136, 136, 0.4);
-    border-radius: 5px;
-    padding: 10px 17px 10px 17px;
+    width: 40%;
+    border: 0.2rem, solid rgba(136, 136, 136, 0.4);
+    border-radius: 0.5rem;
+    padding: 1rem 1.7rem 1rem 1.7rem;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 1rem;
 }
 
 input {
@@ -37,69 +28,52 @@ input {
 }
 
 .pacientes {
-    border: 2px, solid rgba(136, 136, 136, 0.4);
-    border-radius: 5px;
-    padding: 10px 17px 10px 17px;
-}
-
-.legenda {
-    display: flex;
-    gap: 1%;
-    margin-bottom: 5px;
-}
-
-.legenda p {
-    font-size: 1.4em;
-    font-weight: 500;
-    opacity: 75%;
-}
-
-.dados p {
-    opacity: 50%;
-    font-size: 1.4em;
-    font-weight: 500;
-}
-
-.nome-legenda {
-    width: 57.6%;
+    border: 0.2rem, solid rgba(136, 136, 136, 0.4);
+    border-radius: 0.5rem;
+    padding: 1rem 1.7rem 1rem 1.7rem;
 }
 
 .dados {
     display: flex;
-    gap: 1%;
-    margin-bottom: 5px;
+    gap: 0.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.dados p {
+    opacity: 50%;
+    font-size: 2rem;
+    font-weight: 500;
 }
 
 .nome {
-    width: 64%;
-    border: 2px, solid rgba(136, 136, 136, 0.4);
-    border-radius: 5px;
-    padding: 5px 10px 5px 10px;
+    width: 55%;
+    border: 0.2rem, solid rgba(136, 136, 136, 0.4);
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
 }
 
 .cpf {
     width: 19%;
-    border: 2px, solid rgba(136, 136, 136, 0.4);
-    border-radius: 5px;
-    padding: 5px 10px 5px 10px;
+    border: 0.2rem, solid rgba(136, 136, 136, 0.4);
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
 }
 
 .botao {
     display: flex;
     justify-content: space-between;
     width: 75%;
-    margin-top: 5px;
+    margin-top: 0.5rem;
 }
 
 .botaoVerde {
     text-align: center;
-    padding: 0.3vw 0.8vw;
-    border: 1px, solid rgba(136, 136, 136, 0.4);
-    border-radius: 5px;
-    font-size: 1vw;
+    padding: 0.5rem 1rem;
+    border: 0.1rem, solid rgba(136, 136, 136, 0.4);
+    border-radius: 0.5rem;
+    font-size: 1.8rem;
     color: #FFFFFF;
     font-weight: 600;
-    font-family: "Inter", serif;
     cursor: pointer;
     background-color: #50E3C2;
     text-decoration: none;
@@ -111,13 +85,12 @@ input {
 
 .botaoVermelho {
     text-align: center;
-    padding: 0.3vw 0.8vw;
-    border: 1px, solid rgba(136, 136, 136, 0.4);
-    border-radius: 5px;
-    font-size: 1vw;
+    padding: 0.5rem 1rem;
+    border: 0.1rem, solid rgba(136, 136, 136, 0.4);
+    border-radius: 0.5rem;
+    font-size: 1.8rem;
     color: #FFFFFF;
     font-weight: 600;
-    font-family: "Inter", serif;
     cursor: pointer;
     background-color: #FF6F61;
     text-decoration: none;

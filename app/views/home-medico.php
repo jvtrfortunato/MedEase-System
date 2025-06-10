@@ -31,25 +31,18 @@
                 </div>
 
                 <div class="card">
+                    <a href="calendario-joao.php">
+                        <img src="../../assets/img/Planner.png" alt="Consulta Agendadas">
+                        <p>Agenda</p>
+                    </a>
+                </div>
+
+                <div class="card">
                     <a href="lista-prontuarios.php">
                         <img src="../../assets/img/Medical Record.png" alt="Prontuário">
                         <p>Prontuários</p>
                     </a>
-                </div>
-
-                <div class="card">
-                    <a href="calendario.php?modo=consultas&data">
-                        <img src="../../assets/img/Task Planning.png" alt="Consulta Agendadas">
-                        <p>Consultas Agendadas</p>
-                    </a>
-                </div>
-
-                <div class="card">
-                    <a href="lista-pacientes.php">
-                        <img src="../../assets/img/User Group.png" alt="Pacientes">
-                        <p>Pacientes</p>
-                    </a>
-                </div>
+                </div>     
 
                 <div class="card">
                     <a href="#" target="">
