@@ -9,8 +9,9 @@ class Consulta {
     public function __construct(
         private int $idConsulta,
         private string $motivo,
-        private string $data,
-        private string $hora,
+        private string $cor,
+        private string $dataInicio,
+        private string $dataFim,
         //private StatusConsulta $status, USAR ENUM OU NÃO?
         private string $status,
         private ?int $idAdministrador = null,
@@ -28,12 +29,16 @@ class Consulta {
         return $this->motivo;
     }
 
-    public function getData(): string {
-        return $this->data;
+    public function getCor(): string {
+        return $this->cor;
     }
 
-    public function getHora(): string {
-        return $this->hora;
+    public function getDataInicio(): string {
+        return $this->dataInicio;
+    }
+
+    public function getDataFim(): string {
+        return $this->dataFim;
     }
 
     public function getStatus(): string {
@@ -57,16 +62,24 @@ class Consulta {
     }
 
     // Setters
+    public function setId(int $idConsulta): void {
+        $this->idConsulta = $idConsulta;
+    }
+
     public function setMotivo(string $motivo): void {
         $this->motivo = $motivo;
     }
 
-    public function setData(string $data): void {
-        $this->data = $data;
+    public function setCor(string $cor): void {
+        $this->cor = $cor;
     }
 
-    public function setHora(string $hora): void {
-        $this->hora = $hora;
+    public function setDataInicio(string $dataInicio): void {
+        $this->dataInico = $dataInicio;
+    }
+
+    public function setDataFim(string $dataFim): void {
+        $this->dataFim = $dataFim;
     }
 
     public function setStatus(string $status): void {

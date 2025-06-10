@@ -25,7 +25,10 @@ $cad_consulta->bindParam(':id_medico', $dados['cad_nome_medico'], PDO::PARAM_INT
 $cad_consulta->bindParam(':id_paciente', $dados['cad_nome_paciente'], PDO::PARAM_INT);
 $cad_consulta->bindParam(':status', $dados['cad_status']);
 
+
 if($cad_consulta->execute()) {
+
+    $id_consulta = $conn->lastInsertId();
     
     // Buscar nome do paciente
     $query_paciente = "SELECT nome FROM pacientes WHERE id_paciente = :id_paciente";
@@ -49,7 +52,8 @@ if($cad_consulta->execute()) {
 
     
     $retorna = ['status' => true, 
-                'msg' => 'Consulta cadastrada com sucesso!', 
+                'msg' => 'Consulta cadastrada com sucesso!',
+                'id' => $id_consulta, 
                 'title' => $dados['cad_title'],
                 'nome_paciente' => $paciente['nome'] ?? 'Paciente não encontrado',
                 'nome_medico' => $medico['nome'] ?? 'Médico não encontrado',
@@ -57,6 +61,7 @@ if($cad_consulta->execute()) {
                 'end' => $dados['cad_end'],
                 'status_consulta' => $dados['cad_status']
             ];
+    
 } else {
     $retorna = ['status' => false, 'msg' => 'Erro: Consulta não cadastrada!'];
 }

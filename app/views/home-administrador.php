@@ -32,16 +32,9 @@
                 </div>
 
                 <div class="card">
-                    <a href="calendario.php?modo=agendar&data">
+                    <a href="calendario-joao.php">
                         <img src="../../assets/img/Planner.png" alt="Agendar Consulta">
-                        <p>Agendar Consulta</p>
-                    </a>
-                </div>
-
-                <div class="card">
-                    <a href="calendario.php?modo=consultas&data">
-                        <img src="../../assets/img/Task Planning.png" alt="Consulta Agendadas">
-                        <p>Consultas Agendadas</p>
+                        <p>Agenda</p>
                     </a>
                 </div>
 

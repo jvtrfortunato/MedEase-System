@@ -7,6 +7,7 @@ $conn = $conexao->conectar();
 
 //QUERY para recuperar as consultas
 $query_consultas = "SELECT 
+                        c.id,
                         c.title,
                         c.color,
                         p.nome AS nome_paciente,
@@ -39,6 +40,7 @@ while($row_consultas = $resultado_consultas->fetch(PDO::FETCH_ASSOC)){
     extract($row_consultas);
 
     $consultas[] = [
+        'id' => $id,
         'title' => $title,
         'color' => $color,
         'nome_paciente' => $nome_paciente,

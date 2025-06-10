@@ -188,8 +188,8 @@ class ConsultaController {
                 SELECT c.*, p.nome AS nome_paciente
                 FROM consultas c
                 JOIN pacientes p ON c.id_paciente = p.id_paciente
-                WHERE c.data = ? AND (c.status = 'Agendada' OR c.status = 'Cancelada')
-                ORDER BY c.hora ASC
+                WHERE DATE(c.start) = ? AND (c.status = 'Agendada' OR c.status = 'Cancelada')
+                ORDER BY c.start ASC
             ");
             $stmtPendentes->execute([$dataAtual]);
             $resultPendentes = $stmtPendentes->fetchAll(PDO::FETCH_ASSOC);
@@ -197,10 +197,11 @@ class ConsultaController {
             $consultasPendentes = array_map(function ($row) {
                 return [
                     'consulta' => new Consulta(
-                        $row['id_consulta'],
-                        $row['motivo'],
-                        $row['data'],
-                        $row['hora'],
+                        $row['id'],
+                        $row['title'],
+                        $row['color'],
+                        $row['start'],
+                        $row['end'],
                         $row['status'],
                         $row['id_administrador'] ?? null,
                         $row['id_secretario'] ?? null,
@@ -216,8 +217,8 @@ class ConsultaController {
                 SELECT c.*, p.nome AS nome_paciente
                 FROM consultas c
                 JOIN pacientes p ON c.id_paciente = p.id_paciente
-                WHERE c.data = ? AND c.status = 'Realizada'
-                ORDER BY c.hora ASC
+                WHERE (c.start) = ? AND c.status = 'Realizada'
+                ORDER BY c.start ASC
             ");
             $stmtRealizadas->execute([$dataAtual]);
             $resultRealizadas = $stmtRealizadas->fetchAll(PDO::FETCH_ASSOC);
@@ -225,10 +226,11 @@ class ConsultaController {
             $consultasRealizadas = array_map(function ($row) {
                 return [
                     'consulta' => new Consulta(
-                        $row['id_consulta'],
-                        $row['motivo'],
-                        $row['data'],
-                        $row['hora'],
+                        $row['id'],
+                        $row['title'],
+                        $row['color'],
+                        $row['start'],
+                        $row['end'],
                         $row['status'],
                         $row['id_administrador'] ?? null,
                         $row['id_secretario'] ?? null,
@@ -251,7 +253,7 @@ class ConsultaController {
 
     public function buscarConsulta(int $id_consulta): ?Consulta {
         //Busca a consulta
-        $sqlConsulta = "SELECT * FROM consultas WHERE id_consulta = :id_consulta";
+        $sqlConsulta = "SELECT * FROM consultas WHERE id = :id_consulta";
         $stmtConsulta = $this->conn->prepare($sqlConsulta);
         $this->conn->beginTransaction();
         $stmtConsulta->execute([':id_consulta' => $id_consulta]);
@@ -262,10 +264,11 @@ class ConsultaController {
         }
 
         return new Consulta(
-            $dataConsulta['id_consulta'],
-            $dataConsulta['motivo'],
-            $dataConsulta['data'],
-            $dataConsulta['hora'],
+            $dataConsulta['id'],
+            $dataConsulta['title'],
+            $dataConsulta['color'],
+            $dataConsulta['start'],
+            $dataConsulta['end'],
             $dataConsulta['status'],
             $dataConsulta['id_administrador'],
             $dataConsulta['id_secretario'],
@@ -279,7 +282,7 @@ class ConsultaController {
         $_SESSION['consulta_id'] = $idConsulta;
 
         try {
-            $stmtConsulta = $this->conn->prepare("SELECT * FROM consultas WHERE id_consulta = ?");
+            $stmtConsulta = $this->conn->prepare("SELECT * FROM consultas WHERE id = ?");
             $stmtConsulta->execute([$idConsulta]);
             $dadosConsulta = $stmtConsulta->fetch(PDO::FETCH_ASSOC);
 
