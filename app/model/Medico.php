@@ -178,4 +178,20 @@ class Medico extends Usuario
             return null;
         }
     }
+
+    public static function buscarPorNome(PDO $conn, $nome) {
+        $sql = "
+            SELECT u.*, m.id_medico, m.crm, m.especialidade
+            FROM usuarios u
+            INNER JOIN medicos m ON u.id_usuario = m.id_usuario
+            WHERE u.nome LIKE ?
+            ORDER BY u.nome ASC
+        ";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(["%$nome%"]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
 }

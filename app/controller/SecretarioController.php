@@ -199,6 +199,12 @@ class SecretarioController {
         header("Location: ../views/gerenciar-profissionais.php");
         exit();
     }
+
+    public function buscarPorNome($nome) {
+
+        return Secretario::buscarPorNome($this->conn, $nome); 
+    }
+
 }
 
 ?>

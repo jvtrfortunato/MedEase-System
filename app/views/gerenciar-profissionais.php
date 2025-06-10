@@ -3,10 +3,17 @@ require_once '../controller/MedicoController.php';
 require_once '../controller/SecretarioController.php';
 
 $medicoController = new MedicoController();
-$medicos = $medicoController->exibirDados();
-
 $secretarioController = new SecretarioController();
-$secretarios = $secretarioController->exibirDados();
+
+$termoBusca = $_GET['termo'] ?? '';
+
+if (!empty($termoBusca)) {
+    $medicos = $medicoController->buscarPorNome($termoBusca);
+    $secretarios = $secretarioController->buscarPorNome($termoBusca);
+} else {
+    $medicos = $medicoController->exibirDados();
+    $secretarios = $secretarioController->exibirDados();
+}
 
 ?>
 
@@ -30,11 +37,11 @@ $secretarios = $secretarioController->exibirDados();
 
             <div class="busca-opcoes">
                 
-                <div class="busca">
+                <form method="GET" class="busca">
                     <img src="../../assets/img/lupa.png" alt="Lupa de pesquisa">
-                    <input type="text" placeholder="Buscar Profissional (nome do profissional)">
-                </div>
-                
+                    <input type="text" name="termo" placeholder="Buscar Profissional (nome do profissional)" value="<?= htmlspecialchars($_GET['termo'] ?? '') ?>">
+                    <button type="submit">Buscar</button>
+                </form>
 
                 <div class="opcoes">
                     <button id="opcao-medico" onclick="mostrar('medicos')" class="opcao ativo">Médicos</button>
@@ -55,7 +62,7 @@ $secretarios = $secretarioController->exibirDados();
                                     <p><?= htmlspecialchars($medico['nome']) ?> - <?= htmlspecialchars($medico['especialidade']) ?></p>
                                 </div>
                                 <div class="cpf">
-                                    <p><?= htmlspecialchars($medico['crm']) ?></p>
+                                    <p><?= htmlspecialchars($medico['cpf']) ?></p>
                                 </div>
                                 <a href="detalhes-medico.php?id_medico=<?= htmlspecialchars($medico['id_medico'] ?? '') ?>" class="botaoVerde">
                                     Detalhes
