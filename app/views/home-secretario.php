@@ -24,23 +24,23 @@
             <div class="grid-container">
                 
                 <div class="card">
-                    <a href="gerenciar-pacientes.php" target="">
+                    <a href="gerenciar-pacientes.php">
                         <img src="../../assets/img/User.png" alt="Pacientes">
                         <p>Gerenciar Pacientes</p>
                     </a>
                 </div>
 
                 <div class="card">
-                    <a href="calendario.php?modo=agendar&data">
+                    <a href="calendario-joao.php">
                         <img src="../../assets/img/Planner.png" alt="Agendar Consulta">
                         <p>Agendar Consulta</p>
                     </a>
                 </div>
 
                 <div class="card">
-                    <a href="calendario.php?modo=consultas&data">
-                        <img src="../../assets/img/Task Planning.png" alt="Consulta Agendadas">
-                        <p>Consultas Agendadas</p>
+                    <a href="#" target="">
+                        <img src="../../assets/img/Health Graph.png" alt="Relatórios">
+                        <p>Relatórios</p>
                     </a>
                 </div>
 

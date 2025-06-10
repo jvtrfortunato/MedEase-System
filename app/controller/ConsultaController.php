@@ -112,8 +112,8 @@ class ConsultaController {
                 SELECT c.*, p.nome AS nome_paciente
                 FROM consultas c
                 JOIN pacientes p ON c.id_paciente = p.id_paciente
-                WHERE c.data = ? AND c.id_medico = ? AND (c.status = 'Agendada' OR c.status = 'Cancelada')
-                ORDER BY c.hora ASC
+                WHERE DATE(c.start) = ? AND c.id_medico = ? AND (c.status = 'Agendada' OR c.status = 'Cancelada')
+                ORDER BY c.start ASC
             ");
 
             $stmtPendentes->execute([$dataAtual, $id_medico]);
@@ -122,10 +122,11 @@ class ConsultaController {
             $consultasPendentes = array_map(function ($row) {
                 return [
                     'consulta' => new Consulta(
-                        $row['id_consulta'],
-                        $row['motivo'],
-                        $row['data'],
-                        $row['hora'],
+                        $row['id'],
+                        $row['title'],
+                        $row['color'],
+                        $row['start'],
+                        $row['end'],
                         $row['status'],
                         $row['id_administrador'] ?? null,
                         $row['id_secretario'] ?? null,
@@ -141,8 +142,8 @@ class ConsultaController {
                 SELECT c.*, p.nome AS nome_paciente
                 FROM consultas c
                 JOIN pacientes p ON c.id_paciente = p.id_paciente
-                WHERE c.data = ? AND c.id_medico = ? AND c.status = 'Realizada'
-                ORDER BY c.hora ASC
+                WHERE DATE(c.start) = ? AND c.id_medico = ? AND c.status = 'Realizada'
+                ORDER BY c.start ASC
             ");
             $stmtRealizadas->execute([$dataAtual, $id_medico]);
             $resultRealizadas = $stmtRealizadas->fetchAll(PDO::FETCH_ASSOC);
@@ -150,10 +151,11 @@ class ConsultaController {
             $consultasRealizadas = array_map(function ($row) {
                 return [
                     'consulta' => new Consulta(
-                        $row['id_consulta'],
-                        $row['motivo'],
-                        $row['data'],
-                        $row['hora'],
+                        $row['id'],
+                        $row['title'],
+                        $row['color'],
+                        $row['start'],
+                        $row['end'],
                         $row['status'],
                         $row['id_administrador'] ?? null,
                         $row['id_secretario'] ?? null,
