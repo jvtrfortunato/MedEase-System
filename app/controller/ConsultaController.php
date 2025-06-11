@@ -321,4 +321,18 @@ class ConsultaController {
         }
     }
 
+    
+//     public function buscarTodasConsultas() {
+//         $consultaModel = new Consulta();
+//         return $consultaModel->buscarTodas();
+//     }
+
+//     public function buscarConsultasPorMedico($idMedico) {
+//     $consultaModel = new Consulta();
+//     return $consultaModel->buscarPorMedico($idMedico);
+//    }
+
+
+
+
 }
