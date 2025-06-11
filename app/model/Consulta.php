@@ -2,7 +2,6 @@
 
 session_start(); // Inicia a sessão
 
-require_once 'StatusConsulta.php';
 require_once '../controller/ConsultaController.php';
 
 class Consulta {
