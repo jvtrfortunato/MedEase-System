@@ -6,6 +6,7 @@
     <title>Atendimentos do dia</title>
     <link rel="stylesheet" href="../../assets/css/header.css">
     <link rel="stylesheet" href="../../assets/css/atendimentos-dia.css">
+    <link rel="stylesheet" href="../../assets/css/reset.css">
 </head>
 <body>
     <?php

@@ -19,7 +19,7 @@
 
         <div id='calendar'></div>
 
-        <button type="button">Voltar</button>
+        <button type="button" class="botaoVermelho" id="voltarPagina">Voltar</button>
 
     </div>
 

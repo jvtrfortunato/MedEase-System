@@ -1,12 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Inter", sans-serif;
-}
-
 main {
     display: flex;
     flex-direction: column;
@@ -117,13 +110,12 @@ h1 {
 
 button, .iniciar-consulta, .editar-prontuario {
     text-align: center;
-    padding: 0.3vw 0.8vw;
+    padding: 1rem;
     border: 1px, solid rgba(136, 136, 136, 0.4);
     border-radius: 5px;
     font-size: 1vw;
     color: #FFFFFF;
     font-weight: 600;
-    font-family: "Inter", serif;
     cursor: pointer;
     text-decoration: none;
 }

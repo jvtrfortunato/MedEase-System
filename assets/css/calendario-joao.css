@@ -10,3 +10,21 @@ body {
     max-height: 800px;
     margin: 0 auto;
   }
+
+  .botaoVermelho {
+    text-align: center;
+    padding: 0.5rem 1rem;
+    border: 0.1rem, solid rgba(136, 136, 136, 0.4);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    color: #FFFFFF;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: #FF6F61;
+    text-decoration: none;
+    margin-top: 1rem;
+}
+
+.botaoVermelho:hover {
+    background-color: #E65A50;
+}

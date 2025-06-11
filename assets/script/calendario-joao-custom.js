@@ -503,4 +503,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
     }
+
+    //Função para voltar para a home
+        const voltarPagina = document.getElementById("voltarPagina"); // Certifique-se de que existe esse elemento
+
+        const tipoUsuario = "<?php echo $_SESSION['usuario_tipo']; ?>"; // Exemplo usando sessão
+
+        if (voltarPagina) {
+            voltarPagina.addEventListener("click", () => {
+                if (tipoUsuario === 'administrador') {
+                    window.location.href = "home-administrador.php";
+                } else {
+                    window.location.href = "home-secretario.php";
+                }
+            });
+        }
 });
