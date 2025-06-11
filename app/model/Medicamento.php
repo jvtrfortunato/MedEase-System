@@ -8,11 +8,12 @@ class Medicamento {
         private string $formaFarmaceutica,
         private string $viaAdministracao,
         private string $tipoReceita,
-        private string $dose,
+        private string $intervaloDose,
         private string $frequenciaDose,
+        private string $turnoDose,
         private string $dataInicio,
         private int $quantidadeDuracao,
-        private string $diaMesOuAno,
+        private string $tipoDuracao,
         private ?int $idPrescricao = null
     ) {}
 
@@ -41,12 +42,16 @@ class Medicamento {
         return $this->tipoReceita;
     }
 
-    public function getDose(): string {
-        return $this->dose;
+    public function getIntervaloDose(): string {
+        return $this->intervaloDose;
     }
 
     public function getFrequenciaDose(): string {
         return $this->frequenciaDose;
+    }
+
+    public function getTurnoDose(): string {
+        return $this->turnoDose;
     }
 
     public function getDataInicio(): string {
@@ -57,8 +62,8 @@ class Medicamento {
         return $this->quantidadeDuracao;
     }
 
-    public function getDiaMesOuAno(): string {
-        return $this->diaMesOuAno;
+    public function getTipoDuracao(): string {
+        return $this->tipoDuracao;
     }
 
     public function getIdPrescricao(): int {
@@ -90,12 +95,16 @@ class Medicamento {
         $this->tipoReceita = $tipoReceita;
     }
 
-    public function setDose(string $dose): void {
+    public function setIntervaloDose(string $dose): void {
         $this->dose = $dose;
     }
 
     public function setFrequenciaDose(string $frequenciaDose): void {
         $this->frequenciaDose = $frequenciaDose;
+    }
+
+    public function setTurnoaDose(string $turnoDose): void {
+        $this->turnoDose = $turnoDose;
     }
 
     public function setDataInicio(string $dataInicio): void {
@@ -106,8 +115,8 @@ class Medicamento {
         $this->quantidadeDuracao = $quantidadeDuracao;
     }
 
-    public function setDiaMesOuAno(string $diaMesOuAno): void {
-        $this->diaMesOuAno = $diaMesOuAno;
+    public function setTipoDuracao(string $tipoDuracao): void {
+        $this->tipoDuracao = $tipoDuracao;
     }
 
     public function setIdPrescricao(int $idPrescricao): void {

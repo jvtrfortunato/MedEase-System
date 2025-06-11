@@ -55,10 +55,13 @@
                                 </select>
                             </div>
                         </div>
-                        <!--Posologia-->
+
+                        <!-- Posologia -->
                         <h2>Posologia</h2>
                         <div class="posologia">
-                            <!--Dose-->
+
+                            <!--PENSAR SE IMPLEMENTAREMOS ISSO-->
+                            <!-- Dose 
                             <div class="dose-uso">
                                 <div class="dose-esquerda">
                                     <label for="dose">Dose <strong class="azul">*</strong></label>
@@ -78,7 +81,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <!--Frequência da dose-->
                             <h3>Frequência da dose</h3>
@@ -126,10 +129,10 @@
                                 <label for="">Duração <span class="azul">*</span></label>
                                 <div class="duracao-input">
                                     <input type="number" id="duracao" required>
-                                    <select name="">
-                                        <option value="Dia">Dia(s)</option>
-                                        <option value="Mes">Mes(es)</option>
-                                        <option value="Ano">Ano(s)</option>
+                                    <select name="" id="duracaoTipo">
+                                        <option value="Dia(s)">Dia(s)</option>
+                                        <option value="Mes(es)">Mes(es)</option>
+                                        <option value="Ano(s)">Ano(s)</option>
                                     </select>
                                 </div>
                             </div>
@@ -137,13 +140,13 @@
 
                         <!--Recomendações-->
                         <h2>Recomendações</h2>
-                        <textarea name="" id="" cols="86" rows="9"></textarea>
+                        <textarea name="" id="recomendacoes" cols="86" rows="9"></textarea>
                         
                         <div class="botoes">
                         <button class="vermelho" type="button" onclick="window.location.href='prontuario.php'">Voltar</button>
                         <div class="botoes-direita">
                             <button type="button" class="vermelho" onclick="limparCampos()">Limpar campos</button>
-                            <button class="verde" type="submit" onclick="enviarMedicamentos()">Salvar</button>
+                            <button class="verde" id="botaoSalvarPrescricao" type="submit">Salvar</button>
                         </div>
                         </div>
                     </form>
@@ -159,246 +162,6 @@
         </section>
     </main>
     <footer></footer>
-    <script>
-        //Script posologia
-        let tipoSelecionado = null;
-        //Função para os botoes Dose única e Uso Contínuo
-        function selecionarTipo(tipo) {
-            const unica = document.getElementById('toggleUnica').parentElement;
-            const continua = document.getElementById('toggleContinua').parentElement;
-
-            if (tipo === 'unica') {
-                if (tipoSelecionado === 'Dose única') {
-                unica.classList.remove('ativo');
-                tipoSelecionado = null;
-                } else {
-                unica.classList.add('ativo');
-                continua.classList.remove('ativo');
-                tipoSelecionado = 'Dose única';
-                }
-            } else if (tipo === 'continua') {
-                if (tipoSelecionado === 'Uso contínuo') {
-                continua.classList.remove('ativo');
-                tipoSelecionado = null;
-                } else {
-                continua.classList.add('ativo');
-                unica.classList.remove('ativo');
-                tipoSelecionado = 'Uso contínuo';
-                }
-            }
-
-            console.log('Tipo selecionado:', tipoSelecionado || 'nenhum');
-        }
-
-        //Função para alternar entre as labels Intervalo, Frequência e Turno
-        function alternarLabels(tipo) {
-          // Remove a classe 'ativo' de todos os labels
-          document.querySelectorAll('.labels label').forEach(label => {
-            label.classList.remove('ativo');
-          });
-
-          // Adiciona classe 'ativo' ao label clicado
-          document.getElementById('label-' + tipo).classList.add('ativo');
-
-          // Esconde todas as divs
-          document.querySelectorAll('.frequencia-detalhe').forEach(div => {
-            div.classList.remove('visivel');
-          });
-
-          // Mostra a div correspondente
-          document.getElementById('conteudo-' + tipo).classList.add('visivel');
-        }
-
-        //Função para alternar entre as opções das labels Intervalo e Turno
-        function selecionarOpcao(elemento) {
-            // Remove a seleção de todos os elementos selecionáveis
-            const todasAsOpcoes = document.querySelectorAll('.opcao-selecionavel');
-            todasAsOpcoes.forEach(op => op.classList.remove('selecionado'));
-
-            // Limpa os inputs manuais
-            const inputs = document.querySelectorAll('.opcao-selecionavel[type="text"], .opcao-selecionavel[type="number"]');
-            inputs.forEach(input => input.value = '');
-
-            // Marca o elemento clicado ou focado como selecionado
-            elemento.classList.add('selecionado');
-        }
-
-        //função que limpa todos os campos do formulário
-        function limparCampos() {
-            // Limpa todos os inputs (text, number, etc.)
-            document.querySelectorAll('input[type="text"], input[type="number"], textarea').forEach(input => {
-                input.value = '';
-            });
-
-            // Desmarca botões selecionáveis (como os de intervalo ou turno)
-            document.querySelectorAll('button.selecionado').forEach(botao => {
-                botao.classList.remove('selecionado');
-            });
-
-            // Desmarca botões de tipo de dose (Dose única / Uso contínuo)
-            const toggleUnica = document.getElementById('toggleUnica');
-            const toggleContinua = document.getElementById('toggleContinua');
-            toggleUnica?.parentElement.classList.remove('ativo');
-            toggleContinua?.parentElement.classList.remove('ativo');
-            tipoSelecionado = null;
-
-            // Recolhe divs expandidas, se quiser (opcional)
-            document.querySelectorAll('.opcao-expandida').forEach(div => {
-                div.style.display = 'none';
-            });
-
-            // Restaura seleção da aba "Intervalo", se quiser (opcional)
-            selecionarAba('intervalo');
-        }
-
-        //Função para adicionar cada medicamento
-        let medicamentos = JSON.parse(localStorage.getItem('medicamentos')) || [];
-        
-        function adicionarMedicamento() {
-            const principio = document.getElementById('principioAtivo');
-            const concentracao = document.getElementById('concentracao');
-            const forma = document.getElementById('forma');
-            const via = document.getElementById('via');
-            const tipoReceita = document.getElementById('tipoReceita');
-
-            const intervaloSelecionado = document.querySelector('#conteudo-intervalo .opcao-selecionavel.selecionado');
-            const intervaloInput = document.getElementById('input-intervalo');
-            const frequenciaInput = document.getElementById('input-frequencia');
-            const turnoSelecionado = document.querySelector('#conteudo-turno .opcao-selecionavel.selecionado');
-            
-            const algumHorarioPreenchido =
-                intervaloSelecionado ||
-                turnoSelecionado ||
-                (intervaloInput && intervaloInput.value.trim() !== '') ||
-                (frequenciaInput && frequenciaInput.value.trim() !== '');
-
-            const inicioTratamento = document.getElementById('inicioTratamento');
-            const duracao = document.getElementById('duracao');
-
-            // Verifica se os campos obrigatórios foram preenchidos
-            if (principio.value.trim() === '' || 
-                concentracao.value.trim() === '' ||
-                forma.value.trim() === '' ||
-                via.value.trim() === '' ||
-                tipoReceita.value.trim() === '' ||
-                !algumHorarioPreenchido ||
-                inicioTratamento.value.trim() === '' ||
-                duracao.value.trim() === '' 
-            ) {
-
-                alert('Preencha todos os campos obrigatórios!');
-                return;
-            }
-
-            // Criar objeto com os dados do medicamento
-            const medicamento = {
-                principioAtivo: principio.value.trim(),
-                concentracao: concentracao.value.trim(),
-                forma: forma.value.trim(),
-                via: via.value.trim(),
-                tipoReceita: tipoReceita.value.trim(),
-                intervalo: intervaloInput?.value.trim() || '',
-                frequencia: frequenciaInput?.value.trim() || '',
-                turno: turnoSelecionado?.textContent.trim() || '',
-                inicioTratamento: inicioTratamento.value.trim(),
-                duracao: duracao.value.trim()
-            };
-
-            medicamentos.push(medicamento);
-            localStorage.setItem('medicamentos', JSON.stringify(medicamentos));
-
-            // Cria item da lista
-            const lista = document.getElementById('listaMedicamentos');
-            
-            const container = document.createElement('div');
-            container.classList.add('item-lista');
-
-            const li = document.createElement('li');
-            
-            const imgRemover = document.createElement('img');
-            imgRemover.src = '/assets/img/lixeira.png'
-            imgRemover.alt = 'Remover';
-            imgRemover.classList.add('icone-remover');
-            imgRemover.onclick = () => {
-                const index = [...lista.children].indexOf(container);
-                medicamentos.splice(index, 1);
-                localStorage.setItem('medicamentos', JSON.stringify(medicamentos));
-                container.remove();
-            }
-
-            li.textContent = principio.value.trim(); // você pode incluir a dose também se quiser
-            
-            container.appendChild(li);
-            container.appendChild(imgRemover);
-            lista.appendChild(container);
-
-            // Limpa o formulário
-            document.getElementById('form-medicamento').reset();
-            document.querySelectorAll('.opcao-selecionavel.selecionado').forEach(el => el.classList.remove('selecionado'));
-        }
-
-        function enviarMedicamentos() {
-            const lista = document.querySelectorAll('#listaMedicamentos .item-lista li');
-            const medicamentos = [];
-
-            lista.forEach(item => {
-                medicamentos.push(item.textContent.trim());
-            });
-
-            if (medicamentos.length === 0) {
-                alert('Nenhum medicamento foi adicionado!');
-                return;
-            }
-
-            localStorage.setItem('medicamentos', JSON.stringify(medicamentos));
-            window.location.href = 'prontuario.php';
-        }
-
-        function carregarMedicamentosSalvos() {
-            const medicamentosSalvos = JSON.parse(localStorage.getItem('medicamentos'));
-
-            if (medicamentosSalvos && Array.isArray(medicamentosSalvos)) {
-                const lista = document.getElementById('listaMedicamentos');
-                lista.innerHTML = '';
-
-                medicamentosSalvos.forEach(nome => {
-                    const container = document.createElement('div');
-                    container.classList.add('item-lista');
-
-                    const li = document.createElement('li');
-                    li.textContent = nome;
-
-                    const imgRemover = document.createElement('img');
-                    imgRemover.src = '/assets/img/lixeira.png';
-                    imgRemover.alt = 'Remover';
-                    imgRemover.classList.add('icone-remover');
-                    imgRemover.onclick = () => {
-                        container.remove();
-                        atualizarLocalStorage();
-                    };
-
-                    container.appendChild(li);
-                    container.appendChild(imgRemover);
-                    lista.appendChild(container);
-                });
-            }
-        }
-
-        function atualizarLocalStorage() {
-            const lista = document.querySelectorAll('#listaMedicamentos .item-lista li');
-            const medicamentosAtualizados = [];
-
-            lista.forEach(item => {
-                medicamentosAtualizados.push(item.textContent.trim());
-            });
-
-            localStorage.setItem('medicamentos', JSON.stringify(medicamentosAtualizados));
-        }
-
-        // Carrega medicamentos salvos ao abrir a página
-        window.addEventListener('DOMContentLoaded', () => {
-            carregarMedicamentosSalvos();
-        });
-    </script>
+    <script src="../../assets/script/criar-prescricao.js"></script>
 </body>
 </html>

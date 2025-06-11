@@ -309,7 +309,7 @@ class ConsultaController {
     public function finalizarConsulta() {
         try {
             // Atualiza o status da consulta para "Realizada"
-            $stmtUpdate = $this->conn->prepare("UPDATE consultas SET status = 'Realizada' WHERE id_consulta = ?");
+            $stmtUpdate = $this->conn->prepare("UPDATE consultas SET status = 'Realizada' WHERE id = ?");
             $stmtUpdate->execute([$_SESSION['consulta_id']]);
 
             // Redireciona para a tela do prontuário
@@ -320,5 +320,19 @@ class ConsultaController {
             echo "Erro ao finalizar consulta: " . $e->getMessage();
         }
     }
+
+    
+//     public function buscarTodasConsultas() {
+//         $consultaModel = new Consulta();
+//         return $consultaModel->buscarTodas();
+//     }
+
+//     public function buscarConsultasPorMedico($idMedico) {
+//     $consultaModel = new Consulta();
+//     return $consultaModel->buscarPorMedico($idMedico);
+//    }
+
+
+
 
 }
