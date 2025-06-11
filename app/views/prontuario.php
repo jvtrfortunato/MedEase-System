@@ -161,7 +161,7 @@
 
             <form id="salvarProntuario" action="../routers/roteadorProntuario.php" method="post">
                 <input type="hidden" name="acao" value="salvarProntuario">
-                <!--<input type="hidden" name="examesSolicitados" id="examesSolicitadosInput">-->
+
                 <!--Histórico Médico e Familiar-->
                 <div class="menu-seta">
                     <h2>Histórico Médico e Familiar</h2>
@@ -358,7 +358,7 @@
                 <div class="barra"></div>
                 <section id="formulario6" class="formulario-oculto">
                     <ul id="lista-exames"></ul>
-                    <input type="hidden" name="examesJSON" id="examesJSON">
+                    <!-- <input type="hidden" name="examesJSON" id="examesJSON"> -->
                     <div class="botao-solicitar-criar">
                         <button type='button' id="botao-exame" onclick="window.location.href='solicitar-exames.php'">Solicitar exame</button>
                     </div>                   
@@ -441,7 +441,7 @@
 
                 <!--Documentação e Consentimentos-->
                 <div class="menu-seta">
-                    <h2>Documentação e Consentimentos</h2>
+                    <h2>Documentação e Atestado</h2>
                     <img id="seta" onclick="expandirRetrair('formulario11', this)" src="../../assets/img/seta-direita.png" alt="seta">
                 </div>
                 <div class="barra"></div>
@@ -452,11 +452,14 @@
                         <textarea rows="8" cols="50" placeholder="Digite aqui..." name="termosConsentimento"></textarea>
                     </div>
 
-                    <!-- Implementar botão para a interface atestado aqui -->
-
                     <div class="nome-campo">
                         <label for="declaracoesSaude">Declarações de saúde e formulários legais</label>
                         <textarea rows="8" cols="50" placeholder="Digite aqui..." name="declaracoesSaude"></textarea>
+                    </div>
+
+                    <div class="botao-solicitar-criar">
+                        <ul id="atestados"></ul>
+                        <button id="botaoAtestado" type="button" onclick="window.location.href='criar-atestado.php'">Criar atestado</button>
                     </div>
 
                 </section>
@@ -496,6 +499,11 @@
 
                 </section>
 
+                <input type="hidden" name="atestadoJSON" id="atestadoJSON">
+                <input type="hidden" name="examesJSON" id="examesJSON">
+                <input type="hidden" name="medicamentosJSON" id="medicamentosJSON">
+                <input type="hidden" name="recomendacoesJSON" id="recomendacoesJSON">
+
                 <div class="finalizar-consulta">
                     <button type='submit'>Finalizar Consulta</button>
                 </div>
@@ -508,99 +516,6 @@
 
     <footer></footer>
     
-    <script>
-
-        //recupera os medicamentos e os injeta no form
-        window.onload = () => {
-            const medicamentos = JSON.parse(localStorage.getItem('medicamentos')) || [];
-
-            if (medicamentos.length > 0) {
-                // Cria um input hidden com os dados no form salvarProntuario
-                const form = document.getElementById('salvarProntuario');
-                const input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = 'medicamentos';
-                input.value = JSON.stringify(medicamentos); // envia como JSON
-                form.appendChild(input);
-
-                // Opcional: limpa o localStorage se os dados já estiverem no form
-                localStorage.removeItem('medicamentos');
-            }
-        };
-
-        //Função para expandir ou retrair os campos do prontuário
-        function expandirRetrair(idFormulario, setaImg) {
-            const formulario = document.getElementById(idFormulario);
-            const visivel = formulario.classList.contains('formulario-visivel');
-
-            if (visivel) {
-                formulario.classList.remove('formulario-visivel');
-                formulario.classList.add('formulario-oculto');
-                setaImg.src = '../../assets/img/seta-direita.png';
-            }   else {
-                formulario.classList.remove('formulario-oculto');
-                formulario.classList.add('formulario-visivel');
-                setaImg.src = '../../assets/img/seta-baixo.png';
-            }
-        }
-
-        //Função que exibe os exames solicitados ao voltar para o prontuário
-        window.onload = function() {
-            const exames = JSON.parse(localStorage.getItem('examesSolicitados')) || [];
-            const lista = document.getElementById('lista-exames');
-            const botao = document.getElementById('botao-exame');
-            
-            lista.innerHTML = '';
-            exames.forEach(exame => {
-                const container = document.createElement('div');
-                container.classList.add('lista-exames');
-
-                const li = document.createElement('li');
-                li.textContent = exame;
-
-                container.appendChild(li);
-                lista.appendChild(container);
-            });
-
-            // Altera o botão se houver exames
-            if (exames.length > 0) {
-                botao.textContent = 'Editar exames';
-            } else {
-                botao.textContent = 'Solicitar exame';
-            }
-        }
-
-        //Função que exibe os remedios prescrevidos ao voltar para o prontuário
-        window.addEventListener('DOMContentLoaded', () => {
-            const medicamentos = JSON.parse(localStorage.getItem('medicamentos')) || [];
-            const lista = document.getElementById('medicamentosPrescricao');
-            const botao = document.getElementById('botaoPrescricao');
-
-            medicamentos.forEach(med => {
-                const container = document.createElement('div');
-                container.classList.add('lista-medicamentos');
-
-                const li = document.createElement('li');
-                li.textContent = med;
-
-                container.appendChild(li);
-                lista.appendChild(container);
-            });
-
-            // Altera o botão se houver prescrições
-            if (medicamentos.length > 0) {
-                botao.textContent = 'Editar prescrição';
-            } else {
-                botao.textContent = 'Criar Prescrição';
-            }
-        });
-
-        //Função que preenche o array dos exames solicitados
-        document.getElementById('salvarProntuario').addEventListener('submit', function() {
-            const exames = JSON.parse(localStorage.getItem('examesSolicitados')) || [];
-            document.getElementById('examesJSON').value = JSON.stringify(exames);
-        });
-
-    </script>
+    <script src="../../assets/script/prontuario.js"></script>
 </body>
 </html>

@@ -7,10 +7,10 @@ class AtestadoAfastamento extends Atestado {
         int $idAtestado,
         string $cid10,
         string $textoPrincipal,
-        int $idDocumentacao,
+        ?int $idDocumentacao = null,
         protected int $diasAfastamento,
         protected string $dataInicio,
-        protected string $dataRetorno
+        protected string $dataRetorno,    
     ) {
         parent::__construct($idAtestado, $cid10, $textoPrincipal, $idDocumentacao);
     }

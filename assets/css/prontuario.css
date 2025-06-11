@@ -173,7 +173,7 @@ li {
     list-style: none;
 }
 
-.lista-medicamentos {
+.lista-medicamentos, .atestados, .exame-container  {
     border: 2px, solid rgba(136, 136, 136, 0.4);
     border-radius: 5px;
     padding: 5px;

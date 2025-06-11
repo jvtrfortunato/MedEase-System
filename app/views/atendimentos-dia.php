@@ -30,7 +30,7 @@
     }
 
     date_default_timezone_set('America/Sao_Paulo');
-    $dataHoje = date('d/m/Y');
+    $dataHoje = date('Y-m-d');
     $_SESSION['data_hoje'] = $dataHoje;
 
     ?>
