@@ -9,8 +9,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case 'salvarProntuario':
             $controller->salvarProntuario();
             break;
-        case 'editarProntuario':
-            $controller->editarProntuario();
+        case 'atualizarProntuario':
+            $controller->atualizarProntuario();
+            break;
+        case 'visualizarProntuario':
+            $controller->visualizarProntuario($id);
             break;
         case 'deletarProntuario':
             $controller->deletarProntuario();

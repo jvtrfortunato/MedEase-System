@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <a class="logo" href="">MedEase</a>    
+        <a class="logo" href="login.php">MedEase</a>    
         <a href="login.php">sair</a>
     </header>
     

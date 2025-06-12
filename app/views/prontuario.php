@@ -9,31 +9,22 @@
 </head>
 <body>
     <?php
-    require_once '../model/Prontuario.php';
-    require_once '../model/HistoricoMedico.php';
-    require_once '../model/Anamnese.php';
-    require_once '../model/ExameFisico.php';
-    require_once '../model/Prescricao.php';
-    require_once '../model/Internacao.php';
-    require_once '../model/Documentacao.php';
-    require_once '../model/Atestado.php';
-    require_once '../controller/PacienteController.php';
-    require_once '../controller/ConsultaController.php';
 
+        require_once '../controller/PacienteController.php';
+        require_once '../controller/ConsultaController.php';
 
-    $prontuario = isset($_SESSION['prontuario']) ? unserialize($_SESSION['prontuario']) : null;
+        //Busca o paciente
+        $pacienteController = new PacienteController();
+        $paciente = $pacienteController->buscarPacienteCompleto($_SESSION['paciente_id']);
 
-    //Busca o paciente
-    $pacienteController = new PacienteController();
-    $paciente = $pacienteController->buscarPacienteCompleto($_SESSION['paciente_id']);
+        //$_SESSION['paciente_id'] = $paciente->getIdPaciente(); TIRAR??
 
-    $_SESSION['paciente_id'] = $paciente->getIdPaciente();
+        //Busca a consulta
+        $consultaController = new ConsultaController();
+        $consulta = $consultaController->buscarConsulta($_SESSION['consulta_id']);
 
-    //Busca a consulta
-    $consultaController = new ConsultaController();
-    $consulta = $consultaController->buscarConsulta($_SESSION['consulta_id']);
-    
-    $_SESSION['consulta_motivo'] = $consulta->getMotivo();
+        //$_SESSION['consulta_motivo'] = $consulta->getMotivo(); TIRAR??
+
     ?>
 
     <header>
@@ -389,26 +380,6 @@
                     </div>                   
                 </section>
 
-                <!--Exames de Imagem e Procedimentos-->
-                <div class="menu-seta">
-                    <h2>Exames de Imagem e Procedimentos</h2>
-                    <img id="seta" onclick="expandirRetrair('formulario9', this)" src="../../assets/img/seta-direita.png" alt="seta">
-                </div>
-                <div class="barra"></div>
-                <section id="formulario9" class="formulario-oculto">
-                                      
-                    <div class="nome-campo">
-                        <label for="">Laudos de Exames de Imagem</label>
-                        <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
-                    </div>
-
-                    <div class="nome-campo">
-                        <label for="">Procedimentos Realizados (cirurgias, curativos, vacinação, etc.)</label>
-                        <textarea rows="8" cols="50" placeholder="Digite aqui..."></textarea>
-                    </div>
-
-                </section>
-
                 <!--Registro de Internação e Cirurgias-->
                 <div class="menu-seta">
                     <h2>Registros de Internação e Cirurgias</h2>
@@ -457,24 +428,9 @@
                         <textarea rows="8" cols="50" placeholder="Digite aqui..." name="declaracoesSaude"></textarea>
                     </div>
 
+                    <ul id="atestados"></ul>
                     <div class="botao-solicitar-criar">
-                        <ul id="atestados"></ul>
                         <button id="botaoAtestado" type="button" onclick="window.location.href='criar-atestado.php'">Criar atestado</button>
-                    </div>
-
-                </section>
-
-                <!--Agendamentos e Histórico de Consultas-->
-                <div class="menu-seta">
-                    <h2>Agendamentos e Histórico de Consultas</h2>
-                    <img id="seta" onclick="expandirRetrair('formulario12', this)" src="../../assets/img/seta-direita.png" alt="seta">
-                </div>
-                <div class="barra"></div>
-                <section id="formulario12" class="formulario-oculto">
-                                      
-                    <div class="nome-campo">
-                        <label for="">Consultas passadas</label>
-                        <!--IMPLEMENTAR A LISTA DE PRONTUÁRIOS PERTENCENTENS A CONSULTAS PASSADAS AQUI-->
                     </div>
 
                 </section>

@@ -22,7 +22,6 @@ $pacientes = $controller->listarPacientes();
         <a href="">sair</a>
     </header>
     <main>
-
         <section class="conteudo-principal">
 
             <section class="busca">
@@ -41,11 +40,8 @@ $pacientes = $controller->listarPacientes();
                         <div class="cpf">
                             <p><?= htmlspecialchars($paciente->getCpf()) ?></p>
                         </div>
-                        <a href="editar-paciente.php?id=<?= $paciente->getIdPaciente() ?>" class="botaoVerde">
-                            Editar
-                        </a>
-                        <a href="../routers/roteadorPaciente.php?acao=excluirPaciente&paciente_id=<?= $paciente->getIdPaciente() ?>" onclick="return confirm('Deseja excluir este paciente?');" class="botaoVermelho">
-                            Excluir
+                        <a href="detalhes-paciente.php?id=<?= $paciente->getIdPaciente() ?>" class="botaoVerde">
+                            Ver detalhes
                         </a>
                     </div>
                 <?php endforeach; ?>

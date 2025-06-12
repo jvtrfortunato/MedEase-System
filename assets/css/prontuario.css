@@ -184,6 +184,7 @@ li {
 .finalizar-consulta {
     display: flex;
     justify-content: flex-end;
+    margin-bottom: 15px;
 }
 
 .finalizar-consulta button {

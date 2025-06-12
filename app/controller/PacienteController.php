@@ -13,6 +13,9 @@ class PacienteController {
     }
 
     public function salvarPaciente() {
+
+        session_start();
+
         // 1. Capturar os dados do formulário via POST
         $nome = $_POST['nome'];
         $dataNascimento = $_POST['dataNascimento'];
@@ -66,8 +69,18 @@ class PacienteController {
                 $endereco->getIdPaciente()
             ]);
 
-            header("Location: ../views/gerenciar-pacientes.php");
+            if ($_SESSION['usuario_tipo'] === 'secretario') {
+
+                header("Location: ../views/gerenciar-pacientes-secretario.php");
                 exit;
+
+            } 
+            
+            if ($_SESSION['usuario_tipo'] === 'administrador') {
+
+                header("Location: ../views/gerenciar-pacientes.php");
+                exit;
+            }
 
         } catch (PDOException $e) {
             echo "Erro ao cadastrar paciente: " . $e->getMessage();

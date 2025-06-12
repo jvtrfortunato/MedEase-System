@@ -4,7 +4,7 @@ class Documentacao {
     public function __construct(
         private ?int $idDocumentacao = null,
         private string $termosConsentimento,
-        private Atestado $atestado,
+        private ?Atestado $atestado,
         private string $declaracoesSaude,
         private ?int $idProntuario = null
     ) {}
@@ -18,7 +18,7 @@ class Documentacao {
         return $this->termosConsentimento;
     }
 
-    public function getAtestado(): Atestado {
+    public function getAtestado(): ?Atestado {
         return $this->atestado;
     }
 

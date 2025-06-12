@@ -30,7 +30,7 @@ class Prescricao {
         $this->idPrescricao = $idPrescricao;
     }
 
-    public function setMedcamentos(array $medicamentos): void {
+    public function setMedicamentos(array $medicamentos): void {
         $this->medicamentos = $medicamentos;
     }
 
