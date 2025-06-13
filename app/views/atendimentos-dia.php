@@ -100,7 +100,7 @@
                             </div>
                             <div class="status">
                                 <p><?php echo htmlspecialchars($consulta->getStatus()); ?></p>
-                                <a href="../routers/roteadorProntuario.php?acao=visualizarProntuario&consulta_id=<?php echo $consulta->getId(); ?>" class="editar-prontuario">Editar Prontuário</a>
+                                <a href="editar-prontuario.php?consulta_id=<?php echo $consulta->getId(); ?>" class="editar-prontuario">Editar Prontuário</a>
                             </div>
                         </div>
                     </div>

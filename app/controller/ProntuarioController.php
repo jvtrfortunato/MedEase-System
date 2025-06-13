@@ -519,7 +519,7 @@ class ProntuarioController {
         try {
             $sqlProntuario = "SELECT * FROM prontuarios WHERE id_consulta = :id_consulta";
             $stmtProntuario = $this->conn->prepare($sqlProntuario);
-            $stmtProntuario->execute([':id_consulta' => $id_consulta]);
+            $stmtProntuario->execute([':id_consulta' => $idConsulta]);
             $dataProntuario = $stmtProntuario->fetch(PDO::FETCH_ASSOC);
 
             if (!$dataProntuario) {
@@ -555,6 +555,7 @@ class ProntuarioController {
                 $anamnese = new Anamnese(
                     $dataAnamnese['motivo_consulta'],
                     $dataAnamnese['queixa_duracao'],
+                    $dataAnamnese['historia_doenca_atual'],
                     $dataAnamnese['historia_social'],
                     $dataAnamnese['historia_gineco_obstetrica'],
                     $dataAnamnese['revisao_sistemas'],
@@ -578,7 +579,7 @@ class ProntuarioController {
                     $dataExameFisico['sinais_vitais'],
                     $dataExameFisico['exame_pele_anexos'],
                     $dataExameFisico['exame_cabeca_pescoco'],
-                    $dataExameFisico['exame_cardiovascular	'],
+                    $dataExameFisico['exame_cardiovascular'],
                     $dataExameFisico['exame_respiratorio'],
                     $dataExameFisico['exame_abdominal'],
                     $dataExameFisico['exame_neurologico'],
@@ -594,7 +595,7 @@ class ProntuarioController {
             $dataExames = $stmtExames->fetchAll(PDO::FETCH_ASSOC);     
             $listaExames = [];
             if ($dataExames) {
-                foreach ($dadosExames as $ex) {
+                foreach ($dataExames as $ex) {
                     $exame = new Exame(
                         $ex['id_exame'],
                         $ex['nome'],
@@ -613,20 +614,21 @@ class ProntuarioController {
             if ($dataPrescricao) {
                 $prescricao = new Prescricao(
                     $dataPrescricao['id_prescricao'],
+                    $medicamentos = [],
                     $dataPrescricao['recomendacoes'],
                     $idProntuario
                 );
             }
-            $idPrescricao = $dataPrescricao['id_prescricao '];
+            $idPrescricao = $dataPrescricao['id_prescricao'];
 
             // Buscar medicamentos
-            $sqlMedicamento = "SELECT * FROM medicamentos WHERE id_prescricao = :id_prescricao";
-            $stmtMedicamento = $this->conn->prepare($sqlMedicamento);
-            $stmtMedicamento->execute([':id_prescricao' => $idPrescricao]);
-            $dataMedicamento = $stmtMedicamento->fetchAll(PDO::FETCH_ASSOC);           
+            $sqlMedicamentos = "SELECT * FROM medicamentos WHERE id_prescricao = :id_prescricao";
+            $stmtMedicamentos = $this->conn->prepare($sqlMedicamentos);
+            $stmtMedicamentos->execute([':id_prescricao' => $idPrescricao]);
+            $dataMedicamentos = $stmtMedicamentos->fetchAll(PDO::FETCH_ASSOC);           
             $listaMedicamentos = [];
-            if ($dataMedicamento) {
-                foreach ($dadosMedicamentos as $med) {
+            if ($dataMedicamentos) {
+                foreach ($dataMedicamentos as $med) {
                     $medicamento = new Medicamento(
                         $med['id_medicamento'],
                         $med['nome_medicamento'],
@@ -672,6 +674,7 @@ class ProntuarioController {
                 $documentacao = new Documentacao(
                     $dataDocumentacao['id_documentacao'],
                     $dataDocumentacao['termos_consentimento'],
+                    null,
                     $dataDocumentacao['declaracao_saude'],
                     $idProntuario
                 );
@@ -679,6 +682,10 @@ class ProntuarioController {
             $idDocumentacao = $dataDocumentacao['id_documentacao'];
 
             // Buscar atestado
+            $idAtestado = null;
+            $atestadoAcompanhante = null;
+            $atestadoAfastamento = null;
+            $atestadoComparecimento = null;
             $sqlAtestado = "SELECT * FROM atestados WHERE id_documentacao = :id_documentacao";
             $stmtAtestado = $this->conn->prepare($sqlAtestado);
             $stmtAtestado->execute([':id_documentacao' => $idDocumentacao]);
@@ -688,68 +695,93 @@ class ProntuarioController {
                 $atestado = new Atestado(
                     $dataAtestado['id_atestado'],
                     $dataAtestado['cid10'],
-                    $dataAtestado['declaractexto_principalao_saude'],
+                    $dataAtestado['texto_principal'],
                     $idDocumentacao
                 );
-            }
-            $idAtestado = $dataAtestado['id_atestado'];
+                $idAtestado = $dataAtestado['id_atestado'];
+            }      
 
             //Buscar atestado de acompanhante
-            $sqlAtestadoAcompanhante = "SELECT * FROM atestados_acompanhante WHERE id_atestado = :id_atestado";
-            $stmtAtestadoAcompanhante = $this->conn->prepare($sqlAtestadoAcompanhante);
-            $stmtAtestadoAcompanhante->execute([':id_atestado' => $idAtestado]);
-            $dataAtestadoAcompanhante = $stmtAtestadoAcompanhante->fetch(PDO::FETCH_ASSOC);           
-            $atestadoAcompanhante = null;
-            if ($dataAtestadoAcompanhante) {
-                $atestadoAcompanhante = new AtestadoAcompanhante(
-                    $dataAtestadoAcompanhante['nome_acompanhante'],
-                    $dataAtestadoAcompanhante['cpf_acompanhante'],
-                    $dataAtestadoAcompanhante['parentesco_acompanhante'],
-                    $dataAtestadoAcompanhante['data'],
-                    $dataAtestadoAcompanhante['horario_chegada'],
-                    $dataAtestadoAcompanhante['horario_saida'],
-                    $idAtestado
-                );
+            if ($idAtestado !== null) {
+                $sqlAtestadoAcompanhante = "SELECT * FROM atestados_acompanhante WHERE id_atestado = :id_atestado";
+                $stmtAtestadoAcompanhante = $this->conn->prepare($sqlAtestadoAcompanhante);
+                $stmtAtestadoAcompanhante->execute([':id_atestado' => $idAtestado]); 
+                $dataAtestadoAcompanhante = $stmtAtestadoAcompanhante->fetch(PDO::FETCH_ASSOC);           
+                $atestadoAcompanhante = null;
+                if ($dataAtestadoAcompanhante) {
+                    $atestadoAcompanhante = new AtestadoAcompanhante(
+                        $atestado->getIdAtestado(),
+                        $atestado->getCid10(),
+                        $atestado->getTextoPrincipal(),
+                        $atestado->getIdDocumentacao(),
+                        $dataAtestadoAcompanhante['nome_acompanhante'],
+                        $dataAtestadoAcompanhante['cpf_acompanhante'],
+                        $dataAtestadoAcompanhante['parentesco_acompanhante'],
+                        $dataAtestadoAcompanhante['data'],
+                        $dataAtestadoAcompanhante['horario_chegada'],
+                        $dataAtestadoAcompanhante['horario_saida'],
+                        
+                    );
+                }
             }
 
             //Buscar atestado de afastamento
-            $sqlAtestadoAfastamento = "SELECT * FROM atestados_afastamento WHERE id_atestado = :id_atestado";
-            $stmtAtestadoAfastamento = $this->conn->prepare($sqlAtestadoAfastamento);
-            $stmtAtestadoAfastamento->execute([':id_atestado' => $idAtestado]);
-            $dataAtestadoAfastamento = $stmtAtestadoAfastamento->fetch(PDO::FETCH_ASSOC);           
-            $atestadoAfastamento = null;
-            if ($dataAtestadoAfastamento) {
-                $atestadoAfastamento = new AtestadoAfastamento(
-                    $dataAtestadoAfastamento['dias_afastamento'],
-                    $dataAtestadoAfastamento['data_inicio'],
-                    $dataAtestadoAfastamento['data_retorno'],
-                    $idAtestado
-                );
+            if ($idAtestado !== null) {
+                $sqlAtestadoAfastamento = "SELECT * FROM atestados_afastamento WHERE id_atestado = :id_atestado";
+                $stmtAtestadoAfastamento = $this->conn->prepare($sqlAtestadoAfastamento);
+                $stmtAtestadoAfastamento->execute([':id_atestado' => $idAtestado]); 
+                $dataAtestadoAfastamento = $stmtAtestadoAfastamento->fetch(PDO::FETCH_ASSOC);           
+                $atestadoAfastamento = null;
+                if ($dataAtestadoAfastamento) {
+                    $atestadoAfastamento = new AtestadoAfastamento(
+                        $atestado->getIdAtestado(),
+                        $atestado->getCid10(),
+                        $atestado->getTextoPrincipal(),
+                        $atestado->getIdDocumentacao(),
+                        $dataAtestadoAfastamento['dias_afastamento'],
+                        $dataAtestadoAfastamento['data_inicio'],
+                        $dataAtestadoAfastamento['data_retorno'],
+                        $idAtestado
+                    );
+                }
             }
 
             //Buscar atestado de comparecimento
-            $sqlAtestadoComparecimento = "SELECT * FROM atestados_comparecimento WHERE id_atestado = :id_atestado";
-            $stmtAtestadoComparecimento = $this->conn->prepare($sqlAtestadoComparecimento);
-            $stmtAtestadoComparecimento->execute([':id_atestado' => $idAtestado]);
-            $dataAtestadoComparecimento = $stmtAtestadoComparecimento->fetch(PDO::FETCH_ASSOC);           
-            $atestadoComparecimento = null;
-            if ($dataAtestadoComparecimento) {
-                $atestadoComparecimento = new AtestadoComparecimento(
-                    $dataAtestadoComparecimento['data'],
-                    $dataAtestadoComparecimento['horario_chegada'],
-                    $dataAtestadoComparecimento['horario_saida'],
-                    $idAtestado
-                );
+            if ($idAtestado !== null) {
+                $sqlAtestadoComparecimento = "SELECT * FROM atestados_comparecimento WHERE id_atestado = :id_atestado";
+                $stmtAtestadoComparecimento = $this->conn->prepare($sqlAtestadoComparecimento);
+                $stmtAtestadoComparecimento->execute([':id_atestado' => $idAtestado]); 
+                $dataAtestadoComparecimento = $stmtAtestadoComparecimento->fetch(PDO::FETCH_ASSOC);           
+                $atestadoComparecimento = null;
+                if ($dataAtestadoComparecimento) {
+                    $atestadoComparecimento = new AtestadoComparecimento(
+                        $atestado->getIdAtestado(),
+                        $atestado->getCid10(),
+                        $atestado->getTextoPrincipal(),
+                        $atestado->getIdDocumentacao(),
+                        $dataAtestadoComparecimento['data'],
+                        $dataAtestadoComparecimento['horario_chegada'],
+                        $dataAtestadoComparecimento['horario_saida'],
+                        $idAtestado
+                    );
+                }
             }
             
             $prontuario =  new Prontuario(
                 $dataProntuario['id_prontuario'],
                 $dataProntuario['data_criacao'],
+                $historicoMedico,
+                $anamnese,
+                $exameFisico,
                 $dataProntuario['diagnostico_presuntivo'],
                 $dataProntuario['diagnostico_diferencial'],
                 $dataProntuario['diagnostico_definitivo'],
                 $dataProntuario['cid10'],
+                $listaExames,
+                $prescricao,
                 $dataProntuario['evolucao'],
+                $internacao,
+                $documentacao,
                 $dataProntuario['doencas_notificacao_obrigatoria'],
                 $dataProntuario['observacoes_adicionais'],
                 $dataProntuario['id_paciente'],
@@ -757,25 +789,15 @@ class ProntuarioController {
                 $dataProntuario['id_consulta']
             );
 
-            $prontuario->setHistoricoMedico($historicoMedico);
-            $prontuario->setAnamnese($anamnese);
-            $prontuario->setExameFisico($exameFisico);
-            $prontuario->setExamesSolicitados($listaExames);
-
             $prescricao->setMedicamentos($listaMedicamentos);
 
-            $prontuario->setPrescricao($prescricao);
-            $prontuario->setInternacao($internacao);
-
-            if ($atestadoAcompanhante) {
+            if ($atestadoAcompanhante) { 
                 $documentacao->setAtestado($atestadoAcompanhante);
             } elseif ($atestadoAfastamento) {
                 $documentacao->setAtestado($atestadoAfastamento);
-            } elseif ($atestadoComparecimento) {
+            } elseif ($atestadoComparecimento) { 
                 $documentacao->setAtestado($atestadoComparecimento);
             } 
-
-            $prontuario->setDocumentacao($documentacao);
 
             return $prontuario;
 
@@ -792,6 +814,321 @@ class ProntuarioController {
 
         } catch (Exception $e) {
             echo "Erro ao atualizar o prontuário: " . $e->getMessage();
+        }
+    }
+
+    public function listarProntuarios($idPaciente): array {
+
+        try {
+            $sqlProntuario = "SELECT 
+                                    p.*, 
+                                    u.nome AS nome_medico
+                                FROM 
+                                    prontuarios p
+                                INNER JOIN 
+                                    medicos m ON p.id_medico = m.id_medico
+                                INNER JOIN 
+                                    usuarios u ON m.id_usuario = u.id_usuario
+                                WHERE 
+                                    p.id_paciente = :id_paciente";
+            $stmtProntuario = $this->conn->prepare($sqlProntuario);
+            $stmtProntuario->execute([':id_paciente' => $idPaciente]);
+            $dataProntuarios = $stmtProntuario->fetchAll(PDO::FETCH_ASSOC);
+
+            if (!$dataProntuarios) {
+                return [];
+            }
+
+            $prontuarios = [];
+
+            foreach ($dataProntuarios as $row) {
+                $idProntuario = $row['id_prontuario'];
+                $nomeMedico = $row['nome_medico'];
+
+                // Buscar histórico médico
+                $sqlHistoricoMedico = "SELECT * FROM historicos_medicos WHERE id_prontuario = :id_prontuario";
+                $stmtHistoricoMedico = $this->conn->prepare($sqlHistoricoMedico);
+                $stmtHistoricoMedico->execute([':id_prontuario' => $idProntuario]);
+                $dataHistoricoMedico = $stmtHistoricoMedico->fetch(PDO::FETCH_ASSOC);
+                $historicoMedico = null;
+                if($dataHistoricoMedico) {
+                    $historicoMedico = new HistoricoMedico(
+                        $dataHistoricoMedico['doencas_preexistentes'],
+                        $dataHistoricoMedico['medicacoes_uso_continuo'],
+                        $dataHistoricoMedico['cirurgias_anteriores'],
+                        $dataHistoricoMedico['alergias_medicamentos'],
+                        $dataHistoricoMedico['historico_doencas_familia'],
+                        $idProntuario
+                    );
+                }
+
+                // Buscar anamnese
+                $sqlAnamnese = "SELECT * FROM anamneses WHERE id_prontuario = :id_prontuario";
+                $stmtAnamnese = $this->conn->prepare($sqlAnamnese);
+                $stmtAnamnese->execute([':id_prontuario' => $idProntuario]);
+                $dataAnamnese = $stmtAnamnese->fetch(PDO::FETCH_ASSOC);           
+                $anamnese = null;
+                if ($dataAnamnese) {
+                    $anamnese = new Anamnese(
+                        $dataAnamnese['motivo_consulta'],
+                        $dataAnamnese['queixa_duracao'],
+                        $dataAnamnese['historia_doenca_atual'],
+                        $dataAnamnese['historia_social'],
+                        $dataAnamnese['historia_gineco_obstetrica'],
+                        $dataAnamnese['revisao_sistemas'],
+                        $dataAnamnese['fatores_agravantes'],
+                        $dataAnamnese['atenuantes'],
+                        $dataAnamnese['tratamentos_previos'],
+                        $dataAnamnese['resposta_tratamentos_previos'],
+                        $idProntuario
+                    );
+                }
+
+                // Buscar exame físico
+                $sqlExameFisico = "SELECT * FROM exames_fisicos WHERE id_prontuario = :id_prontuario";
+                $stmtExameFisico = $this->conn->prepare($sqlExameFisico);
+                $stmtExameFisico->execute([':id_prontuario' => $idProntuario]);
+                $dataExameFisico = $stmtExameFisico->fetch(PDO::FETCH_ASSOC);           
+                $exameFisico = null;
+                if ($dataExameFisico) {
+                    $exameFisico = new ExameFisico(
+                        $dataExameFisico['avaliacao_geral'],
+                        $dataExameFisico['sinais_vitais'],
+                        $dataExameFisico['exame_pele_anexos'],
+                        $dataExameFisico['exame_cabeca_pescoco'],
+                        $dataExameFisico['exame_cardiovascular'],
+                        $dataExameFisico['exame_respiratorio'],
+                        $dataExameFisico['exame_abdominal'],
+                        $dataExameFisico['exame_neurologico'],
+                        $dataExameFisico['exame_aparelho_locomotor'],
+                        $idProntuario
+                    );
+                }
+
+                // Buscar exames solicitados
+                $sqlExames = "SELECT * FROM exames WHERE id_prontuario = :id_prontuario";
+                $stmtExames = $this->conn->prepare($sqlExames);
+                $stmtExames->execute([':id_prontuario' => $idProntuario]);
+                $dataExames = $stmtExames->fetchAll(PDO::FETCH_ASSOC);     
+                $listaExames = [];
+                if ($dataExames) {
+                    foreach ($dataExames as $ex) {
+                        $exame = new Exame(
+                            $ex['id_exame'],
+                            $ex['nome'],
+                            $idProntuario
+                        );
+                        $listaExames[] = $exame;
+                    }         
+                }
+
+                // Buscar prescrição
+                $sqlPrescricao = "SELECT * FROM prescricoes WHERE id_prontuario = :id_prontuario";
+                $stmtPrescricao = $this->conn->prepare($sqlPrescricao);
+                $stmtPrescricao->execute([':id_prontuario' => $idProntuario]);
+                $dataPrescricao = $stmtPrescricao->fetch(PDO::FETCH_ASSOC);           
+                $prescricao = null;
+                if ($dataPrescricao) {
+                    $prescricao = new Prescricao(
+                        $dataPrescricao['id_prescricao'],
+                        $medicamentos = [],
+                        $dataPrescricao['recomendacoes'],
+                        $idProntuario
+                    );
+                }
+                $idPrescricao = $dataPrescricao['id_prescricao'];
+
+                // Buscar medicamentos
+                $sqlMedicamentos = "SELECT * FROM medicamentos WHERE id_prescricao = :id_prescricao";
+                $stmtMedicamentos = $this->conn->prepare($sqlMedicamentos);
+                $stmtMedicamentos->execute([':id_prescricao' => $idPrescricao]);
+                $dataMedicamentos = $stmtMedicamentos->fetchAll(PDO::FETCH_ASSOC);           
+                $listaMedicamentos = [];
+                if ($dataMedicamentos) {
+                    foreach ($dataMedicamentos as $med) {
+                        $medicamento = new Medicamento(
+                            $med['id_medicamento'],
+                            $med['nome_medicamento'],
+                            $med['concentracao'],
+                            $med['forma_farmaceutica'],
+                            $med['via_administracao'],
+                            $med['tipo_receita'],
+                            $med['intervalo_dose'],
+                            $med['frequencia_dose'],
+                            $med['turno_dose'],
+                            $med['data_inicio'],
+                            $med['quantidade_duracao'],
+                            $med['tipo_duracao'],
+                            $idPrescricao
+                        );
+                        $listaMedicamentos[] = $medicamento;
+                    }
+                }
+
+                // Buscar internação
+                $sqlInternacao = "SELECT * FROM internacoes WHERE id_prontuario = :id_prontuario";
+                $stmtInternacao = $this->conn->prepare($sqlInternacao);
+                $stmtInternacao->execute([':id_prontuario' => $idProntuario]);
+                $dataInternacao = $stmtInternacao->fetch(PDO::FETCH_ASSOC);           
+                $internacao = null;
+                if ($dataInternacao) {
+                    $internacao = new Internacao(
+                        $dataInternacao['data_admissao_e_alta'],
+                        $dataInternacao['diagnostico_internacao'],
+                        $dataInternacao['procedimentos_cirurgicos'],
+                        $dataInternacao['medicos_responsaveis'],
+                        $idProntuario
+                    );
+                }
+
+                // Buscar documentação
+                $sqlDocumentacao = "SELECT * FROM documentacoes WHERE id_prontuario = :id_prontuario";
+                $stmtDocumentacao = $this->conn->prepare($sqlDocumentacao);
+                $stmtDocumentacao->execute([':id_prontuario' => $idProntuario]);
+                $dataDocumentacao = $stmtDocumentacao->fetch(PDO::FETCH_ASSOC);           
+                $documentacao = null;
+                if ($dataDocumentacao) {
+                    $documentacao = new Documentacao(
+                        $dataDocumentacao['id_documentacao'],
+                        $dataDocumentacao['termos_consentimento'],
+                        null,
+                        $dataDocumentacao['declaracao_saude'],
+                        $idProntuario
+                    );
+                }
+                $idDocumentacao = $dataDocumentacao['id_documentacao'];
+
+                // Buscar atestado
+                $idAtestado = null;
+                $atestadoAcompanhante = null;
+                $atestadoAfastamento = null;
+                $atestadoComparecimento = null;
+                $sqlAtestado = "SELECT * FROM atestados WHERE id_documentacao = :id_documentacao";
+                $stmtAtestado = $this->conn->prepare($sqlAtestado);
+                $stmtAtestado->execute([':id_documentacao' => $idDocumentacao]);
+                $dataAtestado = $stmtAtestado->fetch(PDO::FETCH_ASSOC);           
+                $atestado = null;
+                if ($dataAtestado) {
+                    $atestado = new Atestado(
+                        $dataAtestado['id_atestado'],
+                        $dataAtestado['cid10'],
+                        $dataAtestado['texto_principal'],
+                        $idDocumentacao
+                    );
+                    $idAtestado = $dataAtestado['id_atestado'];
+                }      
+
+                //Buscar atestado de acompanhante
+                if ($idAtestado !== null) {
+                    $sqlAtestadoAcompanhante = "SELECT * FROM atestados_acompanhante WHERE id_atestado = :id_atestado";
+                    $stmtAtestadoAcompanhante = $this->conn->prepare($sqlAtestadoAcompanhante);
+                    $stmtAtestadoAcompanhante->execute([':id_atestado' => $idAtestado]); 
+                    $dataAtestadoAcompanhante = $stmtAtestadoAcompanhante->fetch(PDO::FETCH_ASSOC);           
+                    $atestadoAcompanhante = null;
+                    if ($dataAtestadoAcompanhante) {
+                        $atestadoAcompanhante = new AtestadoAcompanhante(
+                            $atestado->getIdAtestado(),
+                            $atestado->getCid10(),
+                            $atestado->getTextoPrincipal(),
+                            $atestado->getIdDocumentacao(),
+                            $dataAtestadoAcompanhante['nome_acompanhante'],
+                            $dataAtestadoAcompanhante['cpf_acompanhante'],
+                            $dataAtestadoAcompanhante['parentesco_acompanhante'],
+                            $dataAtestadoAcompanhante['data'],
+                            $dataAtestadoAcompanhante['horario_chegada'],
+                            $dataAtestadoAcompanhante['horario_saida'],
+                            
+                        );
+                    }
+                }
+
+                //Buscar atestado de afastamento
+                if ($idAtestado !== null) {
+                    $sqlAtestadoAfastamento = "SELECT * FROM atestados_afastamento WHERE id_atestado = :id_atestado";
+                    $stmtAtestadoAfastamento = $this->conn->prepare($sqlAtestadoAfastamento);
+                    $stmtAtestadoAfastamento->execute([':id_atestado' => $idAtestado]); 
+                    $dataAtestadoAfastamento = $stmtAtestadoAfastamento->fetch(PDO::FETCH_ASSOC);           
+                    $atestadoAfastamento = null;
+                    if ($dataAtestadoAfastamento) {
+                        $atestadoAfastamento = new AtestadoAfastamento(
+                            $atestado->getIdAtestado(),
+                            $atestado->getCid10(),
+                            $atestado->getTextoPrincipal(),
+                            $atestado->getIdDocumentacao(),
+                            $dataAtestadoAfastamento['dias_afastamento'],
+                            $dataAtestadoAfastamento['data_inicio'],
+                            $dataAtestadoAfastamento['data_retorno'],
+                            $idAtestado
+                        );
+                    }
+                }
+
+                //Buscar atestado de comparecimento
+                if ($idAtestado !== null) {
+                    $sqlAtestadoComparecimento = "SELECT * FROM atestados_comparecimento WHERE id_atestado = :id_atestado";
+                    $stmtAtestadoComparecimento = $this->conn->prepare($sqlAtestadoComparecimento);
+                    $stmtAtestadoComparecimento->execute([':id_atestado' => $idAtestado]); 
+                    $dataAtestadoComparecimento = $stmtAtestadoComparecimento->fetch(PDO::FETCH_ASSOC);           
+                    $atestadoComparecimento = null;
+                    if ($dataAtestadoComparecimento) {
+                        $atestadoComparecimento = new AtestadoComparecimento(
+                            $atestado->getIdAtestado(),
+                            $atestado->getCid10(),
+                            $atestado->getTextoPrincipal(),
+                            $atestado->getIdDocumentacao(),
+                            $dataAtestadoComparecimento['data'],
+                            $dataAtestadoComparecimento['horario_chegada'],
+                            $dataAtestadoComparecimento['horario_saida'],
+                            $idAtestado
+                        );
+                    }
+                }
+                
+                $prontuario =  new Prontuario(
+                    $row['id_prontuario'],
+                    $row['data_criacao'],
+                    $historicoMedico,
+                    $anamnese,
+                    $exameFisico,
+                    $row['diagnostico_presuntivo'],
+                    $row['diagnostico_diferencial'],
+                    $row['diagnostico_definitivo'],
+                    $row['cid10'],
+                    $listaExames,
+                    $prescricao,
+                    $row['evolucao'],
+                    $internacao,
+                    $documentacao,
+                    $row['doencas_notificacao_obrigatoria'],
+                    $row['observacoes_adicionais'],
+                    $row['id_paciente'],
+                    $row['id_medico'],
+                    $row['id_consulta'],
+                    $nomeMedico
+                );
+
+                $prescricao->setMedicamentos($listaMedicamentos);
+
+                if ($atestadoAcompanhante) {  
+                    $documentacao->setAtestado($atestadoAcompanhante);
+                } elseif ($atestadoAfastamento) { 
+                    $documentacao->setAtestado($atestadoAfastamento);
+                } elseif ($atestadoComparecimento) { 
+                    $documentacao->setAtestado($atestadoComparecimento);
+                }
+
+
+
+                    $prontuarios[] = $prontuario;
+                }
+
+                return $prontuarios;    
+
+            
+        } catch (PDOException $e) {
+            // Trate o erro apropriadamente
+            echo "Erro ao buscar prontuários: " . $e->getMessage();
+            return [];
         }
     }
 }

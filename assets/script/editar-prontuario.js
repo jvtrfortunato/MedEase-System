@@ -36,7 +36,7 @@ window.onload = function() {
     if (exames.length > 0) {
         botao.textContent = 'Editar exames';
     } else {
-        botao.textContent = 'Solicitar exames';
+        botao.textContent = 'Solicitar exame';
     }
 }
 
@@ -95,36 +95,6 @@ window.onload = function () {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    const exames = JSON.parse(localStorage.getItem('examesSolicitados'));
-    const botao = document.getElementById('botao-exame');
-    const ul = document.getElementById('lista-exames');
-
-    if (exames && Array.isArray(exames)) {
- 
-        ul.innerHTML = ''; // limpa antes de exibir
-
-        exames.forEach(exame => {
-
-            const container = document.createElement('div');
-            container.classList.add('exame-container');
-
-            const li = document.createElement('li');
-            li.classList.add('exame-item');
-            li.textContent = exame;
-
-            container.appendChild(li);
-            ul.appendChild(container);
-
-            // Muda o texto do botão
-            botao.textContent = 'Editar exames';
-        });
-
-        // Opcional: limpa o localStorage para não duplicar depois
-        // localStorage.removeItem('examesSolicitados');
-    }
-});
-
 document.querySelector('form').addEventListener('submit', function (e) {
     
     // Recupera do localStorage
@@ -154,7 +124,7 @@ document.querySelector('form').addEventListener('submit', function (e) {
     localStorage.removeItem('atestado');
     localStorage.removeItem('examesSolicitados');
     localStorage.removeItem('medicamentosPrescricao');
-    localStorage.removeItem('recomendacoesPrescricao');
+    localStorage.removeItem('recomendacoesPrescricao')
 });
 
 //Função para voltar para atendimentos do dia

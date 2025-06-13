@@ -50,7 +50,8 @@ class Prontuario {
 
         private int $idPaciente,
         private int $idMedico,
-        private int $idConsulta
+        private int $idConsulta,
+        private ?string $nomeMedico
     ){}
 
     // Getters
@@ -128,6 +129,10 @@ class Prontuario {
 
     public function getIdConsulta(): int {
         return $this->idConsulta;
+    }
+
+    public function getNomeMedico(): string {
+        return $this->nomeMedico;
     }
 
     // Setters

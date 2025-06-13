@@ -1,18 +1,18 @@
 <?php
-require_once '../controller/PacienteController.php';
+require_once '../controller/ProntuarioController.php';
 
-$controller = new PacienteController();
-$pacientes = $controller->listarPacientes();
+$controller = new ProntuarioController();
+$prontuarios = $controller->listarProntuarios($_GET['id_paciente']);
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prontuários</title>
+    <title>Prontuários do Paciente</title>
     <link rel="stylesheet" href="../../assets/css/header.css">
-    <link rel="stylesheet" href="../../assets/css/lista-pacientes.css">
+    <link rel="stylesheet" href="../../assets/css/lista-prontuarios-paciente.css">
 </head>
 <body>
     <header>
@@ -20,31 +20,32 @@ $pacientes = $controller->listarPacientes();
         <a href="">sair</a>
     </header>
     <main>
-        <section class="conteudo-principal">
+        <main>
+        <section class="conteudo">
 
             <section class="busca">
                 <img src="../../assets/img/lupa.png" alt="Lupa de pesquisa">
                 <input type="text" placeholder="Buscar Paciente (nome do paciente)">
             </section>
 
-            <section class="pacientes">
+            <section class="prontuarios">
                 
                 <div class="legenda">
-                    <p class="nome-legenda">Nome Completo</p>
-                    <p>CPF</p>
+                    <p class="nome-legenda">Data de consulta</p>
+                    <p>Médico responsável</p>
                 </div>
                 
                 <!--Lista dinãmica de pacientes-->
-                <?php foreach ($pacientes as $paciente): ?>
+                <?php foreach ($prontuarios as $prontuario): ?>
                     <div class="dados">
                         <div class="nome">
-                            <p><?= htmlspecialchars($paciente->getNome()) ?></p>
+                            <p><?= htmlspecialchars($prontuario->getDataCriacao()) ?></p>
                         </div>
                         <div class="cpf">
-                            <p><?= htmlspecialchars($paciente->getCpf()) ?></p>
+                            <p>Dr(a) <?= htmlspecialchars($prontuario->getNomeMedico()) ?></p>
                         </div>
-                        <a href="lista-prontuarios-paciente.php?id_paciente=<?php echo $paciente->getIdPaciente(); ?>" class="detalhes">
-                            Prontuários
+                        <a href="detalhes-prontuario.php?id_consulta=<?php echo $prontuario->getIdConsulta(); ?>" class="detalhes">
+                            Abrir Prontuário
                         </a>
                     </div>
                 <?php endforeach; ?>
@@ -56,6 +57,8 @@ $pacientes = $controller->listarPacientes();
             <button class="voltar" onclick="history.back()">Voltar</button>
         </section>
     </main>
+    </main>
     <footer></footer>
+    <script></script>
 </body>
 </html>

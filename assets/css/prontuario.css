@@ -183,7 +183,7 @@ li {
 
 .finalizar-consulta {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     margin-bottom: 15px;
 }
 
@@ -197,9 +197,20 @@ li {
     font-weight: 600;
     font-family: "Inter", serif;
     cursor: pointer;
+}
+
+.finalizar-consulta .verde {
     background-color: #50E3C2;
 }
 
-.finalizar-consulta button:hover {
+.finalizar-consulta .verde:hover {
     background-color: #3AC3A5;
+}
+
+.finalizar-consulta .vermelho {
+    background-color: #FF6F61;
+}
+
+.finalizar-consulta .vermelho:hover {
+    background-color: #E65A50;
 }

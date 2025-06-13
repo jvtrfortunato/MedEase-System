@@ -4,7 +4,7 @@ class Prescricao {
     public function __construct(
         private int $idPrescricao,
         private array $medicamentos,
-        private string $recomendacoes,
+        private ?string $recomendacoes,
         private ?int $idProntuario = null
     ) {}
 
