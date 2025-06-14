@@ -27,6 +27,7 @@ $medicos = $sqlMedicos->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="../../assets/css/header.css">
     <link rel="stylesheet" href="../../assets/css/detalhes-consulta.css">
     <script src="../../assets/script/detalhes-consulta.js" defer></script>
+    <script src="../../assets/script/mascaraHORA.js" defer></script>
 </head>
 <body>
     <header>
@@ -53,7 +54,7 @@ $medicos = $sqlMedicos->fetchAll(PDO::FETCH_ASSOC);
                             </div>
                             <div class="label-input">
                                 <label for="hora">Hora</label>
-                                <input type="text" name="hora" require>
+                                <input type="text" name="hora" class="hora" require>
                             </div>
                         </div>
                     </div>

@@ -6,6 +6,8 @@
     <title>Criar Atestado</title>
     <link rel="stylesheet" href="../../assets/css/header.css">
     <link rel="stylesheet" href="../../assets/css/criar-atestado.css">
+    <script src="../../assets/script/mascaraCPF.js"></script>
+    <script src="../../assets/script/mascaraHORA.js"></script>
 </head>
 <body>
     <header>
@@ -28,7 +30,7 @@
                 </div>
                 <div class="input-pequeno">
                     <label for="cpf">CPF</label>
-                    <input type="text" name="cpf"> <!--O CPF SERÁ RESGATADO DO BANCO DE DADOS E INSERIDO AQUI AUTOMATICAMENTE-->
+                    <input type="text" name="cpf" id="cpf"> <!--O CPF SERÁ RESGATADO DO BANCO DE DADOS E INSERIDO AQUI AUTOMATICAMENTE-->
                 </div>
                 <div class="input-pequeno">
                     <label for="dataNascimento">Data de nascimento</label>
@@ -63,13 +65,13 @@
                         </div>
                         <div class="input-pequeno">
                             <label for="horarioChegada">Horário de chegada</label>
-                            <input type="text" name="horarioChegada" id="">
+                            <input type="text" name="horarioChegada" class="hora">
                         </div>
                     </div>
                     <div class="dados-corpo">
                         <div class="input-pequeno">
                             <label for="horarioSaida">Horário de saída</label>
-                            <input type="text" name="horarioSaida" id="">
+                            <input type="text" name="horarioSaida" class="hora">
                         </div>
                         <div class="input-pequeno">
                             <label for="cid10">CID10</label>
