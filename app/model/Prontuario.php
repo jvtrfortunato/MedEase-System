@@ -38,25 +38,20 @@ class Prontuario {
         //Evolução do Quadro Clínico (observações de consultas sucessivas)
         private string $evolucao,
 
-        //Exames de Imagem e Procedimentos
-        private string $laudosExamesImagens,
-        private string $procedimentosRealizados,
-
         //Registros de Internação e Cirurgias
         private Internacao $internacao,
 
         //Documentação e Consentimentos
         private Documentacao $documentacao,
-        
-        //Agendamentos e Histórico de Consultas
-        private $historicoProntuarios = [],
 
         //Observações Gerais e Notificações
         private string $doencasNotificacaoObrigatoria,
         private string $observacoesAdicionais,
 
         private int $idPaciente,
-        private int $idMedico
+        private int $idMedico,
+        private int $idConsulta,
+        private ?string $nomeMedico
     ){}
 
     // Getters
@@ -108,24 +103,12 @@ class Prontuario {
         return $this->evolucao;
     }
 
-    public function getLaudosExamesImagens(): string {
-        return $this->laudosExamesImagens;
-    }
-
-    public function getProcedimentosRealizados(): string {
-        return $this->procedimentosRealizados;
-    }
-
     public function getInternacao(): Internacao {
         return $this->internacao;
     }
 
     public function getDocumentacao(): Documentacao {
         return $this->documentacao;
-    }
-
-    public function getHistoricoProntuarios(): array { //ISSO VAI MUDAR
-        return $this->historicoProntuarios;
     }
 
     public function getDoencasNotificacaoObrigatoria(): string {
@@ -142,6 +125,14 @@ class Prontuario {
 
     public function getIdMedico(): int {
         return $this->idMedico;
+    }
+
+    public function getIdConsulta(): int {
+        return $this->idConsulta;
+    }
+
+    public function getNomeMedico(): string {
+        return $this->nomeMedico;
     }
 
     // Setters
@@ -177,6 +168,10 @@ class Prontuario {
         $this->cid10 = $cid10;
     }
 
+    public function setExamesSolicitados(array $examesSolicitados): void {
+        $this->examesSolicitados = $examesSolicitados;
+    }
+
     public function setPrescricao(Prescricao $prescricao): void {
         $this->prescricao = $prescricao;
     }
@@ -185,24 +180,12 @@ class Prontuario {
         $this->evolucao = $evolucao;
     }
 
-    public function setLaudosExamesImagens(string $laudosExamesImagens): void {
-        $this->laudosExamesImagens = $laudosExamesImagens;
-    }
-
-    public function setProcedimentosRealizados(string $procedimentosRealizados): void {
-        $this->procedimentosRealizados = $procedimentosRealizados;
-    }
-
     public function setInternacao(Internacao $internacao): void {
         $this->internacao = $internacao;
     }
 
     public function setDocumentacao(Documentacao $documentacao): void {
         $this->documentacao = $documentacao;
-    }
-
-    public function seHistoricoProntuarios(array $historicoProntuarios): void {
-        $this->historicoProntuarios = $historicoProntuarios;
     }
 
     public function setDoencasNotificacaoObrigatoria(string $doencasNotificacaoObrigatoria): void {
@@ -219,5 +202,9 @@ class Prontuario {
 
     public function setIdMedico($idMedico): void {
         $this->idMedico = $idMedico;
+    }
+
+    public function setIdConsulta($idConsulta): void {
+        $this->idConsulta = $idConsulta;
     }
 }

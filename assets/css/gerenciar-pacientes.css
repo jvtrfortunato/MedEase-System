@@ -16,26 +16,47 @@ main {
     width: 40%;
     border: 0.2rem, solid rgba(136, 136, 136, 0.4);
     border-radius: 0.5rem;
-    padding: 1rem 1.7rem 1rem 1.7rem;
+    padding: 0 1.7rem;
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
 input {
-    border: transparent;
+    border: none;
     width: 100%;
+    padding: 1.3rem 0;
+    background-color: #f9f9f9;
+    font-size: 1.6rem;
+    opacity: 50%;
+}
+
+input:focus {
+  outline: none;     /* Remove o contorno (normalmente azul ou preto) */
+  box-shadow: none;  /* Remove o efeito de sombra que pode simular uma borda */
+  border: none;      /* Opcional: remove a borda se ela aparecer no focus */ 
+}
+
+input:focus::placeholder {
+  color: transparent;
 }
 
 .pacientes {
     border: 0.2rem, solid rgba(136, 136, 136, 0.4);
     border-radius: 0.5rem;
-    padding: 1rem 1.7rem 1rem 1.7rem;
+    padding: 1rem 1.7rem 0.5rem 1.7rem;
 }
 
 .dados {
     display: flex;
-    gap: 0.1rem;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    width: 100%;
+}
+
+.dados-botoes {
+    display: flex;
+    gap: 1rem;
     margin-bottom: 0.5rem;
 }
 
@@ -46,14 +67,14 @@ input {
 }
 
 .nome {
-    width: 55%;
+    width: 75%;
     border: 0.2rem, solid rgba(136, 136, 136, 0.4);
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
 }
 
 .cpf {
-    width: 19%;
+    width: 30%;
     border: 0.2rem, solid rgba(136, 136, 136, 0.4);
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
@@ -68,7 +89,7 @@ input {
 
 .botaoVerde {
     text-align: center;
-    padding: 0.5rem 1rem;
+    padding: 0 1rem;
     border: 0.1rem, solid rgba(136, 136, 136, 0.4);
     border-radius: 0.5rem;
     font-size: 1.8rem;
@@ -98,4 +119,9 @@ input {
 
 .botaoVermelho:hover {
     background-color: #E65A50;
+}
+
+.separador {
+    display: flex;
+    justify-content: space-between;
 }

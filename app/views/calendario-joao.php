@@ -13,13 +13,19 @@
 </head>
 <body>
 
+    <?php
+        session_start();
+    ?>
+
     <div class="container">
+
+        <h2>Agenda</h2>
 
         <span id="msg"></span>
 
         <div id='calendar'></div>
 
-        <button type="button">Voltar</button>
+        <button type="button" class="botaoVermelho" id="voltarPagina" onClick="window.history.back()">Voltar</button>
 
     </div>
 
@@ -212,6 +218,10 @@
     <script src='../../assets/script/calendario-joao.min.js'></script>
     <script src="../../assets/script/bootstrap5/index.global.min.js"></script>
     <script src='../../assets/script/core/locales-all.global.min.js'></script>
+    <script>
+        const tipoUsuario = "<?php echo $_SESSION['usuario_tipo']; ?>";
+        const medicoId = "<?php echo $_SESSION['medico_id'] ?? ''; ?>";
+    </script>
     <script src='../../assets/script/calendario-joao-custom.js'></script>
 </body>
 </html>

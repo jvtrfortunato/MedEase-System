@@ -10,18 +10,52 @@
 <body>
     <?php
 
+        require_once '../controller/ProntuarioController.php';
         require_once '../controller/PacienteController.php';
         require_once '../controller/ConsultaController.php';
 
+        //Busca o prontuário
+        $prontuarioController = new ProntuarioController();
+        $prontuario = $prontuarioController->visualizarProntuario($_GET['consulta_id']);
+
+        //Conferir se existem exames solicitados
+        $examesBanco = [];
+        foreach ($prontuario->getExamesSolicitados() as $exame) {
+            $examesBanco[] = $exame->getNomeExame();
+        }
+
+        //Conferir se existem medicamentos solicitados
+        $medicamentosBanco = [];
+        foreach ($prontuario->getPrescricao()->getMedicamentos() as $medicamento) {
+            $medicamentosBanco[] = $medicamento;
+        }
+
+        // Transforma os objetos em arrays associativos
+        $medicamentosFormatados = array_map(function($med) {
+            return [
+                'id_medicamento ' => $med->getIdMedicamento(),
+                'nome_medicamento' => $med->getNomeMedicamento(),
+                'concentracao' => $med->getConcentracao(),
+                'forma_farmaceutica' => $med->getFormaFarmaceutica(),
+                'via_administracao' => $med->getViaAdministracao(),
+                'tipo_receita' => $med->getTipoReceita(),
+                'intervalo_dose' => $med->getIntervaloDose(),
+                'frequencia_dose' => $med->getFrequenciaDose(),
+                'turno_dose' => $med->getTurnoDose(),
+                'data_inicio' => $med->getDataInicio(),
+                'quantidade_duracao' => $med->getQuantidadeDuracao(),
+                'tipo_duracao' => $med->getTipoDuracao(),
+                'id_prescricao ' => $med->getIdPrescricao()
+            ];
+        }, $medicamentosBanco);
+
+        //Busca o id do paciente
+        $idPaciente = $prontuario->getIdPaciente();
+        
         //Busca o paciente
         $pacienteController = new PacienteController();
-        $paciente = $pacienteController->buscarPacienteCompleto($_SESSION['paciente_id']);
-        $_SESSION['paciente_id'] = $paciente->getIdPaciente();
+        $paciente = $pacienteController->buscarPacienteCompleto($idPaciente);
 
-        //Busca a consulta
-        $consultaController = new ConsultaController();
-        $consulta = $consultaController->buscarConsulta($_SESSION['consulta_id']);
-        $_SESSION['consulta_motivo'] = $consulta->getMotivo();
 
     ?>
 
@@ -149,7 +183,7 @@
             </section>
 
             <form id="salvarProntuario" action="../routers/roteadorProntuario.php" method="post">
-                <input type="hidden" name="acao" value="salvarProntuario">
+                <input type="hidden" name="acao" value="atualizarProntuario">
 
                 <!--Histórico Médico e Familiar-->
                 <div class="menu-seta">
@@ -162,27 +196,27 @@
 
                         <div class="nome-campo">
                             <label for="doencasPreExistentes">Doenças pré-existentes</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="doencasPreExistentes"></textarea>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="doencasPreExistentes"><?php echo $prontuario->getHistoricoMedico()->getDoencasPreexistentes() ?></textarea>
                         </div>
 
                         <div class="nome-campo">
                             <label for="medicacoesUsoContinuo">Medicaçõs de uso contínuo</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="medicacoesUsoContinuo"></textarea>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="medicacoesUsoContinuo"><?php echo $prontuario->getHistoricoMedico()->getMedicacoesUsoContinuo() ?></textarea>
                         </div>
 
                         <div class="nome-campo">
                             <label for="cirurgiasAnteriores">Cirurgias anteriores</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="cirurgiasAnteriores"></textarea>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="cirurgiasAnteriores"><?php echo $prontuario->getHistoricoMedico()->getCirurgiasAnteriores() ?></textarea>
                         </div>
 
                         <div class="nome-campo">
                             <label for="alergias">Alergias e reações adversas a medicamentos</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="alergias"></textarea>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="alergias"><?php echo $prontuario->getHistoricoMedico()->getAlergiasMedicamentos() ?></textarea>
                         </div>
 
                         <div class="nome-campo">
                             <label for="doencasFamilia">Histórico de doenças na família</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="doencasFamilia"></textarea>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="doencasFamilia"><?php echo $prontuario->getHistoricoMedico()->getHistoricoDoencasFamilia() ?></textarea>
                         </div>   
 
                     
@@ -199,52 +233,52 @@
 
                             <h3>Motivo da consulta</h3>
                             <div class="motivo-consulta">
-                                <p><?= $consulta ? htmlspecialchars($consulta->getMotivo()) : '' ?></p> 
+                                <p><?php echo $prontuario->getAnamnese()->getMotivoConsulta() ?></p> 
                             </div>
 
                         <div class="nome-campo">
                             <label for="queixa">Queixa e duração</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="queixa"></textarea>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="queixa"><?php echo $prontuario->getAnamnese()->getQueixaDuracao() ?></textarea>
                         </div>
 
                         <div class="nome-campo">
                             <label for="doencaAtual">História da doença atual</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="doencaAtual"></textarea>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="doencaAtual"><?php echo $prontuario->getAnamnese()->getHistoriaDoencaAtual() ?></textarea>
                         </div>
 
                         <div class="nome-campo">
                             <label for="historiaSocial">História social</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="historiaSocial"></textarea>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="historiaSocial"><?php echo $prontuario->getAnamnese()->getHistoriaSocial() ?></textarea>
                         </div>
 
                         <div class="nome-campo">
                             <label for="ginecoObstetrica">História gineco-obstétrica (para mulheres)</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="ginecoObstetrica"></textarea>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="ginecoObstetrica"><?php echo $prontuario->getAnamnese()->getHistoriaGinecoObstetrica() ?></textarea>
                         </div>
 
                         <div class="nome-campo">
                             <label for="revisaoSistemas">Revisão de sistemas (sintomas em difentes sistemas do organismo) </label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="revisaoSistemas"></textarea>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="revisaoSistemas"><?php echo $prontuario->getAnamnese()->getRevisaoSistemas() ?></textarea>
                         </div>
 
                         <div class="nome-campo">
                             <label for="fatoresAgravantes">Fatores agravantes</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="fatoresAgravantes"></textarea>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="fatoresAgravantes"><?php echo $prontuario->getAnamnese()->getFatoresAgravantes() ?></textarea>
                         </div>
 
                         <div class="nome-campo">
                             <label for="atenuantes">Atenuantes</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="atenuantes"></textarea>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="atenuantes"><?php echo $prontuario->getAnamnese()->getAtenuantes() ?></textarea>
                         </div>
 
                         <div class="nome-campo">
                             <label for="tratamentosPrevios">Tratamentos Prévios</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="tratamentosPrevios"></textarea>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="tratamentosPrevios"><?php echo $prontuario->getAnamnese()->getTratamentosPrevios() ?></textarea>
                         </div>
 
                         <div class="nome-campo">
                             <label for="respostaTratamentosPrevios">Resposta aos tratamentos prévios</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="respostaTratamentosPrevios"></textarea>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="respostaTratamentosPrevios"><?php echo $prontuario->getAnamnese()->getRespostaTratamentosPrevios() ?></textarea>
                         </div>
 
                     
@@ -261,47 +295,47 @@
 
                         <div class="nome-campo">
                             <label for="avaliacaoGeral">Avaliação geral</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="avaliacaoGeral"></textarea>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="avaliacaoGeral"><?php echo $prontuario->getExameFisico()->getAvaliacaoGeral() ?></textarea>
                         </div>
 
                         <div class="nome-campo">
                             <label for="sinaisVitais">Sinais vitais</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="sinaisVitais"></textarea>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="sinaisVitais"><?php echo $prontuario->getExameFisico()->getSinaisVitais() ?></textarea>
                         </div>
 
                         <div class="nome-campo">
                             <label for="examePele">Exame da pele e anexos (cabelos, unhas, mucosas)</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="examePele"></textarea>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="examePele"><?php echo $prontuario->getExameFisico()->getExamePeleAnexos() ?></textarea>
                         </div>
 
                         <div class="nome-campo">
                             <label for="exameCabeca">Exame da cabeça e pescoço</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="exameCabeca"></textarea>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="exameCabeca"><?php echo $prontuario->getExameFisico()->getExameCabecaPescoco() ?></textarea>
                         </div>
 
                         <div class="nome-campo">
                             <label for="exameCardio">Exame cardiovascular</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="exameCardio"></textarea>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="exameCardio"><?php echo $prontuario->getExameFisico()->getExameCardiovascular() ?></textarea>
                         </div>
 
                         <div class="nome-campo">
                             <label for="exameRespiratorio">Exame respiratório</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="exameRespiratorio"></textarea>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="exameRespiratorio"><?php echo $prontuario->getExameFisico()->getExameRespiratorio() ?></textarea>
                         </div>
 
                         <div class="nome-campo">
                             <label for="exameAbdominal">Exame abdominal</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="exameAbdominal"></textarea>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="exameAbdominal"><?php echo $prontuario->getExameFisico()->getExameAbdominal() ?></textarea>
                         </div>
 
                         <div class="nome-campo">
                             <label for="exameNeuro">Exame neurológico</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="exameNeuro"></textarea>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="exameNeuro"><?php echo $prontuario->getExameFisico()->getExameNeurologico() ?></textarea>
                         </div>
 
                         <div class="nome-campo">
                             <label for="exameLocomotor">Exame do aparelho locomotor</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="exameLocomotor"></textarea>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="exameLocomotor"><?php echo $prontuario->getExameFisico()->getExameAparelhoLocomotor() ?></textarea>
                         </div>
 
                     
@@ -318,22 +352,22 @@
 
                         <div class="nome-campo">
                             <label for="diagPresuntivo">Diagnóstico presuntivo</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="diagPresuntivo"></textarea>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="diagPresuntivo"><?php echo $prontuario->getDiagnosticoPresuntivo() ?></textarea>
                         </div>
 
                         <div class="nome-campo">
                             <label for="diagDiferencial">Diagnóstico diferencial</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="diagDiferencial"></textarea>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="diagDiferencial"><?php echo $prontuario->getDiagnosticoDiferencial() ?></textarea>
                         </div>
 
                         <div class="nome-campo">
                             <label for="diagDefinitivo">Diagnóstico definitivo</label>
-                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="diagDefinitivo"></textarea>
+                            <textarea rows="8" cols="50" placeholder="Digite aqui..." name="diagDefinitivo"><?php echo $prontuario->getDiagnosticoDefinitivo() ?></textarea>
                         </div>
 
                         <div class="nome-campo">
                             <label for="cid10">CID-10 (classificação internacional de doenças)</label>
-                            <input type="text" name="cid10">
+                            <input type="text" name="cid10" value="<?php echo $prontuario->getCid10() ?>">
                         </div>
 
                     
@@ -347,9 +381,12 @@
                 <div class="barra"></div>
                 <section id="formulario6" class="formulario-oculto">
                     <ul id="lista-exames"></ul>
-                    <!-- <input type="hidden" name="examesJSON" id="examesJSON"> -->
                     <div class="botao-solicitar-criar">
-                        <button type='button' id="botao-exame" onclick="window.location.href='solicitar-exames.php'">Solicitar exames</button>
+                        <?php if (!empty($examesBanco)) : ?>
+                            <button type='button' id="botao-exame" onclick="window.location.href='editar-exames-solicitados.php?consulta_id=<?php echo $prontuario->getIdConsulta(); ?>'">Editar exames</button>
+                        <?php else : ?>
+                            <button type='button' id="botao-exame" onclick="window.location.href='editar-exames-solicitados.php?consulta_id=<?php echo $prontuario->getIdConsulta(); ?>'">Solicitar exames</button>
+                        <?php endif; ?>
                     </div>                   
                 </section>
 
@@ -362,7 +399,11 @@
                 <section id="formulario7" class="formulario-oculto">
                     <ul id="medicamentosPrescricao"></ul>
                     <div class="botao-solicitar-criar">
-                        <button id="botaoPrescricao" type="button" onclick="window.location.href='criar-prescricao.php'">Criar prescrição</button>
+                        <?php if (!empty($medicamentosBanco)) : ?>
+                            <button type='button' id="botaoPrescricao" onclick="window.location.href='editar-prescricao.php?consulta_id=<?php echo $prontuario->getIdConsulta(); ?>'">Editar prescrição</button>
+                        <?php else : ?>
+                            <button type='button' id="botaoPrescricao" onclick="window.location.href='editar-prescricao.php?consulta_id=<?php echo $prontuario->getIdConsulta(); ?>'">Criar prescrição</button>
+                        <?php endif; ?>
                     </div>                   
                 </section>
 
@@ -374,7 +415,7 @@
                 <div class="barra"></div>
                 <section id="formulario8" class="formulario-oculto">
                     <div class="nome-campo">
-                        <textarea rows="8" cols="50" placeholder="Digite aqui..." name="evolucao"></textarea>
+                        <textarea rows="8" cols="50" placeholder="Digite aqui..." name="evolucao"><?php echo $prontuario->getEvolucao() ?></textarea>
                     </div>                   
                 </section>
 
@@ -388,22 +429,22 @@
                                       
                     <div class="nome-campo">
                         <label for="dataAdmissaoAlta">Data de Admissão e Alta Hospitalar</label>
-                        <textarea rows="8" cols="50" placeholder="Digite aqui..." name="dataAdmissaoAlta"></textarea>
+                        <textarea rows="8" cols="50" placeholder="Digite aqui..." name="dataAdmissaoAlta"><?php echo $prontuario->getInternacao()->getDataAdmissaoEAlta() ?></textarea>
                     </div>
 
                     <div class="nome-campo">
                         <label for="diagInternacao">Diagnóstico de Internação</label>
-                        <textarea rows="8" cols="50" placeholder="Digite aqui..." name="diagInternacao"></textarea>
+                        <textarea rows="8" cols="50" placeholder="Digite aqui..." name="diagInternacao"><?php echo $prontuario->getInternacao()->getDiagnosticoInternacao() ?></textarea>
                     </div>
 
                     <div class="nome-campo">
                         <label for="cirurgiasInternacao">Procedimentos Cirúrgicos Realizados</label>
-                        <textarea rows="8" cols="50" placeholder="Digite aqui..." name="cirurgiasInternacao"></textarea>
+                        <textarea rows="8" cols="50" placeholder="Digite aqui..." name="cirurgiasInternacao"><?php echo $prontuario->getInternacao()->getProcedimentosCirurgicos() ?></textarea>
                     </div>
 
                     <div class="nome-campo">
                         <label for="medicosInternacao">Médicos Responsáveis</label>
-                        <textarea rows="8" cols="50" placeholder="Digite aqui..." name="medicosInternacao"></textarea>
+                        <textarea rows="8" cols="50" placeholder="Digite aqui..." name="medicosInternacao"><?php echo $prontuario->getInternacao()->getMedicosResponsaveis() ?></textarea>
                     </div>
 
                 </section>
@@ -418,12 +459,12 @@
                                       
                     <div class="nome-campo">
                         <label for="termosConsentimento">Termos de consentimento informado para procedimentos</label>
-                        <textarea rows="8" cols="50" placeholder="Digite aqui..." name="termosConsentimento"></textarea>
+                        <textarea rows="8" cols="50" placeholder="Digite aqui..." name="termosConsentimento"><?php echo $prontuario->getDocumentacao()->getTermosConsentimento() ?></textarea>
                     </div>
 
                     <div class="nome-campo">
                         <label for="declaracoesSaude">Declarações de saúde e formulários legais</label>
-                        <textarea rows="8" cols="50" placeholder="Digite aqui..." name="declaracoesSaude"></textarea>
+                        <textarea rows="8" cols="50" placeholder="Digite aqui..." name="declaracoesSaude"><?php echo $prontuario->getDocumentacao()->getDeclaracoesSaude() ?></textarea>
                     </div>
 
                     <ul id="atestados"></ul>
@@ -443,12 +484,12 @@
                                       
                     <div class="nome-campo">
                         <label for="notificacoesObrigatorias">Doenças de notificação obrigatória (ex: COVID-19, tuberculose)</label>
-                        <textarea rows="8" cols="50" placeholder="Digite aqui..." name="notificacoesObrigatorias"></textarea>
+                        <textarea rows="8" cols="50" placeholder="Digite aqui..." name="notificacoesObrigatorias"><?php echo $prontuario->getDoencasNotificacaoObrigatoria() ?></textarea>
                     </div>
 
                     <div class="nome-campo">
                         <label for="obsMedicas">Observações médicas adicionais</label>
-                        <textarea rows="8" cols="50" placeholder="Digite aqui..." name="obsMedicas"></textarea>
+                        <textarea rows="8" cols="50" placeholder="Digite aqui..." name="obsMedicas"><?php echo $prontuario->getObservacoesAdicionais() ?></textarea>
                     </div>
 
                 </section>
@@ -460,7 +501,7 @@
 
                 <div class="finalizar-consulta">
                     <button type="button" class="vermelho" id="voltarPagina">Voltar</button>
-                    <button type='submit' class="verde">Finalizar Consulta</button>
+                    <button type='submit' class="verde">Confirmar alterações</button>
                 </div>
                 
             </form>
@@ -471,6 +512,19 @@
 
     <footer></footer>
     
-    <script src="../../assets/script/prontuario.js"></script>
+    <script src="../../assets/script/editar-prontuario.js"></script>
+    <script>
+        // Só envia os dados do banco se não houver exames no localStorage
+        if (!localStorage.getItem('examesSolicitados')) {
+            const examesDoBanco = <?= json_encode($examesBanco) ?>;
+            localStorage.setItem('examesSolicitados', JSON.stringify(examesDoBanco));
+        }
+
+        const medicamentosDoBanco = <?= json_encode($medicamentosFormatados, JSON_UNESCAPED_UNICODE) ?>;
+        console.log("Medicamentos carregados do banco:", medicamentosDoBanco);
+        localStorage.setItem('medicamentosSolicitados', JSON.stringify(medicamentosDoBanco));
+
+    </script>
+    
 </body>
 </html>

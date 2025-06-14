@@ -7,7 +7,7 @@ class AtestadoAcompanhante extends Atestado {
         int $idAtestado,
         string $cid10,
         string $textoPrincipal,
-        int $idDocumentacao,
+        ?int $idDocumentacao = null,
         protected string $nomeAcompanhante,
         protected string $cpfAcompanhante,
         protected string $parentescoAcompanhante, 

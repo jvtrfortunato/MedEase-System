@@ -10,7 +10,7 @@
 <body>
     <header>
         <a class="logo" href="">MedEase</a>    
-        <a href="">sair</a>
+        <a href="login.php">sair</a>
     </header>
     
     <main>
@@ -43,13 +43,6 @@
                         <p>Prontuários</p>
                     </a>
                 </div>     
-
-                <div class="card">
-                    <a href="#" target="">
-                        <img src="../../assets/img/Health Graph.png" alt="Relatórios">
-                        <p>Relatórios</p>
-                    </a>
-                </div>
 
             </div>
     </section>

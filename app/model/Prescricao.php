@@ -4,7 +4,7 @@ class Prescricao {
     public function __construct(
         private int $idPrescricao,
         private array $medicamentos,
-        private string $recomendacoes,
+        private ?string $recomendacoes,
         private ?int $idProntuario = null
     ) {}
 
@@ -30,7 +30,7 @@ class Prescricao {
         $this->idPrescricao = $idPrescricao;
     }
 
-    public function setMedcamentos(array $medicamentos): void {
+    public function setMedicamentos(array $medicamentos): void {
         $this->medicamentos = $medicamentos;
     }
 

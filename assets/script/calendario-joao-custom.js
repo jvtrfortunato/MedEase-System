@@ -4,6 +4,16 @@ document.addEventListener('DOMContentLoaded', function() {
     //Recebe o SELETOR calendar do atributo id
     var calendarEl = document.getElementById('calendar');
 
+    // Define a URL de consultas com base no tipo de usuário
+    let urlConsultas = '';
+
+    // Define a urlConsultas
+    if (tipoUsuario === 'medico') {
+        urlConsultas = '../config/listar-consulta-medico.php'; // SEM GET
+    } else {
+        urlConsultas = '../config/listar-consulta.php';
+    }
+
     //Receber o seletor da janela modal cadastrar
     const cadastrarModal = new bootstrap.Modal(document.getElementById("cadastrarModal")); 
 
@@ -48,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
         dayMaxEvents: true, 
         
         //Chamar o arquivo PHP para recuperar as consultas
-        events: '../config/listar-consulta.php',
+        events: urlConsultas,
         
 
         //Identificar o clique do usuário sobre a consulta

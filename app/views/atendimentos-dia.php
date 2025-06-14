@@ -6,34 +6,41 @@
     <title>Atendimentos do dia</title>
     <link rel="stylesheet" href="../../assets/css/header.css">
     <link rel="stylesheet" href="../../assets/css/atendimentos-dia.css">
+    <link rel="stylesheet" href="../../assets/css/reset.css">
 </head>
 <body>
+
     <?php
-    require_once '../controller/ConsultaController.php';
-    require_once '../routers/roteadorConsulta.php';
+        require_once '../controller/ConsultaController.php';
+        require_once '../routers/roteadorConsulta.php';
 
-    if (!isset($_SESSION['usuario_id']) || 
-        ($_SESSION['usuario_tipo'] !== 'medico' && $_SESSION['usuario_tipo'] !== 'administrador')) {
-        header("Location: login.php");
-        exit;
-    }
+        if (!isset($_SESSION['usuario_id']) || 
+            ($_SESSION['usuario_tipo'] !== 'medico' && $_SESSION['usuario_tipo'] !== 'administrador')) {
+            header("Location: login.php");
+            exit;
+        }
 
-    if ($_SESSION['usuario_tipo'] == 'medico') {
-        $id_medico = $_SESSION['medico_id'];
-        $controller = new ConsultaController();
-        $consultas = $controller->listarConsultasDoDia($id_medico);
-    }
+        if ($_SESSION['usuario_tipo'] == 'medico') {
+            $id_medico = $_SESSION['medico_id'];
+            $controller = new ConsultaController();
+            $consultas = $controller->listarConsultasDoDia($id_medico);
+        }
 
-    if ($_SESSION['usuario_tipo'] == 'administrador') {
-        $controller = new ConsultaController();
-        $consultas = $controller->listarTodasConsultasDoDia();
-    }
+        if ($_SESSION['usuario_tipo'] == 'administrador') {
+            $controller = new ConsultaController();
+            $consultas = $controller->listarTodasConsultasDoDia();
+        }
 
-    date_default_timezone_set('America/Sao_Paulo');
-    $dataHoje = date('d/m/Y');
-    $_SESSION['data_hoje'] = $dataHoje;
+        date_default_timezone_set('America/Sao_Paulo');
+
+        $dataHoje = date('d-m-Y');
+        $_SESSION['data_hoje'] = $dataHoje;
+
+        $dataCriacao = date('Y-m-d');
+        $_SESSION['data_criacao'] = $dataCriacao;
 
     ?>
+
     <header>
         <a class="logo" href="">MedEase</a>    
         <a href="">sair</a>
@@ -93,7 +100,7 @@
                             </div>
                             <div class="status">
                                 <p><?php echo htmlspecialchars($consulta->getStatus()); ?></p>
-                                <a href="prontuario.php" class="editar-prontuario" type="submit">Editar Prontuário</a>
+                                <a href="editar-prontuario.php?consulta_id=<?php echo $consulta->getId(); ?>" class="editar-prontuario">Editar Prontuário</a>
                             </div>
                         </div>
                     </div>
@@ -101,9 +108,35 @@
             </section>
         </section>
         <section class="botoes">
-            <button class="voltar" type="button" onclick="history.back()">Voltar</button>
+            <button class="voltar" type="button" id="voltarPagina">Voltar</button>
         </section>
     </main>
     <footer></footer>
+
+    <script>
+        //Função para voltar para a home
+        const voltarPagina = document.getElementById("voltarPagina"); // Certifique-se de que existe esse elemento
+
+        const tipoUsuario = "<?php echo $_SESSION['usuario_tipo']; ?>"; // Exemplo usando sessão
+
+        if (voltarPagina) {
+            voltarPagina.addEventListener("click", () => {
+                console.log(tipoUsuario);
+
+                if (tipoUsuario === 'administrador') {
+                    window.location.href = "home-administrador.php";
+                } 
+                
+                if (tipoUsuario === 'medico') {
+                    window.location.href = "home-medico.php";
+                }
+                
+                if (tipoUsuario === 'secretario') {
+                    window.location.href = "home-secretario.php";
+                }
+            });
+        }
+    </script>
+
 </body>
 </html>

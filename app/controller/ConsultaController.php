@@ -309,7 +309,7 @@ class ConsultaController {
     public function finalizarConsulta() {
         try {
             // Atualiza o status da consulta para "Realizada"
-            $stmtUpdate = $this->conn->prepare("UPDATE consultas SET status = 'Realizada' WHERE id_consulta = ?");
+            $stmtUpdate = $this->conn->prepare("UPDATE consultas SET status = 'Realizada' WHERE id = ?");
             $stmtUpdate->execute([$_SESSION['consulta_id']]);
 
             // Redireciona para a tela do prontuário

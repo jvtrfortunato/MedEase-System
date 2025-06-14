@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.conteudo {
+    width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.busca {
+    width: 25%;
+    border: 2px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    padding: 10px 17px 10px 17px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+input {
+    border: transparent;
+    width: 100%;
+}
+
+.prontuarios {
+    border: 2px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    padding: 10px 17px 10px 17px;
+}
+
+.legenda {
+    display: flex;
+    gap: 1%;
+    margin-bottom: 5px;
+}
+
+.legenda p {
+    font-size: 1.4em;
+    font-weight: 500;
+    opacity: 75%;
+}
+
+.dados p {
+    opacity: 50%;
+    font-size: 1.4em;
+    font-weight: 500;
+}
+
+.nome-legenda {
+    width: 20.2%;
+}
+
+.dados {
+    display: flex;
+    gap: 1%;
+    margin-bottom: 5px;
+}
+
+.nome {
+    width: 20%;
+    border: 2px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.cpf {
+    width: 60%;
+    border: 2px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.detalhes {
+    width: 20%;
+    text-align: center;
+    padding: 0.3vw 0.8vw;
+    border: 1px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    font-size: 1vw;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-family: "Inter", serif;
+    cursor: pointer;
+    background-color: #50E3C2;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.detalhes:hover {
+    background-color: #3AC3A5;
+}
+
+.botao {
+    width: 1200px;
+    margin-top: 5px;
+}
+
+.voltar {
+    text-align: center;
+    padding: 0.3vw 0.8vw;
+    border: 1px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    font-size: 1vw;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-family: "Inter", serif;
+    cursor: pointer;
+    background-color: #FF6F61;
+}
+
+.voltar:hover {
+    background-color: #E65A50;
+}

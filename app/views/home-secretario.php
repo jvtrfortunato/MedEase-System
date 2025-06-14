@@ -10,7 +10,7 @@
 <body>
     <header>
         <a class="logo" href="">MedEase</a>    
-        <a href="">sair</a>
+        <a href="login.php">sair</a>
     </header>
     
     <main>
@@ -24,9 +24,9 @@
             <div class="grid-container">
                 
                 <div class="card">
-                    <a href="gerenciar-pacientes.php">
+                    <a href="gerenciar-pacientes-secretario.php">
                         <img src="../../assets/img/User.png" alt="Pacientes">
-                        <p>Gerenciar Pacientes</p>
+                        <p>Pacientes</p>
                     </a>
                 </div>
 
@@ -34,13 +34,6 @@
                     <a href="calendario-joao.php">
                         <img src="../../assets/img/Planner.png" alt="Agendar Consulta">
                         <p>Agendar Consulta</p>
-                    </a>
-                </div>
-
-                <div class="card">
-                    <a href="#" target="">
-                        <img src="../../assets/img/Health Graph.png" alt="Relatórios">
-                        <p>Relatórios</p>
                     </a>
                 </div>
 

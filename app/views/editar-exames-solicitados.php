@@ -13,6 +13,7 @@
         <a href="">sair</a>
     </header>
     <main>
+
         <h1 class="titulo_secao">Solicitação de Exame</h1>
         <section class="descricao_exame">
             <section class="nome_exame">
@@ -41,12 +42,13 @@
             </div>
         </section>
         <div class="botao">
-            <button onclick="finalizar()">Finalizar</button>
+            <button type="button" onclick="finalizar()">Finalizar</button>
         </div>
     </main>
     
     <footer></footer>
     
-    <script src="../../assets/script/solicitar-exames.js"></script>
+    <script src="../../assets/script/editar-exames-solicitados.js"></script>
+    
 </body>
 </html>
