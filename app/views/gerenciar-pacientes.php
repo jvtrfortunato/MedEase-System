@@ -3,7 +3,16 @@ session_start();
 require_once '../controller/PacienteController.php';
 
 $controller = new PacienteController();
-$pacientes = $controller->listarPacientes();
+
+$termoBusca = $_GET['termo'] ?? '';
+
+if(!empty($termoBusca)){
+    $pacientes = $controller->buscarPorNome($termoBusca);        
+}
+else {
+    $pacientes = $controller->listarPacientes();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -25,10 +34,14 @@ $pacientes = $controller->listarPacientes();
 
         <section class="conteudo-principal">
 
+        <form action="" method="GET">
             <section class="busca">
                 <img src="../../assets/img/lupa.png" alt="Lupa de pesquisa">
-                <input type="text" placeholder="Buscar Paciente (nome do paciente)">
+                <input type="text" name="termo" placeholder="Buscar Paciente (nome do paciente)" value="<?= htmlspecialchars($_GET['termo'] ?? '') ?>">
+                <button type="submit">Buscar</button>
             </section>
+        </form>
+        
 
             <section class="pacientes">
                 
