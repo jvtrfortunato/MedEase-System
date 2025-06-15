@@ -21,6 +21,16 @@ else {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pacientes</title>
+    <style>
+        .btnBusca {
+             padding: 6px 12px;
+             margin-left: 6px; 
+             background-color: #3498db; 
+             color: white; border: none; 
+             border-radius: 4px; 
+             cursor: pointer;
+            }
+    </style>
     <link rel="stylesheet" href="../../assets/css/header.css">
     <link rel="stylesheet" href="../../assets/css/reset.css">
     <link rel="stylesheet" href="../../assets/css/gerenciar-pacientes.css">
@@ -34,13 +44,13 @@ else {
 
         <section class="conteudo-principal">
 
-        <form action="" method="GET">
-            <section class="busca">
-                <img src="../../assets/img/lupa.png" alt="Lupa de pesquisa">
-                <input type="text" name="termo" placeholder="Buscar Paciente (nome do paciente)" value="<?= htmlspecialchars($_GET['termo'] ?? '') ?>">
-                <button type="submit">Buscar</button>
-            </section>
-        </form>
+            <form action="" method="GET" style="display: flex;">
+                <section class="busca">
+                    <img src="../../assets/img/lupa.png" alt="Lupa de pesquisa">
+                    <input type="text" name="termo" placeholder="Buscar Paciente (nome do paciente)" value="<?= htmlspecialchars($_GET['termo'] ?? '') ?>">
+                </section>
+                <button type="submit" class="btnBusca">Buscar</button>
+            </form>
         
 
             <section class="pacientes">
