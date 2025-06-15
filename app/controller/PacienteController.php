@@ -271,4 +271,9 @@ class PacienteController {
             echo "<script>alert('Erro ao editar os dados do paciente.'); history.back();</script>";
         }
     }
+
+    public function buscarPorNome($nome){
+
+        return Paciente::buscarPorNome($this->conn, $nome);
+    }
 }

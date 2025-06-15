@@ -33,7 +33,7 @@ if (!$secretario) {
 <body>
     <header>
         <a class="logo" href="">MedEase</a>    
-        <a href="">sair</a>
+        <a href="login.php">sair</a>
     </header>
 
      <?php if (!empty($mensagem)): ?>

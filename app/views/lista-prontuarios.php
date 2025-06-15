@@ -1,8 +1,18 @@
 <?php
+session_start();
 require_once '../controller/PacienteController.php';
 
 $controller = new PacienteController();
-$pacientes = $controller->listarPacientes();
+
+$termoBusca = $_GET['termo'] ?? '';
+
+if(!empty($termoBusca)){
+    $pacientes = $controller->buscarPorNome($termoBusca);        
+}
+else {
+    $pacientes = $controller->listarPacientes();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -11,21 +21,34 @@ $pacientes = $controller->listarPacientes();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prontuários</title>
+    <style>
+        .btnBusca {
+             padding: 6px 12px;
+             margin-left: 6px; 
+             background-color: #3498db; 
+             color: white; border: none; 
+             border-radius: 4px; 
+             cursor: pointer;
+            }
+    </style>
     <link rel="stylesheet" href="../../assets/css/header.css">
     <link rel="stylesheet" href="../../assets/css/lista-pacientes.css">
 </head>
 <body>
     <header>
         <a class="logo" href="">MedEase</a>    
-        <a href="">sair</a>
+        <a href="login.php">sair</a>
     </header>
     <main>
         <section class="conteudo-principal">
 
-            <section class="busca">
-                <img src="../../assets/img/lupa.png" alt="Lupa de pesquisa">
-                <input type="text" placeholder="Buscar Paciente (nome do paciente)">
-            </section>
+            <form action="" method="GET" style="display: flex;">
+                <section class="busca">
+                    <img src="../../assets/img/lupa.png" alt="Lupa de pesquisa">
+                    <input type="text" name="termo" placeholder="Buscar Paciente (nome do paciente)" value="<?= htmlspecialchars($_GET['termo'] ?? '') ?>">
+                </section>
+                <button type="submit" class="btnBusca">Buscar</button>
+            </form>
 
             <section class="pacientes">
                 

@@ -15,12 +15,13 @@ $tipoUsuario = $_SESSION['usuario_tipo'];
     <script src="../../assets/script/mascaraCPF.js"></script>
     <script src="../../assets/script/mascaraRG.js"></script>
     <script src="../../assets/script/mascaraTelefone.js"></script>
-    <script src="../../assets/script/mascaraCEP.js"></script>
+    <script src="../../assets/script/mascaraCNS.js"></script>
+</head>
 </head>
 <body>
     <header>
         <a class="logo" href="">MedEase</a>    
-        <a href="">sair</a>
+        <a href="login.php">sair</a>
     </header>
     <main>
         <section class="conteudo-principal">
@@ -94,7 +95,7 @@ $tipoUsuario = $_SESSION['usuario_tipo'];
 
                         <div class="label-input">
                             <label for="cns">Cartão Nacional de Saúde (CNS)</label>
-                            <input type="text" name="cns" id="" placeholder="000.000.000.000" required>
+                            <input type="text" name="cns" id="cns" placeholder="000.000.000.000" required>
                         </div>
                     </div>
 
@@ -173,7 +174,7 @@ $tipoUsuario = $_SESSION['usuario_tipo'];
                             </div>
                             <div class="label-input">
                                 <label for="cep">CEP</label>
-                                <input type="text" id="" name="cep" placeholder="00000-000">
+                                <input type="text" id="cep" name="cep" placeholder="00000-000">
                             </div>
                         </div>
                     </div>

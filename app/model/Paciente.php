@@ -1,6 +1,7 @@
 <?php
 
 require_once 'Endereco.php';
+require_once '../config/Database.php';
 require_once '../controller/PacienteController.php';
 
 class Paciente {
@@ -130,4 +131,58 @@ class Paciente {
     public function setEndereco(Endereco $endereco): void {
         $this->endereco = $endereco;
     }
+
+    public static function buscarPorNome(PDO $conn, $nome): array {
+        $sql = "SELECT * FROM pacientes WHERE nome LIKE ? ORDER BY nome ASC";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(["%$nome%"]);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $pacientes = [];
+
+        foreach ($rows as $row) {
+            
+            $sqlEnd = "SELECT * FROM enderecos WHERE id_paciente = ?";
+            $stmtEnd = $conn->prepare($sqlEnd);
+            $stmtEnd->execute([$row['id_paciente']]);
+            $endRow = $stmtEnd->fetch(PDO::FETCH_ASSOC);
+
+            if ($endRow) {
+                $idUsuario = isset($endRow['id_Usuario']) && $endRow['id_Usuario'] !== '' ? (int)$endRow['id_Usuario'] : null;
+
+                $endereco = new Endereco(
+                    $endRow['logradouro'] ?? '',
+                    $endRow['numero'] ?? '',
+                    $endRow['complemento'] ?? '',
+                    $endRow['bairro'] ?? '',
+                    $endRow['cidade'] ?? '',
+                    $endRow['estado'] ?? '',
+                    $idUsuario
+                );
+            } else {
+                // Caso não tenha endereço cadastrado
+                $endereco = new Endereco('', '', '', '', '', '', null);
+            }
+
+            $pacientes[] = new Paciente(
+                (int)$row['id_paciente'],
+                $row['nome'] ?? '',
+                $row['dataNascimento'] ?? '',
+                $row['sexo'] ?? '',
+                $row['estadoCivil'] ?? '',
+                $row['cpf'] ?? '',
+                $row['rg'] ?? '',
+                $row['telefone'] ?? '',
+                $row['email'] ?? '',
+                $row['nomeResponsavel'] ?? '',
+                $row['cns'] ?? '',
+                $row['convenio'] ?? '',
+                $row['planoSaude'] ?? '',
+                $endereco
+            );
+        }
+
+        return $pacientes;
+    }
+
+
 }

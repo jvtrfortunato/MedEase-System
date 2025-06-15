@@ -32,7 +32,7 @@ if (!$secretario) {
 <body>
     <header>
         <a class="logo" href="">MedEase</a>    
-        <a href="">Sair</a>
+        <a href="login.php">Sair</a>
     </header>
 
     <main>
