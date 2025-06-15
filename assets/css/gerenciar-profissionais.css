@@ -26,6 +26,11 @@ main {
     justify-content: space-between;
 }
 
+.opcoes button {
+            margin-left: 10px;
+            padding: 5px 15px;
+}
+
 .busca {
     width: 25%;
     border: 2px, solid rgba(136, 136, 136, 0.4);
@@ -143,3 +148,4 @@ main {
 .botaoVermelho:hover {
     background-color: #E65A50;
 }
+

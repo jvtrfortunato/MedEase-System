@@ -179,40 +179,35 @@ class Secretario extends Usuario {
        
     }
 
-    // Exemplo na função buscarPorNome (ou método similar)
-    public static function buscarPorNome(PDO $conn, $nome) {
-        $sql = "SELECT u.*, e.rua, e.numero, e.bairro, e.cidade, e.estado, e.cep 
-                FROM usuarios u
-                INNER JOIN enderecos e ON u.id_usuario = e.id_usuario
-                WHERE u.nome LIKE ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute(["%$nome%"]);
-        $dados = $stmt->fetch(PDO::FETCH_ASSOC);
+public static function buscarPorNome(PDO $conn, $nome) {
+    $sql = "SELECT 
+                u.id_usuario,
+                u.nome,
+                u.cpf,
+                u.telefone,
+                u.data_nascimento,
+                u.sexo,
+                u.email,
+                s.id_secretario,
+                e.rua,
+                e.numero,
+                e.bairro,
+                e.cidade,
+                e.estado,
+                e.cep
+            FROM usuarios u
+            INNER JOIN secretarios s ON u.id_usuario = s.id_usuario
+            LEFT JOIN enderecos e ON u.id_usuario = e.id_usuario
+            WHERE u.nome LIKE ? AND u.tipo = 'secretario'
+            GROUP BY u.id_usuario"; // Adicionando GROUP BY para evitar duplicatas
+    
+    $stmt = $conn->prepare($sql);
+    $stmt->execute(["%$nome%"]);
+    
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
-        if ($dados) {
-            $endereco = new Endereco(
-                $dados['rua'],
-                $dados['numero'],
-                $dados['bairro'],
-                $dados['cidade'],
-                $dados['estado'],
-                $dados['cep']
-            );
 
-            return new Secretario(
-                $dados['id_usuario'],
-                $dados['nome'],
-                $dados['cpf'],
-                $dados['telefone'],
-                $dados['data_nascimento'],
-                $dados['sexo'],
-                $dados['email'],
-                $dados['senha'],
-                $endereco
-            );
-        }
-        return null;
-    }
 
 
 
