@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -10,12 +14,14 @@
     <link href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css' rel='stylesheet'>
 
     <link rel="stylesheet" href="../../assets/css/calendario-joao.css">
+    <link rel="stylesheet" href="../../assets/css/header.css">
 </head>
 <body>
 
-    <?php
-        session_start();
-    ?>
+    <header>
+        <a class="logo" href="">MedEase</a>    
+        <a href="">sair</a>
+    </header>
 
     <div class="container">
 

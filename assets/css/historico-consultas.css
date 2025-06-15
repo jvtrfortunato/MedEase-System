@@ -70,3 +70,95 @@ input, select {
     border-radius: 5px;
     padding: 10px 15px 10px 15px;
 }
+
+.conteudo {
+    border: 2px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    padding: 10px 17px 5px 17px;
+}
+
+.legenda {
+    display: flex;
+    justify-content: space-between;
+}
+
+.legenda-paciente {
+    width: 38%;
+    margin-bottom: 5px;
+}
+
+.legenda-data {
+    width: 18%;
+}
+
+.legenda-medico {
+    width: 38%;
+}   
+
+.legenda-prontuario {
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+h2 {
+    opacity: 75%;
+    font-weight: 500;
+}
+
+.legenda-paciente-medico {
+    width: 85%;
+    display: flex;
+    gap: 2%;
+}
+
+.paciente {
+    border: 2px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    padding: 10px 17px 10px 17px;
+}
+
+.data {
+    border: 2px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    padding: 10px 17px 10px 17px;
+}
+
+.medico {
+    border: 2px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    padding: 10px 17px 10px 17px;
+}
+
+.prontuario {
+    text-align: center;
+    padding: 10px 17px 10px 17px;
+    border: 1px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    color: #FFFFFF;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: #50E3C2;
+    text-decoration: none;
+}
+
+.prontuario:hover {
+    background-color: #3AC3A5;
+}
+
+.botao-vermelho {
+    text-align: center;
+    padding: 0.3vw 0.8vw;
+    border: 1px, solid rgba(136, 136, 136, 0.4);
+    border-radius: 5px;
+    font-size: 1vw;
+    color: #FFFFFF;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: #FF6F61;
+}
+
+.botao-vermelho:hover {
+    background-color: #E65A50;
+}

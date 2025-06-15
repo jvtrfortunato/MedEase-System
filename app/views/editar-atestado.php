@@ -1,18 +1,16 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criar Atestado</title>
+    <title>Atestado</title>
     <link rel="stylesheet" href="../../assets/css/header.css">
     <link rel="stylesheet" href="../../assets/css/criar-atestado.css">
-    <script src="../../assets/script/mascaraCPF.js"></script>
-    <script src="../../assets/script/mascaraHORA.js"></script>
 </head>
 <body>
     <header>
         <a class="logo" href="">MedEase</a>    
-        <a href="login.php">sair</a>
+        <a href="">sair</a>
     </header>
     <main>
         <section class="conteudo-principal">
@@ -21,38 +19,6 @@
                 <button type="button" id="btn-afastamento" class="botao-tipo" onclick="selecionarTipo('afastamento')">Afastamento</button>
                 <button type="button" id="btn-acompanhante" class="botao-tipo" onclick="selecionarTipo('acompanhante')">Acompanhante</button>
             </div>
-
-            <h1>Informações do Paciente</h1>
-            <section class="informacoes-paciente-medico">                    
-                <div class="input-grande">
-                    <label for="nomePaciente">Nome completo</label>
-                    <input type="text" name="nomePaciente"> <!--O NOME SERÁ RESGATADO DO BANCO DE DADOS E INSERIDO AQUI AUTOMATICAMENTE-->
-                </div>
-                <div class="input-pequeno">
-                    <label for="cpf">CPF</label>
-                    <input type="text" name="cpf" id="cpf"> <!--O CPF SERÁ RESGATADO DO BANCO DE DADOS E INSERIDO AQUI AUTOMATICAMENTE-->
-                </div>
-                <div class="input-pequeno">
-                    <label for="dataNascimento">Data de nascimento</label>
-                    <input type="date" name="dataNascimento"> <!--A DATA SERÁ RESGATADA DO BANCO DE DADOS E INSERIDA AQUI AUTOMATICAMENTE-->
-                </div>
-            </section>
-
-            <h1>Informações do Médico</h1>
-            <section class="informacoes-paciente-medico">
-                <div class="input-grande">
-                    <label for="nomeMedico">Nome completo</label>
-                    <input type="text" name="nomeMedico" id=""> <!--O NOME SERÁ RESGATADO DO BANCO DE DADOS E INSERIDO AQUI AUTOMATICAMENTE-->
-                </div>
-                <div class="input-pequeno">
-                    <label for="crm">CRM</label>
-                    <input type="text" name="crm" id=""> <!--O CRM SERÁ RESGATADO DO BANCO DE DADOS E INSERIDO AQUI AUTOMATICAMENTE-->
-                </div>
-                <div class="input-pequeno">
-                    <label for="especialidade">Especialidade</label>
-                    <input type="text" name="especialidade" id=""> <!--A ESPECIALIDADE SERÁ RESGATADA DO BANCO DE DADOS E INSERIDA AQUI AUTOMATICAMENTE-->
-                </div>
-            </section>
 
             <form action="">
                 <!-- Comparecimento -->
@@ -175,7 +141,7 @@
                 </div>
 
                 <div class="botoes">
-                    <button type="button" class="vermelho" onclick="window.location.href='prontuario.php'">Voltar</button>
+                    <button type="button" class="vermelho" id="botaoVoltar">Voltar</button>
                     <button class="verde">Salvar</button>
                 </div>
             </form>
@@ -183,6 +149,6 @@
         </section>
     </main>
     <footer></footer>
-    <script src="../../assets/script/criar-atestado.js"></script>
+    <script src="../../assets/script/editar-atestado.js"></script>
 </body>
 </html>

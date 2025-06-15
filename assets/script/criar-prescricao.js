@@ -60,15 +60,18 @@ function adicionarMedicamento() {
     const turno = turnoSelecionado ? turnoSelecionado.textContent.trim() : '';
 
     // Verifica se campos obrigatórios estão preenchidos
-    if (!principio || !concentracao || !forma || !via || !tipoReceita || !inicioTratamento || !duracao) {
+    if (
+    !principio.value.trim() || !concentracao.value.trim() || !forma.value.trim() || 
+    !via.value.trim() || !tipoReceita.value.trim() || 
+    !inicioTratamento.value.trim() || !duracao.value.trim()
+    ) {
         alert('Preencha todos os campos obrigatórios do medicamento.');
         return;
     }
 
     // Validação: apenas UM entre frequência, intervalo e turno deve estar preenchido
-    const preenchidos = [frequencia, intervalo, turno].filter(valor => valor !== '');
-
-    if (preenchidos.length !== 1) {
+    const apenasUmPreenchido = [frequencia, intervalo, turno].filter(v => v && v.trim() !== '').length === 1;
+    if (!apenasUmPreenchido) {
         alert('Preencha apenas um dos campos: Frequência, Intervalo ou Turno.');
         return;
     }

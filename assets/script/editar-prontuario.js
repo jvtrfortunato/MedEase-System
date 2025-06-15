@@ -15,7 +15,7 @@ function expandirRetrair(idFormulario, setaImg) {
 }
 
 //Função que exibe os exames solicitados ao voltar para o prontuário
-window.onload = function() {
+document.addEventListener('DOMContentLoaded', function () {
     const exames = JSON.parse(localStorage.getItem('examesSolicitados')) || [];
     const lista = document.getElementById('lista-exames');
     const botao = document.getElementById('botao-exame');
@@ -38,7 +38,13 @@ window.onload = function() {
     } else {
         botao.textContent = 'Solicitar exame';
     }
-}
+});
+
+//Função que preenche o array dos exames solicitados
+document.getElementById('salvarProntuario').addEventListener('submit', function() {
+    const exames = JSON.parse(localStorage.getItem('examesSolicitados')) || [];
+    document.getElementById('examesJSON').value = JSON.stringify(exames);
+});
 
 //Exibe os remédios
 window.addEventListener('DOMContentLoaded', () => {
@@ -51,7 +57,11 @@ window.addEventListener('DOMContentLoaded', () => {
             container.classList.add('lista-medicamentos');
 
             const li = document.createElement('li');
-            li.textContent = `${med.principioAtivo}`;
+
+            // Usa o campo correto dependendo da origem
+            const nome = med.principioAtivo || med.nome_medicamento || '[Sem nome]';
+
+            li.textContent = `${nome}`;
 
             container.appendChild(li);
             lista.appendChild(container);
@@ -63,13 +73,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-//Função que preenche o array dos exames solicitados
-document.getElementById('salvarProntuario').addEventListener('submit', function() {
-    const exames = JSON.parse(localStorage.getItem('examesSolicitados')) || [];
-    document.getElementById('examesJSON').value = JSON.stringify(exames);
-});
-
-//Exibe a prescrição
+//Exibe o atestado
 window.onload = function () {
     const atestadoSalvo = localStorage.getItem('atestado');
 
@@ -101,7 +105,7 @@ document.querySelector('form').addEventListener('submit', function (e) {
     const atestado = localStorage.getItem('atestado');
     const exames = localStorage.getItem('examesSolicitados');
     const medicamentos = localStorage.getItem('medicamentosPrescricao');
-    const recomendacoes = localStorage.getItem('recomendacoesPrescricao'); // se existir
+    const recomendacoes = localStorage.getItem('recomendacoesPrescricao');
 
     // Preenche os inputs ocultos com os dados
     if (atestado) {
@@ -117,7 +121,7 @@ document.querySelector('form').addEventListener('submit', function (e) {
     }
 
     if (recomendacoes) {
-        document.getElementById('recomendacoesJSON').value = recomendacoes; //LINHA 151
+        document.getElementById('recomendacoesJSON').value = recomendacoes;
     }
 
     // Limpa o localStorage

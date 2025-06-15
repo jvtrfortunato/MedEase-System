@@ -52,7 +52,7 @@
                         <div class="div-medios">
                             <div class="input-medio">
                                 <p class="label">Data de Nascimento</p>
-                                <div class="input-estilizacao-padrao"> <?= $paciente ? htmlspecialchars($paciente->getDataNascimento()) : '' ?></div>
+                                <div class="input-estilizacao-padrao"> <?= $paciente ? htmlspecialchars(date("d/m/Y", strtotime($paciente->getDataNascimento()))) : '' ?></div>
                             </div>
                             <div class="input-medio">
                                 <p class="label">Sexo</p>

@@ -321,6 +321,49 @@ class ConsultaController {
         }
     }
 
+    public function listarTodasConsultas(): array {
+        try {
+            // Todas as consultas
+            $stmtConsultas = $this->conn->prepare("
+                SELECT c.*, 
+                    p.nome AS nome_paciente,
+                    u.nome AS nome_medico
+                FROM consultas c
+                JOIN pacientes p ON c.id_paciente = p.id_paciente
+                JOIN medicos m ON c.id_medico = m.id_medico
+                JOIN usuarios u ON u.id_usuario = m.id_usuario
+            ");
+            $stmtConsultas->execute();
+            $resultConsultas = $stmtConsultas->fetchAll(PDO::FETCH_ASSOC);
+
+            $consultas = array_map(function ($row) {
+                return [
+                    'consulta' => new Consulta(
+                        $row['id'],
+                        $row['title'],
+                        $row['color'],
+                        $row['start'],
+                        $row['end'],
+                        $row['status'],
+                        $row['id_administrador'] ?? null,
+                        $row['id_secretario'] ?? null,
+                        $row['id_medico'],
+                        $row['id_paciente']
+                    ),
+                    'nome_paciente' => $row['nome_paciente'],
+                    'nome_medico' => $row['nome_medico']
+                ];
+            }, $resultConsultas);
+
+            return $consultas;
+
+        } catch (Exception $e) {
+            echo "Erro ao listar consultas: " . $e->getMessage();
+            return [];
+
+        }
+    }
+
     
 //     public function buscarTodasConsultas() {
 //         $consultaModel = new Consulta();

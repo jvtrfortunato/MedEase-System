@@ -35,6 +35,10 @@ function selecionarOpcao(elemento) {
 let medicamentos = [];
 
 function adicionarMedicamento() {
+    // Recupera o ID da prescrição da URL atual (se presente)
+    const urlParams = new URLSearchParams(window.location.search);
+    const idPrescricao = urlParams.get('prescricao_id');
+
     const principio = document.getElementById('principioAtivo');
     const concentracao = document.getElementById('concentracao');
     const forma = document.getElementById('forma');
@@ -75,17 +79,19 @@ function adicionarMedicamento() {
 
     // Criar objeto com os dados
     const medicamento = {
-        principioAtivo: principio.value.trim(),
+        id_medicamento: 0,
+        nome_medicamento: principio.value.trim(),
         concentracao: concentracao.value.trim(),
-        forma: forma.value.trim(),
-        via: via.value.trim(),
-        tipoReceita: tipoReceita.value.trim(),
-        intervalo: intervalo,
-        frequencia: frequencia,
-        turno: turno,
-        inicioTratamento: inicioTratamento.value.trim(),
-        duracao: duracao.value.trim(),
-        duracaoTipo: duracaoTipo.value.trim()
+        forma_farmaceutica: forma.value.trim(),
+        via_administracao: via.value.trim(),
+        tipo_receita: tipoReceita.value.trim(),
+        intervalo_dose: intervalo,
+        frequencia_dose: frequencia,
+        turno_dose: turno,
+        data_inicio: inicioTratamento.value.trim(),
+        quantidade_duracao: duracao.value.trim(),
+        tipo_duracao: duracaoTipo.value.trim(), 
+        id_prescricao: idPrescricao
     };
 
     medicamentos.push(medicamento);
@@ -149,6 +155,10 @@ document.getElementById('botaoSalvarPrescricao').addEventListener('click', () =>
     localStorage.setItem('medicamentosPrescricao', JSON.stringify(medicamentos));
     localStorage.setItem('recomendacoesPrescricao', recomendacoes);
 
+    // Recupera o ID da consulta da URL atual (se presente)
+    const urlParams = new URLSearchParams(window.location.search);
+    const consultaId = urlParams.get('consulta_id');
+
     // Redireciona com o parâmetro consulta_id
     if (consultaId) {
         window.location.href = `editar-prontuario.php?consulta_id=${consultaId}`;
@@ -171,18 +181,19 @@ document.getElementById('botaoVoltar').addEventListener('click', () => {
     }
 });
 
-//Restaura os dados quando voltar para prescricao.php
+//Restaura os dados quando voltar para editar-prescricao.php
 window.addEventListener('DOMContentLoaded', () => {
-    const dadosMedicamentos = localStorage.getItem('medicamentosSolicitados');
+    const dadosMedicamentos = localStorage.getItem('medicamentosPrescricao');
     const dadosRecomendacoes = localStorage.getItem('recomendacoesPrescricao');
 
     if (dadosMedicamentos) {
         medicamentos = JSON.parse(dadosMedicamentos);
-        console.log("Medicamentos carregados do banco:", medicamentos);
+        console.log("Medicamentos carregados do localStorage:", medicamentos);
         atualizarListaMedicamentos(); // já deve existir essa função no seu script
     }
 
     if (dadosRecomendacoes) {
+        console.log("Recomendações carregadas do localStorage:", dadosRecomendacoes);
         document.getElementById('recomendacoes').value = dadosRecomendacoes;
     }
 });

@@ -46,6 +46,7 @@
         <a href="login.php">sair</a>
     </header>
     <main>
+        <?php var_dump($_SESSION['usuario_tipo']); ?>
         <section class="conteudo-principal">
             <!-- ATENDIMENTOS PENDENTES -->
             <h1>Atendimentos pendentes - <?php echo $dataHoje; ?></h1>

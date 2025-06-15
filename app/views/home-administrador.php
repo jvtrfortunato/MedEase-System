@@ -60,7 +60,7 @@
                 </div>
 
                 <div class="card">
-                    <a href="#" target="">
+                    <a href="relatorios.php" target="">
                         <img src="../../assets/img/Health Graph.png" alt="Relatórios">
                         <p>Relatórios</p>
                     </a>

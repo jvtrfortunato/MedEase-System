@@ -2,7 +2,8 @@
 require_once '../controller/ProntuarioController.php';
 
 $controller = new ProntuarioController();
-$prontuarios = $controller->listarProntuarios($_GET['id_paciente']);
+$idPaciente = $_GET['id_paciente'];
+$prontuarios = $controller->listarProntuarios($idPaciente);
 ?>
 
 <!DOCTYPE html>
@@ -36,15 +37,18 @@ $prontuarios = $controller->listarProntuarios($_GET['id_paciente']);
                 </div>
                 
                 <!--Lista dinãmica de pacientes-->
-                <?php foreach ($prontuarios as $prontuario): ?>
+                <?php foreach ($prontuarios as $prontuario): ?> 
                     <div class="dados">
                         <div class="nome">
-                            <p><?= htmlspecialchars($prontuario->getDataCriacao()) ?></p>
+                            <p><?= htmlspecialchars(date("d/m/Y", strtotime($prontuario->getDataCriacao()))) ?></p>
                         </div>
                         <div class="cpf">
                             <p>Dr(a) <?= htmlspecialchars($prontuario->getNomeMedico()) ?></p>
                         </div>
-                        <a href="detalhes-prontuario.php?id_consulta=<?php echo $prontuario->getIdConsulta(); ?>" class="detalhes">
+                        <a href="detalhes-prontuario.php?
+                            id_consulta=<?php echo $prontuario->getIdConsulta(); ?>
+                            &id_paciente=<?php echo $prontuario->getIdPaciente(); ?>" 
+                            class="detalhes">
                             Abrir Prontuário
                         </a>
                     </div>
@@ -54,11 +58,21 @@ $prontuarios = $controller->listarProntuarios($_GET['id_paciente']);
 
         </section>
         <section class="botao">
-            <button class="voltar" onclick="history.back()">Voltar</button>
+            <button class="voltar" id="voltarPagina">Voltar</button>
         </section>
     </main>
     </main>
     <footer></footer>
-    <script></script>
+    <script>
+        //Função para voltar para atendimentos do dia
+        const voltarPagina = document.getElementById("voltarPagina");
+
+        if (voltarPagina) {
+            voltarPagina.addEventListener("click", () => {
+
+                window.location.href = "../../app/views/lista-prontuarios.php";
+            });
+        }
+    </script>
 </body>
 </html>
