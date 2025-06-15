@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $controller->salvarProntuario();
             break;
         case 'atualizarProntuario':
-            $controller->atualizarProntuario();
+            $controller->atualizarProntuario($_POST['id_prontuario']);
             break;
         case 'visualizarProntuario':
             $controller->visualizarProntuario($id);

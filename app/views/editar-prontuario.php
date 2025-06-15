@@ -1,3 +1,111 @@
+<?php
+
+    require_once '../controller/ProntuarioController.php';
+    require_once '../controller/PacienteController.php';
+    require_once '../controller/ConsultaController.php';
+
+    //Busca o prontuário
+    $prontuarioController = new ProntuarioController();
+    $prontuario = $prontuarioController->visualizarProntuario($_GET['consulta_id']);
+
+    //Conferir se existem exames solicitados
+    $examesBanco = [];
+    foreach ($prontuario->getExamesSolicitados() as $exame) {
+        $examesBanco[] = $exame;
+    }
+
+    // Transformar os exames em arrays associativos
+    $examesFormatados = array_map(function($exame) {
+        return [
+            'idExame' => $exame->getIdExame(),
+            'nomeExame' => $exame->getNomeExame(),
+            'idProntuario' => $exame->getIdProntuario()
+        ];
+    }, $examesBanco);
+
+    //Conferir se existem medicamentos solicitados
+    $medicamentosBanco = [];
+    foreach ($prontuario->getPrescricao()->getMedicamentos() as $medicamento) {
+        $medicamentosBanco[] = $medicamento;
+    }
+
+    $recomendacoesBanco = $prontuario->getPrescricao()->getRecomendacoes();
+    $idPrescricao = $prontuario->getPrescricao()->getIdPrescricao();
+    $idProntuario = $prontuario->getIdProntuario();
+
+    // Transforma os medicamentos em arrays associativos
+    $medicamentosFormatados = array_map(function($med) {
+        return [
+            'id_medicamento' => $med->getIdMedicamento(),
+            'nome_medicamento' => $med->getNomeMedicamento(),
+            'concentracao' => $med->getConcentracao(),
+            'forma_farmaceutica' => $med->getFormaFarmaceutica(),
+            'via_administracao' => $med->getViaAdministracao(),
+            'tipo_receita' => $med->getTipoReceita(),
+            'intervalo_dose' => $med->getIntervaloDose(),
+            'frequencia_dose' => $med->getFrequenciaDose(),
+            'turno_dose' => $med->getTurnoDose(),
+            'data_inicio' => $med->getDataInicio(),
+            'quantidade_duracao' => $med->getQuantidadeDuracao(),
+            'tipo_duracao' => $med->getTipoDuracao(),
+            'id_prescricao' => $med->getIdPrescricao()
+        ];
+    }, $medicamentosBanco);
+
+    //Conferir se existe atestado criado
+    $atestadoBanco = $prontuario->getDocumentacao()->getAtestado();
+
+    //Tranforma o objeto atestado em array associativo
+    $atestadoFormatado = [];
+
+    if ($atestadoBanco instanceof AtestadoAfastamento) {
+        $atestadoFormatado = [
+            'tipo' => 'afastamento',
+            'idAtestado' => $atestadoBanco->getIdAtestado(),
+            'cid10' => $atestadoBanco->getCid10(),
+            'textoPrincipal' => $atestadoBanco->getTextoPrincipal(),
+            'idDocumentacao' => $atestadoBanco->getIdDocumentacao(),
+            'diasAfastamento' => $atestadoBanco->getDiasAfastamento(),
+            'dataInicio' => $atestadoBanco->getDataInicio(),
+            'dataRetorno' => $atestadoBanco->getDataRetorno()
+        ];
+    } elseif ($atestadoBanco instanceof AtestadoAcompanhante) {
+        $atestadoFormatado = [
+            'tipo' => 'acompanhante',
+            'id_atestado' => $atestadoBanco->getIdAtestado(),
+            'cid10' => $atestadoBanco->getCid10(),
+            'textoPrincipal' => $atestadoBanco->getTextoPrincipal(),
+            'idDocumentacao' => $atestadoBanco->getIdDocumentacao(),
+            'nomeAcompanhante' => $atestadoBanco->getNomeAcompanhante(),
+            'cpfAcompanhante' => $atestadoBanco->getCpfAcompanhante(),
+            'parentescoAcompanhante' => $atestadoBanco->getParentescoAcompanhante(),
+            'data' => $atestadoBanco->getData(),
+            'horarioChegada' => $atestadoBanco->getHorarioChegada(),
+            'horarioSaida' => $atestadoBanco->getHorarioSaida()
+        ];
+    } elseif ($atestadoBanco instanceof AtestadoComparecimento) {
+        $atestadoFormatado = [
+            'tipo' => 'comparecimento',
+            'id_atestado' => $atestadoBanco->getIdAtestado(),
+            'cid10' => $atestadoBanco->getCid10(),
+            'textoPrincipal' => $atestadoBanco->getTextoPrincipal(),
+            'idDocumentacao' => $atestadoBanco->getIdDocumentacao(),
+            'data' => $atestadoBanco->getData(),
+            'horarioChegada' => $atestadoBanco->getHorarioChegada(),
+            'horarioSaida' => $atestadoBanco->getHorarioSaida()
+        ];
+    }
+
+    //Busca o id do paciente
+    $idPaciente = $prontuario->getIdPaciente();
+
+    //Busca o paciente
+    $pacienteController = new PacienteController();
+    $paciente = $pacienteController->buscarPacienteCompleto($idPaciente);
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -8,56 +116,6 @@
     <link rel="stylesheet" href="../../assets/css/prontuario.css">
 </head>
 <body>
-    <?php
-
-        require_once '../controller/ProntuarioController.php';
-        require_once '../controller/PacienteController.php';
-        require_once '../controller/ConsultaController.php';
-
-        //Busca o prontuário
-        $prontuarioController = new ProntuarioController();
-        $prontuario = $prontuarioController->visualizarProntuario($_GET['consulta_id']);
-
-        //Conferir se existem exames solicitados
-        $examesBanco = [];
-        foreach ($prontuario->getExamesSolicitados() as $exame) {
-            $examesBanco[] = $exame->getNomeExame();
-        }
-
-        //Conferir se existem medicamentos solicitados
-        $medicamentosBanco = [];
-        foreach ($prontuario->getPrescricao()->getMedicamentos() as $medicamento) {
-            $medicamentosBanco[] = $medicamento;
-        }
-
-        // Transforma os objetos em arrays associativos
-        $medicamentosFormatados = array_map(function($med) {
-            return [
-                'id_medicamento ' => $med->getIdMedicamento(),
-                'nome_medicamento' => $med->getNomeMedicamento(),
-                'concentracao' => $med->getConcentracao(),
-                'forma_farmaceutica' => $med->getFormaFarmaceutica(),
-                'via_administracao' => $med->getViaAdministracao(),
-                'tipo_receita' => $med->getTipoReceita(),
-                'intervalo_dose' => $med->getIntervaloDose(),
-                'frequencia_dose' => $med->getFrequenciaDose(),
-                'turno_dose' => $med->getTurnoDose(),
-                'data_inicio' => $med->getDataInicio(),
-                'quantidade_duracao' => $med->getQuantidadeDuracao(),
-                'tipo_duracao' => $med->getTipoDuracao(),
-                'id_prescricao ' => $med->getIdPrescricao()
-            ];
-        }, $medicamentosBanco);
-
-        //Busca o id do paciente
-        $idPaciente = $prontuario->getIdPaciente();
-        
-        //Busca o paciente
-        $pacienteController = new PacienteController();
-        $paciente = $pacienteController->buscarPacienteCompleto($idPaciente);
-
-
-    ?>
 
     <header>
         <a class="logo" href="">MedEase</a>    
@@ -86,7 +144,7 @@
                         <div class="div-medios">
                             <div class="input-medio">
                                 <p class="label">Data de Nascimento</p>
-                                <div class="input-estilizacao-padrao"> <?= $paciente ? htmlspecialchars($paciente->getDataNascimento()) : '' ?></div>
+                                <div class="input-estilizacao-padrao"> <?= $paciente ? htmlspecialchars(date("d/m/Y", strtotime($paciente->getDataNascimento()))) : '' ?></div>
                             </div>
                             <div class="input-medio">
                                 <p class="label">Sexo</p>
@@ -383,9 +441,9 @@
                     <ul id="lista-exames"></ul>
                     <div class="botao-solicitar-criar">
                         <?php if (!empty($examesBanco)) : ?>
-                            <button type='button' id="botao-exame" onclick="window.location.href='editar-exames-solicitados.php?consulta_id=<?php echo $prontuario->getIdConsulta(); ?>'">Editar exames</button>
+                            <button type='button' id="botao-exame" onclick="window.location.href='editar-exames-solicitados.php?consulta_id=<?php echo $prontuario->getIdConsulta(); ?>&prontuario_id=<?php echo $idProntuario ?>'">Editar exames</button>
                         <?php else : ?>
-                            <button type='button' id="botao-exame" onclick="window.location.href='editar-exames-solicitados.php?consulta_id=<?php echo $prontuario->getIdConsulta(); ?>'">Solicitar exames</button>
+                            <button type='button' id="botao-exame" onclick="window.location.href='editar-exames-solicitados.php?consulta_id=<?php echo $prontuario->getIdConsulta(); ?>&prontuario_id=<?php echo $idProntuario ?>'">Solicitar exames</button>
                         <?php endif; ?>
                     </div>                   
                 </section>
@@ -400,9 +458,9 @@
                     <ul id="medicamentosPrescricao"></ul>
                     <div class="botao-solicitar-criar">
                         <?php if (!empty($medicamentosBanco)) : ?>
-                            <button type='button' id="botaoPrescricao" onclick="window.location.href='editar-prescricao.php?consulta_id=<?php echo $prontuario->getIdConsulta(); ?>'">Editar prescrição</button>
+                            <button type='button' id="botaoPrescricao" onclick="window.location.href='editar-prescricao.php?consulta_id=<?php echo $prontuario->getIdConsulta(); ?>&prescricao_id=<?php echo $idPrescricao ?>'">Editar prescrição</button>
                         <?php else : ?>
-                            <button type='button' id="botaoPrescricao" onclick="window.location.href='editar-prescricao.php?consulta_id=<?php echo $prontuario->getIdConsulta(); ?>'">Criar prescrição</button>
+                            <button type='button' id="botaoPrescricao" onclick="window.location.href='editar-prescricao.php?consulta_id=<?php echo $prontuario->getIdConsulta(); ?>&prescricao_id=<?php echo $idPrescricao ?>'">Criar prescrição</button>
                         <?php endif; ?>
                     </div>                   
                 </section>
@@ -469,7 +527,7 @@
 
                     <ul id="atestados"></ul>
                     <div class="botao-solicitar-criar">
-                        <button id="botaoAtestado" type="button" onclick="window.location.href='criar-atestado.php'">Criar atestado</button>
+                        <button id="botaoAtestado" type="button" onclick="window.location.href='editar-atestado.php?consulta_id=<?php echo $prontuario->getIdConsulta(); ?>'">Criar atestado</button>
                     </div>
 
                 </section>
@@ -498,6 +556,10 @@
                 <input type="hidden" name="examesJSON" id="examesJSON">
                 <input type="hidden" name="medicamentosJSON" id="medicamentosJSON">
                 <input type="hidden" name="recomendacoesJSON" id="recomendacoesJSON">
+                
+                <input type="hidden" name="id_prontuario" value="<?php echo $prontuario->getIdProntuario() ?>">
+                <input type="hidden" name="id_prescricao" value="<?php echo $prontuario->getPrescricao()->getIdPrescricao() ?>">
+                <input type="hidden" name="id_documentacao" value="<?php echo $prontuario->getDocumentacao()->getIdDocumentacao() ?>">
 
                 <div class="finalizar-consulta">
                     <button type="button" class="vermelho" id="voltarPagina">Voltar</button>
@@ -512,19 +574,52 @@
 
     <footer></footer>
     
-    <script src="../../assets/script/editar-prontuario.js"></script>
     <script>
+
+    document.addEventListener('DOMContentLoaded', function () {
         // Só envia os dados do banco se não houver exames no localStorage
-        if (!localStorage.getItem('examesSolicitados')) {
-            const examesDoBanco = <?= json_encode($examesBanco) ?>;
+        const examesLocalStorage = JSON.parse(localStorage.getItem('examesSolicitados'));
+
+        if (!examesLocalStorage) {
+            const examesDoBanco = <?= json_encode($examesFormatados) ?>;
+            console.log("Exames carregados do banco:", examesDoBanco);
             localStorage.setItem('examesSolicitados', JSON.stringify(examesDoBanco));
+        } else {
+            console.log("Exames carregados do localStorage:", examesLocalStorage);
         }
 
-        const medicamentosDoBanco = <?= json_encode($medicamentosFormatados, JSON_UNESCAPED_UNICODE) ?>;
-        console.log("Medicamentos carregados do banco:", medicamentosDoBanco);
-        localStorage.setItem('medicamentosSolicitados', JSON.stringify(medicamentosDoBanco));
+        // Só envia os dados do banco se não houver medicamentos no localStorage
+        if (!localStorage.getItem('medicamentosPrescricao')) {
+            const medicamentosDoBanco = <?= json_encode($medicamentosFormatados, JSON_UNESCAPED_UNICODE) ?>;
+            const recomendacoesDoBanco = <?= json_encode($recomendacoesBanco, JSON_UNESCAPED_UNICODE | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;
 
+            console.log("Medicamentos carregados do banco:", medicamentosDoBanco);
+            console.log("Recomendações carregadas do banco:", recomendacoesDoBanco);
+
+            localStorage.setItem('medicamentosPrescricao', JSON.stringify(medicamentosDoBanco));
+            localStorage.setItem('recomendacoesPrescricao', recomendacoesDoBanco);
+        } else {
+            const medicamentos = JSON.parse(localStorage.getItem('medicamentosPrescricao')) || [];
+            const recomendacoes = localStorage.getItem('recomendacoesPrescricao') || '';
+
+            console.log("Medicamentos carregados do js:", medicamentos);
+            console.log("Recomendações carregadas do js:", recomendacoes);
+        }
+
+        // Só envia os dados do banco se não houver atestado no localStorage
+        const atestadoStr = localStorage.getItem('atestado');
+        if (!atestadoStr) {
+            const atestadoDoBanco = <?= json_encode($atestadoFormatado, JSON_UNESCAPED_UNICODE) ?>;
+            console.log("Atestado carregado do banco:", atestadoDoBanco);
+            localStorage.setItem('atestado', JSON.stringify(atestadoDoBanco));
+        } else {
+            const atestadoLocalStorage = JSON.parse(atestadoStr);
+            console.log("Atestado carregado do localStorage:", atestadoLocalStorage);
+        }
+    });
     </script>
+    
+    <script src="../../assets/script/editar-prontuario.js"></script>
     
 </body>
 </html>

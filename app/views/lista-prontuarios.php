@@ -53,9 +53,20 @@ $pacientes = $controller->listarPacientes();
 
         </section>
         <section class="botao">
-            <button class="voltar" onclick="history.back()">Voltar</button>
+            <button class="voltar" id="voltarPagina">Voltar</button>
         </section>
     </main>
     <footer></footer>
+    <script>
+        //Função para voltar para atendimentos do dia
+        const voltarPagina = document.getElementById("voltarPagina");
+
+        if (voltarPagina) {
+            voltarPagina.addEventListener("click", () => {
+
+                window.location.href = "../../app/views/home-medico.php";
+            });
+        }
+    </script>
 </body>
 </html>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criar Atestado</title>
+    <title>Atestado</title>
     <link rel="stylesheet" href="../../assets/css/header.css">
     <link rel="stylesheet" href="../../assets/css/criar-atestado.css">
 </head>
@@ -141,7 +141,7 @@
                 </div>
 
                 <div class="botoes">
-                    <button type="button" class="vermelho" onclick="window.location.href='prontuario.php'">Voltar</button>
+                    <button type="button" class="vermelho" id="botaoVoltar">Voltar</button>
                     <button class="verde">Salvar</button>
                 </div>
             </form>
@@ -149,6 +149,6 @@
         </section>
     </main>
     <footer></footer>
-    <script src="../../assets/script/criar-atestado.js"></script>
+    <script src="../../assets/script/editar-atestado.js"></script>
 </body>
 </html>

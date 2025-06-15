@@ -25,28 +25,28 @@
                         <!--Princípioativo-->
                         <div class="label-input">
                             <label for="medicamento">Princípio ativo / Medicamento <span class="azul">*</span></label>
-                            <input type="text" name="medicamento" id="principioAtivo" required>
+                            <input type="text" name="medicamento" id="principioAtivo">
                         </div>
                         <!--Concentração até Forma farmaceutica-->
                         <div class="concentracao-forma">
                             <div class="label-input-media">
                                 <label for="concentracao">Concentração <span class="azul">*</span></label>
-                                <input type="text" name="concentracao" id="concentracao" required>
+                                <input type="text" name="concentracao" id="concentracao">
                             </div>
                             <div class="label-input-media">
                                 <label for="forma">Forma farmaceutica <span class="azul">*</span></label>
-                                <input type="text" name="forma" id="forma" required>
+                                <input type="text" name="forma" id="forma">
                             </div>
                         </div>
                         <!--Via de administração até Tipo de receita-->
                         <div class="via-tipo">
                             <div class="label-input-media">
                                 <label for="via">Via de administração <strong class="azul">*</strong></label>
-                                <input type="text" name="via" id="via" required>
+                                <input type="text" name="via" id="via">
                             </div>
                             <div class="label-input-media">
                                 <label for="receita">Tipo de receita <span class="azul">*</span></label>
-                                <select name="receita" id="tipoReceita" required>
+                                <select name="receita" id="tipoReceita">
                                     <option value="">Selecione</option>
                                     <option value="simples">Simples</option>
                                     <option value="controle">Controle especial</option>
@@ -65,7 +65,7 @@
                             <div class="dose-uso">
                                 <div class="dose-esquerda">
                                     <label for="dose">Dose <strong class="azul">*</strong></label>
-                                    <input type="text" name="dose" id="dose" required>
+                                    <input type="text" name="dose" id="dose">
                                 </div>
                                 <div class="dose-direita">
                                     <div class="toggle-div">
@@ -123,12 +123,12 @@
                         <div class="inicio-duracao">
                             <div class="inicio">
                                 <label for="data">Início <span class="azul">*</span></label>
-                                <input type="date" name="data" id="inicioTratamento" required>
+                                <input type="date" name="data" id="inicioTratamento">
                             </div>
                             <div class="duracao">
                                 <label for="">Duração <span class="azul">*</span></label>
                                 <div class="duracao-input">
-                                    <input type="number" id="duracao" required>
+                                    <input type="number" id="duracao">
                                     <select name="" id="duracaoTipo">
                                         <option value="Dia(s)">Dia(s)</option>
                                         <option value="Mes(es)">Mes(es)</option>
@@ -146,7 +146,7 @@
                         <button class="vermelho" type="button" id="botaoVoltar">Voltar</button>
                         <div class="botoes-direita">
                             <button type="button" class="vermelho" onclick="limparCampos()">Limpar campos</button>
-                            <button class="verde" id="botaoSalvarPrescricao" type="submit">Salvar</button>
+                            <button class="verde" id="botaoSalvarPrescricao" type="button">Salvar</button>
                         </div>
                         </div>
                     </form>

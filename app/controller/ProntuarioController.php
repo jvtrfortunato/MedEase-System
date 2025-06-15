@@ -194,7 +194,8 @@ class ProntuarioController {
                 observacoesAdicionais: $_POST['obsMedicas'],
                 idPaciente: $_SESSION['paciente_id'],
                 idMedico: $_SESSION['medico_id'],
-                idConsulta: $_SESSION['consulta_id']
+                idConsulta: $_SESSION['consulta_id'],
+                nomeMedico: null
             );
             
             $stmt = $this->conn->prepare("
@@ -786,7 +787,8 @@ class ProntuarioController {
                 $dataProntuario['observacoes_adicionais'],
                 $dataProntuario['id_paciente'],
                 $dataProntuario['id_medico'],
-                $dataProntuario['id_consulta']
+                $dataProntuario['id_consulta'],
+                null
             );
 
             $prescricao->setMedicamentos($listaMedicamentos);
@@ -807,10 +809,524 @@ class ProntuarioController {
         }
     }
 
-    public function atualizarProntuario() {
+    public function atualizarProntuario(int $idProntuario) {
         try {
+            // Converter JSON para objetos Medicamento
+            $listaMedicamentos = [];
 
+            if (!empty($_POST['medicamentosJSON'])) {
+                $medicamentosArray = json_decode($_POST['medicamentosJSON'], true);
 
+                if (is_array($medicamentosArray)) {
+                    foreach ($medicamentosArray as $med) {
+                        $medicamento = new Medicamento(
+                            idMedicamento: $med['id_medicamento'],
+                            nomeMedicamento: $med['nome_medicamento'] ?? '',
+                            concentracao: $med['concentracao'] ?? '',
+                            formaFarmaceutica: $med['forma_farmaceutica'] ?? '',
+                            viaAdministracao: $med['via_administracao'] ?? '',
+                            tipoReceita: $med['tipo_receita'] ?? '',
+                            intervaloDose: $med['intervalo_dose'] ?? '',
+                            frequenciaDose: $med['frequencia_dose'] ?? '',
+                            turnoDose: $med['turno_dose'] ?? '',
+                            dataInicio: $med['data_inicio'] ?? '',
+                            quantidadeDuracao: $med['quantidade_duracao'] ?? '',
+                            tipoDuracao: $med['tipo_duracao'] ?? '',
+                            idPrescricao: $med['id_prescricao']
+                        );
+                        $listaMedicamentos[] = $medicamento;
+                    }
+                }
+            }
+
+            //Transformar o examesJson em objetos
+            $listaExames = [];
+            if(isset($_POST['examesJSON'])) {
+                $examesArray = json_decode($_POST['examesJSON'], true);
+
+                foreach ($examesArray as $ex) {
+                    $exame = new Exame(
+                        idExame: $ex['idExame'],
+                        nomeExame: $ex['nomeExame'],
+                        idProntuario: $ex['idProntuario']
+                    );
+                    $listaExames[] = $exame;
+                }
+            }
+             
+            //Converter as recomendações da prescrição
+            $recomendacoes = isset($_POST['recomendacoesJSON']) ? $_POST['recomendacoesJSON'] : null;
+
+            //Converter o atestado
+            $atestadoObj = null;
+
+            if (isset($_POST['atestadoJSON'])) {
+                $atestadoData = json_decode($_POST['atestadoJSON'], true);
+
+                if (isset($atestadoData['tipo'])) {
+                    switch ($atestadoData['tipo']) {
+                        case 'afastamento':
+                            $atestadoObj = new AtestadoAfastamento(
+                                idAtestado: $atestadoData['idAtestado'],
+                                cid10: $atestadoData['cid10'],
+                                textoPrincipal: $atestadoData['textoPrincipal'],
+                                idDocumentacao: $atestadoData['idDocumentacao'],
+                                diasAfastamento: $atestadoData['diasAfastamento'],
+                                dataInicio: $atestadoData['dataInicio'],
+                                dataRetorno: $atestadoData['dataRetorno']                                                              
+                            );
+                            break;
+
+                        case 'comparecimento':
+                            $atestadoObj = new AtestadoComparecimento(
+                                idAtestado: $atestadoData['idAtestado'],
+                                cid10: $atestadoData['cid10'],
+                                textoPrincipal: $atestadoData['textoPrincipal'],
+                                idDocumentacao: $atestadoData['idDocumentacao'],
+                                data: $atestadoData['data'],
+                                horarioChegada: $atestadoData['horarioChegada'],
+                                horarioSaida: $atestadoData['horarioSaida']
+                            );
+                            break;
+
+                        case 'acompanhante':
+                            $atestadoObj = new AtestadoAcompanhante(
+                                idAtestado: $atestadoData['id_atestado'],
+                                cid10: $atestadoData['cid10'],
+                                textoPrincipal: $atestadoData['textoPrincipal'],
+                                idDocumentacao: $atestadoData['idDocumentacao'],
+                                nomeAcompanhante: $atestadoData['nomeAcompanhante'],
+                                cpfAcompanhante: $atestadoData['cpfAcompanhante'],
+                                parentescoAcompanhante: $atestadoData['parentescoAcompanhante'],
+                                data: $atestadoData['data'], 
+                                horarioChegada: $atestadoData['horarioChegada'],
+                                horarioSaida: $atestadoData['horarioSaida']
+                            );
+                            break;
+
+                        default:
+                            throw new Exception("Tipo de atestado desconhecido: " . $atestadoData['tipo']);
+                    }
+                }
+            }
+
+            //Salvar o objeto prontuario
+            $prontuario = new Prontuario(
+                idProntuario: $_POST['id_prontuario'],
+                dataCriacao: $_SESSION['data_criacao'],
+                historicoMedico: new HistoricoMedico(
+                    $_POST['doencasPreExistentes'],
+                    $_POST['medicacoesUsoContinuo'],
+                    $_POST['cirurgiasAnteriores'],
+                    $_POST['alergias'],
+                    $_POST['doencasFamilia'],
+                    $_POST['id_prontuario'] //AQUI ESTÁ O ID QUE VEIO DO FORM
+                ),
+                anamnese: new Anamnese(
+                    $_SESSION['consulta_motivo'],
+                    $_POST['queixa'],
+                    $_POST['doencaAtual'],
+                    $_POST['historiaSocial'],
+                    $_POST['ginecoObstetrica'],
+                    $_POST['revisaoSistemas'],
+                    $_POST['fatoresAgravantes'],
+                    $_POST['atenuantes'],
+                    $_POST['tratamentosPrevios'],
+                    $_POST['respostaTratamentosPrevios'],
+                    $_POST['id_prontuario']
+                ),
+                exameFisico: new ExameFisico(
+                    $_POST['avaliacaoGeral'],
+                    $_POST['sinaisVitais'],
+                    $_POST['examePele'],
+                    $_POST['exameCabeca'],
+                    $_POST['exameCardio'],
+                    $_POST['exameRespiratorio'],
+                    $_POST['exameAbdominal'],
+                    $_POST['exameNeuro'],
+                    $_POST['exameLocomotor'],
+                    $_POST['id_prontuario']
+                ),
+                diagnosticoPresuntivo: $_POST['diagPresuntivo'],
+                diagnosticoDiferencial: $_POST['diagDiferencial'],
+                diagnosticoDefinitivo: $_POST['diagDefinitivo'],
+                cid10: $_POST['cid10'],
+                examesSolicitados: $listaExames,
+                prescricao: new Prescricao(
+                    $_POST['id_prescricao'],
+                    $listaMedicamentos, //MEDICAMENTOS
+                    $recomendacoes, //RECOMENDAÇÕES
+                    $_POST['id_prontuario']
+                ),
+                evolucao: $_POST['evolucao'],
+                internacao: new Internacao(
+                    $_POST['dataAdmissaoAlta'],
+                    $_POST['diagInternacao'],
+                    $_POST['cirurgiasInternacao'],
+                    $_POST['medicosInternacao'],
+                    $_POST['id_prontuario']
+                ),
+                documentacao: new Documentacao(
+                    $_POST['id_documentacao'],
+                    $_POST['termosConsentimento'],
+                    $atestadoObj,
+                    $_POST['declaracoesSaude'],
+                    $_POST['id_prontuario']
+                ),
+                doencasNotificacaoObrigatoria: $_POST['notificacoesObrigatorias'],
+                observacoesAdicionais: $_POST['obsMedicas'],
+                idPaciente: $_SESSION['paciente_id'],
+                idMedico: $_SESSION['medico_id'],
+                idConsulta: $_SESSION['consulta_id'],
+                nomeMedico: null
+            );
+
+            //CONSULTA SQL
+            $stmt = $this->conn->prepare("
+                UPDATE prontuarios SET
+                    data_criacao = ?,
+                    diagnostico_presuntivo = ?,
+                    diagnostico_diferencial = ?,
+                    diagnostico_definitivo = ?,
+                    cid10 = ?,
+                    evolucao = ?,
+                    doencas_notificacao_obrigatoria = ?,
+                    observacoes_adicionais = ?
+                WHERE id_prontuario = ?
+            ");
+
+            $stmt->execute([
+                $prontuario->getDataCriacao(),
+                $prontuario->getDiagnosticoPresuntivo(),
+                $prontuario->getDiagnosticoDiferencial(),
+                $prontuario->getDiagnosticoDefinitivo(),
+                $prontuario->getCid10(),
+                $prontuario->getEvolucao(),
+                $prontuario->getDoencasNotificacaoObrigatoria(),
+                $prontuario->getObservacoesAdicionais(),
+                $prontuario->getIdProntuario() // <- aqui entra o ID do prontuário para o WHERE
+            ]);
+
+            $stmt = $this->conn->prepare("
+                UPDATE historicos_medicos SET
+                    doencas_preexistentes = ?,
+                    medicacoes_uso_continuo = ?,
+                    cirurgias_anteriores = ?,
+                    alergias_medicamentos = ?,
+                    historico_doencas_familia = ?
+                WHERE id_prontuario = ?
+            ");
+
+            $stmt->execute([
+                $prontuario->getHistoricoMedico()->getDoencasPreexistentes(),
+                $prontuario->getHistoricoMedico()->getMedicacoesUsoContinuo(),
+                $prontuario->getHistoricoMedico()->getCirurgiasAnteriores(),
+                $prontuario->getHistoricoMedico()->getAlergiasMedicamentos(),
+                $prontuario->getHistoricoMedico()->getHistoricoDoencasFamilia(),
+                $prontuario->getIdProntuario()
+            ]);
+
+            //Salvar a Anamnese
+            $stmt = $this->conn->prepare("
+                UPDATE anamneses SET 
+                    motivo_consulta = ?,
+                    queixa_duracao = ?,
+                    historia_doenca_atual = ?,
+                    historia_social = ?,
+                    historia_gineco_obstetrica = ?,
+                    revisao_sistemas = ?,
+                    fatores_agravantes = ?,
+                    atenuantes = ?,
+                    tratamentos_previos = ?,
+                    resposta_tratamentos_previos = ?
+                WHERE id_prontuario = ?
+            ");
+            $stmt->execute([
+                $prontuario->getAnamnese()->getMotivoConsulta(),
+                $prontuario->getAnamnese()->getQueixaDuracao(),
+                $prontuario->getAnamnese()->getHistoriaDoencaAtual(),
+                $prontuario->getAnamnese()->getHistoriaSocial(),
+                $prontuario->getAnamnese()->getHistoriaGinecoObstetrica(),
+                $prontuario->getAnamnese()->getRevisaoSistemas(),
+                $prontuario->getAnamnese()->getFatoresAgravantes(),
+                $prontuario->getAnamnese()->getAtenuantes(),
+                $prontuario->getAnamnese()->getTratamentosPrevios(),
+                $prontuario->getAnamnese()->getRespostaTratamentosPrevios(),
+                $prontuario->getIdProntuario()
+            ]);
+
+            //Salvar o Exame Físico
+            $stmt = $this->conn->prepare("
+                UPDATE exames_fisicos SET 
+                    avaliacao_geral = ?,
+                    sinais_vitais = ?,
+                    exame_pele_anexos = ?,
+                    exame_cabeca_pescoco = ?,
+                    exame_cardiovascular = ?,
+                    exame_respiratorio = ?,
+                    exame_abdominal = ?,
+                    exame_neurologico = ?,
+                    exame_aparelho_locomotor = ?
+                WHERE id_prontuario = ?
+            ");
+            $stmt->execute([
+                $prontuario->getExameFisico()->getAvaliacaoGeral(),
+                $prontuario->getExameFisico()->getSinaisVitais(),
+                $prontuario->getExameFisico()->getExamePeleAnexos(),
+                $prontuario->getExameFisico()->getExameCabecaPescoco(),
+                $prontuario->getExameFisico()->getExameCardiovascular(),
+                $prontuario->getExameFisico()->getExameRespiratorio(),
+                $prontuario->getExameFisico()->getExameAbdominal(),
+                $prontuario->getExameFisico()->getExameNeurologico(),
+                $prontuario->getExameFisico()->getExameAparelhoLocomotor(),
+                $prontuario->getIdProntuario()
+            ]);
+
+            //salvar a lista com o nome dos exames solicitados
+            // Atualiza os exames existentes
+            foreach ($listaExames as $exame) {
+                $stmt = $this->conn->prepare("
+                    UPDATE exames SET 
+                        nome = ?
+                    WHERE id_exame = ?
+                ");
+                $stmt->execute([
+                    $exame->getNomeExame(),
+                    $exame->getIdExame()
+                ]);
+            }
+
+            // Remove exames que não estão mais na lista
+            $idsParaManter = array_map(function($exame) {
+                return $exame->getIdExame();
+            }, $listaExames);
+
+            // Se houver exames para manter, exclui os demais
+            if (!empty($idsParaManter)) {
+                $placeholders = implode(',', array_fill(0, count($idsParaManter), '?'));
+                $sql = "
+                    DELETE FROM exames 
+                    WHERE id_prontuario = ? 
+                    AND id_exame NOT IN ($placeholders)
+                ";
+
+                // Junta o ID do prontuário com os IDs a manter
+                $params = array_merge([$prontuario->getIdProntuario()], $idsParaManter);
+                $stmt = $this->conn->prepare($sql);
+                $stmt->execute($params);
+            } else {
+                // Se a lista está vazia, remove todos os exames do prontuário
+                $stmt = $this->conn->prepare("DELETE FROM exames WHERE id_prontuario = ?");
+                $stmt->execute([$prontuario->getIdProntuario()]);
+            }
+
+            //Salvar a prescricao
+            $stmt = $this->conn->prepare("
+                UPDATE prescricoes SET 
+                    recomendacoes = ?
+                WHERE id_prontuario = ?
+            ");
+            $stmt->execute([
+                $prontuario->getPrescricao()->getRecomendacoes(),
+                $prontuario->getIdProntuario()
+            ]);
+
+            //Salvar a lista de medicamentos da prescricao
+            // Atualiza os medicamentos existentes da prescrição
+            foreach ($listaMedicamentos as $medicamento) {
+                $stmt = $this->conn->prepare("
+                    UPDATE medicamentos SET
+                        nome_medicamento = ?,
+                        concentracao = ?,
+                        forma_farmaceutica = ?,
+                        via_administracao = ?,
+                        tipo_receita = ?,
+                        intervalo_dose = ?,
+                        frequencia_dose = ?,
+                        turno_dose = ?,
+                        data_inicio = ?,
+                        quantidade_duracao = ?,
+                        tipo_duracao = ?
+                    WHERE id_medicamento = ?
+                ");
+
+                $stmt->execute([
+                    $medicamento->getNomeMedicamento(),
+                    $medicamento->getConcentracao(),
+                    $medicamento->getFormaFarmaceutica(),
+                    $medicamento->getViaAdministracao(),
+                    $medicamento->getTipoReceita(),
+                    $medicamento->getIntervaloDose(),
+                    $medicamento->getFrequenciaDose(),
+                    $medicamento->getTurnoDose(),
+                    $medicamento->getDataInicio(),
+                    $medicamento->getQuantidadeDuracao(),
+                    $medicamento->getTipoDuracao(),
+                    $medicamento->getIdMedicamento()
+                ]);
+            }
+
+            // Excluir medicamentos que não estão mais na lista
+            $idsParaManter = array_map(function($medicamento) {
+                return $medicamento->getIdMedicamento();
+            }, $listaMedicamentos);
+
+            // Se houver medicamentos para manter
+            if (!empty($idsParaManter)) {
+                $placeholders = implode(',', array_fill(0, count($idsParaManter), '?'));
+
+                $sql = "
+                    DELETE FROM medicamentos 
+                    WHERE id_prescricao = ? 
+                    AND id_medicamento NOT IN ($placeholders)
+                ";
+
+                $params = array_merge([$prontuario->getPrescricao()->getIdPrescricao()], $idsParaManter);
+
+                $stmt = $this->conn->prepare($sql);
+                $stmt->execute($params);
+            } else {
+                // Remove todos os medicamentos da prescrição, se a lista estiver vazia
+                $stmt = $this->conn->prepare("DELETE FROM medicamentos WHERE id_prescricao = ?");
+                $stmt->execute([$prontuario->getPrescricao()->getIdPrescricao()]);
+            }
+
+            //Salvar internações
+            $stmt = $this->conn->prepare("
+                UPDATE internacoes SET
+                    data_admissao_e_alta = ?,
+                    diagnostico_internacao = ?,
+                    procedimentos_cirurgicos = ?,
+                    medicos_responsaveis = ?
+                WHERE id_prontuario = ?
+            ");
+            $stmt->execute([
+                $prontuario->getInternacao()->getDataAdmissaoEAlta(),
+                $prontuario->getInternacao()->getDiagnosticoInternacao(),
+                $prontuario->getInternacao()->getProcedimentosCirurgicos(),
+                $prontuario->getInternacao()->getMedicosResponsaveis(),
+                $prontuario->getIdProntuario()
+            ]);
+
+            //Salvar documentação
+            $stmt = $this->conn->prepare("
+                UPDATE documentacoes SET
+                    termos_consentimento = ?,
+                    declaracao_saude = ?
+                WHERE id_prontuario = ?
+            ");
+            $stmt->execute([
+                $prontuario->getDocumentacao()->getTermosConsentimento(),
+                $prontuario->getDocumentacao()->getDeclaracoesSaude(),
+                $prontuario->getIdProntuario()
+            ]);
+
+            // Obtem o atestado
+            $atestado = $prontuario->getDocumentacao()->getAtestado();
+            
+            // Se não há atestado, pula toda a lógica de salvamento
+            if ($atestado !== null) {
+
+                $tipo = ''; // Vamos definir o tipo com base na classe
+
+                if ($atestado instanceof AtestadoAcompanhante) {
+                    $tipo = 'acompanhante';
+                } elseif ($atestado instanceof AtestadoAfastamento) {
+                    $tipo = 'afastamento';
+                } elseif ($atestado instanceof AtestadoComparecimento) {
+                    $tipo = 'comparecimento';
+                }
+
+                // Atualiza os dados do atestado (tabela principal)
+                $stmt = $this->conn->prepare("
+                    UPDATE atestados SET
+                        cid10 = ?,
+                        texto_principal = ?
+                    WHERE id_atestado = ?
+                ");
+                $stmt->execute([
+                    $atestado->getCid10(),
+                    $atestado->getTextoPrincipal(),
+                    $atestado->getIdAtestado()
+                ]);
+
+                // Limpeza de tipos antigos que não correspondem ao tipo atual
+                if ($tipo === 'acompanhante') {
+                    $this->conn->prepare("DELETE FROM atestados_afastamento WHERE id_atestado = ?")->execute([$atestado->getIdAtestado()]);
+                    $this->conn->prepare("DELETE FROM atestados_comparecimento WHERE id_atestado = ?")->execute([$atestado->getIdAtestado()]);
+                }
+
+                if ($tipo === 'afastamento') {
+                    $this->conn->prepare("DELETE FROM atestados_acompanhante WHERE id_atestado = ?")->execute([$atestado->getIdAtestado()]);
+                    $this->conn->prepare("DELETE FROM atestados_comparecimento WHERE id_atestado = ?")->execute([$atestado->getIdAtestado()]);
+                }
+
+                if ($tipo === 'comparecimento') {
+                    $this->conn->prepare("DELETE FROM atestados_acompanhante WHERE id_atestado = ?")->execute([$atestado->getIdAtestado()]);
+                    $this->conn->prepare("DELETE FROM atestados_afastamento WHERE id_atestado = ?")->execute([$atestado->getIdAtestado()]);
+                }
+
+                //Salvar o atestado acompanhante
+                if ($tipo === 'acompanhante') {
+                    $stmt = $this->conn->prepare("
+                        UPDATE atestados_acompanhante SET
+                            nome_acompanhante = ?,
+                            cpf_acompanhante = ?,
+                            parentesco_acompanhante = ?,
+                            data = ?,
+                            horario_chegada = ?,
+                            horario_saida = ?
+                        WHERE id_atestado = ?
+                    ");
+                    $stmt->execute([
+                        $atestado->getNomeAcompanhante(),
+                        $atestado->getCpfAcompanhante(),
+                        $atestado->getParentescoAcompanhante(),
+                        $atestado->getData(),
+                        $atestado->getHorarioChegada(),
+                        $atestado->getHorarioSaida(),
+                        $atestado->getIdAtestado()
+                    ]);
+                }
+
+                //Salvar o atestado afastamento
+                if ($tipo === 'afastamento') {
+                    $stmt = $this->conn->prepare("
+                        UPDATE atestados_afastamento SET
+                            dias_afastamento = ?,
+                            data_inicio = ?,
+                            data_retorno = ?
+                        WHERE id_atestado = ?
+                    ");
+                    $stmt->execute([
+                        $atestado->getDiasAfastamento(),
+                        $atestado->getDataInicio(),
+                        $atestado->getDataRetorno(),
+                        $atestado->getIdAtestado()
+                    ]);
+                }
+
+                //Salvar o atestado comparecimento
+                if ($tipo === 'comparecimento') {
+                    $stmt = $this->conn->prepare("
+                        UPDATE atestados_comparecimento SET
+                            data = ?,
+                            horario_chegada = ?,
+                            horario_saida = ?
+                        WHERE id_atestado = ?
+                    ");
+                    $stmt->execute([
+                        $atestado->getData(),
+                        $atestado->getHorarioChegada(),
+                        $atestado->getHorarioSaida(),
+                        $atestado->getIdAtestado()
+                    ]);
+                }
+            }
+
+            // Redireciona para a tela dos atendimentos do dia
+            header("Location: ../views/atendimentos-dia.php");
+            exit;
 
         } catch (Exception $e) {
             echo "Erro ao atualizar o prontuário: " . $e->getMessage();
