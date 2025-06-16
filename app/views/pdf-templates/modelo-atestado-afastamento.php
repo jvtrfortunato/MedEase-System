@@ -18,13 +18,13 @@
     </style>
 </head>
 <body>
-    <h1>Atestado de Comparecimento</h1>
+    <h1>Atestado de Afastamento</h1>
 
     <div class="section">
         <label>Nome:</label> <?php echo htmlspecialchars($_SESSION['paciente_nome']); ?><br>
-        <label>Data:</label> <?php echo date('d/m/Y', strtotime($_POST['data'])); ?><br>
-        <label>Horário de chegada:</label> <?php echo htmlspecialchars($_POST['horarioChegada']); ?><br>
-        <label>Horário de saída:</label> <?php echo htmlspecialchars($_POST['horarioSaida']); ?><br>
+        <label>Dias de afastamento:</label> <?php echo htmlspecialchars($_POST['numeroDias']); ?><br>
+        <label>Data de início:</label> <?php echo date('d/m/Y', strtotime($_POST['dataInicio'])); ?><br>
+        <label>Data prevista para o retorno:</label> <?php echo date('d/m/Y', strtotime($_POST['dataRetorno'])); ?><br>
         <label>CID-10:</label> <?php echo htmlspecialchars($_POST['cid10']); ?>
     </div>
 

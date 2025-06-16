@@ -18,13 +18,15 @@
     </style>
 </head>
 <body>
-    <h1>Atestado de Comparecimento</h1>
+    <h1>Atestado de Acompanhante</h1>
 
     <div class="section">
-        <label>Nome:</label> <?php echo htmlspecialchars($_SESSION['paciente_nome']); ?><br>
+        <label>Nome:</label> <?php echo htmlspecialchars($_POST['nomeAcompanhante']); ?><br>
+        <label>CPF:</label> <?php echo htmlspecialchars($_POST['cpfAcompanhante']); ?><br>
+        <label>Parentesco:</label> <?php echo htmlspecialchars($_POST['parentesco']); ?><br>
         <label>Data:</label> <?php echo date('d/m/Y', strtotime($_POST['data'])); ?><br>
         <label>Horário de chegada:</label> <?php echo htmlspecialchars($_POST['horarioChegada']); ?><br>
-        <label>Horário de saída:</label> <?php echo htmlspecialchars($_POST['horarioSaida']); ?><br>
+        <label>Horário de chegada:</label> <?php echo htmlspecialchars($_POST['horarioSaida']); ?><br>
         <label>CID-10:</label> <?php echo htmlspecialchars($_POST['cid10']); ?>
     </div>
 

@@ -17,6 +17,7 @@
         $pacienteController = new PacienteController();
         $paciente = $pacienteController->buscarPacienteCompleto($_SESSION['paciente_id']);
         $_SESSION['paciente_id'] = $paciente->getIdPaciente();
+        $_SESSION['paciente_nome'] = $paciente->getNome();
 
         //Busca a consulta
         $consultaController = new ConsultaController();
