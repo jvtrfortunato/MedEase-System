@@ -22,7 +22,7 @@
                 <button type="button" id="btn-acompanhante" class="botao-tipo" onclick="selecionarTipo('acompanhante')">Acompanhante</button>
             </div>
 
-            <form action="">
+            <form action="gerar-atestado.php" method="POST" target="_blank">
                 <!-- Comparecimento -->
                 <div id="form-comparecimento" class="formulario-atestado ativo">
                     <h1>Corpo do Atestado - Comparecimento</h1>
@@ -30,17 +30,17 @@
                         <div class="dados-corpo">
                             <div class="input-pequeno">
                                 <label for="data">Data</label>
-                                <input type="date" name="data" id="">
+                                <input type="date" name="data">
                             </div>
                             <div class="input-pequeno">
                                 <label for="horarioChegada">Horário de chegada</label>
-                                <input type="text" name="horarioChegada" id="">
+                                <input type="text" name="horarioChegada">
                             </div>
                         </div>
                         <div class="dados-corpo">
                             <div class="input-pequeno">
                                 <label for="horarioSaida">Horário de saída</label>
-                                <input type="text" name="horarioSaida" id="">
+                                <input type="text" name="horarioSaida">
                             </div>
                             <div class="input-pequeno">
                                 <label for="cid10">CID10</label>
@@ -144,7 +144,10 @@
 
                 <div class="botoes">
                     <button type="button" class="vermelho" onclick="window.location.href='prontuario.php'">Voltar</button>
-                    <button class="verde">Salvar</button>
+                    <div class="botoes-verde">
+                        <button class="imprimir" type="submit" name="acao" value="imprimir">Imprimir</button>
+                        <button class="verde" type="button">Salvar</button>
+                    </div>
                 </div>
             </form>
             

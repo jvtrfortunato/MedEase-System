@@ -112,11 +112,11 @@ textarea {
     background-color: #E65A50;
 }
 
-.verde {
+.verde, .imprimir {
     background-color: #50E3C2;
 }
 
-.verde:hover {
+.verde:hover, .imprimir:hover {
     background-color: #3AC3A5;
 }
 

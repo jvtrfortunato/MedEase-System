@@ -81,3 +81,17 @@ window.onload = function () {
         document.querySelector('#form-acompanhante textarea[name="textoPrincipal"]').value = dados.texto || '';
     }
 }
+
+//desabilita os inputs inativos
+document.querySelector('form').addEventListener('submit', function () {
+    // Desabilita todos os campos de atestados
+    document.querySelectorAll('.formulario-atestado input, .formulario-atestado textarea').forEach(input => {
+        input.disabled = true;
+    });
+
+    // Habilita apenas os campos do formulário ativo
+    const ativo = document.querySelector('.formulario-atestado.ativo');
+    ativo.querySelectorAll('input, textarea').forEach(input => {
+        input.disabled = false;
+    });
+});
