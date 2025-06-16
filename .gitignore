@@ -1,0 +1,22 @@
+# Ignora a pasta do Composer
+/vendor/
+
+# Arquivos de configuração e cache do Composer
+composer.lock
+composer.phar
+
+# Diretórios e arquivos temporários criados pelo sistema
+*.log
+*.cache
+*.tmp
+*.temp
+
+# Sistema operacional (Windows, macOS, Linux)
+.DS_Store
+Thumbs.db
+
+# Configurações locais do VSCode ou IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
