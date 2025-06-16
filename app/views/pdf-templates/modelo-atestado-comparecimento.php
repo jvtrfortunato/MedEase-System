@@ -11,12 +11,12 @@
     </style>
 </head>
 <body>
-    <h1>Atestado Médico</h1>
+    <h1>Atestado de Comparecimento</h1>
 
     <div class="section">
         <label>Data:</label> <?php echo date('d/m/Y', strtotime($_POST['data'])); ?><br>
         <label>Horário de chegada:</label> <?php echo htmlspecialchars($_POST['horarioChegada']); ?><br>
-        <label>Hora:</label> <?php echo htmlspecialchars($_POST['horarioSaida']); ?><br>
+        <label>Horário de saída:</label> <?php echo htmlspecialchars($_POST['horarioSaida']); ?><br>
         <label>CID-10:</label> <?php echo htmlspecialchars($_POST['cid10']); ?>
     </div>
 

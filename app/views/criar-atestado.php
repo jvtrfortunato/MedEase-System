@@ -23,6 +23,7 @@
             </div>
 
             <form action="gerar-atestado.php" method="POST" target="_blank">
+                <input type="hidden" name="tipoAtestado" id="tipoAtestado" value="comparecimento">
                 <!-- Comparecimento -->
                 <div id="form-comparecimento" class="formulario-atestado ativo">
                     <h1>Corpo do Atestado - Comparecimento</h1>

@@ -17,7 +17,21 @@ $dompdf = new Dompdf($options);
 
 // Gera o conteúdo HTML do PDF
 ob_start();
-require __DIR__ . '/pdf-templates/modelo-atestado-afastamento.php';
+$tipo = $_POST['tipoAtestado'] ?? '';
+
+switch ($tipo) {
+    case 'comparecimento':
+        require __DIR__ . '/pdf-templates/modelo-atestado-comparecimento.php';
+        break;
+    case 'afastamento':
+        require __DIR__ . '/pdf-templates/modelo-atestado-afastamento.php';
+        break;
+    case 'acompanhante':
+        require __DIR__ . '/pdf-templates/modelo-atestado-acompanhante.php';
+        break;
+    default:
+        die("Tipo de atestado inválido.");
+}
 $html = ob_get_clean();
 
 $dompdf->loadHtml($html);
