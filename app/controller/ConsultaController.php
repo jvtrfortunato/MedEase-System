@@ -219,7 +219,7 @@ class ConsultaController {
                 SELECT c.*, p.nome AS nome_paciente
                 FROM consultas c
                 JOIN pacientes p ON c.id_paciente = p.id_paciente
-                WHERE (c.start) = ? AND c.status = 'Realizada'
+                WHERE DATE(c.start) = ? AND c.status = 'Realizada'
                 ORDER BY c.start ASC
             ");
             $stmtRealizadas->execute([$dataAtual]);

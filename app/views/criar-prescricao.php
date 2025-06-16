@@ -143,7 +143,7 @@
                         <textarea name="" id="recomendacoes" cols="86" rows="9"></textarea>
                         
                         <div class="botoes">
-                        <button class="vermelho" type="button" onclick="window.location.href='prontuario.php'">Voltar</button>
+                        <button class="vermelho" type="button" onclick="history.back()">Voltar</button>
                         <div class="botoes-direita">
                             <button type="button" class="vermelho" onclick="limparCampos()">Limpar campos</button>
                             <button class="verde" id="botaoSalvarPrescricao" type="submit">Salvar</button>

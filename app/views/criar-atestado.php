@@ -22,38 +22,6 @@
                 <button type="button" id="btn-acompanhante" class="botao-tipo" onclick="selecionarTipo('acompanhante')">Acompanhante</button>
             </div>
 
-            <h1>Informações do Paciente</h1>
-            <section class="informacoes-paciente-medico">                    
-                <div class="input-grande">
-                    <label for="nomePaciente">Nome completo</label>
-                    <input type="text" name="nomePaciente"> <!--O NOME SERÁ RESGATADO DO BANCO DE DADOS E INSERIDO AQUI AUTOMATICAMENTE-->
-                </div>
-                <div class="input-pequeno">
-                    <label for="cpf">CPF</label>
-                    <input type="text" name="cpf" id="cpf"> <!--O CPF SERÁ RESGATADO DO BANCO DE DADOS E INSERIDO AQUI AUTOMATICAMENTE-->
-                </div>
-                <div class="input-pequeno">
-                    <label for="dataNascimento">Data de nascimento</label>
-                    <input type="date" name="dataNascimento"> <!--A DATA SERÁ RESGATADA DO BANCO DE DADOS E INSERIDA AQUI AUTOMATICAMENTE-->
-                </div>
-            </section>
-
-            <h1>Informações do Médico</h1>
-            <section class="informacoes-paciente-medico">
-                <div class="input-grande">
-                    <label for="nomeMedico">Nome completo</label>
-                    <input type="text" name="nomeMedico" id=""> <!--O NOME SERÁ RESGATADO DO BANCO DE DADOS E INSERIDO AQUI AUTOMATICAMENTE-->
-                </div>
-                <div class="input-pequeno">
-                    <label for="crm">CRM</label>
-                    <input type="text" name="crm" id=""> <!--O CRM SERÁ RESGATADO DO BANCO DE DADOS E INSERIDO AQUI AUTOMATICAMENTE-->
-                </div>
-                <div class="input-pequeno">
-                    <label for="especialidade">Especialidade</label>
-                    <input type="text" name="especialidade" id=""> <!--A ESPECIALIDADE SERÁ RESGATADA DO BANCO DE DADOS E INSERIDA AQUI AUTOMATICAMENTE-->
-                </div>
-            </section>
-
             <form action="">
                 <!-- Comparecimento -->
                 <div id="form-comparecimento" class="formulario-atestado ativo">

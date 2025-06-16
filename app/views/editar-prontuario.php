@@ -521,7 +521,7 @@
                     </div>
 
                     <div class="nome-campo">
-                        <label for="declaracoesSaude">Declarações de saúde e formulários legais</label>
+                        <label for="declaracoesSaude">Declarações de saúde</label>
                         <textarea rows="8" cols="50" placeholder="Digite aqui..." name="declaracoesSaude"><?php echo $prontuario->getDocumentacao()->getDeclaracoesSaude() ?></textarea>
                     </div>
 

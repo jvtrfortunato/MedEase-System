@@ -72,7 +72,7 @@ function renderizarConsultas(consultasFiltradas) {
             </div>
 
             <div class="legenda-prontuario">
-                <a href="editar-prontuario.php?consulta_id=${consulta.id}" class="prontuario">
+                <a href="detalhes-prontuario-relatorios.php?id_consulta=${consulta.id}" class="prontuario">
                     Abrir Prontuário
                 </a>
             </div>

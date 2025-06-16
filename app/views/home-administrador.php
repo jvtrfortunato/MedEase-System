@@ -39,13 +39,6 @@
                 </div>
 
                 <div class="card">
-                    <a href="atendimentos-dia.php" target="">
-                        <img src="../../assets/img/Healthcare.png">
-                        <p>Atendimentos do dia</p>
-                    </a>                 
-                </div>
-
-                <div class="card">
                     <a href="lista-prontuarios.php" target="">
                         <img src="../../assets/img/Medical Record.png" alt="Prontuário">
                         <p>Prontuários</p>

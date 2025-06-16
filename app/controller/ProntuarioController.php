@@ -518,7 +518,12 @@ class ProntuarioController {
 
     public function visualizarProntuario($idConsulta) {
         try {
-            $sqlProntuario = "SELECT * FROM prontuarios WHERE id_consulta = :id_consulta";
+            $sqlProntuario = "
+                SELECT p.*
+                FROM prontuarios p
+                JOIN consultas c ON p.id_consulta = c.id
+                WHERE c.status = 'Realizada' AND p.id_consulta = :id_consulta
+            ";
             $stmtProntuario = $this->conn->prepare($sqlProntuario);
             $stmtProntuario->execute([':id_consulta' => $idConsulta]);
             $dataProntuario = $stmtProntuario->fetch(PDO::FETCH_ASSOC);

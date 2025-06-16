@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 //Conectar com o banco de dados
 include 'Database.php';
@@ -6,12 +7,30 @@ $conexao = new Database;
 $conn = $conexao->conectar();
 
 //QUERY para recuperar os médicos
-$query_medicos = "SELECT m.id_medico AS id_medico, u.nome AS nome FROM medicos m INNER JOIN usuarios u ON m.id_usuario = u.id_usuario ORDER BY u.nome ASC";
+if (isset($_SESSION['usuario_tipo']) && $_SESSION['usuario_tipo'] === 'medico') {
+    // Busca apenas o médico da sessão
+    $id_medico = $_SESSION['medico_id'];
+
+    $query_medicos = "SELECT m.id_medico AS id_medico, u.nome AS nome 
+                      FROM medicos m 
+                      INNER JOIN usuarios u ON m.id_usuario = u.id_usuario 
+                      WHERE m.id_medico = :id_medico 
+                      ORDER BY u.nome ASC";
+    
+    $result_medicos = $conn->prepare($query_medicos);
+    $result_medicos->bindParam(':id_medico', $id_medico);
+} else {
+    // Busca todos os médicos
+    $query_medicos = "SELECT m.id_medico AS id_medico, u.nome AS nome 
+                      FROM medicos m 
+                      INNER JOIN usuarios u ON m.id_usuario = u.id_usuario 
+                      ORDER BY u.nome ASC";
+
+    // Prepara a QUERY
+    $result_medicos = $conn->prepare($query_medicos);
+}
 
 //$query_medicos = "SELECT m.id_medico AS id_medico u.nome AS nome FROM medicos m INNER JOIN usuarios u ON m.id_usuario = u.id_usuario WHERE m.id_medico = 100 ORDER BY u.nome ASC";
-
-// Prepara a QUERY
-$result_medicos = $conn->prepare($query_medicos);
 
 //Executar a QUERY
 $result_medicos->execute();
