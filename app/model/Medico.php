@@ -151,7 +151,7 @@ class Medico extends Usuario
                     $dataEndereco['cep']
                 );
             } else {
-                // Pode definir um endereço vazio, ou lançar exceção, se quiser
+                // Pode definir um endereço vazio
                 $endereco = new Endereco('', '', '', '', '', '');
             }
 
@@ -167,7 +167,7 @@ class Medico extends Usuario
                     $dados['senha'],
                     $dados['crm'],
                     $dados['especialidade'],
-                    $endereco    // <-- PASSA O OBJETO ENDEREÇO AQUI
+                    $endereco    // <-- PASSA O OBJETO ENDEREÇO
                 );
             }
 

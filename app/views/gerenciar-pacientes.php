@@ -4,7 +4,7 @@ require_once '../controller/PacienteController.php';
 
 $controller = new PacienteController();
 
-$termoBusca = $_GET['termo'] ?? '';
+$termoBusca = $_POST['termo'] ?? '';
 
 if(!empty($termoBusca)){
     $pacientes = $controller->buscarPorNome($termoBusca);        
@@ -44,10 +44,10 @@ else {
 
         <section class="conteudo-principal">
 
-            <form action="" method="GET" style="display: flex;">
+            <form action="" method="POST" style="display: flex;">
                 <section class="busca">
                     <img src="../../assets/img/lupa.png" alt="Lupa de pesquisa">
-                    <input type="text" name="termo" placeholder="Buscar Paciente (nome do paciente)" value="<?= htmlspecialchars($_GET['termo'] ?? '') ?>">
+                    <input type="text" name="termo" placeholder="Buscar Paciente (nome do paciente)" value="<?= htmlspecialchars($_POST['termo'] ?? '') ?>">
                 </section>
                 <button type="submit" class="btnBusca">Buscar</button>
             </form>
@@ -89,9 +89,9 @@ else {
 
     <script>
         //Função para voltar para a home
-        const voltarPagina = document.getElementById("voltarPagina"); // Certifique-se de que existe esse elemento
+        const voltarPagina = document.getElementById("voltarPagina");
 
-        const tipoUsuario = "<?php echo $_SESSION['usuario_tipo']; ?>"; // Exemplo usando sessão
+        const tipoUsuario = "<?php echo $_SESSION['usuario_tipo']; ?>";
 
         if (voltarPagina) {
             voltarPagina.addEventListener("click", () => {
