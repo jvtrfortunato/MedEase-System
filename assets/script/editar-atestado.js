@@ -10,6 +10,12 @@ function selecionarTipo(tipo) {
     document.getElementById(`form-${tipo}`).classList.add("ativo");
 }
 
+// Recupera o ID da consulta da URL atual (se presente)
+const urlParams = new URLSearchParams(window.location.search);
+const consultaId = urlParams.get('consulta_id');
+const documentacaoId = parseInt(urlParams.get('documentacao_id'), 10);
+const atestadoId = parseInt(urlParams.get('atestado_id'), 10);
+
 document.querySelector('.verde').addEventListener('click', function (e) {
     e.preventDefault();
 
@@ -18,30 +24,36 @@ document.querySelector('.verde').addEventListener('click', function (e) {
     let dados = { tipo: tipoSelecionado };
 
     if (tipoSelecionado === 'comparecimento') {
+        dados.id_atestado = atestadoId;
+        dados.cid10 = document.querySelector('#form-comparecimento input[name="cid10"]').value;
+        dados.textoPrincipal = document.querySelector('#form-comparecimento textarea[name="textoPrincipal"]').value;
+        dados.idDocumentacao = documentacaoId;
         dados.data = document.querySelector('#form-comparecimento input[name="data"]').value;
         dados.horarioChegada = document.querySelector('#form-comparecimento input[name="horarioChegada"]').value;
         dados.horarioSaida = document.querySelector('#form-comparecimento input[name="horarioSaida"]').value;
-        dados.cid10 = document.querySelector('#form-comparecimento input[name="cid10"]').value;
-        dados.textoPrincipal = document.querySelector('#form-comparecimento textarea[name="textoPrincipal"]').value;
     }
 
     if (tipoSelecionado === 'afastamento') {
+        dados.id_atestado = atestadoId;
+        dados.cid10 = document.querySelector('#form-afastamento input[name="cid10"]').value;
+        dados.textoPrincipal = document.querySelector('#form-afastamento textarea[name="textoPrincipal"]').value;
+        dados.idDocumentacao = documentacaoId;
         dados.diasAfastamento = document.querySelector('#form-afastamento input[name="numeroDias"]').value;
         dados.dataInicio = document.querySelector('#form-afastamento input[name="dataInicio"]').value;
         dados.dataRetorno = document.querySelector('#form-afastamento input[name="dataRetorno"]').value;
-        dados.cid10 = document.querySelector('#form-afastamento input[name="cid10"]').value;
-        dados.textoPrincipal = document.querySelector('#form-afastamento textarea[name="textoPrincipal"]').value;
     }
 
     if (tipoSelecionado === 'acompanhante') {
+        dados.id_atestado = atestadoId;
+        dados.cid10 = document.querySelector('#form-acompanhante input[name="cid10"]').value;
+        dados.textoPrincipal = document.querySelector('#form-acompanhante textarea[name="textoPrincipal"]').value;
+        dados.idDocumentacao = documentacaoId;
         dados.nomeAcompanhante = document.querySelector('#form-acompanhante input[name="nomeAcompanhante"]').value;
         dados.cpfAcompanhante = document.querySelector('#form-acompanhante input[name="cpfAcompanhante"]').value;
         dados.parentesco = document.querySelector('#form-acompanhante input[name="parentesco"]').value;
         dados.data = document.querySelector('#form-acompanhante input[name="data"]').value;
         dados.horarioChegada = document.querySelector('#form-acompanhante input[name="horarioChegada"]').value;
         dados.horarioSaida = document.querySelector('#form-acompanhante input[name="horarioSaida"]').value;
-        dados.cid10 = document.querySelector('#form-acompanhante input[name="cid10"]').value;
-        dados.textoPrincipal = document.querySelector('#form-acompanhante textarea[name="textoPrincipal"]').value;
     }
 
     localStorage.setItem('atestado', JSON.stringify(dados));
@@ -66,11 +78,11 @@ window.onload = function () {
     selecionarTipo(dados.tipo); // Ativa o formulário correto
 
     if (dados.tipo === 'comparecimento') {
+        document.querySelector('#form-comparecimento input[name="cid10"]').value = dados.cid10 || '';
+        document.querySelector('#form-comparecimento textarea[name="textoPrincipal"]').value = dados.textoPrincipal || '';
         document.querySelector('#form-comparecimento input[name="data"]').value = dados.data || '';
         document.querySelector('#form-comparecimento input[name="horarioChegada"]').value = dados.horarioChegada || '';
         document.querySelector('#form-comparecimento input[name="horarioSaida"]').value = dados.horarioSaida || '';
-        document.querySelector('#form-comparecimento input[name="cid10"]').value = dados.cid10 || '';
-        document.querySelector('#form-comparecimento textarea[name="textoPrincipal"]').value = dados.textoPrincipal || '';
     }
 
     if (dados.tipo === 'afastamento') {
@@ -94,10 +106,6 @@ window.onload = function () {
 }
 
 document.getElementById('botaoVoltar').addEventListener('click', () => {
-
-    // Recupera o ID da consulta da URL atual (se presente)
-    const urlParams = new URLSearchParams(window.location.search);
-    const consultaId = urlParams.get('consulta_id');
 
     // Redireciona com o parâmetro consulta_id
     if (consultaId) {

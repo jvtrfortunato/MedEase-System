@@ -12,6 +12,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Adiciona os exames na lista
 function adicionarExame(nomeExame = null) {
+    // Recupera o ID do exame da URL atual (se presente)
+    const urlParams = new URLSearchParams(window.location.search);
+    const idProntuario = urlParams.get('prontuario_id');
+
     const select = document.getElementById('exame');
     const lista = document.getElementById('lista-exames');
 
@@ -19,8 +23,16 @@ function adicionarExame(nomeExame = null) {
 
     if (nomeExame !== '') {
         // Evita duplicatas
-        if (!listaExames.includes(nomeExame)) {
-            listaExames.push(nomeExame);
+        if (!listaExames.some(exame => exame.nomeExame === nomeExame)) {
+            // Criar objeto com os dados
+            const exame = {
+                idExame: 0,
+                nomeExame: nomeExame,
+                idProntuario: idProntuario
+            };
+
+            listaExames.push(exame);
+            console.log(listaExames);
 
             const container = document.createElement('div');
             container.classList.add('exame-container');
@@ -36,13 +48,13 @@ function adicionarExame(nomeExame = null) {
             imgRemover.classList.add('lixeira');
 
             imgRemover.addEventListener('click', function () {
-                // Remove da lista
-                const index = listaExames.indexOf(nomeExame);
+                // Remove da lista (agora corretamente)
+                const index = listaExames.findIndex(exame => exame.nomeExame === nomeExame);
                 if (index !== -1) {
                     listaExames.splice(index, 1);
                 }
 
-                //Remove do DOM 
+                // Remove do DOM 
                 container.remove();
             });
 
