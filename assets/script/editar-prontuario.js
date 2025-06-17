@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
         container.classList.add('lista-exames');
 
         const li = document.createElement('li');
-        li.textContent = exame;
+        li.textContent = exame.nomeExame;
 
         container.appendChild(li);
         lista.appendChild(container);

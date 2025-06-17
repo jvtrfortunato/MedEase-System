@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const examesSalvos = JSON.parse(localStorage.getItem('examesSolicitados'));
     if (examesSalvos && Array.isArray(examesSalvos)) {
         examesSalvos.forEach(exame => {
-            adicionarExame(exame); // Adiciona cada exame à lista e à interface
+            adicionarExame(exame.nomeExame); // Adiciona cada exame à lista e à interface
         });
     }
 });

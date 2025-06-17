@@ -171,30 +171,29 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-//SCRIPT DOS BOTOES DE DOSE UNICA E CONTINUA
-// let tipoSelecionado = null;
-// //Função para os botoes Dose única e Uso Contínuo
-// function selecionarTipo(tipo) {
-//     const unica = document.getElementById('toggleUnica').parentElement;
-//     const continua = document.getElementById('toggleContinua').parentElement;
+//Envia os dados para gerar-prescricao.php
+document.getElementById('botaoImprimirPrescricao').addEventListener('click', () => {
+    const medicamentosJSON  = JSON.stringify(medicamentos); // array global
+    const recomendacoes = document.getElementById('recomendacoes').value.trim();
 
-//     if (tipo === 'unica') {
-//         if (tipoSelecionado === 'Dose única') {
-//         unica.classList.remove('ativo');
-//         tipoSelecionado = null;
-//         } else {
-//         unica.classList.add('ativo');
-//         continua.classList.remove('ativo');
-//         tipoSelecionado = 'Dose única';
-//         }
-//     } else if (tipo === 'continua') {
-//         if (tipoSelecionado === 'Uso contínuo') {
-//         continua.classList.remove('ativo');
-//         tipoSelecionado = null;
-//         } else {
-//         continua.classList.add('ativo');
-//         unica.classList.remove('ativo');
-//         tipoSelecionado = 'Uso contínuo';
-//         }
-//     }
-// }
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = 'gerar-prescricao.php';
+    form.target = '_blank'; // abrir em nova aba
+
+    const input1 = document.createElement('input');
+    input1.type = 'hidden';
+    input1.name = 'medicamentos';
+    input1.value = medicamentosJSON;
+
+    const input2 = document.createElement('input');
+    input2.type = 'hidden';
+    input2.name = 'recomendacoes';
+    input2.value = recomendacoes;
+
+    form.appendChild(input1);
+    form.appendChild(input2);
+    document.body.appendChild(form);
+    form.submit();
+    form.remove();
+});

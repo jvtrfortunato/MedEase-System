@@ -2,7 +2,7 @@
 
     require_once '../controller/ConsultaController.php';
     $controller = new ConsultaController;
-    $consultas = $controller->listarTodasConsultas();
+    $consultas = $controller->listarTodasConsultasRealizadas();
 
     $consultasFormatadas = array_map(function($item) {
         /** @var Consulta $consulta */
