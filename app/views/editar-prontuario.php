@@ -32,6 +32,8 @@
     $recomendacoesBanco = $prontuario->getPrescricao()->getRecomendacoes();
     $idPrescricao = $prontuario->getPrescricao()->getIdPrescricao();
     $idProntuario = $prontuario->getIdProntuario();
+    $idDocumentacao = $prontuario->getDocumentacao()->getIdDocumentacao();
+    $idAtestado = $prontuario->getDocumentacao()->getAtestado()->getIdAtestado();
 
     // Transforma os medicamentos em arrays associativos
     $medicamentosFormatados = array_map(function($med) {
@@ -527,7 +529,7 @@
 
                     <ul id="atestados"></ul>
                     <div class="botao-solicitar-criar">
-                        <button id="botaoAtestado" type="button" onclick="window.location.href='editar-atestado.php?consulta_id=<?php echo $prontuario->getIdConsulta(); ?>'">Criar atestado</button>
+                        <button id="botaoAtestado" type="button" onclick="window.location.href='editar-atestado.php?consulta_id=<?php echo $prontuario->getIdConsulta(); ?>&documentacao_id=<?php echo $idDocumentacao ?>&atestado_id=<?php echo $idAtestado ?>'">Criar atestado</button>
                     </div>
 
                 </section>

@@ -872,7 +872,7 @@ class ProntuarioController {
                     switch ($atestadoData['tipo']) {
                         case 'afastamento':
                             $atestadoObj = new AtestadoAfastamento(
-                                idAtestado: $atestadoData['idAtestado'],
+                                idAtestado: $atestadoData['id_atestado'],
                                 cid10: $atestadoData['cid10'],
                                 textoPrincipal: $atestadoData['textoPrincipal'],
                                 idDocumentacao: $atestadoData['idDocumentacao'],
@@ -884,7 +884,7 @@ class ProntuarioController {
 
                         case 'comparecimento':
                             $atestadoObj = new AtestadoComparecimento(
-                                idAtestado: $atestadoData['idAtestado'],
+                                idAtestado: $atestadoData['id_atestado'],
                                 cid10: $atestadoData['cid10'],
                                 textoPrincipal: $atestadoData['textoPrincipal'],
                                 idDocumentacao: $atestadoData['idDocumentacao'],
@@ -1088,41 +1088,23 @@ class ProntuarioController {
             ]);
 
             //salvar a lista com o nome dos exames solicitados
-            // Atualiza os exames existentes
+            // Exclui todos os exames do prontuário atual
+            $stmt = $this->conn->prepare("DELETE FROM exames WHERE id_prontuario = ?");
+            $stmt->execute([$prontuario->getIdProntuario()]);
+
+            // var_dump($prontuario->getIdProntuario());
+            // die;
+
+            // Insere novamente os exames da lista
             foreach ($listaExames as $exame) {
                 $stmt = $this->conn->prepare("
-                    UPDATE exames SET 
-                        nome = ?
-                    WHERE id_exame = ?
+                    INSERT INTO exames (nome, id_prontuario) 
+                    VALUES (?, ?)
                 ");
                 $stmt->execute([
                     $exame->getNomeExame(),
-                    $exame->getIdExame()
+                    $prontuario->getIdProntuario()
                 ]);
-            }
-
-            // Remove exames que não estão mais na lista
-            $idsParaManter = array_map(function($exame) {
-                return $exame->getIdExame();
-            }, $listaExames);
-
-            // Se houver exames para manter, exclui os demais
-            if (!empty($idsParaManter)) {
-                $placeholders = implode(',', array_fill(0, count($idsParaManter), '?'));
-                $sql = "
-                    DELETE FROM exames 
-                    WHERE id_prontuario = ? 
-                    AND id_exame NOT IN ($placeholders)
-                ";
-
-                // Junta o ID do prontuário com os IDs a manter
-                $params = array_merge([$prontuario->getIdProntuario()], $idsParaManter);
-                $stmt = $this->conn->prepare($sql);
-                $stmt->execute($params);
-            } else {
-                // Se a lista está vazia, remove todos os exames do prontuário
-                $stmt = $this->conn->prepare("DELETE FROM exames WHERE id_prontuario = ?");
-                $stmt->execute([$prontuario->getIdProntuario()]);
             }
 
             //Salvar a prescricao
@@ -1137,24 +1119,20 @@ class ProntuarioController {
             ]);
 
             //Salvar a lista de medicamentos da prescricao
-            // Atualiza os medicamentos existentes da prescrição
+            // Excluir todos os medicamentos da prescrição atual
+            $stmt = $this->conn->prepare("DELETE FROM medicamentos WHERE id_prescricao = ?");
+            $stmt->execute([$prontuario->getPrescricao()->getIdPrescricao()]);
+
+            // Inserir novamente os medicamentos da lista
             foreach ($listaMedicamentos as $medicamento) {
                 $stmt = $this->conn->prepare("
-                    UPDATE medicamentos SET
-                        nome_medicamento = ?,
-                        concentracao = ?,
-                        forma_farmaceutica = ?,
-                        via_administracao = ?,
-                        tipo_receita = ?,
-                        intervalo_dose = ?,
-                        frequencia_dose = ?,
-                        turno_dose = ?,
-                        data_inicio = ?,
-                        quantidade_duracao = ?,
-                        tipo_duracao = ?
-                    WHERE id_medicamento = ?
+                    INSERT INTO medicamentos (
+                        nome_medicamento, concentracao, forma_farmaceutica,
+                        via_administracao, tipo_receita, intervalo_dose,
+                        frequencia_dose, turno_dose, data_inicio,
+                        quantidade_duracao, tipo_duracao, id_prescricao
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ");
-
                 $stmt->execute([
                     $medicamento->getNomeMedicamento(),
                     $medicamento->getConcentracao(),
@@ -1167,33 +1145,8 @@ class ProntuarioController {
                     $medicamento->getDataInicio(),
                     $medicamento->getQuantidadeDuracao(),
                     $medicamento->getTipoDuracao(),
-                    $medicamento->getIdMedicamento()
+                    $prontuario->getPrescricao()->getIdPrescricao()
                 ]);
-            }
-
-            // Excluir medicamentos que não estão mais na lista
-            $idsParaManter = array_map(function($medicamento) {
-                return $medicamento->getIdMedicamento();
-            }, $listaMedicamentos);
-
-            // Se houver medicamentos para manter
-            if (!empty($idsParaManter)) {
-                $placeholders = implode(',', array_fill(0, count($idsParaManter), '?'));
-
-                $sql = "
-                    DELETE FROM medicamentos 
-                    WHERE id_prescricao = ? 
-                    AND id_medicamento NOT IN ($placeholders)
-                ";
-
-                $params = array_merge([$prontuario->getPrescricao()->getIdPrescricao()], $idsParaManter);
-
-                $stmt = $this->conn->prepare($sql);
-                $stmt->execute($params);
-            } else {
-                // Remove todos os medicamentos da prescrição, se a lista estiver vazia
-                $stmt = $this->conn->prepare("DELETE FROM medicamentos WHERE id_prescricao = ?");
-                $stmt->execute([$prontuario->getPrescricao()->getIdPrescricao()]);
             }
 
             //Salvar internações
@@ -1232,102 +1185,78 @@ class ProntuarioController {
             // Se não há atestado, pula toda a lógica de salvamento
             if ($atestado !== null) {
 
-                $tipo = ''; // Vamos definir o tipo com base na classe
+                $idAtestado = $atestado->getIdAtestado();
+                $idDocumentacao = $prontuario->getDocumentacao()->getIdDocumentacao();
 
-                if ($atestado instanceof AtestadoAcompanhante) {
-                    $tipo = 'acompanhante';
-                } elseif ($atestado instanceof AtestadoAfastamento) {
-                    $tipo = 'afastamento';
-                } elseif ($atestado instanceof AtestadoComparecimento) {
-                    $tipo = 'comparecimento';
-                }
+                // Primeiro: excluir os dados específicos do tipo (caso existam)
+                $this->conn->prepare("DELETE FROM atestados_acompanhante WHERE id_atestado = ?")->execute([$idAtestado]);
+                $this->conn->prepare("DELETE FROM atestados_afastamento WHERE id_atestado = ?")->execute([$idAtestado]);
+                $this->conn->prepare("DELETE FROM atestados_comparecimento WHERE id_atestado = ?")->execute([$idAtestado]);
 
-                // Atualiza os dados do atestado (tabela principal)
+                // Segundo: excluir o atestado principal associado à documentação
+                $this->conn->prepare("DELETE FROM atestados WHERE id_documentacao = ?")->execute([$idDocumentacao]);
+
+                // Terceiro: inserir novamente o atestado principal
                 $stmt = $this->conn->prepare("
-                    UPDATE atestados SET
-                        cid10 = ?,
-                        texto_principal = ?
-                    WHERE id_atestado = ?
+                    INSERT INTO atestados (cid10, texto_principal, id_documentacao)
+                    VALUES (?, ?, ?)
                 ");
                 $stmt->execute([
                     $atestado->getCid10(),
                     $atestado->getTextoPrincipal(),
-                    $atestado->getIdAtestado()
+                    $idDocumentacao
                 ]);
 
-                // Limpeza de tipos antigos que não correspondem ao tipo atual
-                if ($tipo === 'acompanhante') {
-                    $this->conn->prepare("DELETE FROM atestados_afastamento WHERE id_atestado = ?")->execute([$atestado->getIdAtestado()]);
-                    $this->conn->prepare("DELETE FROM atestados_comparecimento WHERE id_atestado = ?")->execute([$atestado->getIdAtestado()]);
-                }
+                // Recupera o ID do atestado recém-inserido
+                $novoIdAtestado = $this->conn->lastInsertId();
+                $atestado->setIdAtestado($novoIdAtestado); // Atualiza o objeto, caso precise usar depois
 
-                if ($tipo === 'afastamento') {
-                    $this->conn->prepare("DELETE FROM atestados_acompanhante WHERE id_atestado = ?")->execute([$atestado->getIdAtestado()]);
-                    $this->conn->prepare("DELETE FROM atestados_comparecimento WHERE id_atestado = ?")->execute([$atestado->getIdAtestado()]);
-                }
-
-                if ($tipo === 'comparecimento') {
-                    $this->conn->prepare("DELETE FROM atestados_acompanhante WHERE id_atestado = ?")->execute([$atestado->getIdAtestado()]);
-                    $this->conn->prepare("DELETE FROM atestados_afastamento WHERE id_atestado = ?")->execute([$atestado->getIdAtestado()]);
-                }
-
-                //Salvar o atestado acompanhante
-                if ($tipo === 'acompanhante') {
+                // Quarto: inserir os dados específicos do tipo correto
+                if ($atestado instanceof AtestadoAcompanhante) {
                     $stmt = $this->conn->prepare("
-                        UPDATE atestados_acompanhante SET
-                            nome_acompanhante = ?,
-                            cpf_acompanhante = ?,
-                            parentesco_acompanhante = ?,
-                            data = ?,
-                            horario_chegada = ?,
-                            horario_saida = ?
-                        WHERE id_atestado = ?
+                        INSERT INTO atestados_acompanhante (
+                            id_atestado, nome_acompanhante, cpf_acompanhante, parentesco_acompanhante, data, horario_chegada, horario_saida
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?)
                     ");
                     $stmt->execute([
+                        $novoIdAtestado,
                         $atestado->getNomeAcompanhante(),
                         $atestado->getCpfAcompanhante(),
                         $atestado->getParentescoAcompanhante(),
                         $atestado->getData(),
                         $atestado->getHorarioChegada(),
-                        $atestado->getHorarioSaida(),
-                        $atestado->getIdAtestado()
+                        $atestado->getHorarioSaida()
                     ]);
                 }
 
-                //Salvar o atestado afastamento
-                if ($tipo === 'afastamento') {
+                if ($atestado instanceof AtestadoAfastamento) {
                     $stmt = $this->conn->prepare("
-                        UPDATE atestados_afastamento SET
-                            dias_afastamento = ?,
-                            data_inicio = ?,
-                            data_retorno = ?
-                        WHERE id_atestado = ?
+                        INSERT INTO atestados_afastamento (
+                            id_atestado, dias_afastamento, data_inicio, data_retorno
+                        ) VALUES (?, ?, ?, ?)
                     ");
                     $stmt->execute([
+                        $novoIdAtestado,
                         $atestado->getDiasAfastamento(),
                         $atestado->getDataInicio(),
-                        $atestado->getDataRetorno(),
-                        $atestado->getIdAtestado()
+                        $atestado->getDataRetorno()
                     ]);
                 }
 
-                //Salvar o atestado comparecimento
-                if ($tipo === 'comparecimento') {
+                if ($atestado instanceof AtestadoComparecimento) {
                     $stmt = $this->conn->prepare("
-                        UPDATE atestados_comparecimento SET
-                            data = ?,
-                            horario_chegada = ?,
-                            horario_saida = ?
-                        WHERE id_atestado = ?
+                        INSERT INTO atestados_comparecimento (
+                            id_atestado, data, horario_chegada, horario_saida
+                        ) VALUES (?, ?, ?, ?)
                     ");
                     $stmt->execute([
+                        $novoIdAtestado,
                         $atestado->getData(),
                         $atestado->getHorarioChegada(),
-                        $atestado->getHorarioSaida(),
-                        $atestado->getIdAtestado()
+                        $atestado->getHorarioSaida()
                     ]);
                 }
-            }
+            }   
 
             // Redireciona para a tela dos atendimentos do dia
             header("Location: ../views/atendimentos-dia.php");

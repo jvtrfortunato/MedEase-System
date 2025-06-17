@@ -429,11 +429,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     // Atualizar os atributos do evento com os novos valores do banco de dados
                     eventoExiste.setProp('title', resposta['title']);
-                    eventoExiste.setProp('nome_paciente', resposta['nome_paciente']);
-                    eventoExiste.setProp('nome_medico', resposta['nome_medico']);
                     eventoExiste.setStart(resposta['start']);
                     eventoExiste.setEnd(resposta['end']);
-                    eventoExiste.setProp('status_consulta', resposta['status_consulta']);
+
+                    // Definir propriedades personalizadas corretamente
+                    eventoExiste.setExtendedProp('nome_paciente', resposta['nome_paciente']);
+                    eventoExiste.setExtendedProp('nome_medico', resposta['nome_medico']);
+                    eventoExiste.setExtendedProp('status_consulta', resposta['status_consulta']);
                 }
 
                 // Chamar a função para remover a mensagem após 3 segundos
