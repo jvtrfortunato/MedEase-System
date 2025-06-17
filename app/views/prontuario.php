@@ -17,6 +17,7 @@
         $pacienteController = new PacienteController();
         $paciente = $pacienteController->buscarPacienteCompleto($_SESSION['paciente_id']);
         $_SESSION['paciente_id'] = $paciente->getIdPaciente();
+        $_SESSION['paciente_nome'] = $paciente->getNome();
 
         //Busca a consulta
         $consultaController = new ConsultaController();
@@ -422,7 +423,7 @@
                     </div>
 
                     <div class="nome-campo">
-                        <label for="declaracoesSaude">Declarações de saúde e formulários legais</label>
+                        <label for="declaracoesSaude">Declarações de saúde</label>
                         <textarea rows="8" cols="50" placeholder="Digite aqui..." name="declaracoesSaude"></textarea>
                     </div>
 

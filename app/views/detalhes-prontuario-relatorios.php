@@ -479,7 +479,7 @@
     
     <script src="../../assets/script/detalhes-prontuario.js"></script>
     <script>
-        //Função para voltar para atendimentos do dia
+        //Função para voltar para histórico de consultas
         const voltarPagina = document.getElementById("voltarPagina");
 
         if (voltarPagina) {
@@ -490,9 +490,8 @@
                 localStorage.removeItem('examesSolicitados');
                 localStorage.removeItem('medicamentosPrescricao');
                 localStorage.removeItem('recomendacoesPrescricao');
-
-                let idPaciente = <?= $idPaciente ?>;
-                window.location.href = `../../app/views/lista-prontuarios-paciente.php?id_paciente=${idPaciente}`;
+                
+                window.location.href = `../../app/views/historico-consultas.php`;
             });
         }
     </script>

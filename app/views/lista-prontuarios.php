@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once '../controller/PacienteController.php';
+$tipoUsuario = $_SESSION['usuario_tipo'];
 
 $controller = new PacienteController();
 
@@ -81,13 +82,18 @@ else {
     </main>
     <footer></footer>
     <script>
-        //Função para voltar para atendimentos do dia
         const voltarPagina = document.getElementById("voltarPagina");
+
+        // Armazena o valor de PHP numa variável JS
+        const tipoUsuario = "<?php echo $tipoUsuario; ?>";
 
         if (voltarPagina) {
             voltarPagina.addEventListener("click", () => {
-
-                window.location.href = "../../app/views/home-medico.php";
+                if (tipoUsuario === 'administrador') {
+                    window.location.href = "../../app/views/home-administrador.php";
+                } else if (tipoUsuario === 'medico') {
+                    window.location.href = "../../app/views/home-medico.php";
+                }
             });
         }
     </script>

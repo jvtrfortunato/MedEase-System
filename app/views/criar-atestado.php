@@ -22,39 +22,8 @@
                 <button type="button" id="btn-acompanhante" class="botao-tipo" onclick="selecionarTipo('acompanhante')">Acompanhante</button>
             </div>
 
-            <h1>Informações do Paciente</h1>
-            <section class="informacoes-paciente-medico">                    
-                <div class="input-grande">
-                    <label for="nomePaciente">Nome completo</label>
-                    <input type="text" name="nomePaciente"> <!--O NOME SERÁ RESGATADO DO BANCO DE DADOS E INSERIDO AQUI AUTOMATICAMENTE-->
-                </div>
-                <div class="input-pequeno">
-                    <label for="cpf">CPF</label>
-                    <input type="text" name="cpf" id="cpf"> <!--O CPF SERÁ RESGATADO DO BANCO DE DADOS E INSERIDO AQUI AUTOMATICAMENTE-->
-                </div>
-                <div class="input-pequeno">
-                    <label for="dataNascimento">Data de nascimento</label>
-                    <input type="date" name="dataNascimento"> <!--A DATA SERÁ RESGATADA DO BANCO DE DADOS E INSERIDA AQUI AUTOMATICAMENTE-->
-                </div>
-            </section>
-
-            <h1>Informações do Médico</h1>
-            <section class="informacoes-paciente-medico">
-                <div class="input-grande">
-                    <label for="nomeMedico">Nome completo</label>
-                    <input type="text" name="nomeMedico" id=""> <!--O NOME SERÁ RESGATADO DO BANCO DE DADOS E INSERIDO AQUI AUTOMATICAMENTE-->
-                </div>
-                <div class="input-pequeno">
-                    <label for="crm">CRM</label>
-                    <input type="text" name="crm" id=""> <!--O CRM SERÁ RESGATADO DO BANCO DE DADOS E INSERIDO AQUI AUTOMATICAMENTE-->
-                </div>
-                <div class="input-pequeno">
-                    <label for="especialidade">Especialidade</label>
-                    <input type="text" name="especialidade" id=""> <!--A ESPECIALIDADE SERÁ RESGATADA DO BANCO DE DADOS E INSERIDA AQUI AUTOMATICAMENTE-->
-                </div>
-            </section>
-
-            <form action="">
+            <form action="gerar-atestado.php" method="POST" target="_blank">
+                <input type="hidden" name="tipoAtestado" id="tipoAtestado" value="comparecimento">
                 <!-- Comparecimento -->
                 <div id="form-comparecimento" class="formulario-atestado ativo">
                     <h1>Corpo do Atestado - Comparecimento</h1>
@@ -62,17 +31,17 @@
                         <div class="dados-corpo">
                             <div class="input-pequeno">
                                 <label for="data">Data</label>
-                                <input type="date" name="data" id="">
+                                <input type="date" name="data">
                             </div>
                             <div class="input-pequeno">
                                 <label for="horarioChegada">Horário de chegada</label>
-                                <input type="text" name="horarioChegada" id="">
+                                <input type="text" name="horarioChegada">
                             </div>
                         </div>
                         <div class="dados-corpo">
                             <div class="input-pequeno">
                                 <label for="horarioSaida">Horário de saída</label>
-                                <input type="text" name="horarioSaida" id="">
+                                <input type="text" name="horarioSaida">
                             </div>
                             <div class="input-pequeno">
                                 <label for="cid10">CID10</label>
@@ -176,7 +145,10 @@
 
                 <div class="botoes">
                     <button type="button" class="vermelho" onclick="window.location.href='prontuario.php'">Voltar</button>
-                    <button class="verde">Salvar</button>
+                    <div class="botoes-verde">
+                        <button class="imprimir" type="submit" name="acao" value="imprimir">Imprimir</button>
+                        <button class="verde" type="button">Salvar</button>
+                    </div>
                 </div>
             </form>
             

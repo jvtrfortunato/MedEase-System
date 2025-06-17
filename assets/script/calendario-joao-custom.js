@@ -132,26 +132,21 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             //Acessar o IF quando encotrar o médico no banco de dados
-            if(resposta.medicos.status){
+            if (resposta.medicos.status) {
+                var opcoesMedico = '<option value="">Selecione</option>';
 
-                // Criar a opção selecione para o campo select médicos
-                var opcoesMedico = '<option value="">Selecione</option>'
-
-                // Percorrer a lista de usuários
-                for (var i = 0; i < resposta.medicos.dadosMedicos.length; i++){
-
-                    //Criar a lista de opções para o campo select médicos
-                    opcoesMedico += `<option value="${resposta.medicos.dadosMedicos[i]['id_medico']}">${resposta.medicos.dadosMedicos[i]['nome']}</option>`;
+                if (resposta.medicos.dadosMedicos.length === 1) {
+                    const medico = resposta.medicos.dadosMedicos[0];
+                    opcoesMedico += `<option value="${medico.id_medico}" selected>${medico.nome}</option>`;
+                } else {
+                    for (var i = 0; i < resposta.medicos.dadosMedicos.length; i++) {
+                        opcoesMedico += `<option value="${resposta.medicos.dadosMedicos[i]['id_medico']}">${resposta.medicos.dadosMedicos[i]['nome']}</option>`;
+                    }
                 }
 
-                //Enviar as opções para o campo select no HTML
                 cadNomeMedico.innerHTML = opcoesMedico;
-
-            }else{
-
-                // Enviar a opção vazia para o campo select no HTML
+            } else {
                 cadNomeMedico.innerHTML = `<option value="">${resposta.medicos.msg}</option>`;
-
             }
 
             //Chamar a função para converter a data selecionada para ISO8601 e enviar para o formulário
