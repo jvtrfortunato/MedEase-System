@@ -155,7 +155,7 @@ session_start();
                             </div>
                             <div class="label-input">
                                 <label for="cep">CEP</label>
-                                <input type="text" id="" name="cep" placeholder="00000-000" required>
+                                <input type="text" id="cep" name="cep" placeholder="00000-000" required>
                             </div>
                         </div>
                     </div>
