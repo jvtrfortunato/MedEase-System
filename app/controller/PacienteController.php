@@ -73,7 +73,6 @@ class PacienteController {
 
                 header("Location: ../views/gerenciar-pacientes.php");
                 exit;
-
             } 
             
             if ($_SESSION['usuario_tipo'] === 'administrador') {
