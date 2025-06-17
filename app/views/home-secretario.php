@@ -24,7 +24,7 @@
             <div class="grid-container">
                 
                 <div class="card">
-                    <a href="gerenciar-pacientes-secretario.php">
+                    <a href="gerenciar-pacientes.php" >
                         <img src="../../assets/img/User.png" alt="Pacientes">
                         <p>Pacientes</p>
                     </a>

@@ -71,9 +71,8 @@ class PacienteController {
 
             if ($_SESSION['usuario_tipo'] === 'secretario') {
 
-                header("Location: ../views/gerenciar-pacientes-secretario.php");
+                header("Location: ../views/gerenciar-pacientes.php");
                 exit;
-
             } 
             
             if ($_SESSION['usuario_tipo'] === 'administrador') {
@@ -102,7 +101,7 @@ class PacienteController {
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $pacientes = [];
-
+        
         foreach ($result as $row) {
             $endereco = new Endereco(
                 $row['rua'], $row['numero'], $row['bairro'], $row['cidade'], 
