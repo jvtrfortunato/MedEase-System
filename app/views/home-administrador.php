@@ -9,7 +9,11 @@
 </head>
 <body>
     <header>
+<<<<<<< HEAD
         <a class="logo" href="login.php">MedEase</a>    
+=======
+        <a class="logo" href="home-administrador.php">MedEase</a>    
+>>>>>>> bf69ae98904925856cb5bf48273faf3acb1364bc
         <a href="login.php">sair</a>
     </header>
     

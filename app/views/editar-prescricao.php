@@ -146,6 +146,7 @@
                         <button class="vermelho" type="button" id="botaoVoltar">Voltar</button>
                         <div class="botoes-direita">
                             <button type="button" class="vermelho" onclick="limparCampos()">Limpar campos</button>
+                            <button class="verde" id="botaoImprimirPrescricao" type="button">Imprimir</button>
                             <button class="verde" id="botaoSalvarPrescricao" type="button">Salvar</button>
                         </div>
                         </div>

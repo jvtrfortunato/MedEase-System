@@ -1,12 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Inter", sans-serif;
-}
-
 main {
     display: flex;
     flex-direction: column;
@@ -21,25 +14,11 @@ main {
     gap: 5px;
 }
 
-.busca {
-    width: 25%;
-    border: 2px, solid rgba(136, 136, 136, 0.4);
-    border-radius: 5px;
-    padding: 10px 17px 10px 17px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-input {
-    border: transparent;
-    width: 100%;
-}
-
 .prontuarios {
     border: 2px, solid rgba(136, 136, 136, 0.4);
     border-radius: 5px;
     padding: 10px 17px 10px 17px;
+    margin-top: 5rem;
 }
 
 .legenda {
@@ -56,7 +35,7 @@ input {
 
 .dados p {
     opacity: 50%;
-    font-size: 1.4em;
+    font-size: 1.8rem;
     font-weight: 500;
 }
 

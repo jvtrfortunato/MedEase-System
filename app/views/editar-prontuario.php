@@ -104,6 +104,7 @@
     //Busca o paciente
     $pacienteController = new PacienteController();
     $paciente = $pacienteController->buscarPacienteCompleto($idPaciente);
+    $_SESSION['paciente_nome'] = $paciente->getNome();
 
 
 ?>

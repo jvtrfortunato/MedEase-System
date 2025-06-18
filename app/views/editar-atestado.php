@@ -20,7 +20,8 @@
                 <button type="button" id="btn-acompanhante" class="botao-tipo" onclick="selecionarTipo('acompanhante')">Acompanhante</button>
             </div>
 
-            <form action="">
+            <form action="gerar-atestado.php" method="POST" target="_blank">
+                <input type="hidden" name="tipoAtestado" id="tipoAtestado" value="comparecimento">
                 <!-- Comparecimento -->
                 <div id="form-comparecimento" class="formulario-atestado ativo">
                     <h1>Corpo do Atestado - Comparecimento</h1>
@@ -142,7 +143,10 @@
 
                 <div class="botoes">
                     <button type="button" class="vermelho" id="botaoVoltar">Voltar</button>
-                    <button class="verde">Salvar</button>
+                    <div class="botoes-verde">
+                        <button class="imprimir" type="submit" name="acao" value="imprimir">Imprimir</button>
+                        <button class="verde" type="button">Salvar</button>
+                    </div>
                 </div>
             </form>
             

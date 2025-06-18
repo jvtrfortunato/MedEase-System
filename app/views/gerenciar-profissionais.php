@@ -38,6 +38,7 @@ if (!empty($termoBusca)) {
     </style>
     <link rel="stylesheet" href="../../assets/css/header.css">
     <link rel="stylesheet" href="../../assets/css/gerenciar-profissionais.css">
+    <link rel="stylesheet" href="../../assets/css/reset.css">
 </head>
 <body>
     <header>

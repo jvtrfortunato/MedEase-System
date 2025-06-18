@@ -105,6 +105,35 @@ window.onload = function () {
     }
 }
 
+//desabilita os inputs inativos
+document.querySelector('form').addEventListener('submit', function () {
+    // Desabilita todos os campos de atestados
+    document.querySelectorAll('.formulario-atestado input, .formulario-atestado textarea').forEach(input => {
+        input.disabled = true;
+    });
+
+    // Habilita apenas os campos do formulário ativo
+    const ativo = document.querySelector('.formulario-atestado.ativo');
+    ativo.querySelectorAll('input, textarea').forEach(input => {
+        input.disabled = false;
+    });
+});
+
+function selecionarTipo(tipo) {
+    // Esconde todos os formulários
+    document.querySelectorAll('.formulario-atestado').forEach(form => form.classList.remove('ativo'));
+
+    // Mostra o formulário selecionado
+    document.getElementById('form-' + tipo).classList.add('ativo');
+
+    // Atualiza o campo oculto com o tipo atual
+    document.getElementById('tipoAtestado').value = tipo;
+
+    // Atualiza os botões ativos (se necessário visualmente)
+    document.querySelectorAll('.botao-tipo').forEach(btn => btn.classList.remove('ativo'));
+    document.getElementById('btn-' + tipo).classList.add('ativo');
+}
+
 document.getElementById('botaoVoltar').addEventListener('click', () => {
 
     // Redireciona com o parâmetro consulta_id
