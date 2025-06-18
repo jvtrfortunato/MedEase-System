@@ -71,7 +71,7 @@ class PacienteController {
 
             if ($_SESSION['usuario_tipo'] === 'secretario') {
 
-                header("Location: ../views/gerenciar-pacientes.php");
+                header("Location: ../views/gerenciar-pacientes-secretario.php");
                 exit;
             } 
             
