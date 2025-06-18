@@ -24,6 +24,23 @@
                         <option value="RAIO-X">RAIO-X</option>
                         <option value="HEMOGRAMA">HEMOGRAMA</option>
                         <option value="RESSONÂNCIA">RESSONÂNCIA</option>
+                        <option value="ULTRASSOM">ULTRASSOM</option>
+                        <option value="TOMOGRAFIA">TOMOGRAFIA</option>
+                        <option value="ELETROCARDIOGRAMA">ELETROCARDIOGRAMA</option>
+                        <option value="ECOCARDIOGRAMA">ECOCARDIOGRAMA</option>
+                        <option value="EXAME DE URINA">EXAME DE URINA</option>
+                        <option value="EXAME DE FEZES">EXAME DE FEZES</option>
+                        <option value="GLICEMIA">GLICEMIA</option>
+                        <option value="PAINEL ALÉRGICO">PAINEL ALÉRGICO</option>
+                        <option value="TESTE ERGOMÉTRICO">TESTE ERGOMÉTRICO</option>
+                        <option value="COLPOSCOPIA">COLPOSCOPIA</option>
+                        <option value="PAPANICOLAU">PAPANICOLAU</option>
+                        <option value="ENDOSCOPIA">ENDOSCOPIA</option>
+                        <option value="COLONOSCOPIA">COLONOSCOPIA</option>
+                        <option value="TSH">TSH</option>
+                        <option value="PCR">PCR</option>
+                        <option value="VHS">VHS</option>
+                        <option value="HORMÔNIOS">HORMÔNIOS</option>
                     </select>
                 </form>
             </section>
