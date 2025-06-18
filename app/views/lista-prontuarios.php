@@ -5,7 +5,7 @@ $tipoUsuario = $_SESSION['usuario_tipo'];
 
 $controller = new PacienteController();
 
-$termoBusca = $_POST['termo'] ?? '';
+$termoBusca = $_GET['termo'] ?? '';
 
 if(!empty($termoBusca)){
     $pacientes = $controller->buscarPorNome($termoBusca);        
@@ -43,10 +43,10 @@ else {
     <main>
         <section class="conteudo-principal">
 
-            <form action="" method="POST" style="display: flex;">
+            <form action="" method="GET" style="display: flex;">
                 <section class="busca">
                     <img src="../../assets/img/lupa.png" alt="Lupa de pesquisa">
-                    <input type="text" name="termo" placeholder="Buscar Paciente (nome do paciente)" value="<?= htmlspecialchars($_POST['termo'] ?? '') ?>">
+                    <input type="text" name="termo" placeholder="Buscar Paciente (nome do paciente)" value="<?= htmlspecialchars($_GET['termo'] ?? '') ?>">
                 </section>
                 <button type="submit" class="btnBusca">Buscar</button>
             </form>
