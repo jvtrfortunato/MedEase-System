@@ -62,7 +62,7 @@ input, .input {
 }
 
 .corpo-atestado {
-    width: 50%;
+    width: 75%;
     padding: 20px;
     border: 2px, solid rgba(136, 136, 136, 0.4);
     border-radius: 5px; 
@@ -88,7 +88,7 @@ textarea {
 }
 
 .botoes {
-    width: 50%;
+    width: 75%;
     display: flex;
     justify-content: space-between;
 }
@@ -98,7 +98,7 @@ textarea {
     padding: 0.3vw 0.8vw;
     border: 1px solid rgba(136, 136, 136, 0.4);
     border-radius: 5px;
-    font-size: 1vw;
+    font-size: 1rem;
     color: #FFFFFF;
     font-weight: 600;
     cursor: pointer;
