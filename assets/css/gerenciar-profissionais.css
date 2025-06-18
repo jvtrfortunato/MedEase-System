@@ -1,12 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Inter", sans-serif;
-}
-
 main {
     display: flex;
     flex-direction: column;
@@ -27,23 +20,38 @@ main {
 }
 
 .opcoes button {
-            margin-left: 10px;
-            padding: 5px 15px;
+    margin-left: 10px;
+    padding: 5px 15px;
 }
 
 .busca {
     width: 25%;
     border: 2px, solid rgba(136, 136, 136, 0.4);
     border-radius: 5px;
-    padding: 10px 17px 10px 17px;
     display: flex;
     align-items: center;
-    gap: 10px;
+}
+
+.busca img {
+    margin-left: 1rem;
 }
 
 .busca input {
     border: transparent;
     width: 100%;
+    border-radius: 5px;
+    padding: 10px 15px 10px 15px;
+    background-color: #f9f9f9;
+}
+
+.busca input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.busca input:focus::placeholder {
+    
+    color: transparent;
 }
 
 .opcoes button {
@@ -88,7 +96,7 @@ main {
 
 .dados p {
     opacity: 50%;
-    font-size: 1.4em;
+    font-size: 1.5rem;
     font-weight: 500;
 }
 
@@ -118,7 +126,7 @@ main {
     padding: 0.3vw 0.8vw;
     border: 1px, solid rgba(136, 136, 136, 0.4);
     border-radius: 5px;
-    font-size: 1vw;
+    font-size: 1.8rem;
     color: #FFFFFF;
     font-weight: 600;
     font-family: "Inter", serif;

@@ -14,6 +14,7 @@ $prontuarios = $controller->listarProntuarios($idPaciente);
     <title>Prontuários do Paciente</title>
     <link rel="stylesheet" href="../../assets/css/header.css">
     <link rel="stylesheet" href="../../assets/css/lista-prontuarios-paciente.css">
+    <link rel="stylesheet" href="../../assets/css/reset.css">
 </head>
 <body>
     <header>
@@ -23,11 +24,6 @@ $prontuarios = $controller->listarProntuarios($idPaciente);
     <main>
         <main>
         <section class="conteudo">
-
-            <section class="busca">
-                <img src="../../assets/img/lupa.png" alt="Lupa de pesquisa">
-                <input type="text" placeholder="Buscar Paciente (nome do paciente)">
-            </section>
 
             <section class="prontuarios">
                 

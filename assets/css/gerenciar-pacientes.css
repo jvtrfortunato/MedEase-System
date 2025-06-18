@@ -62,19 +62,19 @@ input:focus::placeholder {
 
 .dados p {
     opacity: 50%;
-    font-size: 2rem;
+    font-size: 1.7rem;
     font-weight: 500;
 }
 
 .nome {
-    width: 75%;
+    width: 50%;
     border: 0.2rem, solid rgba(136, 136, 136, 0.4);
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
 }
 
 .cpf {
-    width: 30%;
+    width: 23%;
     border: 0.2rem, solid rgba(136, 136, 136, 0.4);
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
@@ -92,12 +92,14 @@ input:focus::placeholder {
     padding: 0 1rem;
     border: 0.1rem, solid rgba(136, 136, 136, 0.4);
     border-radius: 0.5rem;
-    font-size: 1.8rem;
+    font-size: 1.3rem;
     color: #FFFFFF;
     font-weight: 600;
     cursor: pointer;
     background-color: #50E3C2;
     text-decoration: none;
+    display: flex;
+    align-items: center;
 }
 
 .botaoVerde:hover {
@@ -109,12 +111,14 @@ input:focus::placeholder {
     padding: 0.5rem 1rem;
     border: 0.1rem, solid rgba(136, 136, 136, 0.4);
     border-radius: 0.5rem;
-    font-size: 1.8rem;
+    font-size: 1.3rem;
     color: #FFFFFF;
     font-weight: 600;
     cursor: pointer;
     background-color: #FF6F61;
     text-decoration: none;
+    display: flex;
+    align-items: center;
 }
 
 .botaoVermelho:hover {

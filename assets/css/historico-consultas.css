@@ -1,12 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Inter", sans-serif;
-}
-
 main {
     display: flex;
     flex-direction: column;
@@ -141,6 +134,7 @@ h2 {
     cursor: pointer;
     background-color: #50E3C2;
     text-decoration: none;
+    font-size: 1.3rem;
 }
 
 .prontuario:hover {
@@ -161,4 +155,8 @@ h2 {
 
 .botao-vermelho:hover {
     background-color: #E65A50;
+}
+
+p {
+    font-size: 1.3rem;
 }

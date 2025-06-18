@@ -29,6 +29,7 @@
     <title>Histórico de Consultas</title>
     <link rel="stylesheet" href="../../assets/css/header.css">
     <link rel="stylesheet" href="../../assets/css/historico-consultas.css">
+    <link rel="stylesheet" href="../../assets/css/reset.css">
 </head>
 <body>
     <header>

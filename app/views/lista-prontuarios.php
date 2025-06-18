@@ -34,6 +34,7 @@ else {
     </style>
     <link rel="stylesheet" href="../../assets/css/header.css">
     <link rel="stylesheet" href="../../assets/css/lista-pacientes.css">
+    <link rel="stylesheet" href="../../assets/css/reset.css">
 </head>
 <body>
     <header>

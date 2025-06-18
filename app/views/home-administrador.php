@@ -20,7 +20,7 @@ $nomeUsuario = htmlspecialchars($_SESSION['usuario_nome'] ?? 'Administrador');
 <body>
     <header>
         <a class="logo" href="home-administrador.php">MedEase</a>    
-        <a href="../routers/logout.php">sair</a>
+        <a href="login.php">sair</a>
     </header>
     
     <main>
