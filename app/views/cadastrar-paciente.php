@@ -16,7 +16,6 @@ $tipoUsuario = $_SESSION['usuario_tipo'];
     <script src="../../assets/script/mascaraRG.js"></script>
     <script src="../../assets/script/mascaraTelefone.js"></script>
     <script src="../../assets/script/mascaraCNS.js"></script>
-    <script src="../../assets/script/mascaraCEP.js"></script>
 </head>
 </head>
 <body>
@@ -71,7 +70,7 @@ $tipoUsuario = $_SESSION['usuario_tipo'];
                             </div>
                             <div class="label-input">
                                 <label for="rg">RG</label>
-                                <input type="text" name="rg" id="rg" placeholder="00.000.000-0" required>
+                                <input type="text" name="rg" id="rg" required>
                             </div>
                         </div>
                     </div>

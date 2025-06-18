@@ -5,8 +5,8 @@ require_once '../controller/SecretarioController.php';
 $medicoController = new MedicoController();
 $secretarioController = new SecretarioController();
 
-$termoBusca = $_POST['termo'] ?? '';
-$tipoAtual = $_POST['tipo'] ?? 'medicos';
+$termoBusca = $_GET['termo'] ?? '';
+$tipoAtual = $_GET['tipo'] ?? 'medicos';
 
 if (!empty($termoBusca)) {
     $medicos = $medicoController->buscarPorNome($termoBusca);
@@ -16,6 +16,8 @@ if (!empty($termoBusca)) {
     $secretarios = $secretarioController->exibirDados();
 }
 ?>
+
+<!-- O resto do seu HTML permanece o mesmo -->
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -47,7 +49,7 @@ if (!empty($termoBusca)) {
         <section class="conteudo-principal">
 
             <div class="busca-opcoes">
-                <form action="" method="POST" style="display: flex;">
+                <form action="" method="GET" style="display: flex;">
                     <section class="busca" style="width: 300px;">
                         <img src="../../assets/img/lupa.png" alt="Lupa de pesquisa">
                         <input type="text" name="termo" placeholder="Buscar Profissional (nome do profissional)" value="<?= htmlspecialchars($termoBusca) ?>">
